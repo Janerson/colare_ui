@@ -48,11 +48,12 @@
     </li>
   </ul>
 </app-header>
+
 <div class="app-body">
   <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
     <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
     <app-sidebar-minimizer></app-sidebar-minimizer>
-  </app-sidebar>
+  </app-sidebar>  
   <!-- Main content -->
   <main class="main">
     <!-- Breadcrumb -->
@@ -66,19 +67,8 @@
           <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
         </div>
       </li>
-    </cui-breadcrumb>
-    <!-- deprecation warning for 'app-breadcrumb' -->
-    <!--<ol class="breadcrumb">-->
-      <!--<app-breadcrumb></app-breadcrumb>-->
-      <!--&lt;!&ndash; Breadcrumb Menu&ndash;&gt;-->
-      <!--<li class="breadcrumb-menu d-md-down-none">-->
-        <!--<div class="btn-group" role="group" aria-label="Button group with nested dropdown">-->
-          <!--<a class="btn" href="#"><i class="icon-speech"></i></a>-->
-          <!--<a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a>-->
-          <!--<a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>-->
-        <!--</div>-->
-      <!--</li>-->
-    <!--</ol>-->
+    </cui-breadcrumb> 
+
     <div class="container-fluid">
       <router-outlet></router-outlet>
     </div><!-- /.container-fluid -->
@@ -335,6 +325,7 @@
     </tabset>
   </app-aside>
 </div>
+
 <app-footer>
   <span><a href="https://coreui.io">CoreUI</a> &copy; 2018 creativeLabs.</span>
   <span class="ml-auto">Powered by <a href="https://coreui.io/angular">CoreUI for Angular</a></span>

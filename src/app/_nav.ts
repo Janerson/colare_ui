@@ -2,17 +2,21 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
-    name: 'Dashboard',
+    name: 'Dashboard - Alterar',
     url: '/dashboard',
-    icon: 'icon-speedometer',
+    icon: 'cui-note',
     badge: {
-      variant: 'info',
+      variant: 'warning',
       text: 'NEW'
     }
   },
   {
     title: true,
-    name: 'Theme'
+    name: 'Tabelas',  
+  },
+  {
+    title: true,
+    name: 'Licitações'
   },
   {
     name: 'Colors',
@@ -26,7 +30,7 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
-    name: 'Components'
+    name: 'Atos de Pessoal'
   },
   {
     name: 'Base',
@@ -194,7 +198,7 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
-    name: 'Extras',
+    name: 'Folha de Pagamento',
   },
   {
     name: 'Pages',
@@ -228,24 +232,9 @@ export const navItems: INavData[] = [
     url: '/dashboard',
     icon: 'icon-ban',
     badge: {
-      variant: 'secondary',
+      variant: 'success',
       text: 'NEW'
     },
     attributes: { disabled: true },
-  },
-  {
-    name: 'Download CoreUI',
-    url: 'http://coreui.io/angular/',
-    icon: 'icon-cloud-download',
-    class: 'mt-auto',
-    variant: 'success',
-    attributes: { target: '_blank', rel: 'noopener' }
-  },
-  {
-    name: 'Try CoreUI PRO',
-    url: 'http://coreui.io/pro/angular/',
-    icon: 'icon-layers',
-    variant: 'danger',
-    attributes: { target: '_blank', rel: 'noopener' }
   }
 ];
