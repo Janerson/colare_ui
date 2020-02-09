@@ -1,13 +1,25 @@
-import {Component } from '@angular/core';
-import { navItems } from '../../_nav';
+import {Component, OnInit } from '@angular/core';
+import { MenuService } from '../../services/menu.service';
+import { BaseEntity } from '../../services/generic/base-entity';
+import { INavData } from '@coreui/angular';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html'
 })
-export class DefaultLayoutComponent {
+export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
-  public navItems = navItems;
+   navItems:INavData// = navItems;
+
+  constructor(private service:MenuService){
+  }
+  
+  ngOnInit(): void {
+    this.service.list().subscribe(s =>{
+      this.navItems = null
+      this.navItems = s
+    })
+  }
 
   toggleMinimize(e) {
     this.sidebarMinimized = e;

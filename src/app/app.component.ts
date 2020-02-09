@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { MenuService } from './services/menu.service';
 
 @Component({
   // tslint:disable-next-line
@@ -16,5 +17,6 @@ export class AppComponent implements OnInit {
       }
       window.scrollTo(0, 0);
     });
+
   }
 }
