@@ -9,14 +9,13 @@ import { INavData } from '@coreui/angular';
 })
 export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
-   navItems:INavData// = navItems;
+   navItems:BaseEntity[]// = navItems;
 
   constructor(private service:MenuService){
   }
   
   ngOnInit(): void {
-    this.service.list().subscribe(s =>{
-      this.navItems = null
+    this.service.list().subscribe(s =>{   
       this.navItems = s
     })
   }
