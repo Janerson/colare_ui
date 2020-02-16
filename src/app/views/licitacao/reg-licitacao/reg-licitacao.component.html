@@ -1,22 +1,41 @@
 <div class="animated fadeIn">
-    <!--/.row-->
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card">
-          <div class="card-header">
-            <i class="fa fa-edit"></i>Regulamentação dos procedimentos licitatórios       
-          </div>
-          <div 
-               class="card-body">
-            <form class="form-horizontal">
+  <!--/.row-->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-edit"></i>Regulamentação dos procedimentos
+          licitatórios
+        </div>
+        <div class="card-body">
+          <form class="form-horizontal">
             <div class="form-group">
-              <label class="col-form-label" for="prependedInput">Tipo de regulamentação</label>
-              <div class="controls">
-                <div class="input-prepend input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">Tipo</span>
+              <div class="row">
+                <div class="col-lg-6">
+                  <label class="col-form-label" for="prependedInput" >Tipo de regulamentação</label>
+                  <div class="controls">
+                    <div class="input-prepend input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Tipo</span>
+                      </div>
+                      <select class="form-control" id="exampleFormControlSelect1">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
+                    </div>
                   </div>
-                  <input id="prependedInput" class="form-control" size="16" type="text">
+                </div>
+                <div class="col-lg-6">
+                  <label class="col-form-label" for="prependedInput">Existe Regulamentacao Municipal</label>
+                  <div class="controls">
+                    <label class="switch switch-label switch-pill switch-success">
+                      <input type="checkbox" class="switch-input">
+                      <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
@@ -24,7 +43,7 @@
               <label class="col-form-label" for="appendedInput">Appended text</label>
               <div class="controls">
                 <div class="input-group">
-                  <input id="appendedInput" class="form-control" size="16" type="text">
+                  <input id="appendedInput" class="form-control" size="16" type="text" />
                   <div class="input-group-append">
                     <span class="input-group-text">.00</span>
                   </div>
@@ -39,7 +58,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
                   </div>
-                  <input id="appendedPrependedInput" class="form-control" size="16" type="text">
+                  <input id="appendedPrependedInput" class="form-control" size="16" type="text" />
                   <div class="input-group-append">
                     <span class="input-group-text">.00</span>
                   </div>
@@ -50,7 +69,7 @@
               <label class="col-form-label" for="appendedInputButton">Append with button</label>
               <div class="controls">
                 <div class="input-group">
-                  <input id="appendedInputButton" class="form-control" size="16" type="text">
+                  <input id="appendedInputButton" class="form-control" size="16" type="text" />
                   <span class="input-group-append">
                     <button class="btn btn-secondary" type="button">Go!</button>
                   </span>
@@ -61,22 +80,29 @@
               <label class="col-form-label" for="appendedInputButtons">Two-button append</label>
               <div class="controls">
                 <div class="input-group">
-                  <input id="appendedInputButtons" size="16" class="form-control" type="text">
+                  <input id="appendedInputButtons" size="16" class="form-control" type="text" />
                   <span class="input-group-append">
-                    <button class="btn btn-secondary" type="button">Search</button>
-                    <button class="btn btn-secondary" type="button">Options</button>
+                    <button class="btn btn-secondary" type="button">
+                      Search
+                    </button>
+                    <button class="btn btn-secondary" type="button">
+                      Options
+                    </button>
                   </span>
                 </div>
               </div>
             </div>
             <div class="form-actions">
-              <button type="submit" class="btn btn-primary">Save changes</button>
+              <button type="submit" class="btn btn-primary">
+                Save changes
+              </button>
               <button class="btn btn-secondary" type="button">Cancel</button>
             </div>
           </form>
-          </div>
         </div>
-      </div> <!--/.col-->
-    </div><!--/.row-->
+      </div>
+    </div>
+    <!--/.col-->
   </div>
-  
+  <!--/.row-->
+</div>
