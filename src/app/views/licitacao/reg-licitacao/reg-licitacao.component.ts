@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+declare var $: any;
+declare var jQuery: any;
 @Component({
   selector: 'app-reg-licitacao',
   templateUrl: './reg-licitacao.component.html',

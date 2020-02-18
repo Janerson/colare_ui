@@ -6,7 +6,7 @@
           <i class="fa fa-table"></i>Regulamentações dos procedimentos licitatórios
         </div>
         <div class="card-body">
-          <table class="table table-striped">
+          <table datatable class="table table-striped">
             <thead>
               <tr>
                 <th>Username</th>
@@ -17,7 +17,7 @@
             </thead>
             <tbody>
               <tr>
-                <td>Yiorgos Avraamu</td>
+                <td [routerLink]="['./detail']" routerLinkActive="router-link-active" >Yiorgos Avraamu</td>
                 <td>2012/01/01</td>
                 <td>Member</td>
                 <td>
@@ -58,7 +58,7 @@
               </tr>
             </tbody>
           </table>
-          <ul class="pagination">
+           <ul class="pagination">
             <li class="page-item"><a class="page-link" href="#">Prev</a></li>
             <li class="page-item active">
               <a class="page-link" href="#">1</a>
@@ -67,7 +67,7 @@
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item"><a class="page-link" href="#">4</a></li>
             <li class="page-item"><a class="page-link" href="#">Next</a></li>
-          </ul>
+          </ul> 
         </div>
       </div>
     </div>

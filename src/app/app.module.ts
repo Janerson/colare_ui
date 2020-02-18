@@ -42,6 +42,7 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
+import  {DataTablesModule} from 'angular-datatables'
 
 @NgModule({
   imports: [
@@ -57,7 +58,8 @@ import { ChartsModule } from 'ng2-charts';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule
   ],
   declarations: [
     AppComponent,
@@ -71,6 +73,9 @@ import { ChartsModule } from 'ng2-charts';
     provide: LocationStrategy,
     useClass: HashLocationStrategy
   }],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
+  exports:[
+    DataTablesModule
+  ]
 })
 export class AppModule { }
