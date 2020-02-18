@@ -9,6 +9,7 @@
           <table datatable class="table table-striped">
             <thead>
               <tr>
+                <th>#</th>
                 <th>Username</th>
                 <th>Date registered</th>
                 <th>Role</th>
@@ -17,7 +18,9 @@
             </thead>
             <tbody>
               <tr>
-                <td [routerLink]="['./detail']" routerLinkActive="router-link-active" >Yiorgos Avraamu</td>
+                <td><a [routerLink]="['./detail']" routerLinkActive="router-link-active"><i class="fa fa-edit"></i></a>
+                </td>
+                <td>Yiorgos Avraamu</td>
                 <td>2012/01/01</td>
                 <td>Member</td>
                 <td>
@@ -25,6 +28,8 @@
                 </td>
               </tr>
               <tr>
+                <td><a [routerLink]="['./detail']" routerLinkActive="router-link-active"><i class="fa fa-edit"></i></a>
+                </td>
                 <td>Avram Tarasios</td>
                 <td>2012/02/01</td>
                 <td>Staff</td>
@@ -33,6 +38,8 @@
                 </td>
               </tr>
               <tr>
+                <td><a [routerLink]="['./detail']" routerLinkActive="router-link-active"><i class="fa fa-edit"></i></a>
+                </td>
                 <td>Quintin Ed</td>
                 <td>2012/02/01</td>
                 <td>Admin</td>
@@ -41,6 +48,8 @@
                 </td>
               </tr>
               <tr>
+                <td><a [routerLink]="['./detail']" routerLinkActive="router-link-active"><i class="fa fa-edit"></i></a>
+                </td>
                 <td>Enéas Kwadwo</td>
                 <td>2012/03/01</td>
                 <td>Member</td>
@@ -49,6 +58,8 @@
                 </td>
               </tr>
               <tr>
+                <td><a [routerLink]="['./detail']" routerLinkActive="router-link-active"><i class="fa fa-edit"></i></a>
+                </td>
                 <td>Agapetus Tadeáš</td>
                 <td>2012/01/21</td>
                 <td>Staff</td>
@@ -58,7 +69,7 @@
               </tr>
             </tbody>
           </table>
-           <ul class="pagination">
+          <ul class="pagination">
             <li class="page-item"><a class="page-link" href="#">Prev</a></li>
             <li class="page-item active">
               <a class="page-link" href="#">1</a>
@@ -67,7 +78,7 @@
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item"><a class="page-link" href="#">4</a></li>
             <li class="page-item"><a class="page-link" href="#">Next</a></li>
-          </ul> 
+          </ul>
         </div>
       </div>
     </div>

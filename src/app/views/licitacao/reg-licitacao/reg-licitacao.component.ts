@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-declare var $: any;
-declare var jQuery: any;
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+
 @Component({
   selector: 'app-reg-licitacao',
   templateUrl: './reg-licitacao.component.html',
 })
 export class RegLicitacaoComponent implements OnInit {
 
+  @ViewChild('labelImport')
+  labelImport: ElementRef;
+
+  formImport: FormGroup;
+  fileToUpload: File = null;
   constructor() { }
 
   ngOnInit(): void {

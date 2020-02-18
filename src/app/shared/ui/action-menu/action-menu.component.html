@@ -1,0 +1,12 @@
+<div class="list-group">
+    <a class="list-group-item  flex-column align-items-start menu-header font-white">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{header}}</h5>
+        </div>
+    </a>
+    <a *ngFor="let rota of rotas" [routerLink]="rota.url" class="list-group-item list-group-item-action flex-column align-items-end">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{rota.title}}</h5>
+        </div>
+    </a>
+</div>
