@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { of, Observable, empty, interval } from 'rxjs';
-import { tap, switchMap, debounce, distinctUntilChanged } from 'rxjs/operators';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { of, Observable, empty, interval } from "rxjs";
+import { tap, switchMap, debounce, distinctUntilChanged } from "rxjs/operators";
 
 @Component({
-  selector: 'app-base-form',
-  template: ''
+  selector: "app-base-form",
+  template: ""
 })
 export class BaseFormComponent implements OnInit {
   formulario: FormGroup;
@@ -31,19 +31,18 @@ export class BaseFormComponent implements OnInit {
       : this.formulario.get(controlPath).value;
   }
   /**
-   *
    * @param path
    * @param observable
    */
   onStatusChanged(path: string, observable: Observable<any>) {
-    let fc = path.slice(0, path.indexOf('.'));
+    let fc = path.slice(0, path.indexOf("."));
     this.formValue(path, true)
       .statusChanges.pipe(
         tap(status => console.log(status)),
         distinctUntilChanged(),
         tap(() => console.log(observable)),
         debounce(() => interval(1500)),
-        switchMap((status: any) => (status === 'VALID' ? observable : empty()))
+        switchMap((status: any) => (status === "VALID" ? observable : empty()))
       )
       .subscribe(
         (result: any) => {

@@ -8,10 +8,7 @@ import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import {
   TypeaheadModule,
-  BsDatepickerModule,
-  BsLocaleService,
-  ModalModule
-} from 'ngx-bootstrap';
+  BsLocaleService} from 'ngx-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AlertModalComponent } from './ui/alert-modal/alert-modal.component';
 import { BaseFormComponent } from './ui/base-form/base-form.component';
@@ -22,10 +19,7 @@ defineLocale('pt-br', ptBrLocale);
   imports: [
     CommonModule,
     RouterModule,
-    ReactiveFormsModule,
-    TypeaheadModule.forRoot(),
-    BsDatepickerModule.forRoot(),
-    ModalModule.forRoot(),
+    ReactiveFormsModule,    
     NgxJsonViewerModule
   ],
   exports: [

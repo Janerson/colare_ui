@@ -1,6 +1,5 @@
 import {Component, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu.service';
-import { BaseEntity } from '../../services/generic/base-entity';
 import { navItems } from '../../_nav';
 
 @Component({
@@ -11,7 +10,7 @@ export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
    navItems = navItems;
 
-  constructor(private service:MenuService){
+  constructor(){
   }
   
   ngOnInit(): void {

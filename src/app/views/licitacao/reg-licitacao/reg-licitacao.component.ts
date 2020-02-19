@@ -1,25 +1,26 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Component({
-  selector: 'app-reg-licitacao',
-  templateUrl: './reg-licitacao.component.html',
+  selector: "app-reg-licitacao",
+  templateUrl: "./reg-licitacao.component.html"
 })
 export class RegLicitacaoComponent implements OnInit {
-
-  @ViewChild('labelImport')
+  @ViewChild("labelImport")
   labelImport: ElementRef;
 
-  formImport: FormGroup;
+  form: FormGroup;
   fileToUpload: File = null;
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
+    this.form = new FormGroup({
+      importFile: new FormControl('', Validators.required)
+    });
   }
 
-  
+  ngOnInit(): void {}
+
   isCollapsed: boolean = false;
-  iconCollapse: string = 'icon-arrow-up';
+  iconCollapse: string = "icon-arrow-up";
 
   collapsed(event: any): void {
     // console.log(event);
@@ -31,9 +32,17 @@ export class RegLicitacaoComponent implements OnInit {
 
   toggleCollapse(): void {
     this.isCollapsed = !this.isCollapsed;
-    this.iconCollapse = this.isCollapsed ? 'icon-arrow-down' : 'icon-arrow-up';
+    this.iconCollapse = this.isCollapsed ? "icon-arrow-down" : "icon-arrow-up";
   }
 
+  onFileChange(files: FileList) {
+    this.labelImport.nativeElement.innerText = Array.from(files)
+      .map(f => f.name)
+      .join(", ");
+    this.fileToUpload = files.item(0);
+  }
 
-
+  import(): void {
+    console.log("import " + this.fileToUpload.name);
+  }
 }

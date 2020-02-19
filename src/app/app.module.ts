@@ -42,7 +42,9 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
-import  {DataTablesModule} from 'angular-datatables'
+import  {DataTablesModule} from 'angular-datatables';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
+
 
 @NgModule({
   imports: [
@@ -59,7 +61,8 @@ import  {DataTablesModule} from 'angular-datatables'
     TabsModule.forRoot(),
     ChartsModule,
     HttpClientModule,
-    DataTablesModule
+    DataTablesModule,
+    NgxJsonViewerModule
   ],
   declarations: [
     AppComponent,
