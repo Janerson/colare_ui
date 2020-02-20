@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormGroup, FormBuilder } from "@angular/forms";
 import { of, Observable, empty, interval } from "rxjs";
 import { tap, switchMap, debounce, distinctUntilChanged } from "rxjs/operators";
 
@@ -9,6 +9,8 @@ import { tap, switchMap, debounce, distinctUntilChanged } from "rxjs/operators";
 })
 export class BaseFormComponent implements OnInit {
   formulario: FormGroup;
+  protected builder : FormBuilder = new FormBuilder();
+
   constructor() {}
 
   ngOnInit() {}
@@ -65,6 +67,7 @@ export class BaseFormComponent implements OnInit {
       this.formValue(undefined, true).setValue(obj);
     }
   }
+
   /**
    *
    *

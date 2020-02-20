@@ -1,20 +1,19 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder
+} from "@angular/forms";
+import { BaseFormComponent } from "../../../shared/ui/base-form/base-form.component";
 
 @Component({
   selector: "app-reg-licitacao",
   templateUrl: "./reg-licitacao.component.html"
 })
-export class RegLicitacaoComponent implements OnInit {
-  @ViewChild("labelImport")
-  labelImport: ElementRef;
-
-  form: FormGroup;
-  fileToUpload: File = null;
+export class RegLicitacaoComponent extends BaseFormComponent implements OnInit {
   constructor() {
-    this.form = new FormGroup({
-      importFile: new FormControl('', Validators.required)
-    });
+    super();
   }
 
   ngOnInit(): void {}
@@ -33,16 +32,5 @@ export class RegLicitacaoComponent implements OnInit {
   toggleCollapse(): void {
     this.isCollapsed = !this.isCollapsed;
     this.iconCollapse = this.isCollapsed ? "icon-arrow-down" : "icon-arrow-up";
-  }
-
-  onFileChange(files: FileList) {
-    this.labelImport.nativeElement.innerText = Array.from(files)
-      .map(f => f.name)
-      .join(", ");
-    this.fileToUpload = files.item(0);
-  }
-
-  import(): void {
-    console.log("import " + this.fileToUpload.name);
   }
 }

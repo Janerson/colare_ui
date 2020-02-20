@@ -1,258 +1,285 @@
 <div class="animated fadeIn">
   <!--Regulamentação dos procedimentos-->
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="card-header">
-          <i class="fa fa-edit"></i>Regulamentação dos procedimentos
-          licitatórios
-        </div>
-        <div class="card-body">
-          <div class="form-group">
-            <!-- row -->
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="col-form-label" for="prependedInput">Tipo de regulamentação</label>
-                <div class="controls">
-                  <div class="input-prepend input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">Tipo</span>
+  <div>
+    <ngx-json-viewer [json]="formulario.value"></ngx-json-viewer>
+  </div>
+  <div [formGroup]="formulario">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <i class="fa fa-edit"></i>Regulamentação dos procedimentos
+            licitatórios
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <!-- row -->
+              <div class="row">
+                <div class="col-lg-6">
+                  <label class="col-form-label" for="codTipoRegulamentacao">Tipo de regulamentação</label>
+                  <div class="controls">
+                    <div class="input-prepend input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Tipo</span>
+                      </div>
+                      <select class="form-control" id="codTipoRegulamentacao" formControlName="codTipoRegulamentacao">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
                     </div>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <label class="col-form-label" for="existeRegulamentacaoMunicipal">Existe Regulamentacao
+                    Municipal</label>
+                  <div class="controls">
+                    <label class="switch switch-label switch-pill switch-success">
+                      <input id="existeRegulamentacaoMunicipal" type="checkbox" class="switch-input"
+                        formControlName="existeRegulamentacaoMunicipal">
+                      <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                    </label>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6">
-                <label class="col-form-label" for="prependedInput">Existe Regulamentacao Municipal</label>
-                <div class="controls">
-                  <label class="switch switch-label switch-pill switch-success">
-                    <input type="checkbox" class="switch-input">
-                    <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <!-- row  1-->
+              <!-- row  1-->
 
-            <!-- row  2-->
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="col-form-label" for="prependedInput">Número Decreto Municipal</label>
-                <div class="controls">
-                  <div class="input-prepend input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">N°</span>
+              <!-- row  2-->
+              <div class="row">
+                <div class="col-lg-6">
+                  <label class="col-form-label" for="numeroDecretoMunicipal">Número Decreto Municipal</label>
+                  <div class="controls">
+                    <div class="input-prepend input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">N°</span>
+                      </div>
+                      <input type="text" id="numeroDecretoMunicipal" name="numeroDecretoMunicipal" class="form-control"
+                        formControlName="numeroDecretoMunicipal">
                     </div>
-                    <input type="text" id="prependedInput" name="text-input" class="form-control" placeholder="Text">
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <label class="col-form-label" for="dataDecretoMunicipal">Data Decreto Municipal</label>
+                  <div class="controls">
+                    <input type="date" id="dataDecretoMunicipal" name="dataDecretoMunicipal" class="form-control"
+                      formControlName="dataDecretoMunicipal">
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <label class="col-form-label" for="prependedInput">Data Publicação</label>
+                  <div class="controls">
+                    <input type="date" id="dataPublicacao" name="dataPublicacao" class="form-control"
+                      formControlName="dataPublicacao">
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3">
-                <label class="col-form-label" for="prependedInput">Data Decreto Municipal</label>
-                <div class="controls">
-                  <input type="date" id="text-input" name="text-input" class="form-control" placeholder="Text">
-                </div>
-              </div>
-              <div class="col-lg-3">
-                <label class="col-form-label" for="prependedInput">Data Publicação</label>
-                <div class="controls">
-                  <input type="date" id="text-input" name="text-input" class="form-control" placeholder="Text">
-                </div>
-              </div>
-            </div>
-            <!-- row  2-->
+              <!-- row  2-->
 
-            <!-- row  3-->
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="col-form-label" for="input-file">Arquivo</label>
-                <div class="input-group">
-                  <div class="custom-file">
-                    <input type="file" class="custom-file-input"  formControlName="importFile" id="importFile"
-                      (change)="onFileChange($event.target.files)">
-                    <label class="custom-file-label" #labelImport for="importFile"><i class="fa fa-search"></i> Choose
-                      file</label>
+              <!-- row  3-->
+              <div class="row">
+                <div class="col-lg-6">
+                  <label class="col-form-label" for="idDocumentoPDF">Arquivo</label>
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" formControlName="idDocumentoPDF" id="idDocumentoPDF"
+                        (change)="onFileChange($event.target.files)">
+                      <label class="custom-file-label" #labelImport for="idDocumentoPDF"><i
+                          class="fa fa-search"></i>Enviar arquivo</label>
+                    </div>
                   </div>
                 </div>
               </div>
+              <!-- row 3-->
             </div>
-            <!-- row 3-->
           </div>
         </div>
       </div>
+      <!--/.col-->
     </div>
-    <!--/.col-->
-  </div>
 
-  <!--Detalhamento da regulamentação do Artigo 47 da Lei Complementar 123/06-->
-  <!--/.row-->
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="card-header">
-          <i class="fa fa-edit"></i>Detalhamento da regulamentação do Artigo 47 da Lei Complementar 123/06
-        </div>
-        <div class="card-body">
-          <div class="form-group">
-            <!-- row -->
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="col-form-label" for="prependedInput">Regulamentou Participação Exclusiva MEEPP</label>
-                <div class="controls">
-                  <label class="switch switch-label switch-pill switch-success">
-                    <input type="checkbox" class="switch-input">
-                    <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
-                  </label>
+    <!--Detalhamento da regulamentação do Artigo 47 da Lei Complementar 123/06-->
+    <!--/.row-->
+    <div class="row" formGroupName="detalhamentoLc123">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <i class="fa fa-edit"></i>Detalhamento da regulamentação do Artigo 47 da Lei Complementar 123/06
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <!-- row -->
+              <div class="row">
+                <div class="col-lg-6">
+                  <label class="col-form-label" for="regulamentouParticipExclusivaMEEPP">Regulamentou Participação
+                    Exclusiva MEEPP</label>
+                  <div class="controls">
+                    <label class="switch switch-label switch-pill switch-success">
+                      <input type="checkbox" class="switch-input" name="regulamentouParticipExclusivaMEEPP"
+                        formControlName="regulamentouParticipExclusivaMEEPP">
+                      <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                    </label>
+                  </div>
                 </div>
-              </div>
-              <div class="col-lg-6">
-                <label class="col-form-label" for="prependedInput">Atigo Regulamentou Participação Exclusiva
-                  MEEPP</label>
-                <div class="controls">
-                  <div class="input-prepend input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">N°</span>
+                <div class="col-lg-6">
+                  <label class="col-form-label" for="artigoRegulamentouParticipExclusivaMEEPP">Atigo Regulamentou
+                    Participação Exclusiva
+                    MEEPP</label>
+                  <div class="controls">
+                    <div class="input-prepend input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">N°</span>
+                      </div>
+                      <input type="text" name="artigoRegulamentouParticipExclusivaMEEPP" class="form-control"
+                        formControlName="artigoRegulamentouParticipExclusivaMEEPP">
                     </div>
-                    <input type="text" id="prependedInput" name="text-input" class="form-control" placeholder="Text">
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- row  1-->
+              <!-- row  1-->
 
-            <!-- row  2-->
-            <div class="row">
-              <div class="col-lg-4">
-                <label class="col-form-label" for="prependedInput">Valor Limite Reg. Participação Exclusiva
-                  MEEPP</label>
-                <div class="controls">
-                  <div class="input-prepend input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">R$</span>
+              <!-- row  2-->
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="col-form-label" for="valorLimiteRegParticipExclusivaMEEPP">Valor Limite Reg.
+                    Participação Exclusiva
+                    MEEPP</label>
+                  <div class="controls">
+                    <div class="input-prepend input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">R$</span>
+                      </div>
+                      <input type="number" id="valorLimiteRegParticipExclusivaMEEPP" class="form-control"
+                        formControlName="valorLimiteRegParticipExclusivaMEEPP">
                     </div>
-                    <input type="number" id="prependedInput" name="text-input" class="form-control" placeholder="Text">
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <label class="col-form-label" for="regulamentouProcSubContratacaoMEEPP">Reg. Proc. SubContratacao
+                    MEEPP</label>
+                  <div class="controls">
+                    <label class="switch switch-label switch-pill switch-success">
+                      <input id="regulamentouProcSubContratacaoMEEPP" type="checkbox" class="switch-input"
+                        formControlName="regulamentouProcSubContratacaoMEEPP">
+                      <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <label class="col-form-label" for="artigoProcSubContratacaoMEEPP">Artigo Proc. SubContratacao
+                    MEEPP</label>
+                  <div class="controls">
+                    <div class="input-prepend input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">N° Artigo</span>
+                      </div>
+                      <input type="text" id="artigoProcSubContratacaoMEEPP" class="form-control"
+                        formControlName="artigoProcSubContratacaoMEEPP">
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3">
-                <label class="col-form-label" for="prependedInput">Reg. Proc. SubContratacao MEEPP</label>
-                <div class="controls">
-                  <label class="switch switch-label switch-pill switch-success">
-                    <input type="checkbox" class="switch-input">
-                    <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
-                  </label>
-                </div>
-              </div>
-              <div class="col-lg-5">
-                <label class="col-form-label" for="prependedInput">Artigo Proc. SubContratacao MEEPP</label>
-                <div class="controls">
-                  <div class="input-prepend input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">N° Artigo</span>
-                    </div>
-                    <input type="text" id="prependedInput" name="text-input" class="form-control" placeholder="Text">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- row  2-->
+              <!-- row  2-->
 
-            <!-- row  3-->
-            <div class="row">
-              <div class="col-lg-4">
-                <label class="col-form-label" for="prependedInput">Percentual SubContratacao MEEPP</label>
-                <div class="controls">
-                  <div class="input-prepend input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">%</span>
+              <!-- row  3-->
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="col-form-label" for="percentualSubContratacaoMEEPP">Percentual SubContratacao
+                    MEEPP</label>
+                  <div class="controls">
+                    <div class="input-prepend input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">%</span>
+                      </div>
+                      <input type="number" id="percentualSubContratacaoMEEPP" name="text-input" class="form-control"
+                        formControlName="percentualSubContratacaoMEEPP">
                     </div>
-                    <input type="number" id="prependedInput" name="text-input" class="form-control">
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <label class="col-form-label" for="regulamentouCriteriosEmpenhoPagamentoMEEPP">Criterios Empenho Pagto
+                    MEEPP</label>
+                  <div class="controls">
+                    <label class="switch switch-label switch-pill switch-success">
+                      <input id="regulamentouCriteriosEmpenhoPagamentoMEEPP" type="checkbox" class="switch-input"
+                        formControlName="regulamentouCriteriosEmpenhoPagamentoMEEPP">
+                      <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <label class="col-form-label" for="artigoEmpenhoPagamentoMEEPP">Artigo Empenho Pagto MEEPP</label>
+                  <div class="controls">
+                    <div class="input-prepend input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">N° Artigo</span>
+                      </div>
+                      <input type="text" id="artigoEmpenhoPagamentoMEEPP" class="form-control"
+                        formControlName="artigoEmpenhoPagamentoMEEPP">
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3">
-                <label class="col-form-label" for="prependedInput">Criterios Empenho Pagto MEEPP</label>
-                <div class="controls">
-                  <label class="switch switch-label switch-pill switch-success">
-                    <input type="checkbox" class="switch-input">
-                    <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
-                  </label>
-                </div>
-              </div>
-              <div class="col-lg-5">
-                <label class="col-form-label" for="prependedInput">Artigo Empenho Pagto MEEPP</label>
-                <div class="controls">
-                  <div class="input-prepend input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">N° Artigo</span>
-                    </div>
-                    <input type="text" id="prependedInput" name="text-input" class="form-control" placeholder="Text">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- row 3-->
+              <!-- row 3-->
 
-            <!-- row 4-->
-            <div class="row">
-              <div class="col-lg-4">
-                <label class="col-form-label" for="prependedInput">Regulamentou Perc. Objeto Contratacao MEEPP</label>
-                <div class="controls">
-                  <label class="switch switch-label switch-pill switch-success">
-                    <input type="checkbox" class="switch-input">
-                    <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
-                  </label>
+              <!-- row 4-->
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="col-form-label" for="regulamentouPercObjetoContratacaoMEEPP">Regulamentou Perc. Objeto
+                    Contratacao MEEPP</label>
+                  <div class="controls">
+                    <label class="switch switch-label switch-pill switch-success">
+                      <input id="regulamentouPercObjetoContratacaoMEEPP" type="checkbox" class="switch-input"
+                        formControlName="regulamentouPercObjetoContratacaoMEEPP">
+                      <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                    </label>
+                  </div>
                 </div>
-              </div>
-              <div class="col-lg-4">
-                <label class="col-form-label" for="prependedInput">Artigo Perc. Objeto Contratacao MEEPP</label>
-                <div class="controls">
-                  <div class="input-prepend input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">N° Artigo</span>
+                <div class="col-lg-4">
+                  <label class="col-form-label" for="artigoPercObjetoContratacaoMEEPP">Artigo Perc. Objeto Contratacao MEEPP</label>
+                  <div class="controls">
+                    <div class="input-prepend input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">N° Artigo</span>
+                      </div>
+                      <input type="text" id="artigoPercObjetoContratacaoMEEPP" class="form-control" formControlName="artigoPercObjetoContratacaoMEEPP">
                     </div>
-                    <input type="text" id="prependedInput" name="text-input" class="form-control" placeholder="Text">
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <label class="col-form-label" for="percentualObjetoContratacaoMEEPP">Percentual Objeto Contratacao MEEPP</label>
+                  <div class="controls">
+                    <div class="input-prepend input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">%</span>
+                      </div>
+                      <input type="number" id="percentualObjetoContratacaoMEEPP" class="form-control" formControlName="percentualObjetoContratacaoMEEPP">
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4">
-                <label class="col-form-label" for="prependedInput">Percentual Objeto Contratacao MEEPP</label>
-                <div class="controls">
-                  <div class="input-prepend input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">%</span>
-                    </div>
-                    <input type="number" id="prependedInput" name="text-input" class="form-control">
-                  </div>
-                </div>
-              </div>
+              <!-- row 4-->
             </div>
-            <!-- row 4-->
           </div>
         </div>
       </div>
+      <!--/.col-->
     </div>
-    <!--/.col-->
-  </div>
 
-  <!--Ações-->
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="card-header">
-          <i class="fa fa-certificate"></i>Ações
-        </div>
-        <div class="card-body">
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Gravar</button>
-            <button type="submit" class="btn btn-warning">Transmitir</button>
-            <button class="btn btn-secondary" type="button">Cancel</button>
+    <!--Ações-->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <i class="fa fa-certificate"></i>Ações
+          </div>
+          <div class="card-body">
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Gravar</button>
+              <button type="submit" class="btn btn-warning">Transmitir</button>
+              <button class="btn btn-secondary" type="button">Cancel</button>
+            </div>
           </div>
         </div>
       </div>

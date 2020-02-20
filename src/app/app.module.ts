@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {ReactiveFormsModule } from '@angular/forms'
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,6 +34,7 @@ import {
   AppFooterModule,
   AppSidebarModule,
   
+  
 } from '@coreui/angular';
 
 // Import routing module
@@ -62,7 +64,8 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
     ChartsModule,
     HttpClientModule,
     DataTablesModule,
-    NgxJsonViewerModule
+    NgxJsonViewerModule,
+   ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
