@@ -6,10 +6,11 @@ import { OnlyNumberDirective } from "./diretivas/only-number.directive";
 import { defineLocale } from "ngx-bootstrap/chronos";
 import { ptBrLocale } from "ngx-bootstrap/locale";
 import { NgxJsonViewerModule } from "ngx-json-viewer";
-import { TypeaheadModule, BsLocaleService } from "ngx-bootstrap";
+import { TypeaheadModule, BsLocaleService, BsModalService } from "ngx-bootstrap";
 import { ReactiveFormsModule } from "@angular/forms";
 import { AlertModalComponent } from "./ui/alert-modal/alert-modal.component";
 import { BaseFormComponent } from "./ui/base-form/base-form.component";
+import { PaginationModule } from 'ngx-bootstrap';
 defineLocale("pt-br", ptBrLocale);
 
 @NgModule({
@@ -23,7 +24,8 @@ defineLocale("pt-br", ptBrLocale);
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    NgxJsonViewerModule
+    NgxJsonViewerModule,
+    PaginationModule.forRoot()
   ],
   exports: [
     TypeaheadModule,
@@ -31,11 +33,11 @@ defineLocale("pt-br", ptBrLocale);
     OnlyNumberDirective,
     ReactiveFormsModule,
     BaseFormComponent,
-    NgxJsonViewerModule
+    NgxJsonViewerModule,
+    PaginationModule
     // BsDatepickerModule
   ],
-  providers:[BsLocaleService]
- // entryComponents: [AlertModalComponent]
+  providers:[BsLocaleService],
 })
 export class SharedModule {
   constructor(localeService: BsLocaleService) {

@@ -1,8 +1,8 @@
 <div class="animated fadeIn">
-  <!--Regulamentação dos procedimentos-->
+  <!--Regulamentação dos procedimentos
   <div>
     <ngx-json-viewer [json]="formulario.value"></ngx-json-viewer>
-  </div>
+  </div>-->
   <div [formGroup]="formulario">
     <div class="row">
       <div class="col-lg-12">
@@ -276,7 +276,7 @@
           </div>
           <div class="card-body">
             <div class="form-actions">
-              <button type="submit" class="btn btn-primary">Gravar</button>
+              <button type="submit" class="btn btn-primary" (click)="save()">Gravar</button>
               <button type="submit" class="btn btn-warning">Transmitir</button>
               <button class="btn btn-secondary" type="button">Cancel</button>
             </div>

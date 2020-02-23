@@ -6,17 +6,39 @@ import {
   FormBuilder
 } from "@angular/forms";
 import { BaseFormComponent } from "../../../shared/ui/base-form/base-form.component";
+import { RegLicitacaoService } from "../../../shared/services/licitacao/reg-licitacao.service";
+import { RegLicitacao } from "../../../shared/entity/reg-licitacao";
+import { Page } from '../../../shared/services/generic/page';
 
 @Component({
   selector: "app-reg-licitacao",
   templateUrl: "./reg-licitacao.component.html"
 })
 export class RegLicitacaoComponent extends BaseFormComponent implements OnInit {
-  constructor() {
+  
+  page: Page<RegLicitacao>; 
+
+  protected regLicitacao: RegLicitacao[];
+
+  constructor(protected service: RegLicitacaoService) {
     super();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.service.paged().subscribe(data => {
+      console.log(data)
+      this.page = data;
+    });
+  }
+
+  pageChanged(event: any): void {
+    console.log(event)
+    //this.page = event.page;
+    this.service.paged(event.page-1).subscribe(data => {
+      console.log(data)
+      this.page = data;
+    });
+  }
 
   isCollapsed: boolean = false;
   iconCollapse: string = "icon-arrow-up";

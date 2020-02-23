@@ -1,4 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Output,
+  EventEmitter,
+  OnDestroy
+} from "@angular/core";
 import {
   FormGroup,
   FormControl,
@@ -6,20 +14,70 @@ import {
   FormBuilder
 } from "@angular/forms";
 import { BaseFormComponent } from "../../../../shared/ui/base-form/base-form.component";
+import { RegLicitacaoService } from "../../../../shared/services/licitacao/reg-licitacao.service";
+import { ActivatedRoute } from "@angular/router";
+import { RegLicitacao } from "../../../../shared/entity/reg-licitacao";
+import { SharedService } from '../../../../shared/services/shared-service.service';
+import { AlertModalService } from '../../../../shared/services/alert-modal.service';
+import { BsModalService } from 'ngx-bootstrap';
 
 @Component({
   selector: "app-reg-licitacao-detail",
   templateUrl: "./reg-licitacao-detail.component.html"
 })
 export class RegLicitacaoDetailComponent extends BaseFormComponent
-  implements OnInit {
+  implements OnInit, OnDestroy {
+
+ 
+  private id: number;
+
   @ViewChild("labelImport")
   labelImport: ElementRef;
 
   fileToUpload: File = null;
 
-  constructor() {
+  constructor(
+    private service: RegLicitacaoService,
+    private route: ActivatedRoute,
+    private sharedService : SharedService,
+    private bsModal:BsModalService,
+    private alertService:AlertModalService
+  ) {
     super();
+    this.buildForm();
+  }
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(p => {
+      this.service.loadByID(parseInt(p.get("id"))).subscribe(r => {
+        this.formulario.patchValue(r);
+        //this.atualizaForm(r,this.formulario)
+      });
+    });
+
+    this.sharedService.emitChange(this.formulario)
+  }
+
+  ngOnDestroy(): void {
+    this.formulario.reset()
+    this.sharedService.emitChange(this.formulario)
+  }
+
+  onFileChange(files: FileList) {
+    this.labelImport.nativeElement.innerText = Array.from(files)
+      .map(f => f.name)
+      .join(", ");
+    this.fileToUpload = files.item(0);
+  }
+
+  save() {
+    this.service.create(this.formulario.value).subscribe(s =>{
+      console.log(s)
+      this.alertService.showAlertSucess("Salvo com sucesso","Regulamentação")
+    });
+  }
+
+  private buildForm() {
     this.formulario = this.builder.group({
       codTipoRegulamentacao: this.builder.control("", [Validators.required]),
       existeRegulamentacaoMunicipal: this.builder.control("", [
@@ -49,16 +107,4 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
     });
   }
 
-  ngOnInit(): void {}
-
-  onFileChange(files: FileList) {
-    this.labelImport.nativeElement.innerText = Array.from(files)
-      .map(f => f.name)
-      .join(", ");
-    this.fileToUpload = files.item(0);
-  }
-
-  import(): void {
-    console.log("import " + this.fileToUpload.name);
-  }
 }

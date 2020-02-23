@@ -5,5 +5,7 @@
 
 export const environment = {
   production: false,
-  API_URL:"http://localhost:8080/api",
+  REG_LICITACAO:"LIC/REG_LICITACAO",
+  API_URL: (layout:any) => `http://localhost:8080/api/${layout}`,
+  URL_DEV_TCM:(layout: any,mes: any,ano: any)=> `https://testes.tcm.go.gov.br/recepcao/${layout}/${mes}/${ano}`,
 };

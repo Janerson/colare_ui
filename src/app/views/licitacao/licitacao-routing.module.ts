@@ -22,7 +22,7 @@ const routes: Routes = [
         }
       },
       {
-        path: "reg_licitacao/detail",
+        path: "reg_licitacao/detail/:id",
         component: RegLicitacaoDetailComponent,
         data: {
           title:

@@ -13,6 +13,6 @@ import { environment } from '../../environments/environment';
 export class MenuService extends GenericDao<BaseEntity> {
 
   constructor(protected http:HttpClient) { 
-    super(http,`${environment.API_URL}/DOMINIO/MENU_LINK/LISTAR-TODOS`)
+    super(http,`${environment.API_URL}`)
   }
 }
