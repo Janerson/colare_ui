@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { AlertModalComponent } from '../ui/alert-modal/alert-modal.component';
 
 export enum AlertTypes {
@@ -16,7 +16,7 @@ export enum AlertTypes {
 @Injectable({
   providedIn: 'root'
 })
-export class AlertModalService {
+export class AlertService {
   constructor(private modalService: BsModalService) {}
 
   private showAlert(

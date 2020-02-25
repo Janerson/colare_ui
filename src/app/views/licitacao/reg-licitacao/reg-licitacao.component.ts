@@ -9,6 +9,7 @@ import { BaseFormComponent } from "../../../shared/ui/base-form/base-form.compon
 import { RegLicitacaoService } from "../../../shared/services/licitacao/reg-licitacao.service";
 import { RegLicitacao } from "../../../shared/entity/reg-licitacao";
 import { Page } from '../../../shared/services/generic/page';
+import { AlertService } from '../../../shared/services/alert.service';
 
 @Component({
   selector: "app-reg-licitacao",
@@ -20,7 +21,7 @@ export class RegLicitacaoComponent extends BaseFormComponent implements OnInit {
 
   protected regLicitacao: RegLicitacao[];
 
-  constructor(protected service: RegLicitacaoService) {
+  constructor(protected service: RegLicitacaoService, private alertService:AlertService) {
     super();
   }
 
@@ -54,5 +55,9 @@ export class RegLicitacaoComponent extends BaseFormComponent implements OnInit {
   toggleCollapse(): void {
     this.isCollapsed = !this.isCollapsed;
     this.iconCollapse = this.isCollapsed ? "icon-arrow-down" : "icon-arrow-up";
+  }
+
+  show(){
+    this.alertService.showAlertDanger("Erro ao salvar objeto","Ops")
   }
 }

@@ -5,7 +5,7 @@ import { INavData } from '@coreui/angular';
 
 import { BaseEntity } from './generic/base-entity';
 import { GenericDao } from './generic/generic-dao';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

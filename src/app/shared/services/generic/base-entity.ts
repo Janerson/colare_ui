@@ -1,5 +1,5 @@
 export class BaseEntity {
     id?:number;
-    idTCM?:number;
+    seqID?:number;
 }
 

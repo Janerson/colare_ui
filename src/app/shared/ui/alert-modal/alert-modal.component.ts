@@ -4,8 +4,8 @@ import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-alert-modal',
-  templateUrl: './alert-modal.component.html',
-  styleUrls: ['./alert-modal.component.css']
+  templateUrl: './alert-modal.component.html'
+
 })
 export class AlertModalComponent implements OnInit {
   @Input() title = '';

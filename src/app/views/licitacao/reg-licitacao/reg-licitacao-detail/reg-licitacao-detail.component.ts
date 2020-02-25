@@ -18,8 +18,7 @@ import { RegLicitacaoService } from "../../../../shared/services/licitacao/reg-l
 import { ActivatedRoute } from "@angular/router";
 import { RegLicitacao } from "../../../../shared/entity/reg-licitacao";
 import { SharedService } from '../../../../shared/services/shared-service.service';
-import { AlertModalService } from '../../../../shared/services/alert-modal.service';
-import { BsModalService } from 'ngx-bootstrap';
+
 
 @Component({
   selector: "app-reg-licitacao-detail",
@@ -39,9 +38,7 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
   constructor(
     private service: RegLicitacaoService,
     private route: ActivatedRoute,
-    private sharedService : SharedService,
-    private bsModal:BsModalService,
-    private alertService:AlertModalService
+    private sharedService : SharedService, 
   ) {
     super();
     this.buildForm();
@@ -73,7 +70,7 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
   save() {
     this.service.create(this.formulario.value).subscribe(s =>{
       console.log(s)
-      this.alertService.showAlertSucess("Salvo com sucesso","Regulamentação")
+      //this.alertService.showAlertSucess("Salvo com sucesso","Regulamentação")
     });
   }
 
