@@ -18,6 +18,7 @@ import { RegLicitacaoService } from "../../../../shared/services/licitacao/reg-l
 import { ActivatedRoute } from "@angular/router";
 import { RegLicitacao } from "../../../../shared/entity/reg-licitacao";
 import { SharedService } from '../../../../shared/services/shared-service.service';
+import { AlertService } from '../../../../shared/services/alert.service';
 
 
 @Component({
@@ -39,6 +40,7 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
     private service: RegLicitacaoService,
     private route: ActivatedRoute,
     private sharedService : SharedService, 
+    private alertService:AlertService
   ) {
     super();
     this.buildForm();
@@ -68,9 +70,9 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
   }
 
   save() {
-    this.service.create(this.formulario.value).subscribe(s =>{
+    this.service.save(this.formulario.value).subscribe(s =>{
       console.log(s)
-      //this.alertService.showAlertSucess("Salvo com sucesso","Regulamentação")
+      this.alertService.showAlertSucess(`Salvo com sucesso ${s['seqID']}`,"Regulamentação")
     });
   }
 

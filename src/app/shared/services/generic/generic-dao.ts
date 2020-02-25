@@ -21,10 +21,17 @@ export class GenericDao<T extends BaseEntity> {
   loadByID(id: number) {
     return this.http.get<T>(`${this.API_URL}/${id}`).pipe(take(1)/*,tap(console.log)*/);
   }
-  create(obj: T) {
-    return this.http.post(`${this.API_URL}`, obj).pipe(take(1));
+  save(obj: T) {
+    if(obj.seqID){
+      return this.update(obj)
+    }
+    return this.create(obj)
   }
-  update(obj: T) {
+
+ private update(obj: T) {
     return this.http.put(`${this.API_URL}`, obj).pipe(take(1));
+  }
+ private create(obj: T) {
+    return this.http.post(`${this.API_URL}`, obj).pipe(take(1));
   }
 }
