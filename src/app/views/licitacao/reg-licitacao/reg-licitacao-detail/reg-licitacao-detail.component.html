@@ -3,7 +3,7 @@
   <div>
     <ngx-json-viewer [json]="formulario.value"></ngx-json-viewer>
   </div>-->
-  <div [formGroup]="formulario">
+  <div [formGroup]="formulario" (submit)="save()">
     <div class="row">
       <div class="col-lg-12">
         <div class="card">
@@ -15,7 +15,19 @@
             <div class="form-group">
               <!-- row -->
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-2">
+                  <label class="col-form-label" for="id">Código TCM</label>
+                  <div class="controls">
+                    <div class="input-prepend input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">ID</span>
+                      </div>
+                      <input type="hidden" id="seqID" class="form-control" formControlName="seqID">
+                      <input type="text" id="id" class="form-control" formControlName="id" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
                   <label class="col-form-label" for="codTipoRegulamentacao">Tipo de regulamentação</label>
                   <div class="controls">
                     <div class="input-prepend input-group">
@@ -237,24 +249,28 @@
                   </div>
                 </div>
                 <div class="col-lg-4">
-                  <label class="col-form-label" for="artigoPercObjetoContratacaoMEEPP">Artigo Perc. Objeto Contratacao MEEPP</label>
+                  <label class="col-form-label" for="artigoPercObjetoContratacaoMEEPP">Artigo Perc. Objeto Contratacao
+                    MEEPP</label>
                   <div class="controls">
                     <div class="input-prepend input-group">
                       <div class="input-group-prepend">
                         <span class="input-group-text">N° Artigo</span>
                       </div>
-                      <input type="text" id="artigoPercObjetoContratacaoMEEPP" class="form-control" formControlName="artigoPercObjetoContratacaoMEEPP">
+                      <input type="text" id="artigoPercObjetoContratacaoMEEPP" class="form-control"
+                        formControlName="artigoPercObjetoContratacaoMEEPP">
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-4">
-                  <label class="col-form-label" for="percentualObjetoContratacaoMEEPP">Percentual Objeto Contratacao MEEPP</label>
+                  <label class="col-form-label" for="percentualObjetoContratacaoMEEPP">Percentual Objeto Contratacao
+                    MEEPP</label>
                   <div class="controls">
                     <div class="input-prepend input-group">
                       <div class="input-group-prepend">
                         <span class="input-group-text">%</span>
                       </div>
-                      <input type="number" id="percentualObjetoContratacaoMEEPP" class="form-control" formControlName="percentualObjetoContratacaoMEEPP">
+                      <input type="number" id="percentualObjetoContratacaoMEEPP" class="form-control"
+                        formControlName="percentualObjetoContratacaoMEEPP">
                     </div>
                   </div>
                 </div>
@@ -276,8 +292,8 @@
           </div>
           <div class="card-body">
             <div class="form-actions">
-              <button type="submit" class="btn btn-primary" (click)="save()">Gravar</button>
-              <button type="submit" class="btn btn-warning">Transmitir</button>
+              <button type="submit" class="btn btn-primary">Gravar</button>
+              <button type="submit" class="btn btn-warning" (click)="transmitir()">Transmitir</button>
               <button class="btn btn-secondary" type="button" routerLink="/lic">Cancelar</button>
             </div>
           </div>

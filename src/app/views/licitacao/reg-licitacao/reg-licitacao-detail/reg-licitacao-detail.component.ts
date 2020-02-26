@@ -17,9 +17,8 @@ import { BaseFormComponent } from "../../../../shared/ui/base-form/base-form.com
 import { RegLicitacaoService } from "../../../../shared/services/licitacao/reg-licitacao.service";
 import { ActivatedRoute } from "@angular/router";
 import { RegLicitacao } from "../../../../shared/entity/reg-licitacao";
-import { SharedService } from '../../../../shared/services/shared-service.service';
-import { AlertService } from '../../../../shared/services/alert.service';
-
+import { SharedService } from "../../../../shared/services/shared-service.service";
+import { AlertService } from "../../../../shared/services/alert.service";
 
 @Component({
   selector: "app-reg-licitacao-detail",
@@ -27,9 +26,8 @@ import { AlertService } from '../../../../shared/services/alert.service';
 })
 export class RegLicitacaoDetailComponent extends BaseFormComponent
   implements OnInit, OnDestroy {
-
- 
   private id: number;
+  private regLicitacao: RegLicitacao 
 
   @ViewChild("labelImport")
   labelImport: ElementRef;
@@ -39,8 +37,8 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
   constructor(
     private service: RegLicitacaoService,
     private route: ActivatedRoute,
-    private sharedService : SharedService, 
-    private alertService:AlertService
+    private sharedService: SharedService,
+    private alertService: AlertService
   ) {
     super();
     this.buildForm();
@@ -48,18 +46,21 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(p => {
-      this.service.loadByID(parseInt(p.get("id"))).subscribe(r => {
-        this.formulario.patchValue(r);
-        //this.atualizaForm(r,this.formulario)
-      });
+      let id = parseInt(p.get("id"));
+      if (id) {
+        this.service.loadByID(id).subscribe(r => {
+          this.formulario.patchValue(r);
+          //this.atualizaForm(r,this.formulario)
+        });
+      }
     });
 
-    this.sharedService.emitChange(this.formulario)
+    this.sharedService.emitChange(this.formulario);
   }
 
   ngOnDestroy(): void {
-    this.formulario.reset()
-    this.sharedService.emitChange(this.formulario)
+    this.formulario.reset();
+    this.sharedService.emitChange(this.formulario);
   }
 
   onFileChange(files: FileList) {
@@ -70,14 +71,25 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
   }
 
   save() {
-    this.service.save(this.formulario.value).subscribe(s =>{
-      console.log(s)
-      this.alertService.showAlertSucess(`Salvo com sucesso ${s['seqID']}`,"Regulamentação")
+    this.service.save(this.formulario.value).subscribe(s => {
+      console.log(s);
+      this.alertService.showAlertSucess(
+        `Salvo com sucesso ${s["seqID"]}`,
+        "Regulamentação"
+      );
     });
   }
 
-  private buildForm() {
+  transmitir() {
+    console.log(this.formulario.value);
+    this.regLicitacao = new RegLicitacao(this.formulario.value)
+    console.log(this.regLicitacao);
+  }
+
+  private buildForm() {    
     this.formulario = this.builder.group({
+      seqID: this.builder.control("", []),
+      id: this.builder.control("", []),
       codTipoRegulamentacao: this.builder.control("", [Validators.required]),
       existeRegulamentacaoMunicipal: this.builder.control("", [
         Validators.required
@@ -105,5 +117,4 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
       })
     });
   }
-
 }

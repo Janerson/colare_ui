@@ -20,7 +20,7 @@ export const navItems: INavData[] = [
   },
   {
     name: "Reg. Proc. licitatórios",
-    url:"/lic/reg_licitacao",
+    url:"/lic",
     icon:"icon-notebook"
   },
   {

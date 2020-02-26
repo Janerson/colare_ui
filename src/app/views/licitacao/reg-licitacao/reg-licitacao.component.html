@@ -15,7 +15,7 @@
             <!--/.col-->
             <div class="col-sm-7 d-none d-md-block">              
               <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
-                <button type="submit" class="btn btn-warning" (click)="show()"><i class="fa fa-plus"></i>&nbsp;Novo</button></div>
+                <button type="submit" class="btn btn-warning" routerLink="./novo"><i class="fa fa-plus"></i>&nbsp;Novo</button></div>
             </div>
             <!--/.col-->
           </div>
@@ -29,12 +29,12 @@
                 <th>Data Publicação</th>
                 <th>Data Decreto Municipal</th>
                 <th>Número Decreto Municipal</th>
-                <th>Status</th>
+                <th>Status Envio</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of page?.content">
-                <td><a [routerLink]="['./detail',item.seqID]" routerLinkActive="router-link-active">
+                <td><a [routerLink]="['./',item.seqID]" routerLinkActive="router-link-active">
                     <i class="fa fa-edit"></i></a>
                 </td>
                 <td>{{item.id}}</td>

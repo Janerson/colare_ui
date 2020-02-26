@@ -3,6 +3,50 @@ import { Routes, RouterModule } from "@angular/router";
 import { RegLicitacaoComponent } from "./reg-licitacao/reg-licitacao.component";
 import { RegLicitacaoDetailComponent } from "./reg-licitacao/reg-licitacao-detail/reg-licitacao-detail.component";
 
+export const routes: Routes = [
+  {
+    path: "",
+    data: {
+      title: "Licitação"
+    },
+    children: [
+      {
+        path: "",
+        redirectTo: "regulamentacao"
+      },
+      {
+        path: "regulamentacao",
+        children: [
+          {
+            path: "",
+            component: RegLicitacaoComponent,
+            data: {
+              title: "Regulamentações"
+            }
+          },
+          {
+            path: ":id",
+            component: RegLicitacaoDetailComponent,
+            outlet: "",
+            data: {
+              title: "Detalhar Regulamentação"
+            }
+          },
+          {
+            path: "novo",
+            component: RegLicitacaoDetailComponent,
+            outlet: "",
+            data: {
+              title: "Adicionar Regulamentação"
+            }
+          }
+        ]
+      }
+    ]
+  }
+];
+
+/*
 const routes: Routes = [
   {
     path: "",
@@ -19,20 +63,22 @@ const routes: Routes = [
         component: RegLicitacaoComponent,
         data: {
           title: "Regulamentação dos procedimentos licitatórios"
-        }
-      },
-      {
-        path: "reg_licitacao/detail/:id",
-        component: RegLicitacaoDetailComponent,
-        data: {
-          title:
-            "Detalhamento Regulamentação dos procedimentos licitatórios"
-        }
+        },
+        children: [
+          {
+            path: "detail/:id",
+            component: RegLicitacaoDetailComponent,
+            data: {
+              title:
+                "Detalhamento Regulamentação dos procedimentos licitatórios"
+            }
+          }
+        ]
       }
     ]
   }
 ];
-
+*/
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
