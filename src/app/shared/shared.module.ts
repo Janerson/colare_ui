@@ -11,13 +11,15 @@ import { AlertModalComponent } from "./ui/alert-modal/alert-modal.component";
 import { BaseFormComponent } from "./ui/base-form/base-form.component";
 import { PaginationModule } from 'ngx-bootstrap';
 import { AlertService } from './services/alert.service';
+import { FileUploadComponent } from './ui/file-upload/file-upload.component';
 defineLocale("pt-br", ptBrLocale);
 
 @NgModule({
   declarations: [
     OnlyNumberDirective,
     AlertModalComponent,
-    BaseFormComponent    
+    BaseFormComponent,
+    FileUploadComponent    
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,8 @@ defineLocale("pt-br", ptBrLocale);
     BaseFormComponent,
     NgxJsonViewerModule,
     PaginationModule,
-    AlertModalComponent
+    AlertModalComponent,
+    FileUploadComponent
     // BsDatepickerModule
   ],
   providers:[BsLocaleService, BsModalService,AlertService],

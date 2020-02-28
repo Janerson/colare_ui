@@ -18,16 +18,8 @@ export const routes: Routes = [
         path: "regulamentacao",
         children: [
           {
-            path: "",
-            component: RegLicitacaoComponent,
-            data: {
-              title: "Regulamentações"
-            }
-          },
-          {
             path: ":id",
             component: RegLicitacaoDetailComponent,
-            outlet: "",
             data: {
               title: "Detalhar Regulamentação"
             }
@@ -35,9 +27,15 @@ export const routes: Routes = [
           {
             path: "novo",
             component: RegLicitacaoDetailComponent,
-            outlet: "",
             data: {
               title: "Adicionar Regulamentação"
+            }
+          },
+          {
+            path: "",
+            component: RegLicitacaoComponent,
+            data: {
+              title: "Regulamentações"
             }
           }
         ]

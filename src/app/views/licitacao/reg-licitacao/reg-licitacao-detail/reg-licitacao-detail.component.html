@@ -93,17 +93,16 @@
               <div class="row">
                 <div class="col-lg-6">
                   <label class="col-form-label" for="idDocumentoPDF">Arquivo</label>
-                  <div class="input-group">
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" formControlName="idDocumentoPDF" id="idDocumentoPDF"
-                        (change)="onFileChange($event.target.files)">
-                      <label class="custom-file-label" #labelImport for="idDocumentoPDF"><i
-                          class="fa fa-search"></i>Enviar arquivo</label>
+                  <div class="controls">
+                    <div class="input-prepend input-group">                                            
+                      <input type="text" id="idDocumentoPDF" class="form-control" formControlName="idDocumentoPDF" readonly>
+                      <div class="input-group-prepend">
+                        <app-file-upload (fileUpload)="getFileUploadID($event)"></app-file-upload>
+                      </div>
                     </div>
-                  </div>
-                </div>
+                  </div>                  
+                </div>                
               </div>
-              <!-- row 3-->
             </div>
           </div>
         </div>

@@ -3,22 +3,16 @@ import {
   OnInit,
   ViewChild,
   ElementRef,
-  Output,
-  EventEmitter,
   OnDestroy
 } from "@angular/core";
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from "@angular/forms";
+import { Validators } from "@angular/forms";
 import { BaseFormComponent } from "../../../../shared/ui/base-form/base-form.component";
 import { RegLicitacaoService } from "../../../../shared/services/licitacao/reg-licitacao.service";
 import { ActivatedRoute } from "@angular/router";
 import { RegLicitacao } from "../../../../shared/entity/reg-licitacao";
 import { SharedService } from "../../../../shared/services/shared-service.service";
 import { AlertService } from "../../../../shared/services/alert.service";
+import { Subscriber, Subscription } from "rxjs";
 
 @Component({
   selector: "app-reg-licitacao-detail",
@@ -26,13 +20,8 @@ import { AlertService } from "../../../../shared/services/alert.service";
 })
 export class RegLicitacaoDetailComponent extends BaseFormComponent
   implements OnInit, OnDestroy {
-  private id: number;
-  private regLicitacao: RegLicitacao 
-
-  @ViewChild("labelImport")
-  labelImport: ElementRef;
-
-  fileToUpload: File = null;
+  private regLicitacao: RegLicitacao;
+  private subscription: Subscription;
 
   constructor(
     private service: RegLicitacaoService,
@@ -45,7 +34,7 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(p => {
+    this.subscription = this.route.paramMap.subscribe(p => {
       let id = parseInt(p.get("id"));
       if (id) {
         this.service.loadByID(id).subscribe(r => {
@@ -61,18 +50,11 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
   ngOnDestroy(): void {
     this.formulario.reset();
     this.sharedService.emitChange(this.formulario);
-  }
-
-  onFileChange(files: FileList) {
-    this.labelImport.nativeElement.innerText = Array.from(files)
-      .map(f => f.name)
-      .join(", ");
-    this.fileToUpload = files.item(0);
+    this.subscription.unsubscribe();
   }
 
   save() {
     this.service.save(this.formulario.value).subscribe(s => {
-      console.log(s);
       this.alertService.showAlertSucess(
         `Salvo com sucesso ${s["seqID"]}`,
         "Regulamentação"
@@ -81,39 +63,39 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
   }
 
   transmitir() {
-    console.log(this.formulario.value);
-    this.regLicitacao = new RegLicitacao(this.formulario.value)
-    console.log(this.regLicitacao);
+    this.regLicitacao = new RegLicitacao(this.formulario.value);
   }
 
-  private buildForm() {    
+  getFileUploadID(e) {
+    console.log(e);
+    this.atualizaForm(e, "idDocumentoPDF");
+  }
+  private buildForm() {
     this.formulario = this.builder.group({
-      seqID: this.builder.control("", []),
-      id: this.builder.control("", []),
-      codTipoRegulamentacao: this.builder.control("", [Validators.required]),
-      existeRegulamentacaoMunicipal: this.builder.control("", [
+      seqID: this.builder.control(null, []),
+      id: this.builder.control(null, []),
+      codTipoRegulamentacao: this.builder.control(null, [Validators.required]),
+      existeRegulamentacaoMunicipal: this.builder.control(null, [
         Validators.required
       ]),
-      numeroDecretoMunicipal: this.builder.control("", [Validators.required]),
-      dataDecretoMunicipal: this.builder.control("", [Validators.required]),
-      dataPublicacao: this.builder.control("", [Validators.required]),
-      idDocumentoPDF: this.builder.control("", [Validators.required]),
-      codTipoEnvio: this.builder.control("", [Validators.required]),
-      motivoAtualizacaoCorrecao: this.builder.control("", [
-        Validators.required
-      ]),
+      numeroDecretoMunicipal: this.builder.control(null),
+      dataDecretoMunicipal: this.builder.control(null),
+      dataPublicacao: this.builder.control(null),
+      idDocumentoPDF: this.builder.control(null),
+      codTipoEnvio: this.builder.control(null, [Validators.required]),
+      motivoAtualizacaoCorrecao: this.builder.control(null),
       detalhamentoLc123: this.builder.group({
-        regulamentouParticipExclusivaMEEPP: this.builder.control(""),
-        artigoRegulamentouParticipExclusivaMEEPP: this.builder.control(""),
-        valorLimiteRegParticipExclusivaMEEPP: this.builder.control(""),
-        regulamentouProcSubContratacaoMEEPP: this.builder.control(""),
-        artigoProcSubContratacaoMEEPP: this.builder.control(""),
-        percentualSubContratacaoMEEPP: this.builder.control(""),
-        regulamentouCriteriosEmpenhoPagamentoMEEPP: this.builder.control(""),
-        artigoEmpenhoPagamentoMEEPP: this.builder.control(""),
-        regulamentouPercObjetoContratacaoMEEPP: this.builder.control(""),
-        artigoPercObjetoContratacaoMEEPP: this.builder.control(""),
-        percentualObjetoContratacaoMEEPP: this.builder.control("")
+        regulamentouParticipExclusivaMEEPP: this.builder.control(null,[Validators.required]),
+        artigoRegulamentouParticipExclusivaMEEPP: this.builder.control(null),
+        valorLimiteRegParticipExclusivaMEEPP: this.builder.control(null),
+        regulamentouProcSubContratacaoMEEPP: this.builder.control(null,[Validators.required]),
+        artigoProcSubContratacaoMEEPP: this.builder.control(null),
+        percentualSubContratacaoMEEPP: this.builder.control(null),
+        regulamentouCriteriosEmpenhoPagamentoMEEPP: this.builder.control(null,[Validators.required]),
+        artigoEmpenhoPagamentoMEEPP: this.builder.control(null),
+        regulamentouPercObjetoContratacaoMEEPP: this.builder.control(null,[Validators.required]),
+        artigoPercObjetoContratacaoMEEPP: this.builder.control(null),
+        percentualObjetoContratacaoMEEPP: this.builder.control(null)
       })
     });
   }
