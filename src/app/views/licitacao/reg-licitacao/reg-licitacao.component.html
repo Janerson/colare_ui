@@ -6,21 +6,17 @@
           <i class="fa fa-table"></i>Regulamentações dos procedimentos licitatórios
         </div>
         <div class="card-body">
-
           <div class="row">
             <div class="col-sm-5">
               <h4 class="card-title mb-0">Regulamentações</h4>
               <div class="small text-muted">&nbsp;</div>
             </div>
-            <!--/.col-->
-            <div class="col-sm-7 d-none d-md-block">              
+            <div class="col-sm-7 d-none d-md-block">
               <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
-                <button type="submit" class="btn btn-warning" routerLink="./novo"><i class="fa fa-plus"></i>&nbsp;Novo</button></div>
+                <button type="submit" class="btn btn-warning" routerLink="./novo">
+                  <i class="fa fa-plus"></i>&nbsp;Novo</button></div>
             </div>
-            <!--/.col-->
           </div>
-          <!--/.row-->
-
           <table datatable class="table table-striped">
             <thead>
               <tr>
@@ -42,8 +38,7 @@
                 <td>{{item.dataDecretoMunicipal | date:'dd/MM/yyyy'}}</td>
                 <td>{{item.numeroDecretoMunicipal}}</td>
                 <td>
-                  <span
-                    class="badge badge-{{item.id?'success':'warning'}}">{{item.id?"Transmitido":"Pendente"}}</span>
+                  <span class="badge badge-{{item.id?'success':'warning'}}">{{item.id?"Transmitido":"Pendente"}}</span>
                 </td>
               </tr>
             </tbody>

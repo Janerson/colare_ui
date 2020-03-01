@@ -44,6 +44,8 @@ import { DataTablesModule } from "angular-datatables";
 import { NgxJsonViewerModule } from "ngx-json-viewer";
 import { SharedModule } from "./shared/shared.module";
 
+import {Interceptor} from './auh/interceptor.module';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -62,7 +64,8 @@ import { SharedModule } from "./shared/shared.module";
     DataTablesModule,
     NgxJsonViewerModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    Interceptor
   ],
   declarations: [
     AppComponent,

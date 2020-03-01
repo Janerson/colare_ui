@@ -2,13 +2,12 @@ import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
-  ViewChild,
-  ElementRef,
-  Input,
   Output,
   EventEmitter
 } from "@angular/core";
-import { constructor } from 'moment';
+import { FileUploadService } from "../../services/file-upload.service";
+import { UploadResponse } from "../../entity/UploadResponse";
+import { AlertService } from "../../services/alert.service";
 
 @Component({
   selector: "app-file-upload",
@@ -17,14 +16,23 @@ import { constructor } from 'moment';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileUploadComponent implements OnInit {
-  
   @Output() fileUpload = new EventEmitter<string>();
 
-  constructor() {}
+  constructor(
+    private fileUploadService: FileUploadService,
+    private alertService: AlertService
+  ) {}
 
   ngOnInit(): void {}
 
-  onFileChange(file : FileList) {
-    this.fileUpload.emit(file.item(0).name)
+  onFileChange(file: FileList) {
+    this.fileUploadService.upload(file).subscribe(
+      response => {
+        this.fileUpload.emit((<UploadResponse>response).arquivo);
+      },
+      e => {
+        this.alertService.showAlertDanger(e["message"],"Erro ao enviar o arquivo")
+      }
+    );
   }
 }
