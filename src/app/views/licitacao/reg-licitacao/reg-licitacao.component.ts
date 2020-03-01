@@ -9,6 +9,11 @@ import { Page } from "../../../shared/services/generic/page";
   templateUrl: "./reg-licitacao.component.html"
 })
 export class RegLicitacaoComponent extends BaseFormComponent implements OnInit {
+  
+  submit() {
+    throw new Error("Method not implemented.");
+  }
+  
   protected page: Page<RegLicitacao>;
 
   constructor(protected service: RegLicitacaoService) {

@@ -3,13 +3,12 @@
   <div>
     <ngx-json-viewer [json]="formulario.value"></ngx-json-viewer>
   </div>-->
-  <div [formGroup]="formulario" (submit)="save()">
+  <form [formGroup]="formulario" (submit)="onSubmit()" >
     <div class="row">
       <div class="col-lg-12">
         <div class="card">
           <div class="card-header">
-            <i class="fa fa-edit"></i>Regulamentação dos procedimentos
-            licitatórios
+            <i class="fa fa-edit"></i>Regulamentação dos procedimentos licitatórios
           </div>
           <div class="card-body">
             <div class="form-group">
@@ -34,14 +33,15 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text">Tipo</span>
                       </div>
-                      <select class="form-control" id="codTipoRegulamentacao" formControlName="codTipoRegulamentacao">
+                      <select [ngClass]="aplicaCssErro('codTipoRegulamentacao')" class="form-control" id="codTipoRegulamentacao" formControlName="codTipoRegulamentacao">
+                        <option></option>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
                         <option>5</option>
                       </select>
-                    </div>
+                    </div>                    
                   </div>
                 </div>
                 <div class="col-lg-6">
@@ -49,11 +49,11 @@
                     Municipal</label>
                   <div class="controls">
                     <label class="switch switch-label switch-pill switch-success">
-                      <input id="existeRegulamentacaoMunicipal" type="checkbox" class="switch-input"
+                      <input [ngClass]="aplicaCssErro('existeRegulamentacaoMunicipal')" id="existeRegulamentacaoMunicipal" type="checkbox" class="switch-input"
                         formControlName="existeRegulamentacaoMunicipal">
                       <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
                     </label>
-                  </div>
+                  </div>  
                 </div>
               </div>
               <!-- row  1-->
@@ -94,14 +94,15 @@
                 <div class="col-lg-6">
                   <label class="col-form-label" for="idDocumentoPDF">Arquivo</label>
                   <div class="controls">
-                    <div class="input-prepend input-group">                                            
-                      <input type="text" id="idDocumentoPDF" class="form-control" formControlName="idDocumentoPDF" readonly>
+                    <div class="input-prepend input-group">
+                      <input type="text" id="idDocumentoPDF" class="form-control" formControlName="idDocumentoPDF"
+                        readonly>
                       <div class="input-group-prepend">
                         <app-file-upload (fileUpload)="getFileUploadID($event)"></app-file-upload>
                       </div>
                     </div>
-                  </div>                  
-                </div>                
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -299,5 +300,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>

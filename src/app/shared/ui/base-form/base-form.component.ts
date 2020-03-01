@@ -1,19 +1,28 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, FormArray } from "@angular/forms";
 import { of, Observable, empty, interval } from "rxjs";
-import { tap, switchMap, debounce, distinctUntilChanged } from "rxjs/operators";
+import { tap, switchMap, debounce, distinctUntilChanged, map } from "rxjs/operators";
 
 @Component({
   selector: "app-base-form",
   template: ""
 })
 export class BaseFormComponent implements OnInit {
-  formulario: FormGroup;
-  protected builder : FormBuilder = new FormBuilder();
+  
+  formulario: FormGroup; 
+
+  protected builder: FormBuilder = new FormBuilder();
 
   constructor() {}
 
   ngOnInit() {}
+
+  /**
+   * Método chamado quando formulario válido
+   */
+  submit(){
+    throw new Error("Method should be overridden");
+  }
 
   /**
    * Retorna o valor do formControl ou o proprio formControl
@@ -68,11 +77,66 @@ export class BaseFormComponent implements OnInit {
     }
   }
 
+
+  onSubmit() {
+    if (this.formulario.valid) {
+
+    } else {
+      this.verificaValidacoesForm(this.formulario);
+    }
+  }
+
+  verificaValidacoesForm(formGroup: FormGroup | FormArray) {
+    Object.keys(formGroup.controls).forEach(campo => {
+      const controle = formGroup.get(campo);
+      console.log(campo)
+      controle.markAsDirty();
+      controle.markAsTouched();
+      if (controle instanceof FormGroup || controle instanceof FormArray) {
+        this.verificaValidacoesForm(controle); 
+      }
+    });
+  }
+
+  resetar() {
+    this.formulario.reset();
+  }
+
+  verificaValidTouched(campo: string) {
+    return (
+      !this.formulario.get(campo).valid &&
+      (this.formulario.get(campo).touched || this.formulario.get(campo).dirty)
+    );
+  }
+
+  verificaRequired(campo: string) {
+    return (
+      this.formulario.get(campo).hasError("required") &&
+      (this.formulario.get(campo).touched || this.formulario.get(campo).dirty)
+    );
+  }
+
+  verificaEmailInvalido() {
+    const campoEmail = this.formulario.get("email");
+    if (campoEmail.errors) {
+      return campoEmail.errors["email"] && campoEmail.touched;
+    }
+  }
+
+  aplicaCssErro(campo: string) {
+    return {
+      "has-error": this.verificaValidTouched(campo),
+      "is-invalid": this.verificaRequired(campo),
+    };
+  }
+
   /**
    *
    *
    */
   validaForm() {
-    of(this.formulario.controls).pipe(tap(v => console.log(v)));
+    of(this.formulario.controls).pipe(
+      map(v => console.log(v))
+      );
   }
 }

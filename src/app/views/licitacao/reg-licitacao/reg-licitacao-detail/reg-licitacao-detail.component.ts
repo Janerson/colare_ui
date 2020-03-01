@@ -20,6 +20,8 @@ import { Subscriber, Subscription } from "rxjs";
 })
 export class RegLicitacaoDetailComponent extends BaseFormComponent
   implements OnInit, OnDestroy {
+  
+ 
   private regLicitacao: RegLicitacao;
   private subscription: Subscription;
 
@@ -62,6 +64,10 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
     });
   }
 
+  submit() {
+    
+  }
+  
   transmitir() {
     this.regLicitacao = new RegLicitacao(this.formulario.value);
   }
@@ -97,6 +103,6 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
         artigoPercObjetoContratacaoMEEPP: this.builder.control(null),
         percentualObjetoContratacaoMEEPP: this.builder.control(null)
       })
-    });
+    },[Validators.required]);
   }
 }

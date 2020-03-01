@@ -9,6 +9,10 @@ import { SharedService } from '../../shared/services/shared-service.service';
 })
 export class DefaultLayoutComponent extends BaseFormComponent implements OnInit {
   
+  submit() {
+    throw new Error("Method not implemented.");
+  }
+  
   
   public sidebarMinimized = false;
    navItems = navItems;
