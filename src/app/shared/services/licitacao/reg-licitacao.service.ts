@@ -11,6 +11,6 @@ import { RegLicitacao } from '../../entity/reg-licitacao';
 export class RegLicitacaoService extends GenericDao<RegLicitacao> {
 
   constructor(protected http:HttpClient) {
-    super(http,environment.API_URL(environment.REG_LICITACAO));
+    super(http,environment.REG_LICITACAO);
   }
 }

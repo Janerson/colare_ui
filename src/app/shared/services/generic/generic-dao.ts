@@ -15,20 +15,20 @@ export class GenericDao<T extends BaseEntity> {
   constructor(protected http: HttpClient, private LAYOUT: string) {}
 
   list() {
-    return this.http.get<T[]>(`${environment.API_URL}/${this.LAYOUT}/ALL`);
+    return this.http.get<T[]>(`${environment.API_URL(this.LAYOUT)}/ALL`);
   }
 
   paged(page?: number) {
     return page !== undefined
       ? this.http.get<Page<T>>(
-          `${environment.API_URL}/${this.LAYOUT}/PAGED?page=${page}`
+          `${environment.API_URL(this.LAYOUT)}/PAGED?page=${page}`
         )
-      : this.http.get<Page<T>>(`${environment.API_URL}/${this.LAYOUT}/PAGED`);
+      : this.http.get<Page<T>>(`${environment.API_URL(this.LAYOUT)}/PAGED`);
   }
 
   loadByID(id: number) {
     return this.http
-      .get<T>(`${environment.API_URL}/${this.LAYOUT}/${id}`)
+      .get<T>(`${environment.API_URL(this.LAYOUT)}/${id}`)
       .pipe(take(1) /*,tap(console.log)*/);
   }
 
@@ -41,12 +41,12 @@ export class GenericDao<T extends BaseEntity> {
 
   private update(obj: T) {
     return this.http
-      .put(`${environment.API_URL}/${this.LAYOUT}`, obj)
+      .put(`${environment.API_URL(this.LAYOUT)}`, obj)
       .pipe(take(1));
   }
   private create(obj: T) {
     return this.http
-      .post(`${environment.API_URL}/${this.LAYOUT}`, obj)
+      .post(`${environment.API_URL(this.LAYOUT)}`, obj)
       .pipe(take(1));
   }
 
@@ -57,7 +57,7 @@ export class GenericDao<T extends BaseEntity> {
    */
   public postTCM(t: T) {
     return this.http
-      .post(`${environment.URL_LAYOUT}/${this.LAYOUT}`, t)
+      .post(`${environment.URL_LAYOUT(this.LAYOUT)}`, t)
       .pipe(take(1));
   }
 
@@ -68,7 +68,7 @@ export class GenericDao<T extends BaseEntity> {
    */
   public putTCM(t: T, id: any) {
     return this.http
-      .put(`${environment.URL_LAYOUT}/${this.LAYOUT}/${id}`, t)
+      .put(`${environment.URL_LAYOUT(this.LAYOUT)}/${id}`, t)
       .pipe(take(1));
   }
 
@@ -77,7 +77,7 @@ export class GenericDao<T extends BaseEntity> {
    * @param id id do layout enviado
    */
   public deleteTCM(id: any) {
-    return this.http.delete(`${environment.URL_LAYOUT}/${this.LAYOUT}/${id}`);
+    return this.http.delete(`${environment.URL_LAYOUT(this.LAYOUT)}/${id}`);
   }
 
   /**
@@ -85,7 +85,7 @@ export class GenericDao<T extends BaseEntity> {
    * @param id 
    */
   public getTCM(id: any) {
-    this.http.get<T>(`${environment.URL_LAYOUT}/${this.LAYOUT}/${id}`);
+    this.http.get<T>(`${environment.URL_LAYOUT(this.LAYOUT)}/${id}`);
   }
 
   public upload(file: FileList) {

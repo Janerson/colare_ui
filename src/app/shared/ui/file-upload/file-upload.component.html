@@ -13,5 +13,5 @@
     <input type="file" name="myfile" />
 </div>-->
 <label class="btn btn-primary">
-    Upload <input type="file" style="display: none;" (change)="onFileChange($event.target.files)">
+    Upload <input #file type="file" style="display: none;" (change)="onFileChange($event.target.files)">
 </label>

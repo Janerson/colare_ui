@@ -9,6 +9,7 @@ import {
 } from "@angular/common/http";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { tap } from "rxjs/operators";
+import { environment, BASE_URL_TCM } from "../../environments/environment";
 
 @Injectable()
 export class HttpsRequestInterceptor implements HttpInterceptor {
@@ -18,11 +19,14 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     // modify request
-    request = request.clone({
-      setHeaders: {
-        Authorization: localStorage.getItem("MY_TOKEN")
-      }
-    });
+    console.log(request.url)
+    if (request.url.startsWith(BASE_URL_TCM)) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: 'CONFIGURAR TOKEN'
+        }
+      });
+    }
 
     console.log("----request----");
 
@@ -34,9 +38,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
       tap(
         event => {
           if (event instanceof HttpResponse) {
-            console.log(" all looks good");
-            // http response status code
-            console.log(event.status);
+            console.log(" all looks good",event.status);
           }
         },
         error => {

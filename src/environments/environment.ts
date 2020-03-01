@@ -31,19 +31,18 @@ export const right = (str: any, n: any) => {
 const d = new Date();
 const mes = "000" + (d.getMonth() + 1);
 const ano = d.getUTCFullYear();
+export const BASE_URL_TCM = "https://testes.tcm.go.gov.br";
 
 export const environment = {
   production: false,
   REG_LICITACAO: "LIC/REG_LICITACAO",
   API_URL: (layout: string) => `http://localhost:8080/api/${layout}`,
   URL_LAYOUT: (layout: string) =>
-    `https://testes.tcm.go.gov.br/recepcao/${layout}/${right(mes, 2)}/${ano}`,
-  URL_VALIDAR_ENVIO:(recibo)=>`https://testes.tcm.go.gov.br/recepcao/validar-recibo/${recibo}`,
-  URL_REPRESENTACOES:
-    "https://testes.tcm.go.gov.br/passaporte/api/auth/representacoes",
-  URL_TOKEN:
-    "https://testes.tcm.go.gov.br/passaporte/api/auth/certificado?representacao=21",
-  URL_UPLOAD: "https://testes.tcm.go.gov.br/recepcao/arquivo/upload",
+    `${BASE_URL_TCM}/recepcao/${layout}/${right(mes, 2)}/${ano}`,
+  URL_VALIDAR_ENVIO: `${BASE_URL_TCM}/recepcao/validar-recibo/`,
+  URL_REPRESENTACOES: `${BASE_URL_TCM}/passaporte/api/auth/representacoes`,
+  URL_TOKEN: `${BASE_URL_TCM}/passaporte/api/auth/certificado?representacao=`,
+  URL_UPLOAD: `${BASE_URL_TCM}/recepcao/arquivo/upload`,
   URL_DOWNLOAD: (recibo: string, idArquivo: string) =>
-    `https://testes.tcm.go.gov.br/envio-manual/api/envio/pdf/anexo/${recibo}/${idArquivo}`
+    `${BASE_URL_TCM}/envio-manual/api/envio/pdf/anexo/${recibo}/${idArquivo}`
 };
