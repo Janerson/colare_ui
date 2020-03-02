@@ -15,13 +15,25 @@ export const navItems: INavData[] = [
     name: "Tabelas"
   },
   {
+    name: "Domínios",
+    url: "/base",
+    icon: "icon-puzzle",
+    children: [
+      {
+        name: "Tipo regulamentação",
+        url: "/base/cards",
+        icon: "icon-puzzle"
+      }
+    ]
+  },
+  {
     title: true,
     name: "Licitações"
   },
   {
     name: "Reg. Proc. licitatórios",
-    url:"/lic",
-    icon:"icon-notebook"
+    url: "/lic",
+    icon: "icon-notebook"
   },
   {
     name: "Colors",

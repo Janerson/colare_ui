@@ -19,7 +19,7 @@ defineLocale("pt-br", ptBrLocale);
     OnlyNumberDirective,
     AlertModalComponent,
     BaseFormComponent,
-    FileUploadComponent    
+    FileUploadComponent
   ],
   imports: [
     CommonModule,

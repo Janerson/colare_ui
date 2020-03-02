@@ -1,18 +1,12 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  OnDestroy
-} from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Validators } from "@angular/forms";
 import { BaseFormComponent } from "../../../../shared/ui/base-form/base-form.component";
-import { RegLicitacaoService } from "../../../../shared/services/licitacao/reg-licitacao.service";
 import { ActivatedRoute } from "@angular/router";
 import { RegLicitacao } from "../../../../shared/entity/reg-licitacao";
 import { SharedService } from "../../../../shared/services/shared-service.service";
 import { AlertService } from "../../../../shared/services/alert.service";
 import { Subscriber, Subscription } from "rxjs";
+import { RegLicitacaoService } from "../../service/reg-licitacao.service";
 
 @Component({
   selector: "app-reg-licitacao-detail",
@@ -20,8 +14,6 @@ import { Subscriber, Subscription } from "rxjs";
 })
 export class RegLicitacaoDetailComponent extends BaseFormComponent
   implements OnInit, OnDestroy {
-  
- 
   private regLicitacao: RegLicitacao;
   private subscription: Subscription;
 
@@ -64,10 +56,8 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
     });
   }
 
-  submit() {
-    
-  }
-  
+  submit() {}
+
   transmitir() {
     this.regLicitacao = new RegLicitacao(this.formulario.value);
   }
@@ -77,32 +67,46 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
     this.atualizaForm(e, "idDocumentoPDF");
   }
   private buildForm() {
-    this.formulario = this.builder.group({
-      seqID: this.builder.control(null, []),
-      id: this.builder.control(null, []),
-      codTipoRegulamentacao: this.builder.control(null, [Validators.required]),
-      existeRegulamentacaoMunicipal: this.builder.control(null, [
-        Validators.required
-      ]),
-      numeroDecretoMunicipal: this.builder.control(null),
-      dataDecretoMunicipal: this.builder.control(null),
-      dataPublicacao: this.builder.control(null),
-      idDocumentoPDF: this.builder.control(null),
-      codTipoEnvio: this.builder.control(null, [Validators.required]),
-      motivoAtualizacaoCorrecao: this.builder.control(null),
-      detalhamentoLc123: this.builder.group({
-        regulamentouParticipExclusivaMEEPP: this.builder.control(null,[Validators.required]),
-        artigoRegulamentouParticipExclusivaMEEPP: this.builder.control(null),
-        valorLimiteRegParticipExclusivaMEEPP: this.builder.control(null),
-        regulamentouProcSubContratacaoMEEPP: this.builder.control(null,[Validators.required]),
-        artigoProcSubContratacaoMEEPP: this.builder.control(null),
-        percentualSubContratacaoMEEPP: this.builder.control(null),
-        regulamentouCriteriosEmpenhoPagamentoMEEPP: this.builder.control(null,[Validators.required]),
-        artigoEmpenhoPagamentoMEEPP: this.builder.control(null),
-        regulamentouPercObjetoContratacaoMEEPP: this.builder.control(null,[Validators.required]),
-        artigoPercObjetoContratacaoMEEPP: this.builder.control(null),
-        percentualObjetoContratacaoMEEPP: this.builder.control(null)
-      })
-    },[Validators.required]);
+    this.formulario = this.builder.group(
+      {
+        seqID: this.builder.control(null, []),
+        id: this.builder.control(null, []),
+        codTipoRegulamentacao: this.builder.control(null, [
+          Validators.required
+        ]),
+        existeRegulamentacaoMunicipal: this.builder.control(null, [
+          Validators.required
+        ]),
+        numeroDecretoMunicipal: this.builder.control(null),
+        dataDecretoMunicipal: this.builder.control(null),
+        dataPublicacao: this.builder.control(null),
+        idDocumentoPDF: this.builder.control(null),
+        codTipoEnvio: this.builder.control(null, [Validators.required]),
+        motivoAtualizacaoCorrecao: this.builder.control(null),
+        detalhamentoLc123: this.builder.group({
+          regulamentouParticipExclusivaMEEPP: this.builder.control(null, [
+            Validators.required
+          ]),
+          artigoRegulamentouParticipExclusivaMEEPP: this.builder.control(null),
+          valorLimiteRegParticipExclusivaMEEPP: this.builder.control(null),
+          regulamentouProcSubContratacaoMEEPP: this.builder.control(null, [
+            Validators.required
+          ]),
+          artigoProcSubContratacaoMEEPP: this.builder.control(null),
+          percentualSubContratacaoMEEPP: this.builder.control(null),
+          regulamentouCriteriosEmpenhoPagamentoMEEPP: this.builder.control(
+            null,
+            [Validators.required]
+          ),
+          artigoEmpenhoPagamentoMEEPP: this.builder.control(null),
+          regulamentouPercObjetoContratacaoMEEPP: this.builder.control(null, [
+            Validators.required
+          ]),
+          artigoPercObjetoContratacaoMEEPP: this.builder.control(null),
+          percentualObjetoContratacaoMEEPP: this.builder.control(null)
+        })
+      },
+      [Validators.required]
+    );
   }
 }
