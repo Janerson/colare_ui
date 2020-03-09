@@ -9,4 +9,5 @@ export class Dominios extends BaseEntity  {
   codigo: string;
   descricao: string;
   vigencia: string;
+  ativo: boolean;
 }

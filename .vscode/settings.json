@@ -5,5 +5,8 @@
         "**/.settings": true,
         "**/.factorypath": true
     },
-    "explorer.compactFolders": false
+    "terminal.integrated.shell.windows": "C:\\Windows\\Sysnative\\cmd.exe",
+    "terminal.integrated.shellArgs.windows": [
+        "/k C:\\Cmder\\vendor\\init.bat"
+    ]
 }

@@ -7,6 +7,9 @@ import { SharedService } from "../../../../shared/services/shared-service.servic
 import { AlertService } from "../../../../shared/services/alert.service";
 import { Subscriber, Subscription } from "rxjs";
 import { RegLicitacaoService } from "../../service/reg-licitacao.service";
+import { DominioService } from "../../../dominio/service/dominio.service";
+import { Dominios } from "../../../../shared/entity/dominio";
+import { TABELAS_DOMINIOS } from '../../../../shared/tabelas';
 
 @Component({
   selector: "app-reg-licitacao-detail",
@@ -15,10 +18,12 @@ import { RegLicitacaoService } from "../../service/reg-licitacao.service";
 export class RegLicitacaoDetailComponent extends BaseFormComponent
   implements OnInit, OnDestroy {
   private regLicitacao: RegLicitacao;
+  protected dominios: Dominios[];
   private subscription: Subscription;
 
   constructor(
     private service: RegLicitacaoService,
+    protected dominioService: DominioService,
     private route: ActivatedRoute,
     private sharedService: SharedService,
     private alertService: AlertService
@@ -37,8 +42,9 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
         });
       }
     });
-
     this.sharedService.emitChange(this.formulario);
+    this.dominioService.listDominio(TABELAS_DOMINIOS.TIPO_DECRETO_REGULAMENTADOR,true)
+    .subscribe((data) => this.dominios = data)
   }
 
   ngOnDestroy(): void {
@@ -60,6 +66,7 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
 
   transmitir() {
     this.regLicitacao = new RegLicitacao(this.formulario.value);
+    console.log(this.regLicitacao);
   }
 
   getFileUploadID(e) {

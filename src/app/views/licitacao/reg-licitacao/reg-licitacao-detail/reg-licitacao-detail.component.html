@@ -35,11 +35,7 @@
                       </div>
                       <select [ngClass]="aplicaCssErro('codTipoRegulamentacao')" class="form-control" id="codTipoRegulamentacao" formControlName="codTipoRegulamentacao">
                         <option></option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option *ngFor="let item of dominios" [value]="item.codigo">{{item.descricao}}</option>                        
                       </select>
                     </div>                    
                   </div>

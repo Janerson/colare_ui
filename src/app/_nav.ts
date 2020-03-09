@@ -16,12 +16,12 @@ export const navItems: INavData[] = [
   },
   {
     name: "Domínios",
-    url: "/base",
+    url: "/dominio",
     icon: "icon-puzzle",
     children: [
       {
         name: "Tipo regulamentação",
-        url: "/base/cards",
+        url: "/dominio/tipo-regulamentacao",
         icon: "icon-puzzle"
       }
     ]

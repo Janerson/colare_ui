@@ -35,6 +35,7 @@ export const BASE_URL_TCM = "https://testes.tcm.go.gov.br";
 
 export const environment = {
   production: false,
+  DOMINIO:"DOMINIO/PROCESS_JSON",
   REG_LICITACAO: "LIC/REG_LICITACAO",
   API_URL: (layout: string) => `http://localhost:8080/api/${layout}`,
   URL_LAYOUT: (layout: string) =>

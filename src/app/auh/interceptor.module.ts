@@ -19,7 +19,6 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     // modify request
-    console.log(request.url)
     if (request.url.startsWith(BASE_URL_TCM)) {
       request = request.clone({
         setHeaders: {
@@ -27,12 +26,6 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
         }
       });
     }
-
-    console.log("----request----");
-
-    console.log(request);
-
-    console.log("--- end of request---");
 
     return next.handle(request).pipe(
       tap(
@@ -44,9 +37,8 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
         error => {
           // http response status code
           console.log("----response----");
-          console.error("status code:");
-          console.error(error.status);
-          console.error(error.message);
+          console.error("status code: "+error.status);
+          console.error("message: "+error.message);
           console.log("--- end of response---");
         }
       )

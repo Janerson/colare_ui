@@ -58,6 +58,12 @@ export const routes: Routes = [
           )
       },
       {
+        path:"dominio",
+        loadChildren: () => import("./views/dominio/dominio.module").then(
+          m => m.DominioModule
+        )
+      },
+      {
         path: "base",
         loadChildren: () =>
           import("./views/base/base.module").then(m => m.BaseModule)
