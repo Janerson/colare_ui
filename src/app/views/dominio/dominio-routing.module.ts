@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { TipoDeDominioComponent } from './tipo-de-dominio/tipo-de-dominio.component';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { TipoDeDominioComponent } from "./tipo-de-dominio/tipo-de-dominio.component";
+import { TABELAS_DOMINIOS } from "../../shared/tabelas";
 
 const routes: Routes = [
   {
@@ -17,7 +18,14 @@ const routes: Routes = [
         path: "tipo-regulamentacao",
         component: TipoDeDominioComponent,
         data: {
-          title: "Tipo de decreto regulamentador"
+          title: TABELAS_DOMINIOS.TIPO_DECRETO_REGULAMENTADOR
+        }
+      },
+      {
+        path: "natureza-do-objeto",
+        component: TipoDeDominioComponent,
+        data: {
+          title: TABELAS_DOMINIOS.NATUREZA_DO_OBJETO
         }
       }
     ]
@@ -28,4 +36,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DominioRoutingModule { }
+export class DominioRoutingModule {}

@@ -23,6 +23,11 @@ export const navItems: INavData[] = [
         name: "Tipo regulamentação",
         url: "/dominio/tipo-regulamentacao",
         icon: "icon-puzzle"
+      },
+      {
+        name: "Natureza do Objeto",
+        url: "/dominio/natureza-do-objeto",
+        icon: "icon-puzzle"
       }
     ]
   },
