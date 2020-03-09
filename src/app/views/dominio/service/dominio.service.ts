@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GenericDao } from '../../../shared/services/generic/generic-dao';
-import { Dominio, Dominios } from '../../../shared/entity/dominio';
+import { Dominios } from '../../../shared/entity/dominio';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 
@@ -9,7 +9,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class DominioService extends GenericDao<Dominios> {
   
-  emit(arquivo: string) {
+  emit() {
     throw new Error("Method not implemented.");
   }
 
