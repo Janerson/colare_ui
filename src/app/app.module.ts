@@ -43,8 +43,9 @@ import { ChartsModule } from "ng2-charts";
 import { DataTablesModule } from "angular-datatables";
 import { NgxJsonViewerModule } from "ngx-json-viewer";
 import { SharedModule } from "./shared/shared.module";
+import { CookieService } from "ngx-cookie-service";
 
-import {Interceptor} from './auh/interceptor.module';
+import { Interceptor } from "./auh/interceptor.module";
 
 @NgModule({
   imports: [
@@ -79,7 +80,8 @@ import {Interceptor} from './auh/interceptor.module';
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
-    }
+    },
+    CookieService
   ],
   bootstrap: [AppComponent],
   exports: [DataTablesModule]
