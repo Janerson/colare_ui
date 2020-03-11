@@ -5,7 +5,8 @@ import {
   Output,
   EventEmitter,
   ElementRef,
-  ViewChild
+  ViewChild,
+  Input
 } from "@angular/core";
 import { FileUploadService } from "../../services/file-upload.service";
 import { UploadResponse } from "../../entity/UploadResponse";
@@ -18,6 +19,9 @@ import { AlertService } from "../../services/alert.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileUploadComponent implements OnInit {
+
+  @Input() 
+  extensions;
 
   @Output() fileUpload = new EventEmitter<string>();
 

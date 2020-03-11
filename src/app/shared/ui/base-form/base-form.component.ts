@@ -89,7 +89,6 @@ export class BaseFormComponent implements OnInit {
   verificaValidacoesForm(formGroup: FormGroup | FormArray) {
     Object.keys(formGroup.controls).forEach(campo => {
       const controle = formGroup.get(campo);
-      console.log(campo)
       controle.markAsDirty();
       controle.markAsTouched();
       if (controle instanceof FormGroup || controle instanceof FormArray) {

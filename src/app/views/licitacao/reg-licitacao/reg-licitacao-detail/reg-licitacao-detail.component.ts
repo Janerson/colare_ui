@@ -66,7 +66,11 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
 
   transmitir() {
     this.regLicitacao = new RegLicitacao(this.formulario.value);
-    console.log(this.regLicitacao);
+    console.log("OLL",this.regLicitacao);
+    this.service.postTCM(this.regLicitacao).subscribe(
+      s =>{console.log(s)},
+      error =>{ console.log(error)}
+      )
   }
 
   getFileUploadID(e) {
