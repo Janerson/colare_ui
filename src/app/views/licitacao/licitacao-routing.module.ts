@@ -9,11 +9,7 @@ export const routes: Routes = [
     data: {
       title: "Licitação"
     },
-    children: [
-      {
-        path: "",
-        redirectTo: "regulamentacao"
-      },
+    children: [      
       {
         path: "regulamentacao",
         children: [
@@ -38,7 +34,6 @@ export const routes: Routes = [
               title: "Adicionar Regulamentação"
             }
           }
-          
         ]
       }
     ]

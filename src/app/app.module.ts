@@ -40,7 +40,6 @@ import { AppRoutingModule } from "./app.routing";
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { ChartsModule } from "ng2-charts";
-import { DataTablesModule } from "angular-datatables";
 import { NgxJsonViewerModule } from "ngx-json-viewer";
 import { SharedModule } from "./shared/shared.module";
 import { CookieService } from "ngx-cookie-service";
@@ -62,7 +61,6 @@ import { Interceptor } from "./auh/interceptor.module";
     TabsModule.forRoot(),
     ChartsModule,
     HttpClientModule,
-    DataTablesModule,
     NgxJsonViewerModule,
     ReactiveFormsModule,
     SharedModule,
@@ -84,6 +82,5 @@ import { Interceptor } from "./auh/interceptor.module";
     CookieService
   ],
   bootstrap: [AppComponent],
-  exports: [DataTablesModule]
 })
 export class AppModule {}
