@@ -10,9 +10,12 @@ import {
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { tap } from "rxjs/operators";
 import { environment, BASE_URL_TCM } from "../../environments/environment";
+import { AlertService } from '../shared/services/alert.service';
 
 @Injectable()
 export class HttpsRequestInterceptor implements HttpInterceptor {
+
+  constructor(private alertService:AlertService){}
   // intercept request and add token
   intercept(
     request: HttpRequest<any>,
@@ -39,6 +42,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
           console.log("----response----");
           console.error("status code: "+error.status);
           console.error("message: "+error.message);
+          this.alertService.showAlertDanger(error.error.message)
           console.log("--- end of response---");
         }
       )

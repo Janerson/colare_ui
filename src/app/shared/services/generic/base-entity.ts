@@ -5,7 +5,7 @@ export class BaseEntity {
   constructor(obj: BaseEntity) {
     Object.assign(this, obj);
     delete this.seqID;
-   this.clearEmpties(this)
+   this.removeEmpty(this)
   }
 
   private removeEmpty = obj => {

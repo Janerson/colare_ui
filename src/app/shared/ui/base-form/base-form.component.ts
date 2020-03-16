@@ -1,15 +1,20 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, FormArray } from "@angular/forms";
 import { of, Observable, empty, interval } from "rxjs";
-import { tap, switchMap, debounce, distinctUntilChanged, map } from "rxjs/operators";
+import {
+  tap,
+  switchMap,
+  debounce,
+  distinctUntilChanged,
+  map
+} from "rxjs/operators";
 
 @Component({
   selector: "app-base-form",
   template: ""
 })
 export class BaseFormComponent implements OnInit {
-  
-  formulario: FormGroup; 
+  formulario: FormGroup;
 
   protected builder: FormBuilder = new FormBuilder();
 
@@ -20,8 +25,8 @@ export class BaseFormComponent implements OnInit {
   /**
    * Método chamado quando formulario válido
    */
-  submit(){
-    throw new Error("Method should be overridden");
+  submit() {   
+    throw new Error("submit() method should be overridden");
   }
 
   /**
@@ -77,10 +82,9 @@ export class BaseFormComponent implements OnInit {
     }
   }
 
-
   onSubmit() {
     if (this.formulario.valid) {
-
+      this.submit();
     } else {
       this.verificaValidacoesForm(this.formulario);
     }
@@ -92,7 +96,7 @@ export class BaseFormComponent implements OnInit {
       controle.markAsDirty();
       controle.markAsTouched();
       if (controle instanceof FormGroup || controle instanceof FormArray) {
-        this.verificaValidacoesForm(controle); 
+        this.verificaValidacoesForm(controle);
       }
     });
   }
@@ -125,7 +129,7 @@ export class BaseFormComponent implements OnInit {
   aplicaCssErro(campo: string) {
     return {
       "has-error": this.verificaValidTouched(campo),
-      "is-invalid": this.verificaRequired(campo),
+      "is-invalid": this.verificaRequired(campo)
     };
   }
 
@@ -134,8 +138,6 @@ export class BaseFormComponent implements OnInit {
    *
    */
   validaForm() {
-    of(this.formulario.controls).pipe(
-      map(v => console.log(v))
-      );
+    of(this.formulario.controls).pipe(map(v => console.log(v)));
   }
 }
