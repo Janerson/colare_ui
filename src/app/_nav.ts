@@ -33,12 +33,59 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
-    name: "Licitações"
+    name: "LICITAÇÕES"
   },
   {
-    name: "Reg. Proc. licitatórios",
-    url: "/lic/regulamentacao",
-    icon: "icon-notebook"
+    name: "Layout´s",
+    url: "/LIC",
+    icon: "icon-puzzle",
+    children: [
+      {
+        name: "Reg. Proc. licitatórios",
+        url: "/lic/regulamentacao",
+        icon: "icon-notebook"
+      },
+      {
+        name: "Contrato Rescisao",
+        url: "/lic/regulamentacao",
+        icon: "icon-notebook"
+      },
+      {
+        name: "Situacao Procedimento",
+        url: "/lic/regulamentacao",
+        icon: "icon-notebook"
+      },
+      {
+        name: "Registro de Precos",
+        url: "/lic/regulamentacao",
+        icon: "icon-notebook"
+      },
+      {
+        name: "Contrato aditivo",
+        url: "/lic/regulamentacao",
+        icon: "icon-notebook"
+      },
+      {
+        name: "Dispensa",
+        url: "/lic/regulamentacao",
+        icon: "icon-notebook"
+      },
+      {
+        name: "Licitação Fase 1",
+        url: "/lic/regulamentacao",
+        icon: "icon-notebook"
+      },
+      {
+        name: "Licitação Fase 2",
+        url: "/lic/regulamentacao",
+        icon: "icon-notebook"
+      },
+      {
+        name: "Contrato inicial",
+        url: "/lic/regulamentacao",
+        icon: "icon-notebook"
+      }
+    ]
   },
   {
     name: "Colors",
@@ -53,6 +100,28 @@ export const navItems: INavData[] = [
   {
     title: true,
     name: "Atos de Pessoal"
+  },
+  {
+    name: "Layout´s",
+    url: "/LIC",
+    icon: "icon-puzzle",
+    children: [
+      {
+        name: "Pessoal Legislacao",
+        url: "/lic/regulamentacao",
+        icon: "icon-notebook"
+      },
+      {
+        name: "Pessoal Cargos",
+        url: "/lic/regulamentacao",
+        icon: "icon-notebook"
+      },
+      {
+        name: "Pessoal Cadastro",
+        url: "/lic/regulamentacao",
+        icon: "icon-notebook"
+      }
+    ]
   },
   {
     name: "Base",
@@ -220,6 +289,18 @@ export const navItems: INavData[] = [
   {
     title: true,
     name: "Folha de Pagamento"
+  },
+  {
+    name: "Layout´s",
+    url: "/LIC",
+    icon: "icon-puzzle",
+    children: [
+      {
+        name: "Reg. Proc. licitatórios",
+        url: "/lic/regulamentacao",
+        icon: "icon-notebook"
+      }
+    ]
   },
   {
     name: "Pages",

@@ -41,7 +41,6 @@ export class FileUploadComponent implements OnInit {
       },
       e => {
         this._file.nativeElement.value = null
-        this.alertService.showAlertDanger(e.error.message,"Erro ao enviar o arquivo")
       }
     );
   }

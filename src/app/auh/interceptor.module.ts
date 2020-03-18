@@ -11,11 +11,12 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { tap } from "rxjs/operators";
 import { environment, BASE_URL_TCM } from "../../environments/environment";
 import { AlertService } from '../shared/services/alert.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class HttpsRequestInterceptor implements HttpInterceptor {
 
-  constructor(private alertService:AlertService){}
+  constructor(private alertService:AlertService, private cookieService: CookieService){}
   // intercept request and add token
   intercept(
     request: HttpRequest<any>,
@@ -25,7 +26,13 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     if (request.url.startsWith(BASE_URL_TCM)) {
       request = request.clone({
         setHeaders: {
-          Authorization: 'CONFIGURAR TOKEN'
+          Authorization: this.cookieService.get('TCM_TOKEN')
+        }
+      });
+    }else{
+      request = request.clone({
+        setHeaders: {
+          Authorization: this.cookieService.get('API_TOKEN')
         }
       });
     }
@@ -42,7 +49,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
           console.log("----response----");
           console.error("status code: "+error.status);
           console.error("message: "+error.message);
-          this.alertService.showAlertDanger(error.error.message)
+          this.alertService.showAlertDanger(error.error.message,"ERRO")
           console.log("--- end of response---");
         }
       )
