@@ -51,7 +51,7 @@ export const routes: Routes = [
     },
     children: [
       {
-        path: "lic",
+        path: "LIC",
         loadChildren: () =>
           import("./views/licitacao/licitacao.module").then(
             m => m.LicitacaoModule

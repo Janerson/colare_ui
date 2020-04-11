@@ -2,6 +2,8 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { RegLicitacaoComponent } from "./reg-licitacao/reg-licitacao.component";
 import { RegLicitacaoDetailComponent } from "./reg-licitacao/reg-licitacao-detail/reg-licitacao-detail.component";
+import { ContratoRecisaoComponent } from './contrato-recisao/contrato-recisao.component';
+import { ContratoRecisaoDetailComponent } from './contrato-recisao/contrato-recisao-detail/contrato-recisao-detail.component';
 
 export const routes: Routes = [
   {
@@ -11,7 +13,7 @@ export const routes: Routes = [
     },
     children: [      
       {
-        path: "regulamentacao",
+        path: "REG_LICITACAO",
         children: [
           {
             path: "",
@@ -32,6 +34,32 @@ export const routes: Routes = [
             component: RegLicitacaoDetailComponent,
             data: {
               title: "Adicionar Regulamentação"
+            }
+          }
+        ]
+      },
+      {
+        path: "CONTRATO_RESC",
+        children: [
+          {
+            path: "",
+            component: ContratoRecisaoComponent,
+            data: {
+              title: "Contrato Recisão"
+            }
+          },
+          {
+            path: ":id",
+            component: ContratoRecisaoDetailComponent,
+            data: {
+              title: "Detalhar Contrato Recisão"
+            }
+          },
+          {
+            path: "novo",
+            component: ContratoRecisaoDetailComponent,
+            data: {
+              title: "Adicionar Contrato Recisão"
             }
           }
         ]

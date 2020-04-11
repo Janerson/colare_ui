@@ -37,6 +37,7 @@ export const environment = {
   production: false,
   DOMINIO:"DOMINIO/PROCESS_JSON",
   REG_LICITACAO: "LIC/REG_LICITACAO",
+  CONTRATO_RESC: "LIC/CONTRATO_RESC",
   API_URL: (layout: string) => `http://localhost:8080/api/${layout}`,
   URL_LAYOUT: (layout: string) =>
     `${BASE_URL_TCM}/recepcao/${layout}/${right(mes, 2)}/${ano}`,

@@ -2,17 +2,17 @@ import { INavData } from "@coreui/angular";
 
 export const navItems: INavData[] = [
   {
-    name: "Dashboard - Alterar",
+    name: "Dashboard",
     url: "/dashboard",
     icon: "cui-note",
     badge: {
       variant: "warning",
-      text: "NEW"
-    }
+      text: "NEW",
+    },
   },
   {
     title: true,
-    name: "Tabelas"
+    name: "Tabelas",
   },
   {
     name: "Domínios",
@@ -22,18 +22,18 @@ export const navItems: INavData[] = [
       {
         name: "Tipo regulamentação",
         url: "/dominio/tipo-regulamentacao",
-        icon: "icon-puzzle"
+        icon: "icon-puzzle",
       },
       {
         name: "Natureza do Objeto",
         url: "/dominio/natureza-do-objeto",
-        icon: "icon-puzzle"
-      }
-    ]
+        icon: "icon-puzzle",
+      },
+    ],
   },
   {
     title: true,
-    name: "LICITAÇÕES"
+    name: "LICITAÇÕES",
   },
   {
     name: "Layout´s",
@@ -42,64 +42,69 @@ export const navItems: INavData[] = [
     children: [
       {
         name: "Reg. Proc. licitatórios",
-        url: "/lic/regulamentacao",
-        icon: "icon-notebook"
+        url: "/LIC/REG_LICITACAO",
+        icon: "icon-notebook",
       },
       {
         name: "Contrato Rescisao",
-        url: "/lic/regulamentacao",
-        icon: "icon-notebook"
+        url: "/LIC/CONTRATO_RESC",
+        icon: "icon-user-unfollow",
       },
       {
         name: "Situacao Procedimento",
-        url: "/lic/regulamentacao",
-        icon: "icon-notebook"
+        url: "/LIC/SITUACAO_PROCED",
+        icon: "icon-notebook",
       },
       {
         name: "Registro de Precos",
-        url: "/lic/regulamentacao",
-        icon: "icon-notebook"
+        url: "/LIC/ADESAO_REG_PREC",
+        icon: "icon-notebook",
       },
       {
         name: "Contrato aditivo",
-        url: "/lic/regulamentacao",
-        icon: "icon-notebook"
+        url: "/LIC/CONTRATO_ADT",
+        icon: "icon-notebook",
       },
       {
         name: "Dispensa",
-        url: "/lic/regulamentacao",
-        icon: "icon-notebook"
+        url: "/LIC/DISPENSA_INEXIG",
+        icon: "icon-notebook",
       },
       {
         name: "Licitação Fase 1",
-        url: "/lic/regulamentacao",
-        icon: "icon-notebook"
+        url: "/LIC/regulamentacao",
+        icon: "icon-notebook",
       },
       {
         name: "Licitação Fase 2",
-        url: "/lic/regulamentacao",
-        icon: "icon-notebook"
+        url: "/LIC/LICITACAOFASE1",
+        icon: "icon-notebook",
       },
       {
         name: "Contrato inicial",
-        url: "/lic/regulamentacao",
-        icon: "icon-notebook"
-      }
-    ]
+        url: "/LIC/LICITACAOFASE2",
+        icon: "icon-notebook",
+      },
+      {
+        name: "Contrato inicial",
+        url: "/LIC/LICITACAOFASE2",
+        icon: "icon-notebook",
+      },
+    ],
   },
   {
     name: "Colors",
     url: "/theme/colors",
-    icon: "icon-drop"
+    icon: "icon-drop",
   },
   {
     name: "Typography",
     url: "/theme/typography",
-    icon: "icon-pencil"
+    icon: "icon-pencil",
   },
   {
     title: true,
-    name: "Atos de Pessoal"
+    name: "Atos de Pessoal",
   },
   {
     name: "Layout´s",
@@ -108,20 +113,20 @@ export const navItems: INavData[] = [
     children: [
       {
         name: "Pessoal Legislacao",
-        url: "/lic/regulamentacao",
-        icon: "icon-notebook"
+        url: "/LIC/regulamentacao",
+        icon: "icon-notebook",
       },
       {
         name: "Pessoal Cargos",
-        url: "/lic/regulamentacao",
-        icon: "icon-notebook"
+        url: "/LIC/regulamentacao",
+        icon: "icon-notebook",
       },
       {
         name: "Pessoal Cadastro",
-        url: "/lic/regulamentacao",
-        icon: "icon-notebook"
-      }
-    ]
+        url: "/LIC/regulamentacao",
+        icon: "icon-notebook",
+      },
+    ],
   },
   {
     name: "Base",
@@ -131,64 +136,64 @@ export const navItems: INavData[] = [
       {
         name: "Cards",
         url: "/base/cards",
-        icon: "icon-puzzle"
+        icon: "icon-puzzle",
       },
       {
         name: "Carousels",
         url: "/base/carousels",
-        icon: "icon-puzzle"
+        icon: "icon-puzzle",
       },
       {
         name: "Collapses",
         url: "/base/collapses",
-        icon: "icon-puzzle"
+        icon: "icon-puzzle",
       },
       {
         name: "Forms",
         url: "/base/forms",
-        icon: "icon-puzzle"
+        icon: "icon-puzzle",
       },
       {
         name: "Navbars",
         url: "/base/navbars",
-        icon: "icon-puzzle"
+        icon: "icon-puzzle",
       },
       {
         name: "Pagination",
         url: "/base/paginations",
-        icon: "icon-puzzle"
+        icon: "icon-puzzle",
       },
       {
         name: "Popovers",
         url: "/base/popovers",
-        icon: "icon-puzzle"
+        icon: "icon-puzzle",
       },
       {
         name: "Progress",
         url: "/base/progress",
-        icon: "icon-puzzle"
+        icon: "icon-puzzle",
       },
       {
         name: "Switches",
         url: "/base/switches",
-        icon: "icon-puzzle"
+        icon: "icon-puzzle",
       },
       {
         name: "Tables",
         url: "/base/tables",
-        icon: "icon-puzzle"
+        icon: "icon-puzzle",
       },
       {
         name: "Tabs",
         url: "/base/tabs",
-        icon: "icon-puzzle"
+        icon: "icon-puzzle",
       },
       {
         name: "Tooltips",
         url: "/base/tooltips",
-        icon: "icon-puzzle"
-      }
-    ]
+        icon: "icon-puzzle",
+      },
+    ],
   },
   {
     name: "Buttons",
@@ -198,24 +203,24 @@ export const navItems: INavData[] = [
       {
         name: "Buttons",
         url: "/buttons/buttons",
-        icon: "icon-cursor"
+        icon: "icon-cursor",
       },
       {
         name: "Dropdowns",
         url: "/buttons/dropdowns",
-        icon: "icon-cursor"
+        icon: "icon-cursor",
       },
       {
         name: "Brand Buttons",
         url: "/buttons/brand-buttons",
-        icon: "icon-cursor"
-      }
-    ]
+        icon: "icon-cursor",
+      },
+    ],
   },
   {
     name: "Charts",
     url: "/charts",
-    icon: "icon-pie-chart"
+    icon: "icon-pie-chart",
   },
   {
     name: "Icons",
@@ -228,13 +233,13 @@ export const navItems: INavData[] = [
         icon: "icon-star",
         badge: {
           variant: "success",
-          text: "NEW"
-        }
+          text: "NEW",
+        },
       },
       {
         name: "Flags",
         url: "/icons/flags",
-        icon: "icon-star"
+        icon: "icon-star",
       },
       {
         name: "Font Awesome",
@@ -242,15 +247,15 @@ export const navItems: INavData[] = [
         icon: "icon-star",
         badge: {
           variant: "secondary",
-          text: "4.7"
-        }
+          text: "4.7",
+        },
       },
       {
         name: "Simple Line Icons",
         url: "/icons/simple-line-icons",
-        icon: "icon-star"
-      }
-    ]
+        icon: "icon-star",
+      },
+    ],
   },
   {
     name: "Notifications",
@@ -260,19 +265,19 @@ export const navItems: INavData[] = [
       {
         name: "Alerts",
         url: "/notifications/alerts",
-        icon: "icon-bell"
+        icon: "icon-bell",
       },
       {
         name: "Badges",
         url: "/notifications/badges",
-        icon: "icon-bell"
+        icon: "icon-bell",
       },
       {
         name: "Modals",
         url: "/notifications/modals",
-        icon: "icon-bell"
-      }
-    ]
+        icon: "icon-bell",
+      },
+    ],
   },
   {
     name: "Widgets",
@@ -280,15 +285,15 @@ export const navItems: INavData[] = [
     icon: "icon-calculator",
     badge: {
       variant: "info",
-      text: "NEW"
-    }
+      text: "NEW",
+    },
   },
   {
-    divider: true
+    divider: true,
   },
   {
     title: true,
-    name: "Folha de Pagamento"
+    name: "Folha de Pagamento",
   },
   {
     name: "Layout´s",
@@ -297,10 +302,10 @@ export const navItems: INavData[] = [
     children: [
       {
         name: "Reg. Proc. licitatórios",
-        url: "/lic/regulamentacao",
-        icon: "icon-notebook"
-      }
-    ]
+        url: "/LIC/regulamentacao",
+        icon: "icon-notebook",
+      },
+    ],
   },
   {
     name: "Pages",
@@ -310,24 +315,24 @@ export const navItems: INavData[] = [
       {
         name: "Login",
         url: "/login",
-        icon: "icon-star"
+        icon: "icon-star",
       },
       {
         name: "Register",
         url: "/register",
-        icon: "icon-star"
+        icon: "icon-star",
       },
       {
         name: "Error 404",
         url: "/404",
-        icon: "icon-star"
+        icon: "icon-star",
       },
       {
         name: "Error 500",
         url: "/500",
-        icon: "icon-star"
-      }
-    ]
+        icon: "icon-star",
+      },
+    ],
   },
   {
     name: "Disabled",
@@ -335,8 +340,8 @@ export const navItems: INavData[] = [
     icon: "icon-ban",
     badge: {
       variant: "success",
-      text: "NEW"
+      text: "NEW",
     },
-    attributes: { disabled: true }
-  }
+    attributes: { disabled: true },
+  },
 ];
