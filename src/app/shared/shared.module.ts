@@ -5,13 +5,15 @@ import { OnlyNumberDirective } from "./diretivas/only-number.directive";
 import { defineLocale } from "ngx-bootstrap/chronos";
 import { ptBrLocale } from "ngx-bootstrap/locale";
 import { NgxJsonViewerModule } from "ngx-json-viewer";
-import { TypeaheadModule, BsLocaleService, BsModalService, ModalModule } from "ngx-bootstrap";
+import { TypeaheadModule } from "ngx-bootstrap/typeahead";
+import { BsLocaleService } from "ngx-bootstrap/datepicker";
+import { BsModalService, ModalModule } from "ngx-bootstrap/modal";
 import { ReactiveFormsModule } from "@angular/forms";
 import { AlertModalComponent } from "./ui/alert-modal/alert-modal.component";
 import { BaseFormComponent } from "./ui/base-form/base-form.component";
-import { PaginationModule } from 'ngx-bootstrap';
-import { AlertService } from './services/alert.service';
-import { FileUploadComponent } from './ui/file-upload/file-upload.component';
+import { PaginationModule } from "ngx-bootstrap/pagination";
+import { AlertService } from "./services/alert.service";
+import { FileUploadComponent } from "./ui/file-upload/file-upload.component";
 defineLocale("pt-br", ptBrLocale);
 
 @NgModule({
@@ -27,7 +29,7 @@ defineLocale("pt-br", ptBrLocale);
     ReactiveFormsModule,
     NgxJsonViewerModule,
     PaginationModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
   ],
   exports: [
     TypeaheadModule,
@@ -37,11 +39,11 @@ defineLocale("pt-br", ptBrLocale);
     NgxJsonViewerModule,
     PaginationModule,
     AlertModalComponent,
-    FileUploadComponent
+    FileUploadComponent,
     // BsDatepickerModule
   ],
-  providers:[BsLocaleService, BsModalService,AlertService],
-  entryComponents:[AlertModalComponent]
+  providers: [BsLocaleService, BsModalService, AlertService],
+  entryComponents: [AlertModalComponent],
 })
 export class SharedModule {
   constructor(localeService: BsLocaleService) {
