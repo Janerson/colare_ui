@@ -1,22 +1,21 @@
+import { ContratoInicialService } from "./../service/contrato-inicial.service";
+import { ContratoInicial } from "./../../../shared/entity/contrato-inicial";
 import { Page } from "./../../../shared/services/generic/page";
-import { ContratoRecisaoService } from "./../service/contrato-recisao.service";
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { ContratoRecisao } from "../../../shared/entity/contrato-recisao";
 import { Subscription } from "rxjs";
-import { ActivatedRoute } from "@angular/router";
-import { AlertService } from "../../../shared/services/alert.service";
+import { ActivatedRoute } from '@angular/router';
+import { AlertService } from '../../../shared/services/alert.service';
 
 @Component({
-  selector: "app-contrato-recisao",
-  templateUrl: "./contrato-recisao.component.html",
+  selector: "app-contrato-inicial",
+  templateUrl: "./contrato-inicial.component.html",
 })
-export class ContratoRecisaoComponent implements OnInit, OnDestroy {
+export class ContratoInicialComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   protected title: string;
-  protected page: Page<ContratoRecisao>;
-
+  protected page: Page<ContratoInicial>;
   constructor(
-    protected service: ContratoRecisaoService,
+    protected service: ContratoInicialService,
     private route: ActivatedRoute,
     private alertService: AlertService
   ) {}
@@ -25,14 +24,15 @@ export class ContratoRecisaoComponent implements OnInit, OnDestroy {
     this.subscription = this.route.data.subscribe((d) => {
       this.title = d.title;
     });
-
     this.service.paged().subscribe((data) => {
       this.page = data;
     });
   }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
   pageChanged(event: any): void {
     this.service.paged(event.page - 1).subscribe((data) => {
       this.page = data;

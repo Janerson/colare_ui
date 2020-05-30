@@ -34,9 +34,9 @@
                       <i class="fa fa-edit"></i></a>
                   </td>
                   <td>{{item.id}}</td>
-                  <td>{{item.data | date:'dd/MM/yyyy'}}</td>
-                  <td>{{item.saldoFinalExecutadoContrato}}</td>
-                  <td>{{item.codMotivoRescisao }}</td>
+                  <td>{{item.anoContrato | date:'dd/MM/yyyy'}}</td>
+                  <td>{{item.contratado.numeroDocumento}}</td>
+                  <td>{{item.codNaturezaObjeto }}</td>
                   <td>
                     <span class="badge badge-{{item.id?'success':'warning'}}">{{item.id?"Transmitido":"Pendente"}}</span>
                   </td>

@@ -32,19 +32,51 @@ const d = new Date();
 const mes = "000" + (d.getMonth() + 1);
 const ano = d.getUTCFullYear();
 export const BASE_URL_TCM = "https://testes.tcm.go.gov.br";
+export const BASE_URL_API = "http://localhost:8080/api/";
 
 export const environment = {
   production: false,
-  DOMINIO:"DOMINIO/PROCESS_JSON",
+  DOMINIO: "DOMINIO/PROCESS_JSON",
+  /**
+   * REGULAMENTAÇÃO DOS PROCEDIMENTOS LICITATÓRIOS
+   */
   REG_LICITACAO: "LIC/REG_LICITACAO",
+  /**
+   * CONTRATO RECISAO
+   */
   CONTRATO_RESC: "LIC/CONTRATO_RESC",
-  API_URL: (layout: string) => `http://localhost:8080/api/${layout}`,
+  /**
+   * CONTRATO INICIAL
+   */
+  CONTRATO_INI: "LIC/CONTRATO_INI",
+  /**
+   * @param layout 
+   */
+  API_URL: (layout: string) => `${BASE_URL_API}${layout}`,
+  /**
+   * @param layout 
+   */
   URL_LAYOUT: (layout: string) =>
     `${BASE_URL_TCM}/recepcao/${layout}/${right(mes, 2)}/${ano}`,
+  /**
+   *
+   */
   URL_VALIDAR_ENVIO: `${BASE_URL_TCM}/recepcao/validar-recibo/`,
+  /**
+   * 
+   */
   URL_REPRESENTACOES: `${BASE_URL_TCM}/passaporte/api/auth/representacoes`,
+  /**
+   * 
+   */
   URL_TOKEN: `${BASE_URL_TCM}/passaporte/api/auth/certificado?representacao=`,
+  /**
+   * 
+   */
   URL_UPLOAD: `${BASE_URL_TCM}/recepcao/arquivo/upload`,
+  /**
+   * 
+   */
   URL_DOWNLOAD: (recibo: string, idArquivo: string) =>
-    `${BASE_URL_TCM}/envio-manual/api/envio/pdf/anexo/${recibo}/${idArquivo}`
+    `${BASE_URL_TCM}/envio-manual/api/envio/pdf/anexo/${recibo}/${idArquivo}`,
 };

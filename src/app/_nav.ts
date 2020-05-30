@@ -72,22 +72,18 @@ export const navItems: INavData[] = [
       },
       {
         name: "Licitação Fase 1",
-        url: "/LIC/regulamentacao",
-        icon: "icon-notebook",
-      },
-      {
-        name: "Licitação Fase 2",
         url: "/LIC/LICITACAOFASE1",
         icon: "icon-notebook",
       },
       {
-        name: "Contrato inicial",
+        name: "Licitação Fase 2",
         url: "/LIC/LICITACAOFASE2",
         icon: "icon-notebook",
       },
+      
       {
         name: "Contrato inicial",
-        url: "/LIC/LICITACAOFASE2",
+        url: "/LIC/CONTRATO_INI",
         icon: "icon-notebook",
       },
     ],
