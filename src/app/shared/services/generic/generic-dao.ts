@@ -54,6 +54,7 @@ export class GenericDao<T extends BaseEntity> {
   }
 
   save(obj: T) {
+    console.log(obj)
     if (obj.seqID) {
       return this.update(obj);
     }
@@ -61,7 +62,7 @@ export class GenericDao<T extends BaseEntity> {
   }
 
   private update(obj: T) {
-    return this.http.put(`${environment.API_URL(this.LAYOUT)}`, obj).pipe(
+    return this.http.put(`${environment.API_URL(this.LAYOUT)}/${obj.seqID}`, obj).pipe(
       take(1),
       tap(() => this._refresh.next())
     );

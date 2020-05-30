@@ -74,7 +74,6 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
 
   transmitir() {
     this.regLicitacao = new RegLicitacao(this.formulario.value);
-    console.log(this.regLicitacao)
     this.service.postTCM(this.regLicitacao).subscribe(
       s => {
         console.log(s);
@@ -86,7 +85,6 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
   }
 
   getFileUploadID(e) {
-    console.log(e);
     this.atualizaForm(e, "idDocumentoPDF");
   }
   private buildForm() {
