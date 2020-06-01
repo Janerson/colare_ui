@@ -7,6 +7,7 @@ import {
   HttpRequest,
   HttpResponse
 } from "@angular/common/http";
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { tap } from "rxjs/operators";
 import { environment, BASE_URL_TCM } from "../../environments/environment";
@@ -16,12 +17,15 @@ import { CookieService } from 'ngx-cookie-service';
 @Injectable()
 export class HttpsRequestInterceptor implements HttpInterceptor {
 
-  constructor(private alertService:AlertService, private cookieService: CookieService){}
+  constructor(private alertService:AlertService, 
+    private ngxLoader: NgxUiLoaderService,
+    private cookieService: CookieService){}
   // intercept request and add token
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    this.ngxLoader.start();
     // modify request
     if (request.url.startsWith(BASE_URL_TCM)) {
       request = request.clone({
@@ -40,17 +44,14 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       tap(
         event => {
-          if (event instanceof HttpResponse) {
-            console.log(" all looks good",event.status);
+          if (event instanceof HttpResponse) {            
+            this.ngxLoader.stop();
           }
         },
         error => {
           // http response status code
-          console.log("----response----");
-          console.error("status code: "+error.status);
-          console.error("message: "+error.message);
-          this.alertService.showAlertDanger(error.error.message,"ERRO")
-          console.log("--- end of response---");
+          this.ngxLoader.stop();          
+          this.alertService.showAlertDanger(error.error.message,"ERRO")          
         }
       )
     );

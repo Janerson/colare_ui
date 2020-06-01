@@ -1,3 +1,4 @@
+import { NgxUiLoaderModule, SPINNER, NgxUiLoaderConfig } from "ngx-ui-loader";
 import { BrowserModule } from "@angular/platform-browser";
 import { ReactiveFormsModule } from "@angular/forms";
 import { NgModule } from "@angular/core";
@@ -10,7 +11,16 @@ import { PERFECT_SCROLLBAR_CONFIG } from "ngx-perfect-scrollbar";
 import { PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
+  suppressScrollX: true,
+};
+
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  text: "AGUARDE...",
+  fgsColor: "red",
+  pbColor:"red",
+  fgsPosition: "center-center",
+  //fgsSize: 80,
+  fgsType: SPINNER.squareJellyBox,
 };
 
 import { AppComponent } from "./app.component";
@@ -30,7 +40,7 @@ import {
   AppBreadcrumbModule,
   AppHeaderModule,
   AppFooterModule,
-  AppSidebarModule
+  AppSidebarModule,
 } from "@coreui/angular";
 
 // Import routing module
@@ -64,7 +74,8 @@ import { Interceptor } from "./auh/interceptor.module";
     NgxJsonViewerModule,
     ReactiveFormsModule,
     SharedModule,
-    Interceptor
+    Interceptor,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
   ],
   declarations: [
     AppComponent,
@@ -72,14 +83,14 @@ import { Interceptor } from "./auh/interceptor.module";
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   providers: [
     {
       provide: LocationStrategy,
-      useClass: HashLocationStrategy
+      useClass: HashLocationStrategy,
     },
-    CookieService
+    CookieService,
   ],
   bootstrap: [AppComponent],
 })
