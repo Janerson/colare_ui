@@ -54,7 +54,7 @@ import { NgxJsonViewerModule } from "ngx-json-viewer";
 import { SharedModule } from "./shared/shared.module";
 import { CookieService } from "ngx-cookie-service";
 
-import { Interceptor } from "./auh/interceptor.module";
+import { Interceptor } from "./auth/interceptor.module";
 
 @NgModule({
   imports: [
