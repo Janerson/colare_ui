@@ -56,6 +56,14 @@
               <ngx-json-viewer [json]="formulario?.value"></ngx-json-viewer>
             </div>
           </div>
+          <div
+            class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">
+            Token</div>
+          <div class="list-group-item list-group-item-accent-success list-group-item-divider">
+            <div>
+              <textarea #text rows="7" (change)="setToken(text.value)"></textarea>
+            </div>
+          </div>
         </div>
       </tab>
     </tabset>

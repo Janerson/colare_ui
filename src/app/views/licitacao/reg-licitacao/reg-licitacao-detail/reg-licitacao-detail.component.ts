@@ -84,9 +84,10 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
     );
   }
 
-  getFileUploadID(e) {
+  getFileUploadID(e) {    
     this.atualizaForm(e, "idDocumentoPDF");
   }
+
   private buildForm() {
     this.formulario = this.builder.group(
       {

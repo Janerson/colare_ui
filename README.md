@@ -4,7 +4,7 @@
 [![@coreui coreui](https://img.shields.io/badge/@coreui%20-coreui-lightgrey.svg?style=flat-square)](https://github.com/coreui/coreui)
 [![npm package][npm-coreui-badge]][npm-coreui]
 [![NPM downloads][npm-coreui-download]][npm-coreui]  
-![angular](https://img.shields.io/badge/angular-^9.0.0--rc.7-lightgrey.svg?style=flat-square&logo=angular)  
+![angular](https://img.shields.io/badge/angular-^9.0.0--rc.7-lightgrey.svg?style=flat-square&logo=angular)[![Netlify Status](https://api.netlify.com/api/v1/badges/6d7192ca-ada3-4cce-b9c0-ec925c0abb19/deploy-status)](https://app.netlify.com/sites/colare/deploys)
 
 [npm-coreui-angular]: https://www.npmjs.com/package/@coreui/angular  
 [npm-coreui-angular-badge]: https://img.shields.io/npm/v/@coreui/angular.png?style=flat-square  

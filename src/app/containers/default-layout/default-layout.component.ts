@@ -2,6 +2,7 @@ import {Component, OnInit, Input } from '@angular/core';
 import { navItems } from '../../_nav';
 import { BaseFormComponent } from '../../shared/ui/base-form/base-form.component';
 import { SharedService } from '../../shared/services/shared-service.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +18,7 @@ export class DefaultLayoutComponent extends BaseFormComponent implements OnInit 
   public sidebarMinimized = false;
    navItems = navItems;
 
-  constructor(private _sharedService : SharedService){
+  constructor(private _sharedService : SharedService,  private cookieService: CookieService){
     super()
     this.formulario = this.builder.group({})
     _sharedService.changeEmitted$.subscribe(f=>{
@@ -29,6 +30,11 @@ export class DefaultLayoutComponent extends BaseFormComponent implements OnInit 
    /* this.service.list().subscribe(s =>{   
       this.navItems = s
     })*/
+  }
+
+  setToken(e){
+    console.log(e)
+    this.cookieService.set("TCM_TOKEN",e)
   }
 
   adicionado(e){

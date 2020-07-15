@@ -22,7 +22,8 @@
               "node_modules/flag-icon-css/css/flag-icon.css",
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/simple-line-icons/css/simple-line-icons.css",
-              "src/scss/style.scss"
+              "src/scss/style.scss",
+              "node_modules/filepond/dist/filepond.min.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": ["./node_modules"]
@@ -50,6 +51,14 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "homolog":{
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.homolog.ts"
                 }
               ]
             }

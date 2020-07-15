@@ -24,15 +24,15 @@
                     <table datatable class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Código</th>
-                                <th>Descrição</th>
-                                <th>Vigência</th>
-                                <th>Status</th>
+                                <th scope="col">Código</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Vigência</th>
+                                <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of page?.content">
-                                <td>{{item.codigo}}</td>
+                            <tr *ngFor="let item of page?.content" scope="row">
+                                <td >{{item.codigo}}</td>
                                 <td>{{item.descricao}}</td>
                                 <td>{{item.vigencia}}</td>
                                 <td>

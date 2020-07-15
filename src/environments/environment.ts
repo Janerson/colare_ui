@@ -32,7 +32,7 @@ const d = new Date();
 const mes = "000" + (d.getMonth() + 1);
 const ano = d.getUTCFullYear();
 export const BASE_URL_TCM = "https://testes.tcm.go.gov.br";
-export const BASE_URL_API = "https://colare.herokuapp.com/api/";
+export const BASE_URL_API = "http://localhost:8080/api/";
 
 export const environment = {
   production: false,

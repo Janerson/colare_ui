@@ -14,7 +14,6 @@ import { environment, BASE_URL_TCM } from "../../environments/environment";
 import { AlertService } from '../shared/services/alert.service';
 import { CookieService } from 'ngx-cookie-service';
 
-const TOKEN_TCM = "eyJhbGciOiJIUzUxMiJ9.eyJsb2dhZG9Db21DZXJ0aWZpY2Fkb0RpZ2l0YWwiOnRydWUsInN1YiI6IjI0MzI5NTUwMTMwIiwiYXVkaWVuY2UiOiJ3ZWIiLCJjcmVhdGVkIjoxNTkxMDkzNzQ5LCJyZXByZXNlbnRhY2FvIjo4NTUsImV4cCI6MTU5MTE1MzE5OX0.qg2d0CL3WV4Ne3AlbtujW336-3ocCfrkOPt9DUrO2is7QAERqBdPQBVz7ErmScObwYL-3ji99Gfs24GI7yajxQ"
 
 @Injectable()
 export class HttpsRequestInterceptor implements HttpInterceptor {
@@ -32,7 +31,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     if (request.url.startsWith(BASE_URL_TCM)) {
       request = request.clone({
         setHeaders: {
-          Authorization: TOKEN_TCM//this.cookieService.get('TCM_TOKEN')
+          Authorization: this.cookieService.get('TCM_TOKEN')
         }
       });
     }else{

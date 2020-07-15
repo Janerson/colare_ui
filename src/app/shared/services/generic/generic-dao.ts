@@ -125,10 +125,10 @@ export class GenericDao<T extends BaseEntity> {
     this.http.get<T>(`${environment.URL_LAYOUT(this.LAYOUT)}/${id}`);
   }
 
-  public upload(file: FileList) {
+  public upload(file: File) {
     let formData = new FormData();
-    if (file.item(0) != null) {
-      formData.set("arquivo", file.item(0));
+    if (file != null) {
+      formData.set("arquivo", file);
       return this.http
         .post(`${environment.URL_UPLOAD}`, formData)
         .pipe(take(1));

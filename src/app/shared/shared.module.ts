@@ -14,6 +14,17 @@ import { BaseFormComponent } from "./ui/base-form/base-form.component";
 import { PaginationModule } from "ngx-bootstrap/pagination";
 import { AlertService } from "./services/alert.service";
 import { FileUploadComponent } from "./ui/file-upload/file-upload.component";
+// import filepond module
+import { FilePondModule, registerPlugin } from 'ngx-filepond';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+
+
+// import and register filepond file type validation plugin
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import { FileUploadPondComponent } from './ui/file-upload-pond/file-upload-pond.component';
+registerPlugin(FilePondPluginFileValidateType,FilePondPluginFileValidateSize)
+//registerPlugin(FilePondPluginGetFile)
+
 defineLocale("pt-br", ptBrLocale);
 
 @NgModule({
@@ -22,6 +33,7 @@ defineLocale("pt-br", ptBrLocale);
     AlertModalComponent,
     BaseFormComponent,
     FileUploadComponent,
+    FileUploadPondComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +42,7 @@ defineLocale("pt-br", ptBrLocale);
     NgxJsonViewerModule,
     PaginationModule.forRoot(),
     ModalModule.forRoot(),
+    FilePondModule
   ],
   exports: [
     TypeaheadModule,
@@ -40,6 +53,7 @@ defineLocale("pt-br", ptBrLocale);
     PaginationModule,
     AlertModalComponent,
     FileUploadComponent,
+    FileUploadPondComponent
     // BsDatepickerModule
   ],
   providers: [BsLocaleService, BsModalService, AlertService],
