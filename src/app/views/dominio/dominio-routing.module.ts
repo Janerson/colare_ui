@@ -15,6 +15,13 @@ const routes: Routes = [
         redirectTo: "tipo-regulamentacao"
       },
       {
+        path: "tipo-de-envio",
+        component: TipoDeDominioComponent,
+        data: {
+          title: TABELAS_DOMINIOS.TIPO_DE_ENVIO
+        }
+      },
+      {
         path: "tipo-regulamentacao",
         component: TipoDeDominioComponent,
         data: {

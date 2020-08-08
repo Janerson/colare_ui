@@ -1,8 +1,9 @@
-import { BaseEntity } from './../services/generic/base-entity';
+import { BaseEntity } from '../api/base-entity';
+
 /**
  * Dados da rescisão contratual.
  */
-export interface ContratoRecisao extends BaseEntity {
+export interface ContratoRecisao extends BaseEntity<String> {
     /**
      * Motivo da rescisão
      */

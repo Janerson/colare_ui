@@ -1,0 +1,44 @@
+<!--Ações-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-certificate"></i>Ações
+            </div>
+            <div class="card-body">
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-brand btn-sm btn-facebook mr-1">
+                        <i class="fa fa-save"></i>
+                        <span>Gravar</span>
+                    </button>
+                    <button type="button" class="btn btn-brand btn-sm btn-vine mr-1"
+                        (click)="onTransmitir.emit($event)">
+                        <i class="fa fa-send"></i>
+                        <span>Transmitir</span>
+                    </button>
+                    <button type="button" class="btn btn-brand btn-sm btn-youtube mr-1"
+                        (click)="onPdfHomologacao.emit($event)">
+                        <i class="fa fa-file-pdf-o"></i>
+                        <span>PDF Homologação</span>
+                    </button>
+                    <label class="btn btn-brand btn-sm btn-spotify mr-1" style="margin-bottom: 0px; cursor: pointer;">
+                        <i class="fa fa-check"></i>
+                        <span>Homologar</span>
+                        <input #file type="file" style="display: none;" accept=".pdf"
+                            (change)="onFileChange($event.target.files[0])">
+                    </label>
+                    <button type="button" class="btn btn-brand btn-sm btn-reddit mr-1"
+                        (click)="onRetificar.emit($event)">
+                        <i class="fa fa-edit"></i>
+                        <span>Retificar</span>
+                    </button>
+                    <button type="button" class="btn btn-brand btn-sm btn-tumblr mr-1"
+                        (click)="onCancelar.emit($event)">
+                        <i class="fa fa-undo"></i>
+                        <span>Cancelar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

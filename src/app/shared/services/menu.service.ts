@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class MenuService extends GenericDao<BaseEntity> {
+export class MenuService extends GenericDao<number,BaseEntity<number>> {
 
   constructor(protected http:HttpClient) { 
     super(http,`${environment.API_URL}`)

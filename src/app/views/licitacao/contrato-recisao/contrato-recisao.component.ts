@@ -1,10 +1,10 @@
-import { Page } from "./../../../shared/services/generic/page";
+import { Page } from "../../../shared/entity/api/page";
 import { ContratoRecisaoService } from "./../service/contrato-recisao.service";
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { ContratoRecisao } from "../../../shared/entity/contrato-recisao";
 import { Subscription } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 import { AlertService } from "../../../shared/services/alert.service";
+import { ContratoRecisao } from '../../../shared/entity/LIC/contrato-recisao';
 
 @Component({
   selector: "app-contrato-recisao",
@@ -26,7 +26,7 @@ export class ContratoRecisaoComponent implements OnInit, OnDestroy {
       this.title = d.title;
     });
 
-    this.service.paged().subscribe((data) => {
+    this.service.paginado().subscribe((data) => {
       this.page = data;
     });
   }
@@ -34,7 +34,7 @@ export class ContratoRecisaoComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
   pageChanged(event: any): void {
-    this.service.paged(event.page - 1).subscribe((data) => {
+    this.service.paginado(event.page - 1).subscribe((data) => {
       this.page = data;
     });
   }

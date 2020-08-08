@@ -2,136 +2,251 @@ import { HttpClient } from "@angular/common/http";
 
 import { take, tap } from "rxjs/operators";
 
-import { BaseEntity } from "./base-entity";
-import { Page } from "./page";
+import { Page } from "../../entity/api/page";
 import { environment } from "../../../../environments/environment";
 import { Subject } from "rxjs";
+import { BaseEntity } from "../../entity/api/base-entity";
 
-export class GenericDao<T extends BaseEntity> {
-  private _refresh = new Subject<T>();
+export class GenericDao<K, T extends BaseEntity<K>> {
+  /**
+   * Retorna a quantidade de caracteres {n} da esquerda p/ direita
+   * @param str String
+   * @param n Qtd de caracteres
+   */
+  left = (str: any, n: any) => {
+    if (n <= 0) return "";
+    else if (n > String(str).length) return str;
+    else return String(str).substring(0, n);
+  };
+
+  /**
+   * Retorna a quantidade de caracteres {n} da direita p/ esquerda
+   * @param str String
+   * @param n Qtd de caracteres
+   */
+  right = (str: any, n: any) => {
+    if (n <= 0) return "";
+    else if (n > String(str).length) return str;
+    else {
+      var iLen = String(str).length;
+      return String(str).substring(iLen, iLen - n);
+    }
+  };
+
+  private removeEmpty = (obj: T) => {
+    delete obj.uuid;
+    delete obj.arquivo;
+    Object.keys(obj).forEach((key) => {
+      if (obj[key] && typeof obj[key] === "object") this.removeEmpty(obj[key]);
+      else if (obj[key] == null) delete obj[key];
+    });
+  };
+
+  private d = new Date();
+  private _mes = this.d.getMonth() + 1;
+  private _ano = this.d.getUTCFullYear();
+
+  private _refresh$ = new Subject<T>();
   /**
    *
    * @param http : HttpClient
-   * @param LAYOUT Tipo de Layout do environment
+   * @param layout Tipo de layout do environment
    */
-  constructor(protected http: HttpClient, private LAYOUT: string) {}
+  constructor(protected http: HttpClient, private layout: string) {}
 
   get refresh() {
-    return this._refresh;
+    return this._refresh$;
   }
 
-  list() {
-    return this.http.get<T[]>(`${environment.API_URL(this.LAYOUT)}/ALL`);
+  /**
+   * Lista os Layout´s
+   */
+  listar() {
+    return this.http.get<T[]>(`${environment.api_url(this.layout)}/ALL`);
   }
-
-  paged(page?: number) {
+  /**
+   * Consulta Paginada
+   * @param page Número da página default 0
+   */
+  paginado(page?: number) {
     return page !== undefined
       ? this.http.get<Page<T>>(
-          `${environment.API_URL(this.LAYOUT)}/PAGED?page=${page}`
+          `${environment.api_url(this.layout)}/PAGED?page=${page}`
         )
-      : this.http.get<Page<T>>(`${environment.API_URL(this.LAYOUT)}/PAGED`);
+      : this.http.get<Page<T>>(`${environment.api_url(this.layout)}/PAGED`);
   }
 
   /**
    * Consulta Paginada, Tabelas de Dominios
    * @param page Número da página default 0
-   * @param tabela Noma tabela de dominio
+   * @param tabela Nome tabela de dominio
    */
-  pagedDominio(page: number = 0, tabela?: string) {
+  dominioPaginado(page: number = 0, tabela?: string) {
     return this.http.get<Page<T>>(
-      `${environment.API_URL(this.LAYOUT)}/PAGED/${tabela}?page=${page}`
+      `${environment.api_url(this.layout)}/PAGED/${tabela}?page=${page}`
     );
   }
 
-  listDominio(tabela: string, status: boolean = true) {
-    return this.http.get<T[]>(`${environment.API_URL(this.LAYOUT)}/ALL/${tabela}/${status}`);
+  /**
+   * Lista dados das tabelas de Domínio
+   *@param tabela
+   */
+  listaDominio(tabela: string, status: boolean) {
+    return this.http.get<T[]>(
+      `${environment.api_url(this.layout)}/ALL/${tabela}/${status}`
+    );
   }
-
-  loadByID(id: number) {
+  /**
+   * Busca layout pelo UUID
+   * @param uuid
+   */
+  buscarPorUUID(uuid: K) {
     return this.http
-      .get<T>(`${environment.API_URL(this.LAYOUT)}/${id}`)
+      .get<T>(`${environment.api_url(this.layout)}/${uuid}`)
       .pipe(take(1) /*,tap(console.log)*/);
   }
 
-  save(obj: T) {
-    console.log(obj)
-    if (obj.seqID) {
-      return this.update(obj);
+  /**
+   * Salva ou atualiza a entidade
+   * @param obj Entidade a ser persistida
+   */
+  salvar(obj: T) {
+    if (obj.uuid) {
+      return this.atualizar(obj);
     }
-    return this.create(obj);
+    return this.gravar(obj);
   }
 
-  private update(obj: T) {
-    return this.http.put(`${environment.API_URL(this.LAYOUT)}/${obj.seqID}`, obj).pipe(
-      take(1),
-      tap(() => this._refresh.next())
-    );
+  private atualizar(obj: T) {
+    return this.http
+      .put(`${environment.api_url(this.layout)}/${obj.uuid}`, obj)
+      .pipe(
+        take(1),
+        tap(() => this._refresh$.next())
+      );
   }
-  private create(obj: T) {
-    return this.http.post(`${environment.API_URL(this.LAYOUT)}`, obj).pipe(
+  private gravar(obj: T) {
+    return this.http.post(`${environment.api_url(this.layout)}`, obj).pipe(
       take(1),
-      tap(() => this._refresh.next())
+      tap(() => this._refresh$.next())
     );
   }
 
-  public uploadAPI(file: FileList, tabela: string) {
+  /**
+   * Faz o upload o arquivo de json das tabelas de Domínio
+   * @param file Arquivo json da tabela de Domínio
+   * @param tabela Nome da tabela de Domínio
+   */
+  public uploadAPI(file: File, tabela: string) {
     let formData = new FormData();
-    if (file.item(0) != null) {
-      formData.set("file", file.item(0));
+    if (file != null) {
+      formData.set("file", file);
       return this.http
-        .post(`${environment.API_URL(this.LAYOUT)}/${tabela}`, formData)
+        .post(`${environment.api_url(this.layout)}/${tabela}`, formData)
         .pipe(
           take(1),
-          tap(() => this._refresh.next())
+          tap(() => this._refresh$.next())
         );
     }
   }
 
-  //ENDPOINT´S TCM
+  //==========================ENDPOINT´S TCM=========================
   /**
-   * Transmitir o Layout para o TCM
-   * @param t
+   * Envia o Layout para o TCM
+   * @param t Layout
    */
-  public postTCM(t: T) {
+  public transmitirColare(t: T) {
+    const id = t.arquivo?.id;
+    const mes = t.arquivo?.mes;
+    const ano = t.arquivo?.ano;
+    if (t.arquivo?.id) {
+      this.removeEmpty(t);
+      return this.putColare(t, id, mes, ano);
+    } else {
+      this.removeEmpty(t);
+      return this.postColare(t);
+    }
+  }
+
+  private postColare(t: T) {
     return this.http
-      .post(`${environment.URL_LAYOUT(this.LAYOUT)}`, t)
+      .post(
+        `${environment.url_layout(this.layout)}/${this._mes}/${this._ano}`,
+        t
+      )
       .pipe(take(1));
   }
 
   /**
-   * Atualizar Layout junto ao TCM
+   * Atualizar layout junto ao TCM
    * @param t
    * @param id
    */
-  public putTCM(t: T, id: any) {
+  private putColare(t: T, id: any, mes: any, ano: any) {
     return this.http
-      .put(`${environment.URL_LAYOUT(this.LAYOUT)}/${id}`, t)
+      .put(
+        `${environment.url_layout(this.layout)}/${mes || this._mes}/${
+          ano || this._ano
+        }/${id}`,
+        t
+      )
       .pipe(take(1));
   }
 
   /**
-   * Apagar Layout
+   * Apagar layout no
    * @param id id do layout enviado
    */
-  public deleteTCM(id: any) {
-    return this.http.delete(`${environment.URL_LAYOUT(this.LAYOUT)}/${id}`);
+  public deleteColare(t: T) {
+    return this.http.delete(
+      `${environment.url_layout(this.layout)}/${t.arquivo.mes}/${
+        t.arquivo.ano
+      }/${t.arquivo.id}`
+    );
   }
 
   /**
-   * Obter o Layout enviado
-   * @param id
+   * Obter o layout enviado
+   * @param l Layout
    */
-  public getTCM(id: any) {
-    this.http.get<T>(`${environment.URL_LAYOUT(this.LAYOUT)}/${id}`);
+  public getColare(l: T) {
+    return this.http.get<T>(
+      `${environment.url_layout(this.layout)}/${l.arquivo.mes}/${
+        l.arquivo.ano
+      }/${l.arquivo.id}`
+    );
   }
 
-  public upload(file: File) {
+  public uploadColare(file: File) {
     let formData = new FormData();
     if (file != null) {
       formData.set("arquivo", file);
       return this.http
-        .post(`${environment.URL_UPLOAD}`, formData)
+        .post(`${environment.url_upload}`, formData)
         .pipe(take(1));
     }
+  }
+
+  public obterPdfHomologacaoColare(recibo: string) {
+    return this.http.get(`${environment.url_pdf_homologacao(recibo)}`);
+  }
+
+  /**
+   * Homologa o envio do layout
+   * @param t Layout
+   * @param arquivo Arquivo de homologação assinado digitalmente
+   */
+  public homologarEnvioColare(layout: T, arquivo: File) {
+    var formData = new FormData();
+    formData.set("arquivo", arquivo);
+    return this.http.put(
+      `${environment.url_homologa_envio(
+        this.layout,
+        layout.arquivo.mes,
+        layout.arquivo.ano,
+        layout.arquivo.id
+      )}`,
+      formData
+    );
   }
 }

@@ -1,0 +1,24 @@
+<div class="card-header">
+    <i class="fa fa-send"></i>Tipo de Envio
+</div>
+<div class="col-12">
+    <form [formGroup]="formulario" (submit)="onSubmit()">
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Tipo de Envio</label>
+            <select [ngClass]="aplicaCssErro('codTipoEnvio')" class="form-control" id="codTipoEnvio"
+                formControlName="codTipoEnvio">
+                <option></option>
+                <option *ngFor="let item of dominios" [ngValue]="item.codigo">{{item.descricao}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="motivoAtualizacaoCorrecao">Motivo atualização ou correção</label>
+            <textarea class="form-control" id="motivoAtualizacaoCorrecao" formControlName="motivoAtualizacaoCorrecao"
+                rows="3"></textarea>
+        </div>
+        <div class="col-12 padding-10">
+            <button type="submit" class="btn btn-primary btn-sm">Enviar</button>
+            <button type="button" class="btn btn-secondary btn-sm" (click)="cancelar($event)">Cancelar</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,98 @@
+<ng-container *ngIf="erro412; else mensagens">
+    <div class="card-header">
+        <i class="fa fa-warning"></i>Erros Encontrados
+    </div>
+    <div class="card-body" *ngFor="let item of erro412">
+        <!-- <div class="card-body"> -->
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="message">Mensagem</label>
+                <input type="text" class="form-control" readonly [value]="item.message">
+            </div>
+            <div class="form-group col-md-12">
+                <label for="message">Campo do erro</label>
+                <input type="text" class="form-control" readonly [value]="item.instance.pointer">
+            </div>
+
+            <div class="form-group col-md-6" *ngIf="item.required">
+                <ul class="list-group">
+                    <li class="list-group-item active">Campos obrigatórios</li>
+                    <li class="list-group-item" *ngFor="let r of item.required">{{r}}</li>
+                </ul>
+            </div>
+
+            <div class="form-group col-md-6" *ngIf="item.required">
+                <ul class="list-group">
+                    <li class="list-group-item active">Campos ausentes</li>
+                    <li class="list-group-item" *ngFor="let r of item.missing">{{r}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #mensagens>
+    <div *ngIf="erroMensagem.mensagens.advertencias?.length > 0">
+        <div class="card-header">
+            <i class="fa fa-warning"></i>Advertências
+        </div>
+        <div class="col-12">
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">Regra</th>
+                        <th scope="col">Mensagem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let adv of erroMensagem.mensagens.advertencias">
+                        <th scope="row">{{adv.regra}}</th>
+                        <td>{{adv.mensagem}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="erroMensagem.mensagens.informacoes?.length > 0">
+        <div class="card-header">
+            <i class="fa fa-warning"></i>Informações
+        </div>
+        <div class="col-12">
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">Regra</th>
+                        <th scope="col">Mensagem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let info of erroMensagem.mensagens.advertencias">
+                        <th scope="row">{{info.regra}}</th>
+                        <td>{{info.mensagem}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="erroMensagem.mensagens.erros?.length > 0">
+        <div class="card-header">
+            <i class="fa fa-warning"></i>Erros
+        </div>
+        <div class="col-12">
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">Regra</th>
+                        <th scope="col">Mensagem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let err of erroMensagem.mensagens.erros">
+                        <th scope="row">{{err.regra}}</th>
+                        <td>{{err.mensagem}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</ng-template>

@@ -31,12 +31,13 @@ export const right = (str: any, n: any) => {
 const d = new Date();
 const mes = "000" + (d.getMonth() + 1);
 const ano = d.getUTCFullYear();
-export const BASE_URL_TCM = "https://testes.tcm.go.gov.br";
+export const BASE_URL_TCM = "https://virtual.tcm.go.gov.br";
 export const BASE_URL_API = "http://localhost:8080/api/";
 
 export const environment = {
   production: true,
   DOMINIO: "DOMINIO/PROCESS_JSON",
+  uuidRegex: "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
   /**
    * REGULAMENTAÇÃO DOS PROCEDIMENTOS LICITATÓRIOS
    */
@@ -65,11 +66,11 @@ export const environment = {
   /**
    * 
    */
-  URL_REPRESENTACOES: `${BASE_URL_TCM}/passaporte/api/auth/representacoes`,
+  URL_REPRESENTACOES: `${BASE_URL_TCM}:8443/passaporte/api/auth/representacoes`,
   /**
    * 
    */
-  URL_TOKEN: `${BASE_URL_TCM}/passaporte/api/auth/certificado?representacao=`,
+  URL_TOKEN: `${BASE_URL_TCM}:8443/passaporte/api/auth/certificado?representacao=`,
   /**
    * 
    */

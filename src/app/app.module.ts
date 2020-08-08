@@ -1,7 +1,7 @@
 import { NgxUiLoaderModule, SPINNER, NgxUiLoaderConfig } from "ngx-ui-loader";
 import { BrowserModule } from "@angular/platform-browser";
 import { ReactiveFormsModule } from "@angular/forms";
-import { NgModule } from "@angular/core";
+import { NgModule, enableProdMode, APP_INITIALIZER } from "@angular/core";
 import { LocationStrategy, HashLocationStrategy } from "@angular/common";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from "@angular/common/http";
@@ -17,7 +17,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   text: "AGUARDE...",
   fgsColor: "red",
-  pbColor:"red",
+  pbColor: "red",
   fgsPosition: "center-center",
   //fgsSize: 80,
   fgsType: SPINNER.squareJellyBox,
@@ -54,7 +54,13 @@ import { NgxJsonViewerModule } from "ngx-json-viewer";
 import { SharedModule } from "./shared/shared.module";
 import { CookieService } from "ngx-cookie-service";
 
-import { Interceptor } from "./auth/interceptor.module";
+import { InterceptorApi } from "./auth/interceptor-api.module";
+import { InterceptorTCM } from "./auth/interceptor-tcm.module";
+import { HttpErrorInterceptor } from "./auth/http-error-interceptor.module";
+import { appInitializer } from './auth/app.initialize';
+import { AuthenticationService } from './auth/authentication.service';
+
+enableProdMode();
 
 @NgModule({
   imports: [
@@ -74,7 +80,10 @@ import { Interceptor } from "./auth/interceptor.module";
     NgxJsonViewerModule,
     ReactiveFormsModule,
     SharedModule,
-    Interceptor,
+    InterceptorApi,
+    InterceptorTCM,
+    HttpErrorInterceptor,
+    PerfectScrollbarModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
   ],
   declarations: [
@@ -87,8 +96,18 @@ import { Interceptor } from "./auth/interceptor.module";
   ],
   providers: [
     {
+      provide: APP_INITIALIZER,
+      useFactory:appInitializer,
+      multi:true,
+      deps:[AuthenticationService]
+    },
+    {
       provide: LocationStrategy,
       useClass: HashLocationStrategy,
+    },
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
     CookieService,
   ],

@@ -8,7 +8,7 @@ import {
   Output,
 } from "@angular/core";
 import { CookieService } from "ngx-cookie-service";
-import { UploadResponse } from "../../entity/UploadResponse";
+import { UploadResponse } from "../../entity/colare/UploadResponse";
 import { emit } from "cluster";
 
 @Component({

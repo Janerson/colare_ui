@@ -1,4 +1,3 @@
-import { Title } from '@angular/platform-browser';
 import { FormGroup } from '@angular/forms';
 import {
   Component,
@@ -11,9 +10,7 @@ import {
   Input,
 } from "@angular/core";
 import { FileUploadService } from "../../services/file-upload.service";
-import { UploadResponse } from "../../entity/UploadResponse";
-import { AlertService } from "../../services/alert.service";
-import { CookieService } from "ngx-cookie-service";
+import { UploadResponse } from "../../entity/colare/UploadResponse";
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -24,11 +21,10 @@ import { FormControl } from '@angular/forms';
 })
 export class FileUploadComponent implements OnInit {
   @Input() extensions;
-
   @Input() formGroup:FormGroup
   @Input() title: Text
 
-  @Output() fileUpload = new EventEmitter<string>();
+  //@Output() fileUpload = new EventEmitter<string>();
 
   @ViewChild("file") _file: ElementRef;
 
@@ -37,13 +33,13 @@ export class FileUploadComponent implements OnInit {
   ngOnInit(): void {}
 
   onFileChange(file: FileList) {
-    this.fileUploadService.upload(file[0]).subscribe(
+    this.fileUploadService.uploadColare(file[0]).subscribe(
       (response:UploadResponse) => {
-        this.fileUpload.emit(response.arquivo);
-      },
-      (e) => {
-        this._file.nativeElement.value = null;
+        //this.fileUpload.emit(response.arquivo);
+        this.formGroup.patchValue({"idDocumentoPDF":response.arquivo})
+        //fc.patchValue(response.arquivo)        
       }
     );
+    this._file.nativeElement.value = null;
   }
 }

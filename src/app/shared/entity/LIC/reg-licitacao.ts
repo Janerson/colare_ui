@@ -1,17 +1,17 @@
-import { BaseEntity } from "../services/generic/base-entity";
+import { BaseEntity } from '../api/base-entity';
 
 /**
  * Informações sobre a regulamentação municipal do pregão, registro de preços e LC 123/06
  */
-export class RegLicitacao extends BaseEntity {
+export class RegLicitacao extends BaseEntity<String> {
   /**
    * Código do Tipo de Envio
    */
-  codTipoEnvio: number;
+   codTipoEnvio: number;
   /**
    * Tipo de regulamentação
    */
-  codTipoRegulamentacao: number;
+   codTipoRegulamentacao: number;
   /**
    * Data do Decreto Municipal
    */
@@ -37,14 +37,13 @@ export class RegLicitacao extends BaseEntity {
   /**
    * Número do Decreto Municipal Regulamentador do Pregão, Registro de Preços ou da LC 123-06
    */
-  numeroDecretoMunicipal?: string;
- 
+  numeroDecretoMunicipal?: string;   
 }
 
 /**
  * Detalhamento da regulamentação do Artigo 47 da Lei Complementar 123/06
  */
-export class DetalhamentoLc123 extends BaseEntity {
+export class DetalhamentoLc123 extends BaseEntity<String> {
   /**
    * Artigo relativo aos critérios para empenho e pagamento a ME e EPP
    */

@@ -18,6 +18,7 @@
             "polyfills": "src/polyfills.ts",
             "assets": ["src/assets"],
             "styles": [
+              "node_modules/animate.css/animate.css",
               "node_modules/@coreui/icons/css/coreui-icons.css",
               "node_modules/flag-icon-css/css/flag-icon.css",
               "node_modules/font-awesome/css/font-awesome.css",

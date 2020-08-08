@@ -1,11 +1,9 @@
-
-
 <label class="col-form-label" for="idDocumentoPDF">{{title}}</label>
 <div class="controls" [formGroup]="formGroup">
   <div class="input-prepend input-group">
     <input type="text" id="idDocumentoPDF" class="form-control" formControlName="idDocumentoPDF" readonly>
     <div class="input-group-prepend">
-      <label class="btn btn-primary">
+      <label class="btn btn-primary" style="cursor: pointer;">
         Upload <input #file type="file" style="display: none;" (change)="onFileChange($event.target.files)"
           [accept]="extensions">
       </label>

@@ -20,6 +20,11 @@ export const navItems: INavData[] = [
     icon: "icon-puzzle",
     children: [
       {
+        name: "Tipo de envio",
+        url: "/dominio/tipo-de-envio",
+        icon: "icon-puzzle",
+      },
+      {
         name: "Tipo regulamentação",
         url: "/dominio/tipo-regulamentacao",
         icon: "icon-puzzle",

@@ -22,6 +22,13 @@ import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
 // import and register filepond file type validation plugin
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import { FileUploadPondComponent } from './ui/file-upload-pond/file-upload-pond.component';
+import { Erro412Component } from './ui/erro412/erro412.component';
+import { BaseModalComponent } from './ui/base-modal/base-modal.component';
+import { PassaporteComponent } from './ui/passaporte/passaporte.component';
+import { EnvioComponent } from './ui/envio/envio.component';
+import { AcoesComponent } from './ui/acoes/acoes.component';
+import { StatusEnvioPipe } from './pipes/status-envio.pipe';
+import { ValidatorComponentComponent } from './ui/validator-component/validator-component.component';
 registerPlugin(FilePondPluginFileValidateType,FilePondPluginFileValidateSize)
 //registerPlugin(FilePondPluginGetFile)
 
@@ -34,6 +41,13 @@ defineLocale("pt-br", ptBrLocale);
     BaseFormComponent,
     FileUploadComponent,
     FileUploadPondComponent,
+    BaseModalComponent,
+    PassaporteComponent,
+    EnvioComponent,
+    Erro412Component,
+    AcoesComponent,
+    StatusEnvioPipe,
+    ValidatorComponentComponent,
   ],
   imports: [
     CommonModule,
@@ -53,11 +67,16 @@ defineLocale("pt-br", ptBrLocale);
     PaginationModule,
     AlertModalComponent,
     FileUploadComponent,
-    FileUploadPondComponent
+    FileUploadPondComponent,
+    BaseModalComponent,
+    Erro412Component,
+    AcoesComponent,
+    StatusEnvioPipe,
+    ValidatorComponentComponent
     // BsDatepickerModule
   ],
   providers: [BsLocaleService, BsModalService, AlertService],
-  entryComponents: [AlertModalComponent],
+  //entryComponents: [AlertModalComponent,BaseModalComponent,PassaporteComponent],
 })
 export class SharedModule {
   constructor(localeService: BsLocaleService) {

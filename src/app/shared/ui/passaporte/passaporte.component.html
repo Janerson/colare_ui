@@ -1,0 +1,42 @@
+<div class="login-panel ui-fluid card-left" *ngIf="!isLogged; else representacoes">
+    <div class="titulo-card-login">CERTIFICADO DIGITAL</div>
+    <h5 class="marrom-passaporte">LOGIN PADRÃO PARA PRIMEIRO ACESSO DO JURISDICIONADO</h5>
+    <div class="ui-g">
+        <div class="ui-g-12">
+            Se você já possui certificado digital, clique na imagem abaixo.
+        </div>
+        <div class="ui-g-12">
+            <img (click)="login($event)" src="assets/img/certificado.png">
+        </div>
+    </div>
+</div>
+
+<ng-template #representacoes>
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-edit"></i>Representações
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <!-- row -->
+                <div class="col-12">
+                    <div>
+                        <label class="col-form-label" for="codTipoRegulamentacao">Ecolha a Representação</label>
+                        <div class="controls">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Representações</span>
+                                </div>
+                                <select class="select-representacoes" (change)="onRepresentacaoChange($event)">
+                                    <option></option>
+                                    <option *ngFor="let item of authTcm.representacoes" value="{{item.codigo}}">
+                                        {{item.representacao}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

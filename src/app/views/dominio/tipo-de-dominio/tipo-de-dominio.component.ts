@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { BaseFormComponent } from "../../../shared/ui/base-form/base-form.component";
-import { Dominios } from "../../../shared/entity/dominio";
-import { Page } from "../../../shared/services/generic/page";
+import { Dominios } from "../../../shared/entity/colare/dominio";
+import { Page } from "../../../shared/entity/api/page";
 import { DominioService } from "../service/dominio.service";
 import { ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs";
@@ -9,7 +9,7 @@ import { AlertService } from "../../../shared/services/alert.service";
 
 @Component({
   selector: "app-tipo-de-regulamentacao",
-  templateUrl: "./tipo-de-dominio.component.html"
+  templateUrl: "./tipo-de-dominio.component.html",
 })
 export class TipoDeDominioComponent extends BaseFormComponent
   implements OnInit {
@@ -22,14 +22,13 @@ export class TipoDeDominioComponent extends BaseFormComponent
 
   constructor(
     protected service: DominioService,
-    private route: ActivatedRoute,
-    private alertService: AlertService
+    private route: ActivatedRoute
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.subscription = this.route.data.subscribe(d => {
+    this.subscription = this.route.data.subscribe((d) => {
       this.title = d.title;
     });
 
@@ -40,13 +39,13 @@ export class TipoDeDominioComponent extends BaseFormComponent
   }
 
   private listar() {
-    this.service.pagedDominio(0, this.title).subscribe(data => {
+    this.service.dominioPaginado(0, this.title).subscribe((data) => {
       this.page = data;
     });
   }
 
   pageChanged(event: any): void {
-    this.service.pagedDominio(event.page - 1, this.title).subscribe(data => {
+    this.service.dominioPaginado(event.page - 1, this.title).subscribe((data) => {
       this.page = data;
     });
   }
@@ -61,12 +60,8 @@ export class TipoDeDominioComponent extends BaseFormComponent
   }
 
   onFileChange(file: FileList) {
-    this.service.uploadAPI(file, this.title).subscribe(null, e => {
+    this.service.uploadAPI(file[0], this.title).subscribe(null, (e) => {
       this._file.nativeElement.value = null;
-      this.alertService.showAlertDanger(
-        e.error.message,
-        "Erro ao processar o arquivo"
-      );
     });
   }
 }

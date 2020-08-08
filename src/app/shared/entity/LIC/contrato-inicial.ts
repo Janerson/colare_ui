@@ -1,8 +1,9 @@
-import { BaseEntity } from './../services/generic/base-entity';
+import { BaseEntity } from '../api/base-entity';
+
 /**
  * Dados do contrato
  */
-export interface ContratoInicial extends BaseEntity {
+export interface ContratoInicial extends BaseEntity<String> {
     /**
      * Ano do contrato
      */

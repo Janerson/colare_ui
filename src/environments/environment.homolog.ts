@@ -33,10 +33,14 @@ export const left = (str: any, n: any) => {
   const ano = d.getUTCFullYear();
   export const BASE_URL_TCM = "https://testes.tcm.go.gov.br";
   export const BASE_URL_API = "https://colare.herokuapp.com/api/";
+
+
+
   
   export const environment = {
     production: false,
     DOMINIO: "DOMINIO/PROCESS_JSON",
+    uuidRegex: "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
     /**
      * REGULAMENTAÇÃO DOS PROCEDIMENTOS LICITATÓRIOS
      */
