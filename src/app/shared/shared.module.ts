@@ -29,6 +29,9 @@ import { EnvioComponent } from './ui/envio/envio.component';
 import { AcoesComponent } from './ui/acoes/acoes.component';
 import { StatusEnvioPipe } from './pipes/status-envio.pipe';
 import { ValidatorComponentComponent } from './ui/validator-component/validator-component.component';
+import { CardComponent } from './ui/card/card.component';
+import { CustomAlertComponent } from './ui/custom-alert/custom-alert.component';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 registerPlugin(FilePondPluginFileValidateType,FilePondPluginFileValidateSize)
 //registerPlugin(FilePondPluginGetFile)
 
@@ -38,7 +41,7 @@ defineLocale("pt-br", ptBrLocale);
   declarations: [
     OnlyNumberDirective,
     AlertModalComponent,
-    BaseFormComponent,
+        BaseFormComponent,
     FileUploadComponent,
     FileUploadPondComponent,
     BaseModalComponent,
@@ -48,6 +51,8 @@ defineLocale("pt-br", ptBrLocale);
     AcoesComponent,
     StatusEnvioPipe,
     ValidatorComponentComponent,
+    CardComponent,
+    CustomAlertComponent,
   ],
   imports: [
     CommonModule,
@@ -56,6 +61,7 @@ defineLocale("pt-br", ptBrLocale);
     NgxJsonViewerModule,
     PaginationModule.forRoot(),
     ModalModule.forRoot(),
+    PopoverModule.forRoot(),
     FilePondModule
   ],
   exports: [
@@ -66,13 +72,15 @@ defineLocale("pt-br", ptBrLocale);
     NgxJsonViewerModule,
     PaginationModule,
     AlertModalComponent,
+    CustomAlertComponent,
     FileUploadComponent,
     FileUploadPondComponent,
     BaseModalComponent,
     Erro412Component,
     AcoesComponent,
     StatusEnvioPipe,
-    ValidatorComponentComponent
+    ValidatorComponentComponent,
+    CardComponent
     // BsDatepickerModule
   ],
   providers: [BsLocaleService, BsModalService, AlertService],

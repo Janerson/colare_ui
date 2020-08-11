@@ -1,11 +1,12 @@
-import { ContratoInicialDetailComponent } from './contrato-inicial/contrato-inicial-detail/contrato-inicial-detail.component';
-import { ContratoInicialComponent } from './contrato-inicial/contrato-inicial.component';
+import { ContratoInicialDetailComponent } from "./contrato-inicial/contrato-inicial-detail/contrato-inicial-detail.component";
+import { ContratoInicialComponent } from "./contrato-inicial/contrato-inicial.component";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { RegLicitacaoComponent } from "./reg-licitacao/reg-licitacao.component";
 import { RegLicitacaoDetailComponent } from "./reg-licitacao/reg-licitacao-detail/reg-licitacao-detail.component";
 import { ContratoRecisaoComponent } from "./contrato-recisao/contrato-recisao.component";
 import { ContratoRecisaoDetailComponent } from "./contrato-recisao/contrato-recisao-detail/contrato-recisao-detail.component";
+import { CardComponent } from "../../shared/ui/card/card.component";
 
 export const routes: Routes = [
   {
@@ -14,6 +15,14 @@ export const routes: Routes = [
       title: "Licitação",
     },
     children: [
+      {
+        path: "",
+        component:CardComponent,
+        data:{
+          title: "Layout´s",
+          spc:"LIC"
+        }
+      },
       {
         path: "REG_LICITACAO",
         children: [

@@ -12,12 +12,15 @@ const CLIENT_PASS = 'dom02041989'
 export const environment = {
   
   production: false,
-  api_oauth_url: `${BASE_URL_API}oauth/token`,
+  api_oauth_login: `${BASE_URL_API}oauth/token`,
+  api_oauth_logout: `${BASE_URL_API}oauth/logout`,
   client_token :'Basic NEZDNTIzMkUtOTE3Mi00REMzLUIwMUYtRUNDRUM3RDVEMEI1OmRvbTAyMDQxOTg5',
+  
   /**
    * Endpoint para upload dos arquivos de JSON referentes a tabelas de Domínio
    */
   dominio: "DOMINIO/UPLOAD",
+  dominio_menu:"DOMINIO/MENU_LINK",
   /**
    * REGULAMENTAÇÃO DOS PROCEDIMENTOS LICITATÓRIOS
    */

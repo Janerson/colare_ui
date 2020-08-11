@@ -3,7 +3,9 @@ import { BaseEntity } from '../api/base-entity';
 /**
  * Informações sobre a regulamentação municipal do pregão, registro de preços e LC 123/06
  */
-export class RegLicitacao extends BaseEntity<String> {
+export interface RegLicitacao extends BaseEntity<String> {
+ 
+
   /**
    * Código do Tipo de Envio
    */
@@ -43,7 +45,7 @@ export class RegLicitacao extends BaseEntity<String> {
 /**
  * Detalhamento da regulamentação do Artigo 47 da Lei Complementar 123/06
  */
-export class DetalhamentoLc123 extends BaseEntity<String> {
+export interface DetalhamentoLc123 extends BaseEntity<String> {
   /**
    * Artigo relativo aos critérios para empenho e pagamento a ME e EPP
    */

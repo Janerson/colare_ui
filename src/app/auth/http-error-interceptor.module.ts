@@ -76,8 +76,6 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
     switch (error.status) {   
       case 400:
       case 401:
-        let err : Erro400 = error["error"]
-        console.log(err)
         this.alertService.showAlertDanger('Usuário e/ou senha inválido!','Erro');
       case 500:     
         break;    

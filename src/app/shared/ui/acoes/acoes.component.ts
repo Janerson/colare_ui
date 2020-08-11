@@ -21,6 +21,7 @@ export class AcoesComponent implements OnInit, OnChanges {
   @Input() form: FormGroup;
 
   @Output() onTransmitir = new EventEmitter<boolean>();
+  @Output() onSincronizar = new EventEmitter<boolean>();
   @Output() onPdfHomologacao = new EventEmitter<boolean>();
   @Output() onHomologar = new EventEmitter<File>();
   @Output() onRetificar = new EventEmitter<boolean>();

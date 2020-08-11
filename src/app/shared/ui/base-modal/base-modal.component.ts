@@ -4,7 +4,6 @@ import {
   ViewChild,
   ViewContainerRef,
   ComponentFactoryResolver,
-  Input,
   AfterViewInit,
 } from "@angular/core";
 import { BsModalRef } from "ngx-bootstrap/modal";

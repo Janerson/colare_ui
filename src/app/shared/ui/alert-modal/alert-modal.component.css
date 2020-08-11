@@ -1,0 +1,17 @@
+.modal{
+    display:flex;
+    top:40%;
+  }
+  
+  .custom-modal {
+    border: solid 4px blue;
+  }
+  
+  .custom-modal .modal-header {
+    background-color: lime;
+  }
+  
+  .custom-modal .modal-body {
+    background-color: orange;
+  }
+  

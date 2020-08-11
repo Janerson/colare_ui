@@ -6,6 +6,7 @@ import { Page } from "../../entity/api/page";
 import { environment } from "../../../../environments/environment";
 import { Subject } from "rxjs";
 import { BaseEntity } from "../../entity/api/base-entity";
+import { Arquivo, ColareRetorno } from '../../entity/colare/colare-retorno';
 
 export class GenericDao<K, T extends BaseEntity<K>> {
   /**
@@ -210,7 +211,7 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    * @param l Layout
    */
   public getColare(l: T) {
-    return this.http.get<T>(
+    return this.http.get<ColareRetorno>(
       `${environment.url_layout(this.layout)}/${l.arquivo.mes}/${
         l.arquivo.ano
       }/${l.arquivo.id}`
@@ -228,7 +229,21 @@ export class GenericDao<K, T extends BaseEntity<K>> {
   }
 
   public obterPdfHomologacaoColare(recibo: string) {
-    return this.http.get(`${environment.url_pdf_homologacao(recibo)}`);
+    this.http
+      .get(`${environment.url_pdf_homologacao(recibo)}`, {
+        headers: {
+          Accept: "application/pdf",
+        },
+        responseType: "blob",
+      })
+      .subscribe((data) => {
+        //let blob = new Blob([data], { type: "application/pdf" });
+        var downloadURL = window.URL.createObjectURL(data);
+        var link = document.createElement("a");
+        link.href = downloadURL;
+        link.download = `${recibo}.pdf`;
+        link.click();
+      });
   }
 
   /**

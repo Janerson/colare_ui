@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { AlertModalComponent } from '../ui/alert-modal/alert-modal.component';
 import { BaseModalComponent } from '../ui/base-modal/base-modal.component';
+import { CustomAlertComponent } from '../ui/custom-alert/custom-alert.component';
 
 export enum AlertTypes {
   PRIMARY = 'primary',
@@ -26,7 +27,9 @@ export class AlertService {
     footer?: string,
     type?: AlertTypes
   ) {
-    const bsModalRef: BsModalRef = this.modalService.show(AlertModalComponent);
+    const bsModalRef: BsModalRef = this.modalService.show(CustomAlertComponent,{
+      class:'my-modal'
+    });
     bsModalRef.content.type = type;
     bsModalRef.content.message = message;
     bsModalRef.content.title = title;

@@ -2,6 +2,44 @@
 //   border-color: red;
 //   border-width: 1px;
 // }
+// body{
+//   background-color: #f2f4f8;
+// }
+
+.modal{
+  display:flex;
+  top:10%;
+  border: 0px;
+}
+
+.modal-content {
+  position: relative;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-clip: padding-box;
+  border: none;
+  border-radius: 0.5rem;
+  outline: 0;
+}
+
+// .my-modal {
+//   border: solid 4px blue;
+// }
+
+// .my-modal .modal-header {
+//   background-color: lime;
+// }
+
+// .my-modal .modal-body {
+//   background-color: orange;
+// }
+
+
 
 .btn {
   margin-right: 5px;
@@ -22,4 +60,29 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+::-webkit-scrollbar{
+  width: 8px;
+  overflow: auto;
+  padding-right: 1px;
+}
+
+::-webkit-scrollbar-button {
+  width: 8px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #eee;
+  border: thin solid lightgray;
+  box-shadow: 0px 0px 3px #dfdfdf inset;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #999;
+  border: thin solid gray;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7d7d7d;
 }

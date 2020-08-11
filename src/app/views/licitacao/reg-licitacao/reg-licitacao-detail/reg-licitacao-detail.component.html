@@ -43,8 +43,7 @@
                     Municipal</label>
                   <div class="controls">
                     <label class="switch switch-label switch-pill switch-success">
-                      <input [ngClass]="aplicaCssErro('existeRegulamentacaoMunicipal')"
-                        id="existeRegulamentacaoMunicipal" type="checkbox" class="switch-input"
+                      <input id="existeRegulamentacaoMunicipal" type="checkbox" class="switch-input"
                         formControlName="existeRegulamentacaoMunicipal">
                       <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
                     </label>
@@ -271,7 +270,8 @@
       <!--/.col-->
     </div>
     <!--Ações-->
-    <app-acoes [form]="formulario" (onPdfHomologacao)="obterPDFHomologacao()" (onTransmitir)="transmitir()" (onHomologar)="homologar($event)"
-      (onCancelar)="cancelar()"></app-acoes>
+    <app-acoes [form]="formulario" (onPdfHomologacao)="obterPDFHomologacao()" (onTransmitir)="transmitir()"
+    (onSincronizar)="sincronizar($event)"
+      (onHomologar)="homologar($event)" (onCancelar)="cancelar()"></app-acoes>
   </form>
 </div>

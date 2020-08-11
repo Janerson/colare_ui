@@ -1,6 +1,6 @@
-<div *ngIf="formControl.invalid || formControl.dirty  && formControl.touched">
+<div *ngIf="formControl.invalid && (formControl.dirty||formControl.touched)">
     <div>
         <span class="badge badge-danger">{{ error_msg }}</span>
-    </div>   
-</div>  
+    </div>
+</div>
 <ng-content></ng-content>

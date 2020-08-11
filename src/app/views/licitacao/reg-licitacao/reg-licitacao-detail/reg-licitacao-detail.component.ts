@@ -5,7 +5,7 @@ import {
   ComponentFactoryResolver,
 } from "@angular/core";
 import { Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription, EMPTY } from "rxjs";
 
 import { BaseFormComponent } from "../../../../shared/ui/base-form/base-form.component";
@@ -16,7 +16,10 @@ import { DominioService } from "../../../dominio/service/dominio.service";
 import { Dominios } from "../../../../shared/entity/colare/dominio";
 import { TABELAS_DOMINIOS } from "../../../../shared/tabelas";
 import { ModalService } from "../../../../shared/services/modal.service";
-import { ColareRetorno } from "../../../../shared/entity/colare/colare-retorno";
+import {
+  ColareRetorno,
+  Arquivo,
+} from "../../../../shared/entity/colare/colare-retorno";
 import { EnvioComponent } from "../../../../shared/ui/envio/envio.component";
 import { HelperService } from "../../../../shared/services/helper.service";
 import { RegLicitacao } from "../../../../shared/entity/LIC/reg-licitacao";
@@ -35,6 +38,7 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
   protected uuid: String;
 
   constructor(
+    private router: Router,
     private service: RegLicitacaoService,
     private dominioService: DominioService,
     private route: ActivatedRoute,
@@ -96,8 +100,10 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
     this.alertService.showModal(EnvioComponent, {
       initialState: {
         title: "Envio Regulamentação dos procedimentos licitatórios",
+        data: this.formValue("arquivo"),
       },
     });
+
     this.subscriptionModalService = this.modalService.changeEmitted$.subscribe(
       (o) => {
         this.atualizaFormulario(o);
@@ -116,20 +122,33 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
     );
   }
 
-  obterPDFHomologacao() {
-    console.log(this.formValue("arquivo.recibo"));
-    this.service
-      .obterPdfHomologacaoColare(this.formValue("arquivo.recibo"))
-      .subscribe(data => console.log);
+  sincronizar(e) {
+    this.service.getColare(this.formValue()).subscribe((data) => {      
+      this.atualizaFormColare(data)    
+      this.save(false);
+      this.alertService.showAlertSucess(
+        "Layout Sincronizado com sucesso!",
+        "Sucesso"
+      );
+  
+    });
   }
+
+  obterPDFHomologacao() {
+    this.service.obterPdfHomologacaoColare(this.formValue("arquivo.recibo"));
+  }
+
   //TODO - Implementar homologação
   homologar(file: File) {
-    console.log(file);
-    this.alertService.showAlertInfo(file.name, "OK");
+    this.service
+      .homologarEnvioColare(this.formulario.value, file)
+      .subscribe((d) => {
+        console.log(d);
+      });
   }
-  //TODO - Implementar ação cancelar
+
   cancelar() {
-    this.alertService.showAlertInfo("Cancelado", "OK");
+    this.router.navigate(["LIC/REG_LICITACAO"]);
   }
 
   private buildForm() {

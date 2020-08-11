@@ -16,6 +16,12 @@
                         <i class="fa fa-send"></i>
                         <span>Transmitir</span>
                     </button>
+                    <button type="button" class="btn btn-brand btn-sm btn-vine mr-1"
+                        (click)="onSincronizar.emit($event)"
+                        popover="Sincronizar layout junto ao Colare/TCM" triggers="mouseenter:mouseleave">
+                        <i class="fa fa-refresh"></i>
+                        <span>Sincronizar</span>
+                    </button>
                     <button type="button" class="btn btn-brand btn-sm btn-youtube mr-1"
                         (click)="onPdfHomologacao.emit($event)">
                         <i class="fa fa-file-pdf-o"></i>

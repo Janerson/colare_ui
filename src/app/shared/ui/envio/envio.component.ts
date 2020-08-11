@@ -7,6 +7,7 @@ import { DominioService } from "../../../views/dominio/service/dominio.service";
 import { Dominios } from "../../entity/colare/dominio";
 import { Subscription } from "rxjs";
 import { TABELAS_DOMINIOS } from "../../tabelas";
+import { Arquivo } from '../../entity/colare/colare-retorno';
 
 @Component({
   selector: "app-envio",
@@ -15,6 +16,7 @@ import { TABELAS_DOMINIOS } from "../../tabelas";
 })
 export class EnvioComponent extends BaseFormComponent implements OnInit , OnDestroy{
   protected dominios: Dominios[];
+  data : Arquivo
   private subscriptionDominio: Subscription;
 
   constructor(
@@ -30,6 +32,7 @@ export class EnvioComponent extends BaseFormComponent implements OnInit , OnDest
   }
 
   ngOnInit(): void {
+    console.log(this.data)
     this.subscriptionDominio = this.dominioService
       .listaDominio(TABELAS_DOMINIOS.TIPO_DE_ENVIO,true)
       .subscribe((data) => (this.dominios = data));

@@ -14,6 +14,7 @@ import {
   distinctUntilChanged,
   map,
 } from "rxjs/operators";
+import { ColareRetorno } from '../../entity/colare/colare-retorno';
 
 @Component({
   selector: "app-base-form",
@@ -23,23 +24,23 @@ export class BaseFormComponent {
   protected builder: FormBuilder = new FormBuilder();
   protected valueChanged: boolean = false;
 
-  formulario: FormGroup 
+  formulario: FormGroup;
 
   constructor() {
-    this.builForm()   
+    this.builForm();
   }
 
   /**
    * Método chamado quando formulario válido
    */
   submit() {
+    alert("submit() method should be overridden");
     throw new Error("submit() method should be overridden");
   }
 
   /**
    * Retorna o valor do formControl ou o proprio formControl
-   * @param form Formulário
-   * @param controlPath Opcional path do controle no formulário,caso nao seja informado
+   * @param controlPath path do controle no formulário,caso nao seja informado
    * sera retornado o proprio formulario
    * @param control Opcional (TRUE | FALSE - default) Quando true, retorna o FormControl, indicado
    * no parametro {{controlPath}}
@@ -75,7 +76,6 @@ export class BaseFormComponent {
 
   /**
    *
-   * @param form
    * @param obj
    * @param controlPath
    */
@@ -83,11 +83,14 @@ export class BaseFormComponent {
     if (controlPath) {
       this.formValue(controlPath, true).patchValue(obj);
     } else {
-      this.formValue(undefined, true).setValue(obj);
+      this.formValue(undefined, true).patchValue(obj);
     }
   }
-  private builForm(){
-    this.formulario =  this.builder.group(
+  /**
+   *  Cria o Formulario Base
+   */
+  private builForm() {
+    this.formulario = this.builder.group(
       {
         arquivo: this.builder.group({
           uuid: this.builder.control(null),
@@ -105,10 +108,21 @@ export class BaseFormComponent {
       [Validators.required]
     );
   }
-  atualizaFormulario(obj: any) {
-    this.formValue(undefined, true).patchValue(obj);
+
+  atualizaFormulario(obj: any, controlPath?: boolean) {
+    this.atualizaForm(obj, controlPath);
   }
 
+  atualizaFormColare(retorno : ColareRetorno){
+    this.formValue("arquivo", true).patchValue(retorno.arquivo)
+    this.formValue(undefined, true).patchValue(retorno.arquivo.jsonNode)
+   
+  }
+
+/**
+ * Sempre usar o metodo onSubmit no evento de submit do formulário
+ * Ex: <form (submit)="onSubmit()">...</form>
+ */
   onSubmit() {
     if (this.formulario.valid) {
       this.submit();
@@ -116,6 +130,7 @@ export class BaseFormComponent {
       this.verificaValidacoesForm(this.formulario);
     }
   }
+
 
   verificaValidacoesForm(formGroup: FormGroup | FormArray) {
     Object.keys(formGroup.controls).forEach((campo) => {

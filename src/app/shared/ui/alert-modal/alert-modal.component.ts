@@ -1,11 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-alert-modal',
-  templateUrl: './alert-modal.component.html'
-
+  templateUrl: './alert-modal.component.html',
+  styleUrls:['./alert-modal.component.css']
 })
 export class AlertModalComponent implements OnInit {
   @Input() title = '';
@@ -13,7 +12,9 @@ export class AlertModalComponent implements OnInit {
   @Input() footer: '';
   @Input() type = 'success';
 
-  constructor(public bsModalRef: BsModalRef) {}
+  constructor(public bsModalRef: BsModalRef) {
+    
+  }
 
   ngOnInit() {}
 

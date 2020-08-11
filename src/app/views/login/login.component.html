@@ -1,7 +1,7 @@
 <div class="app-body">
   <main class="main d-flex align-items-center">
     <div class="container">
-      <form [formGroup]="loginForm" (submit)="login()">
+      <form [formGroup]="formulario" (submit)="onSubmit()">
         <div class="row">
           <div class="col-md-8 mx-auto">
             <div class="card-group">
@@ -10,7 +10,7 @@
                   <h1>Login</h1>
                   <!-- <p class="text-muted">Sign In to your account</p> -->
                   <div class="controls" validator>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3" >
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fa fa-at"></i></span>
                       </div>
@@ -28,7 +28,7 @@
                     </div>
                     <div class="row">
                       <div class="col-6">
-                        <button type="submit" class="btn btn-primary px-4">Login</button>
+                        <button type="submit" class="btn btn-primary px-4" [disabled]="!formulario.valid">Login</button>
                       </div>
                       <div class="col-6 text-right">
                         <!-- <button type="button" class="btn btn-link px-0">Forgot password?</button> -->

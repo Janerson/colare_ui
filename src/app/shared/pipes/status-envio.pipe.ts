@@ -13,8 +13,11 @@ export class StatusEnvioPipe implements PipeTransform {
       case "NAO_HOMOLOGADO":
         css = "warning";
         break;
-      default:
+      case "HOMOLOGADO":
         css = "success";
+        break;
+      default:
+        css = "warning";
         break;
     }
     return css;

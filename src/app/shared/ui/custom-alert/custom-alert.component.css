@@ -1,0 +1,66 @@
+.card {
+  display: inline-block;
+  /* box-shadow: 0 1px 2px #d7e0ea; */
+  border-radius: 6px;
+  border-top: 8px solid black;
+  padding: 1rem;
+  margin-bottom: 3rem;
+}
+.card-primary {
+  border-top: 8px solid #55a5fa;
+}
+.card-secondary {
+  border-top: 8px solid #0577f1;
+}
+
+.card-success {
+  border-top: 8px solid #19a339;
+}
+.card-danger {
+  border-top: 8px solid #fc0015;
+}
+.card-warning {
+  border-top: 8px solid #fcb32b;
+}
+.card-info {
+  border-top: 8px solid #8294bb;
+}
+.card-light {
+  border-top: 8px solid #ebebeb;
+}
+.card-dark {
+  border-top: 8px solid #6e6e6e;
+}
+
+.card:nth-child(3n + 1) {
+  display: block;
+  /**transform: translateY(50%);**/
+}
+
+.icon {
+  width: 80px;
+  height: 80px;
+  background-repeat: no-repeat;
+  margin-left: auto;
+}
+
+.icon-success {
+  background-image: url("assets/img/custom-alert/success.png");
+}
+.icon-danger {
+  background-image: url("assets/img/custom-alert/danger.png");
+}
+.icon-warning {
+  background-image: url("assets/img/custom-alert/warning.png");
+}
+.icon-info {
+  background-image: url("assets/img/custom-alert/info.png");
+}
+
+.fix-size {
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+}

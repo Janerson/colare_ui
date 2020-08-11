@@ -1,0 +1,13 @@
+<div class="row">
+  <div *ngFor="let item of inavData?.children " class="col-xl-4">
+    <a class="card2" [routerLink]="item.url">
+      <h3>{{item.name}}</h3>
+      <p class="small">transmitir, consultar, listar, editar e excluir</p>
+      <div class="go-corner" href="#">
+        <div class="go-arrow">
+          →
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
