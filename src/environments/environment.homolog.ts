@@ -2,86 +2,74 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
+export const BASE_URL_TCM = "https://testes.tcm.go.gov.br";
+export const BASE_URL_API = "https://colare.herokuapp.com/api/";
 
-/**
- * Retorna a quantidade de caracteres {n} da esquerda p/ direita
- * @param str String
- * @param n Qtd de caracteres
- */
-export const left = (str: any, n: any) => {
-    if (n <= 0) return "";
-    else if (n > String(str).length) return str;
-    else return String(str).substring(0, n);
-  };
+const CLIENT_ID = "4FC5232E-9172-4DC3-B01F-ECCEC7D5D0B5";
+const CLIENT_PASS = "dom02041989";
+
+export const environment = {
+
+  production: false,
+  api_oauth_login: `${BASE_URL_API}oauth/token`,
+  api_oauth_logout: `${BASE_URL_API}oauth/logout`,
+  client_token :'Basic NEZDNTIzMkUtOTE3Mi00REMzLUIwMUYtRUNDRUM3RDVEMEI1OmRvbTAyMDQxOTg5',
   
   /**
-   * Retorna a quantidade de caracteres {n} da direita p/ esquerda
-   * @param str String
-   * @param n Qtd de caracteres
+   * Endpoint para upload dos arquivos de JSON referentes a tabelas de Domínio
    */
-  export const right = (str: any, n: any) => {
-    if (n <= 0) return "";
-    else if (n > String(str).length) return str;
-    else {
-      var iLen = String(str).length;
-      return String(str).substring(iLen, iLen - n);
-    }
-  };
-  
-  const d = new Date();
-  const mes = "000" + (d.getMonth() + 1);
-  const ano = d.getUTCFullYear();
-  export const BASE_URL_TCM = "https://testes.tcm.go.gov.br";
-  export const BASE_URL_API = "https://colare.herokuapp.com/api/";
-
-
-
-  
-  export const environment = {
-    production: false,
-    DOMINIO: "DOMINIO/PROCESS_JSON",
-    uuidRegex: "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
-    /**
-     * REGULAMENTAÇÃO DOS PROCEDIMENTOS LICITATÓRIOS
-     */
-    REG_LICITACAO: "LIC/REG_LICITACAO",
-    /**
-     * CONTRATO RECISAO
-     */
-    CONTRATO_RESC: "LIC/CONTRATO_RESC",
-    /**
-     * CONTRATO INICIAL
-     */
-    CONTRATO_INI: "LIC/CONTRATO_INI",
-    /**
-     * @param layout 
-     */
-    API_URL: (layout: string) => `${BASE_URL_API}${layout}`,
-    /**
-     * @param layout 
-     */
-    URL_LAYOUT: (layout: string) =>
-      `${BASE_URL_TCM}/recepcao/${layout}/${right(mes, 2)}/${ano}`,
-    /**
-     *
-     */
-    URL_VALIDAR_ENVIO: `${BASE_URL_TCM}/recepcao/validar-recibo/`,
-    /**
-     * 
-     */
-    URL_REPRESENTACOES: `${BASE_URL_TCM}/passaporte/api/auth/representacoes`,
-    /**
-     * 
-     */
-    URL_TOKEN: `${BASE_URL_TCM}/passaporte/api/auth/certificado?representacao=`,
-    /**
-     * 
-     */
-    URL_UPLOAD: `${BASE_URL_TCM}/recepcao/arquivo/upload`,
-    /**
-     * 
-     */
-    URL_DOWNLOAD: (recibo: string, idArquivo: string) =>
-      `${BASE_URL_TCM}/envio-manual/api/envio/pdf/anexo/${recibo}/${idArquivo}`,
-  };
-  
+  dominio: "DOMINIO/UPLOAD",
+  dominio_menu:"DOMINIO/MENU_LINK",
+  /**
+   * REGULAMENTAÇÃO DOS PROCEDIMENTOS LICITATÓRIOS
+   */
+  reg_licitacao: "LIC/REG_LICITACAO",
+  /**
+   * CONTRATO RECISAO
+   */
+  contrato_resc: "LIC/CONTRATO_RESC",
+  /**
+   * CONTRATO INICIAL
+   */
+  contrato_ini: "LIC/CONTRATO_INI",
+  /**
+   * 
+   * @param layout
+   */
+  api_url: (layout: string) => `${BASE_URL_API}${layout}`,
+  /**
+   * @param layout
+   */
+  url_layout: (layout: string) => `${BASE_URL_TCM}/recepcao/${layout}`,
+  /**
+   *
+   */
+  url_validar_envio: `${BASE_URL_TCM}/recepcao/validar-recibo/`,
+  /**
+   *
+   */
+  url_representacoes: `${BASE_URL_TCM}:8443/passaporte/api/auth/representacoes`,
+  /**
+   *
+   */
+  url_token: `${BASE_URL_TCM}:8443/passaporte/api/auth/certificado?representacao=`,
+  /**
+   *
+   */
+  url_upload: `${BASE_URL_TCM}/recepcao/arquivo/upload`,
+  /**
+   *
+   */
+  url_download_pdf: (recibo: string, idArquivo: string) =>
+    `${BASE_URL_TCM}/envio-manual/api/envio/pdf/anexo/${recibo}/${idArquivo}`,
+  /**
+   *
+   */
+  url_pdf_homologacao: (recibo: string) =>
+    `${BASE_URL_TCM}/envio-manual/api/envio/pdf/homologacao/${recibo}`,
+  /**
+   *
+   */
+  url_homologa_envio: (layout: string, mes: number, ano: number, id: number) =>
+    `${BASE_URL_TCM}/recepcao/${layout}/${mes}/${ano}/${id}/homologar`, 
+};

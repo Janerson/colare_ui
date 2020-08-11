@@ -44,7 +44,7 @@ export class FileUploadPondComponent implements OnInit {
       formData.append(fieldName, file, file.name);
 
       const request = new XMLHttpRequest();
-      request.open("POST", environment.URL_UPLOAD);
+      request.open("POST", environment.url_upload);
       request.setRequestHeader(
         "Authorization",
         this.cookieService.get("TCM_TOKEN")
