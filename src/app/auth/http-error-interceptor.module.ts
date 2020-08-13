@@ -13,8 +13,8 @@ import { tap, retry, catchError } from "rxjs/operators";
 import { BASE_URL_TCM } from "../../environments/environment";
 import { AlertService } from "../shared/services/alert.service";
 import { Erro500, Erro412 } from "../shared/entity/colare/colare-erro";
-import { APIError, Erro400 } from '../shared/entity/api/api-error';
-import { Erro412Component } from '../shared/ui/erro412/erro412.component';
+import { APIError, Erro400 } from "../shared/entity/api/api-error";
+import { Erro412Component } from "../shared/ui/erro412/erro412.component";
 
 @Injectable()
 export class HttpRequestErrorInterceptor implements HttpInterceptor {
@@ -41,13 +41,13 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
   private hanldeErrorTCM(error: HttpErrorResponse) {
     let msg = "";
     switch (error.status) {
-      case 412:     
-        this.alertService.showModal(Erro412Component,{
-          class:'modal-lg',
-          initialState:{
-            data:error["error"]
-          }
-        })
+      case 412:
+        this.alertService.showModal(Erro412Component, {
+          class: "modal-lg",
+          initialState: {
+            data: error["error"],
+          },
+        });
         break;
       case 400:
       case 401:
@@ -59,26 +59,29 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
       case 0:
         msg =
           "Problema com o certificado digital! Verique se está instalado e/ou inserido no leitor!";
-          this.alertService.showAlertDanger(msg, "ERROR");
+        this.alertService.showAlertDanger(msg, "ERROR");
         break;
       default:
         msg = error.message;
         this.alertService.showAlertDanger(msg, "ERROR");
         break;
     }
-    
   }
   private hanldeErrorAPI(error: HttpErrorResponse) {
-    const apiError : APIError = error.error
+    const apiError: APIError = error.error;
     //this.alertService.showAlertDanger(apiError.message, "ERROR");
 
     let msg = "";
-    switch (error.status) {   
+    switch (error.status) {
       case 400:
       case 401:
-        this.alertService.showAlertDanger('Usuário e/ou senha inválido!','Erro');
-      case 500:     
-        break;    
+        this.alertService.showAlertDanger(
+          "Usuário e/ou senha inválido!",
+          "Erro"
+        );
+      case 500:
+        this.alertService.showAlertDanger(apiError.message, "ERROR");
+        break;
       default:
         msg = error.message;
         this.alertService.showAlertDanger(msg, "ERROR");

@@ -1,8 +1,20 @@
- <div class="card card-{{type}} fix-size">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="onClose()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <h2 >{{title}}</h2>
-    <p>{{message}}</p>
-    <div class="icon icon-{{type}}"></div>
-  </div> 
+<div class="card card-{{type}} fix-size">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="onClose()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="line">
+    <h2>{{title}}</h2>
+  </div>
+  
+  <div class="ctnFlex">
+    <div class="op1">
+      <div class="icon icon-{{type}}"></div>
+    </div>
+    <div class="op2">
+      <h6>{{message}}</h6>  
+    </div>    
+  </div>
+  <div class="right">
+    <button class="btn btn-{{type}}" style="font-weight: 500;" (click)="onClose()">OK</button>
+  </div>
+</div>

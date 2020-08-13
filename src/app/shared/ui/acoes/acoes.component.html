@@ -7,34 +7,40 @@
             </div>
             <div class="card-body">
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-brand btn-sm btn-facebook mr-1">
+                    <button type="submit" class="btn btn-brand btn-sm btn-facebook mr-1"
+                    popover="Gravar layout no banco de dados local." triggers="mouseenter:mouseleave">
                         <i class="fa fa-save"></i>
                         <span>Gravar</span>
                     </button>
                     <button type="button" class="btn btn-brand btn-sm btn-vine mr-1"
-                        (click)="onTransmitir.emit($event)">
+                        (click)="onTransmitir.emit($event)"
+                        popover="Transmitir layout para o Colare" triggers="mouseenter:mouseleave">
                         <i class="fa fa-send"></i>
                         <span>Transmitir</span>
                     </button>
                     <button type="button" class="btn btn-brand btn-sm btn-vine mr-1"
-                        (click)="onSincronizar.emit($event)"
-                        popover="Sincronizar layout junto ao Colare/TCM" triggers="mouseenter:mouseleave">
+                        (click)="onSincronizar.emit($event)" popover="Sincronizar layout junto ao Colare."
+                        triggers="mouseenter:mouseleave">
                         <i class="fa fa-refresh"></i>
                         <span>Sincronizar</span>
                     </button>
                     <button type="button" class="btn btn-brand btn-sm btn-youtube mr-1"
-                        (click)="onPdfHomologacao.emit($event)">
+                        (click)="onPdfHomologacao.emit($event)" popover="Baixar PDF de Homologação."
+                        triggers="mouseenter:mouseleave">
                         <i class="fa fa-file-pdf-o"></i>
                         <span>PDF Homologação</span>
                     </button>
-                    <label class="btn btn-brand btn-sm btn-spotify mr-1" style="margin-bottom: 0px; cursor: pointer;">
+                    <label class="btn btn-brand btn-sm btn-spotify mr-1" style="margin-bottom: 0px; cursor: pointer;"
+                        popover="Homologar layout enviando o PDF de Homologação assinado digitalmente."
+                        triggers="mouseenter:mouseleave">
                         <i class="fa fa-check"></i>
                         <span>Homologar</span>
                         <input #file type="file" style="display: none;" accept=".pdf"
                             (change)="onFileChange($event.target.files[0])">
                     </label>
                     <button type="button" class="btn btn-brand btn-sm btn-reddit mr-1"
-                        (click)="onRetificar.emit($event)">
+                        (click)="onRetificar.emit($event)" popover="Retificar layout já homologado."
+                        triggers="mouseenter:mouseleave">
                         <i class="fa fa-edit"></i>
                         <span>Retificar</span>
                     </button>
