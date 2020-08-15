@@ -70,13 +70,11 @@ export class TipoDeDominioComponent extends BaseFormComponent
   onValueChanged(){
     this.formulario.get("descricao")
     .valueChanges.pipe(
-      tap(v => console.log(v)),
       distinctUntilChanged(),
       debounce(() => interval(500)),
       switchMap((value: any) => this.service.dominioPaginado(0, this.title, value))
     ).subscribe(
       (result: any) => {
-        console.log(result);
         this.page = result;
       },
       (error: { message: string }) => console.log(error.message)
