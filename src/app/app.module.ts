@@ -1,4 +1,4 @@
-import { NgxUiLoaderModule, SPINNER, NgxUiLoaderConfig } from "ngx-ui-loader";
+import { NgxUiLoaderModule, SPINNER, NgxUiLoaderConfig, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule } from "ngx-ui-loader";
 import { BrowserModule } from "@angular/platform-browser";
 import { ReactiveFormsModule } from "@angular/forms";
 import { NgModule, enableProdMode, APP_INITIALIZER } from "@angular/core";
@@ -85,6 +85,8 @@ enableProdMode();
     HttpErrorInterceptor,
     PerfectScrollbarModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    //NgxUiLoaderRouterModule.forRoot({showForeground:false}),
+    NgxUiLoaderHttpModule.forRoot({showForeground:true, excludeRegexp:["page="]})
   ],
   declarations: [
     AppComponent,

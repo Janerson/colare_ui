@@ -51,8 +51,8 @@ export class BaseFormComponent {
         ? this.formulario
         : this.formulario.value
       : control
-      ? this.formulario.get(controlPath)
-      : this.formulario.get(controlPath).value;
+        ? this.formulario.get(controlPath)
+        : this.formulario.get(controlPath).value;
   }
   /**
    * @param path

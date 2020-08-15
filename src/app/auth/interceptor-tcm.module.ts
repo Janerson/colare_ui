@@ -29,7 +29,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    this.ngxLoader.start();
+    //this.ngxLoader.start();
     // modify request
     //&& request.headers.get('ignore')
     if (request.url.startsWith(BASE_URL_TCM) && !request.headers.get('ignore')) {
@@ -51,7 +51,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(      
       tap((event) => {
         if (event instanceof HttpResponse) {
-          this.ngxLoader.stop();
+        //  this.ngxLoader.stop();
         }
       })
     );

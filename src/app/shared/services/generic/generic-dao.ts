@@ -82,9 +82,10 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    * @param page Número da página default 0
    * @param tabela Nome tabela de dominio
    */
-  dominioPaginado(page: number = 0, tabela?: string) {
+  dominioPaginado(page: number = 0, tabela: string, termSearch?:string ) {
+    let str = termSearch || " "
     return this.http.get<Page<T>>(
-      `${environment.api_url(this.layout)}/PAGED/${tabela}?page=${page}`
+      `${environment.api_url(this.layout)}/PAGED/${tabela}?page=${page}&search=${str}`
     );
   }
 
