@@ -51,7 +51,8 @@
 
 .ctnFlex {
   display: flex;
-  justify-content: start;
+  /*justify-content: start;*/
+  justify-content: flex-start;
 }
 
 div.op1 {

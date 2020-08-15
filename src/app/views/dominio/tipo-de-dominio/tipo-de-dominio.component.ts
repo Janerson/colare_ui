@@ -73,7 +73,7 @@ export class TipoDeDominioComponent extends BaseFormComponent
       tap(v => console.log(v)),
       distinctUntilChanged(),
       debounce(() => interval(500)),
-      switchMap((value: any) => (value !== "" ?  this.service.dominioPaginado(0, this.title, value) : empty()))
+      switchMap((value: any) => this.service.dominioPaginado(0, this.title, value))
     ).subscribe(
       (result: any) => {
         console.log(result);
