@@ -21,6 +21,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsPosition: "center-center",
   //fgsSize: 80,
   fgsType: SPINNER.squareJellyBox,
+  
 };
 
 import { AppComponent } from "./app.component";
@@ -86,7 +87,7 @@ enableProdMode();
     PerfectScrollbarModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     //NgxUiLoaderRouterModule.forRoot({showForeground:false}),
-    NgxUiLoaderHttpModule.forRoot({showForeground:true, excludeRegexp:["page="]})
+    //NgxUiLoaderHttpModule.forRoot()
   ],
   declarations: [
     AppComponent,

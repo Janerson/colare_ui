@@ -24,6 +24,10 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+  excludeRegexp:["page="]
+    if(!request.url.match("page=")){
+      this.ngxLoader.start();
+    }
    // this.ngxLoader.start();
     // modify request
     if (request.url.startsWith(BASE_URL_API) && !request.url.endsWith('api/oauth/token')) {
@@ -37,7 +41,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       tap((event) => {
         if (event instanceof HttpResponse) {
-          //this.ngxLoader.stop();
+          this.ngxLoader.stop();
         }
       })
     );
