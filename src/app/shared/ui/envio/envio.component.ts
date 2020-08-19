@@ -32,7 +32,6 @@ export class EnvioComponent extends BaseFormComponent implements OnInit , OnDest
   }
 
   ngOnInit(): void {
-    console.log(this.data)
     this.subscriptionDominio = this.dominioService
       .listaDominio(TABELAS_DOMINIOS.TIPO_DE_ENVIO,true)
       .subscribe((data) => (this.dominios = data));

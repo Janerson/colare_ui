@@ -15,7 +15,7 @@ import { BASE_URL_API, BASE_URL_TCM } from "../../environments/environment";
 import { CookieService } from "ngx-cookie-service";
 import { AlertService } from "../shared/services/alert.service";
 import { ModalService } from "../shared/services/modal.service";
-import { PassaporteComponent } from '../shared/ui/passaporte/passaporte.component';
+import { PassaporteComponent } from "../shared/ui/passaporte/passaporte.component";
 
 @Injectable()
 export class HttpsRequestInterceptor implements HttpInterceptor {
@@ -29,20 +29,29 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if(!request.url.match("page=")){
+    if (!request.url.match("page=")) {
       this.ngxLoader.start();
     }
     //this.ngxLoader.start();
     // modify request
     //&& request.headers.get('ignore')
-    if (request.url.startsWith(BASE_URL_TCM) && !request.headers.get('ignore')) {
-      
-      if (!this.cookieService.get("TCM_TOKEN")) {
-        this.showLogin(); 
-        this.alertService.showAlertInfo("Faça o Login com seu certificado digital e tente novamente!","Atenção")       
+    if (
+      request.url.startsWith(BASE_URL_TCM) &&
+      !request.headers.get("ignore")
+    ) {
+      if (!this.cookieService.get("TCM_TOKEN")) {       
+        this.ngxLoader.stop(); 
+        
+        const sub = this.alertService.showAlertInfo("Faça o Login com seu certificado digital e tente novamente!","Atenção")
+        .onHidden.subscribe(() => {
+          this.showLogin()
+          sub.unsubscribe()
+        });
+
         return EMPTY;
+
       }
-  
+
       request = request.clone({
         setHeaders: {
           Authorization: this.cookieService.get("TCM_TOKEN"),
@@ -50,8 +59,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
       });
     }
 
-    
-    return next.handle(request).pipe(      
+    return next.handle(request).pipe(
       tap((event) => {
         if (event instanceof HttpResponse) {
           this.ngxLoader.stop();
@@ -59,12 +67,12 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
       })
     );
   }
-  showLogin() {
-    this.ngxLoader.stop();
+  showLogin() {    
     const initialState = {
       title: "Obter Token - Colare",
     };
     this.alertService.showModal(PassaporteComponent, {
+      class: "modal-md",
       initialState,
     });
   }

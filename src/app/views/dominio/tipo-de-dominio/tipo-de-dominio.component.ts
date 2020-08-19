@@ -71,7 +71,7 @@ export class TipoDeDominioComponent extends BaseFormComponent
     this.formulario.get("descricao")
     .valueChanges.pipe(
       distinctUntilChanged(),
-      debounce(() => interval(500)),
+      debounce(() => interval(250)),
       switchMap((value: any) => this.service.dominioPaginado(0, this.title, value))
     ).subscribe(
       (result: any) => {

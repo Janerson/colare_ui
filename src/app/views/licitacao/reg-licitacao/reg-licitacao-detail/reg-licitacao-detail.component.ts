@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription, EMPTY } from "rxjs";
 
 import { BaseFormComponent } from "../../../../shared/ui/base-form/base-form.component";
-import { SharedService } from "../../../../shared/services/shared-service.service";
+import { FormService } from "../../../../shared/services/form.service";
 import { AlertService } from "../../../../shared/services/alert.service";
 import { RegLicitacaoService } from "../../service/reg-licitacao.service";
 import { DominioService } from "../../../dominio/service/dominio.service";
@@ -42,7 +42,7 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
     private service: RegLicitacaoService,
     private dominioService: DominioService,
     private route: ActivatedRoute,
-    private sharedService: SharedService,
+    private formService: FormService,
     private alertService: AlertService,
     private modalService: ModalService,
     private helper: HelperService
@@ -52,6 +52,7 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
   }
 
   ngOnInit(): void {
+
     this.subscriptionRoute = this.route.paramMap.subscribe((p) => {
       this.uuid = p.get("id");
       if (this.helper.isUUID(this.uuid)) {
@@ -59,7 +60,7 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
       }
     });
 
-    this.sharedService.emitChange(this.formulario);
+    this.formService.emitChange(this.formulario);
 
     this.dominioService
       .listaDominio(TABELAS_DOMINIOS.TIPO_DECRETO_REGULAMENTADOR, true)
@@ -68,7 +69,7 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
 
   ngOnDestroy(): void {
     this.formulario.reset();
-    this.sharedService.emitChange({});
+    this.formService.emitChange({});
     this.subscriptionRoute.unsubscribe();
   }
 

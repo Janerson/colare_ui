@@ -13,9 +13,12 @@ export class CustomAlertComponent implements OnInit {
   @Input() footer: '';
   @Input() type = 'success';
 
-  constructor(public bsModalRef: BsModalRef) {}
+  constructor( public bsModalRef: BsModalRef) {}
+  
 
-  ngOnInit() {}
+  ngOnInit() {
+   
+  }
 
   onClose() {
     this.bsModalRef.hide();

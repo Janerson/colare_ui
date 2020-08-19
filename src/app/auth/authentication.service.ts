@@ -65,6 +65,7 @@ export class AuthenticationService {
     this.http.delete(environment.api_oauth_logout,{withCredentials:true}).subscribe(() => {
       this.stopRefreshTokenTimer();
       this.cookieService.delete("API_TOKEN");
+      this.cookieService.delete("TCM_TOKEN");
       this._router.navigate(["/login"]);
       this._user = null
     });

@@ -15,6 +15,9 @@ import { BsModalRef } from "ngx-bootstrap/modal";
 })
 export class BaseModalComponent implements OnInit, AfterViewInit {
  
+  /**
+   * Dados são recebidos via ModalOptions, na propriedade initialState
+   */
   title = "Enviar dados Colare";
   component: any;
   data:any

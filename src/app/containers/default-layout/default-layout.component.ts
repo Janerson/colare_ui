@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 //import { navItems } from "../../_nav";
 import { BaseFormComponent } from "../../shared/ui/base-form/base-form.component";
-import { SharedService } from "../../shared/services/shared-service.service";
+import { FormService } from "../../shared/services/form.service";
 import { CookieService } from "ngx-cookie-service";
 import { AuthenticationService } from "../../auth/authentication.service";
 import { MenuService } from "../../shared/services/menu.service";
@@ -22,7 +22,7 @@ export class DefaultLayoutComponent extends BaseFormComponent
   formFilter: FormGroup;
 
   constructor(
-    private _sharedService: SharedService,
+    private formService: FormService,
     private cookieService: CookieService,
     protected authService: AuthenticationService,
     private menuService: MenuService,
@@ -30,7 +30,7 @@ export class DefaultLayoutComponent extends BaseFormComponent
   ) {
     super();
     this.formulario = this.builder.group({});
-    this._sharedService.changeEmitted$.subscribe((f) => {
+    this.formService.changeEmitted$.subscribe((f) => {
       this.formulario = f;
     });
 

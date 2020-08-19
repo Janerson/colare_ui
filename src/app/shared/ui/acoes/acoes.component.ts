@@ -36,7 +36,6 @@ export class AcoesComponent implements OnInit, OnChanges {
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.form);
   }
 
   ngOnInit(): void {

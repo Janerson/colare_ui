@@ -4,7 +4,7 @@ import { Subject } from "rxjs";
 @Injectable({
   providedIn: "root"
 })
-export class SharedService {
+export class FormService {
   constructor() {}
   // Observable string sources
   private emitChangeSource = new Subject<any>();
