@@ -144,8 +144,8 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
         this.sincronizar();
         const sub = this.alertService.showAlertSucess("Envio Homologado com sucesso!","Sucesso!")
         .onHidden.subscribe(() => {
-          this.sincronizar()
           sub.unsubscribe()
+          this.sincronizar()
         })
       });
   }
