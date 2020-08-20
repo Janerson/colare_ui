@@ -6,7 +6,7 @@ import {
   FormControl,
   Validators,
 } from "@angular/forms";
-import { of, Observable, empty, interval } from "rxjs";
+import { of, Observable, empty, interval, EMPTY } from "rxjs";
 import {
   tap,
   switchMap,
@@ -111,12 +111,13 @@ export class BaseFormComponent {
 
   atualizaFormulario(obj: any, controlPath?: boolean) {
     this.atualizaForm(obj, controlPath);
+    this.validarStatusEnvio()
   }
 
   atualizaFormColare(retorno : ColareRetorno){
-    this.formValue("arquivo", true).patchValue(retorno.arquivo)
-    this.formValue(undefined, true).patchValue(retorno.arquivo.jsonNode)
-   
+    this.formValue("arquivo", true).patchValue(retorno.arquivo);
+    this.formValue(undefined, true).patchValue(retorno.arquivo.jsonNode);
+    this.validarStatusEnvio();   
   }
 
 /**
@@ -134,13 +135,27 @@ export class BaseFormComponent {
 
   verificaValidacoesForm(formGroup: FormGroup | FormArray) {
     Object.keys(formGroup.controls).forEach((campo) => {
-      const controle = formGroup.get(campo);
+      const controle = formGroup.get(campo);      
       controle.markAsDirty();
       controle.markAsTouched();
       if (controle instanceof FormGroup || controle instanceof FormArray) {
         this.verificaValidacoesForm(controle);
       }
     });
+  }
+
+  /**
+   * Valida o Status de envio do Layout, caso statusEnvio=HOMOLOGADO
+   * o formulário, será desativado para edição
+   */
+  validarStatusEnvio() {
+      this.formValue("arquivo.statusEnvio") === "HOMOLOGADO"? this.formulario.disable({
+        onlySelf:true,
+        emitEvent:false
+      }) : this.formulario.enable({
+       //onlySelf:true,
+       //emitEvent:false
+      });  
   }
 
   resetar() {

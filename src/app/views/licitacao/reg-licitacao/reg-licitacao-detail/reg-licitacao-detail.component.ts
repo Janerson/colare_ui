@@ -52,7 +52,6 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
   }
 
   ngOnInit(): void {
-
     this.subscriptionRoute = this.route.paramMap.subscribe((p) => {
       this.uuid = p.get("id");
       if (this.helper.isUUID(this.uuid)) {
@@ -64,7 +63,7 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
 
     this.dominioService
       .listaDominio(TABELAS_DOMINIOS.TIPO_DECRETO_REGULAMENTADOR, true)
-      .subscribe((data) => (this.dominios = data));
+      .subscribe((data) => (this.dominios = data));      
   }
 
   ngOnDestroy(): void {
@@ -75,7 +74,7 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
 
   buscarRegulamentacao(uuid) {
     this.service.buscarPorUUID(uuid).subscribe((r) => {
-      this.atualizaFormulario(r);
+      this.atualizaFormulario(r);      
     });
   }
 
@@ -123,15 +122,14 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
     );
   }
 
-  sincronizar(e) {
-    this.service.getColare(this.formValue()).subscribe((data) => {      
-      this.atualizaFormColare(data)    
+  sincronizar(e?) {
+    this.service.getColare(this.formValue()).subscribe((data) => {
+      this.atualizaFormColare(data);
       this.save(false);
-      this.alertService.showAlertSucess(
-        "Layout Sincronizado com sucesso!",
-        "Sucesso"
-      );
-  
+        this.alertService.showAlertSucess(
+          "Layout Sincronizado com sucesso!",
+          "Sucesso"
+        );
     });
   }
 
@@ -139,12 +137,16 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
     this.service.obterPdfHomologacaoColare(this.formValue("arquivo.recibo"));
   }
 
-  //TODO - Implementar homologação
   homologar(file: File) {
     this.service
       .homologarEnvioColare(this.formulario.value, file)
       .subscribe((d) => {
-        console.log(d);
+        this.sincronizar();
+        const sub = this.alertService.showAlertSucess("Envio Homologado com sucesso!","Sucesso!")
+        .onHidden.subscribe(() => {
+          this.sincronizar()
+          sub.unsubscribe()
+        })
       });
   }
 

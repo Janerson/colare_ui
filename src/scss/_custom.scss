@@ -6,39 +6,26 @@
 //   background-color: #f2f4f8;
 // }
 
-.modal{
-  display:flex;
-  top:10%;
-  border: 0px;
-}
+ .modal{
+ //  display:flex;
+   top:10%;
+   //border: 0px;
+ }
 
-.modal-content {
-  position: relative;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  flex-direction: column;
-  width: 100%;
-  pointer-events: auto;
-  background-clip: padding-box;
-  border: none;
-  border-radius: 0.5rem;
-  outline: 0;
-}
-
-// .my-modal {
-//   border: solid 4px blue;
-// }
-
-// .my-modal .modal-header {
-//   background-color: lime;
-// }
-
-// .my-modal .modal-body {
-//   background-color: orange;
-// }
-
+ .modal-content {
+ //  position: relative;
+ //  display: -webkit-box;
+ //  display: flex;
+ //  -webkit-box-orient: vertical;
+ //  -webkit-box-direction: normal;
+  // flex-direction: column;
+  // width: 100%;
+  // pointer-events: auto;
+  // background-clip: padding-box;
+   border: none;
+   border-radius: 0.5rem;
+   //outline: 0;
+ }
 
 
 .btn {
