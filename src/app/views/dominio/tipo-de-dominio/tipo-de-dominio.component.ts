@@ -4,9 +4,8 @@ import { Dominios } from "../../../shared/entity/colare/dominio";
 import { Page } from "../../../shared/entity/api/page";
 import { DominioService } from "../service/dominio.service";
 import { ActivatedRoute } from "@angular/router";
-import { Subscription, Observable, interval, empty } from "rxjs";
-import { AlertService } from "../../../shared/services/alert.service";
-import { distinctUntilChanged, debounce, switchMap, tap } from "rxjs/operators";
+import { Subscription, interval } from "rxjs";
+import { distinctUntilChanged, debounce, switchMap } from "rxjs/operators";
 
 @Component({
   selector: "app-tipo-de-regulamentacao",
@@ -62,7 +61,7 @@ export class TipoDeDominioComponent extends BaseFormComponent
   }
 
   onFileChange(file: FileList) {
-    this.service.uploadAPI(file[0], this.title).subscribe(null, (e) => {
+    this.service.uploadAPI(file[0], this.title).subscribe(null, () => {
       this._file.nativeElement.value = null;
     });
   }

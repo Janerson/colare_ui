@@ -24,8 +24,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-  excludeRegexp:["page="]
-    if(!request.url.match("page=")){
+    if(!request.url.match("page=[1-9]")){
       this.ngxLoader.start();
     }
    // this.ngxLoader.start();
