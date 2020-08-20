@@ -1,5 +1,5 @@
 import { Injectable, NgModule } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, EMPTY } from "rxjs";
 import {
   HttpEvent,
   HttpInterceptor,
@@ -24,10 +24,9 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if(!request.url.match("page=[1-9]")){
+    if(!request.url.match("page=[0-9]")){
       this.ngxLoader.start();
     }
-   // this.ngxLoader.start();
     // modify request
     if (request.url.startsWith(BASE_URL_API) && !request.url.endsWith('api/oauth/token')) {
       request = request.clone({
@@ -42,7 +41,8 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
         if (event instanceof HttpResponse) {
           this.ngxLoader.stop();
         }
-      })
+      }),
+    tap(() => console.log("Send request..."))      
     );
   }
 }
