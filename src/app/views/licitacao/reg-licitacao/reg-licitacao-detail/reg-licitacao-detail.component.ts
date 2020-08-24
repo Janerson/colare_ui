@@ -163,8 +163,8 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
           )
           .onHidden.subscribe(() => {
             sub.unsubscribe();
+            this.sincronizar();
             this.router.navigate(["LIC/REG_LICITACAO"])
-            //this.sincronizar();
           });
       });
   }
@@ -188,7 +188,6 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
     });
     
     this.modalService.changeEmitted$.subscribe((value:boolean) => {
-      console.log(value)
       if (value) {
         this.alertService
           .showAlert(
@@ -198,10 +197,11 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
           )
           .onHide.subscribe(() => {
             this.atualizaFormulario({
-              codTipoEnvio: 2,
-              motivoAtualizacaoCorrecao: "RETIFICAÇÃO",
-            });
-            this.onTransmitir(true);
+              statusEnvio: "NAO_HOMOLOGADO",
+              arquivoHomologacao: null,
+            },"arquivo");
+            this.save(false)
+            //this.onTransmitir(true);
           });
       }
     });

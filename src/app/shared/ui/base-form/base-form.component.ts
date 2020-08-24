@@ -119,7 +119,6 @@ export class BaseFormComponent {
   atualizaFormulario(obj:any, path?:string){
     if(path)this.formulario.get(path).patchValue(obj)
     else this.formulario.patchValue(obj)
-
     this.validarStatusEnvio()
 
   }
