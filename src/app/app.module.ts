@@ -60,6 +60,7 @@ import { InterceptorTCM } from "./auth/interceptor-tcm.module";
 import { HttpErrorInterceptor } from "./auth/http-error-interceptor.module";
 import { appInitializer } from './auth/app.initialize';
 import { AuthenticationService } from './auth/authentication.service';
+import { ConfiguracaoModule } from './views/config/configuracao/configuracao.module';
 
 enableProdMode();
 
