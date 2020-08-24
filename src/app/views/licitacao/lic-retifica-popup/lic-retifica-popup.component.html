@@ -1,0 +1,47 @@
+<div class="card-header">
+    <i class="fa fa-edit"></i>Retificação de Envio Homologado
+</div>
+<ng-wizard (stepChanged)="stepChanged($event)">
+    <ng-wizard-step [title]="'Passo 1'" [description]="'Enviar Solicitação de retificação'">
+        <div class="col-12">
+            <form [formGroup]="formulario" (submit)="onSubmit()">
+                <div class="form-group">
+                    <input type="hidden" formControlName="idProcedimentoOuContrato">
+                    <label for="codTipoRetificacao">Tipo de Retificação</label>
+                    <select class="form-control" id="codTipoRetificacao" formControlName="codTipoRetificacao">
+                        <option *ngFor="let item of dominios" [ngValue]="item.codigo">{{item.descricao}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="motivoRetificacao">Motivo da retificação de dados</label>
+                    <textarea class="form-control" id="motivoRetificacao" formControlName="motivoRetificacao"
+                        rows="3"></textarea>
+                </div>
+                <div class="col-12 padding-10">
+                    <button type="submit" class="btn btn-primary btn-sm">Enviar</button>
+                    <button type="button" class="btn btn-secondary btn-sm" (click)="cancelar($event)">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </ng-wizard-step>
+    <ng-wizard-step [title]="'Passo 2'" [description]="'Obter pdf de Homologação'">
+        <alert type="warning" style="text-align: center">
+            <strong>Atenção!</strong> Agora clique em "Obter Pdf" e faça a assinatura do pdf de homologação e <span class="alert-link">mantenha este popup aberto</span>.
+                <button class="btn btn-warning" (click)="obterPdf()">Obter PDF</button>
+        </alert>
+    </ng-wizard-step>
+    <ng-wizard-step [title]="'Passo 3'" description="Enviar pdf de Homologação">
+        <alert type="success" style="text-align: center">
+            <strong>Atenção!</strong> Agora clique em "Homologar" e <span class="alert-link">selecione o arquivo de homolagação assinado digitalmente.</span>
+            <label class="btn btn-brand btn-sm btn-spotify mr-1" style="margin-bottom: 0px; cursor: pointer;"
+            popover="Homologar layout enviando o PDF de Homologação assinado digitalmente."
+            triggers="mouseenter:mouseleave">
+            <i class="fa fa-check"></i>
+            <span>Homologar</span>
+            <input #file type="file" style="display: none;" accept=".pdf"
+                (change)="onFileChange($event.target.files[0])">
+        </label>
+        </alert>
+    </ng-wizard-step>
+    
+</ng-wizard>

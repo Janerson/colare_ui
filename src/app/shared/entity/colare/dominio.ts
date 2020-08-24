@@ -1,4 +1,4 @@
-import { BaseEntity } from '../api/base-entity';
+import { BaseEntity } from '../base-entity';
 
 export class Dominio extends BaseEntity<Number>  {
   nomeTipoDominio: string;

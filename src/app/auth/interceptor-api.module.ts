@@ -41,8 +41,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
         if (event instanceof HttpResponse) {
           this.ngxLoader.stop();
         }
-      }),
-    tap(() => console.log("Send request..."))      
+      })    
     );
   }
 }

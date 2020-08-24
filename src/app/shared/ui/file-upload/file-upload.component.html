@@ -3,10 +3,11 @@
   <div class="input-prepend input-group">
     <input type="text" id="idDocumentoPDF" class="form-control" formControlName="idDocumentoPDF" readonly>
     <div class="input-group-prepend">
-      <label class="btn btn-primary" style="cursor: pointer;">
-        Upload <input #file type="file" style="display: none;" (change)="onFileChange($event.target.files)"
-          [accept]="extensions">
-      </label>
+      <button type="button" class="btn btn-primary" (click)="file.click()" [disabled]="isHomologado">
+        Upload 
+      </button>
     </div>
   </div>
+  <input #file type="file" style="display: none;" (change)="onFileChange($event.target.files)"
+          [accept]="extensions">
 </div>

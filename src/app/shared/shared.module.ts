@@ -15,33 +15,53 @@ import { PaginationModule } from "ngx-bootstrap/pagination";
 import { AlertService } from "./services/alert.service";
 import { FileUploadComponent } from "./ui/file-upload/file-upload.component";
 // import filepond module
-import { FilePondModule, registerPlugin } from 'ngx-filepond';
-import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
-
+import { FilePondModule, registerPlugin } from "ngx-filepond";
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 
 // import and register filepond file type validation plugin
-import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
-import { FileUploadPondComponent } from './ui/file-upload-pond/file-upload-pond.component';
-import { Erro412Component } from './ui/erro412/erro412.component';
-import { BaseModalComponent } from './ui/base-modal/base-modal.component';
-import { PassaporteComponent } from './ui/passaporte/passaporte.component';
-import { EnvioComponent } from './ui/envio/envio.component';
-import { AcoesComponent } from './ui/acoes/acoes.component';
-import { StatusEnvioPipe } from './pipes/status-envio.pipe';
-import { ValidatorComponentComponent } from './ui/validator-component/validator-component.component';
-import { CardComponent } from './ui/card/card.component';
-import { CustomAlertComponent } from './ui/custom-alert/custom-alert.component';
-import { PopoverModule } from 'ngx-bootstrap/popover';
-registerPlugin(FilePondPluginFileValidateType,FilePondPluginFileValidateSize)
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
+import { FileUploadPondComponent } from "./ui/file-upload-pond/file-upload-pond.component";
+import { Erro412Component } from "./ui/erro412/erro412.component";
+import { BaseModalComponent } from "./ui/base-modal/base-modal.component";
+import { PassaporteComponent } from "./ui/passaporte/passaporte.component";
+import { EnvioComponent } from "./ui/envio/envio.component";
+import { AcoesComponent } from "./ui/acoes/acoes.component";
+import { StatusEnvioPipe } from "./pipes/status-envio.pipe";
+import { ValidatorComponentComponent } from "./ui/validator-component/validator-component.component";
+import { CardComponent } from "./ui/card/card.component";
+import { CustomAlertComponent } from "./ui/custom-alert/custom-alert.component";
+import { PopoverModule } from "ngx-bootstrap/popover";
+import {
+  NgWizardModule,
+  NgWizardConfig,
+  THEME,
+  TOOLBAR_POSITION,
+} from "ng-wizard";
+import { AlertModule } from "ngx-bootstrap/alert";
+registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
 //registerPlugin(FilePondPluginGetFile)
 
 defineLocale("pt-br", ptBrLocale);
+
+const ngWizardConfig: NgWizardConfig = {
+  theme: THEME.default,
+  selected: 0,
+  keyNavigation: true,
+  toolbarSettings: {
+    toolbarPosition: TOOLBAR_POSITION.none,
+    showPreviousButton: false,
+    showNextButton: false,
+  },
+  anchorSettings: {
+    anchorClickable: true,
+  },
+};
 
 @NgModule({
   declarations: [
     OnlyNumberDirective,
     AlertModalComponent,
-        BaseFormComponent,
+    BaseFormComponent,
     FileUploadComponent,
     FileUploadPondComponent,
     BaseModalComponent,
@@ -62,9 +82,12 @@ defineLocale("pt-br", ptBrLocale);
     PaginationModule.forRoot(),
     ModalModule.forRoot(),
     PopoverModule.forRoot(),
-    FilePondModule
+    AlertModule.forRoot(),
+    NgWizardModule.forRoot(ngWizardConfig),
+    FilePondModule,
   ],
   exports: [
+    NgWizardModule,
     TypeaheadModule,
     OnlyNumberDirective,
     ReactiveFormsModule,
@@ -72,15 +95,17 @@ defineLocale("pt-br", ptBrLocale);
     NgxJsonViewerModule,
     PaginationModule,
     AlertModalComponent,
+    AlertModule,
     CustomAlertComponent,
     FileUploadComponent,
     FileUploadPondComponent,
     BaseModalComponent,
     Erro412Component,
     AcoesComponent,
+    PopoverModule,
     StatusEnvioPipe,
     ValidatorComponentComponent,
-    CardComponent
+    CardComponent,
     // BsDatepickerModule
   ],
   providers: [BsLocaleService, BsModalService, AlertService],

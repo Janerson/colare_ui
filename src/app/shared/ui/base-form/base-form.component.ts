@@ -27,15 +27,16 @@ export class BaseFormComponent {
   formulario: FormGroup;
 
   constructor() {
-    this.builForm();
+    this.buildForm();
   }
 
   /**
-   * Método chamado quando formulario válido
+   * 
+   * Método chamado quando formulario é submetido e válido
    */
   submit() {
-    alert("submit() method should be overridden");
-    throw new Error("submit() method should be overridden");
+    alert("O método submit() precisa ser sobrescrito.");
+    throw new Error("O método submit() precisa ser sobrescrito.");
   }
 
   /**
@@ -89,7 +90,7 @@ export class BaseFormComponent {
   /**
    *  Cria o Formulario Base
    */
-  private builForm() {
+  private buildForm() {
     this.formulario = this.builder.group(
       {
         arquivo: this.builder.group({
@@ -104,16 +105,30 @@ export class BaseFormComponent {
           layoutSigla: this.builder.control(null, []),
           prestacaoDeContasSigla: this.builder.control(null, []),
         }),
+        uuid: this.builder.control(null, [])
       },
       [Validators.required]
-    );
+    );    
   }
 
-  atualizaFormulario(obj: any, controlPath?: boolean) {
+  private atualizaFormulario_(obj: any, controlPath?: any) {
     this.atualizaForm(obj, controlPath);
     this.validarStatusEnvio()
   }
 
+  atualizaFormulario(obj:any, path?:string){
+    if(path)this.formulario.get(path).patchValue(obj)
+    else this.formulario.patchValue(obj)
+
+    this.validarStatusEnvio()
+
+  }
+
+  /**
+   * Atualiza o formulário com o retorno de dados do envio ao colare
+   * Usar quando precisar sincronizar a base dados local, com os dados do colare
+   * @param retorno 
+   */
   atualizaFormColare(retorno : ColareRetorno){
     this.formValue("arquivo", true).patchValue(retorno.arquivo);
     this.formValue(undefined, true).patchValue(retorno.arquivo.jsonNode);

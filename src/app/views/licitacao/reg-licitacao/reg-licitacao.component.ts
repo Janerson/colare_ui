@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { BaseFormComponent } from "../../../shared/ui/base-form/base-form.component";
 import { Page } from "../../../shared/entity/api/page";
 import { RegLicitacaoService } from '../service/reg-licitacao.service';
-import { RegLicitacao } from '../../../shared/entity/LIC/reg-licitacao';
+import { RegLicitacao } from '../../../shared/entity/LIC/reg_licitacao/reg-licitacao';
 
 @Component({
   selector: "app-reg-licitacao",

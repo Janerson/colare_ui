@@ -1,4 +1,4 @@
-import { BaseEntity } from '../api/base-entity';
+import { BaseEntity } from '../../base-entity';
 
 /**
  * Informações sobre a regulamentação municipal do pregão, registro de preços e LC 123/06

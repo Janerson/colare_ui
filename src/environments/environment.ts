@@ -6,38 +6,26 @@
 
 
 export const BASE_URL_TCM = "https://testes.tcm.go.gov.br";
-export const BASE_URL_API = "http://localhost:8080/api/";
+export const BASE_URL_API = "http://localhost:8080/api";
 const CLIENT_ID = '4FC5232E-9172-4DC3-B01F-ECCEC7D5D0B5'
 const CLIENT_PASS = 'dom02041989'
 export const environment = {
   
   production: false,
-  api_oauth_login: `${BASE_URL_API}oauth/token`,
-  api_oauth_logout: `${BASE_URL_API}oauth/logout`,
+  api_oauth_login: `${BASE_URL_API}/oauth/token`,
+  api_oauth_logout: `${BASE_URL_API}/oauth/logout`,
   client_token :'Basic NEZDNTIzMkUtOTE3Mi00REMzLUIwMUYtRUNDRUM3RDVEMEI1OmRvbTAyMDQxOTg5',
   
   /**
    * Endpoint para upload dos arquivos de JSON referentes a tabelas de Domínio
    */
   dominio: "DOMINIO/UPLOAD",
-  dominio_menu:"DOMINIO/MENU_LINK",
-  /**
-   * REGULAMENTAÇÃO DOS PROCEDIMENTOS LICITATÓRIOS
-   */
-  reg_licitacao: "LIC/REG_LICITACAO",
-  /**
-   * CONTRATO RECISAO
-   */
-  contrato_resc: "LIC/CONTRATO_RESC",
-  /**
-   * CONTRATO INICIAL
-   */
-  contrato_ini: "LIC/CONTRATO_INI",
+  dominio_menu:"DOMINIO/MENU_LINK", 
   /**
    * 
    * @param layout
    */
-  api_url: (layout: string) => `${BASE_URL_API}${layout}`,
+  api_url: (layout: string) => `${BASE_URL_API}/${layout}`,
   /**
    * @param layout
    */

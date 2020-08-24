@@ -48,6 +48,10 @@ export class DefaultLayoutComponent extends BaseFormComponent
     this.formFilter.get("filter").valueChanges.subscribe((str) => {
       this.filtered = this.filtrarMenu(str, this.navItems);
     });
+
+    if (document.body.classList.contains('modal-open')) {
+      document.body.classList.remove('modal-open');
+    }
   }
 
   filtrarMenu(str: string, array: MenuLink[]): MenuLink[] {

@@ -10,7 +10,7 @@
                   <h1>Login</h1>
                   <!-- <p class="text-muted">Sign In to your account</p> -->
                   <div class="controls" validator>
-                    <div class="input-group mb-3" >
+                    <div class="input-group mb-3" style="margin-bottom: 0px !important;">
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fa fa-at"></i></span>
                       </div>
@@ -19,20 +19,20 @@
                     </div>
                   </div>
                   <div class="controls" validator>
-                    <div class="input-group mb-4">
+                    <div class="input-group mb-4" style="margin-top: 20px !important; margin-bottom: 0px !important;">
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="icon-lock"></i></span>
                       </div>
                       <input type="password" class="form-control" formControlName="password" placeholder="Senha"
                         autocomplete="current-password" required>
+                    </div>                    
+                  </div>
+                  <div class="row" style="margin-top: 20px !important;">
+                    <div class="col-6">
+                      <button type="submit" class="btn btn-primary px-4" [disabled]="!formulario.valid">Login</button>
                     </div>
-                    <div class="row">
-                      <div class="col-6">
-                        <button type="submit" class="btn btn-primary px-4" [disabled]="!formulario.valid">Login</button>
-                      </div>
-                      <div class="col-6 text-right">
-                        <!-- <button type="button" class="btn btn-link px-0">Forgot password?</button> -->
-                      </div>
+                    <div class="col-6 text-right">
+                      <!-- <button type="button" class="btn btn-link px-0">Forgot password?</button> -->
                     </div>
                   </div>
                 </div>

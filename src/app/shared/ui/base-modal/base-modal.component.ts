@@ -46,5 +46,8 @@ export class BaseModalComponent implements OnInit, AfterViewInit {
 
   onClose() {
     this.bsModalRef.hide();
+    if (document.body.classList.contains('modal-open')) {
+      document.body.classList.remove('modal-open');
+    }
   }
 }

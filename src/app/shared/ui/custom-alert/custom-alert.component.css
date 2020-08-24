@@ -2,34 +2,59 @@
   display: inline-block;
   /* box-shadow: 0 1px 2px #d7e0ea; */
   border-radius: 6px;
-  border-top: 8px solid black;
+  border-top: 8px solid #0577f1;
   padding: 1rem;
   margin-bottom: 3rem;
 }
 .card-primary {
   border-top: 8px solid #55a5fa;
+  border-left: 1px solid  #55a5fa;
+  border-right: 1px solid  #55a5fa;
+  border-bottom: 1px solid  #55a5fa;
 }
 .card-secondary {
   border-top: 8px solid #0577f1;
+  border-left: 1px solid  #0577f1;
+  border-right: 1px solid  #0577f1;
+  border-bottom: 1px solid  #0577f1;
+  
 }
 
 .card-success {
   border-top: 8px solid #19a339;
+  border-left: 1px solid  #19a339;
+  border-right: 1px solid  #19a339;
+  border-bottom: 1px solid  #19a339;
 }
 .card-danger {
   border-top: 8px solid #fc0015;
+  border-left: 1px solid  #fc0015;
+  border-right: 1px solid  #fc0015;
+  border-bottom: 1px solid  #fc0015;
 }
 .card-warning {
   border-top: 8px solid #fcb32b;
+  border-left: 1px solid  #fcb32b;
+  border-right: 1px solid  #fcb32b;
+  border-bottom: 1px solid  #fcb32b;
 }
 .card-info {
   border-top: 8px solid #8294bb;
+  border-left: 1px solid  #8294bb;
+  border-right: 1px solid  #8294bb;
+  border-bottom: 1px solid  #8294bb;
 }
 .card-light {
   border-top: 8px solid #ebebeb;
+  border-left: 1px solid  #ebebeb;
+  border-right: 1px solid  #ebebeb;
+  border-bottom: 1px solid  #ebebeb;
 }
 .card-dark {
   border-top: 8px solid #6e6e6e;
+  border-left: 1px solid  #6e6e6e;
+  border-right: 1px solid  #6e6e6e;
+  border-bottom: 1px solid  #6e6e6e;
 }
 
 .card:nth-child(3n + 1) {
@@ -87,6 +112,10 @@ div.op2 {
   background-image: url("assets/img/custom-alert/info.png");
 }
 
+.icon-question {
+  background-image: url("assets/img/custom-alert/question.png");
+}
+
 .icon-info:before {
   content: "";
 }
@@ -100,6 +129,21 @@ div.op2 {
 }
 .icon-warning:before {
   content: "";
+}
+.icon-question:before {
+  content: "";
+}
+
+.btn-question {
+  color: #ffffff;
+  background-color: #32a2ec;
+  border-color: #f0f3f5;
+}
+
+.btn-question:hover{
+  color: #ffffff;
+  background-color: #066eb4;
+  border-color: #d1dbe1;
 }
 
 .fix-size {

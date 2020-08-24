@@ -4,7 +4,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 import { AlertService } from "../../../shared/services/alert.service";
-import { ContratoRecisao } from '../../../shared/entity/LIC/contrato-recisao';
+import { ContratoRecisao } from '../../../shared/entity/LIC/contrato/contrato-recisao';
 
 @Component({
   selector: "app-contrato-recisao",

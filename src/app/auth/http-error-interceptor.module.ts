@@ -9,11 +9,11 @@ import {
 } from "@angular/common/http";
 import { NgxUiLoaderService } from "ngx-ui-loader";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { tap, retry, catchError } from "rxjs/operators";
+import { catchError } from "rxjs/operators";
 import { BASE_URL_TCM } from "../../environments/environment";
-import { AlertService } from "../shared/services/alert.service";
-import { Erro500, Erro412 } from "../shared/entity/colare/colare-erro";
-import { APIError, Erro400 } from "../shared/entity/api/api-error";
+import { AlertService, AlertTypes } from "../shared/services/alert.service";
+import { Erro500 } from "../shared/entity/colare/colare-erro";
+import { APIError } from "../shared/entity/api/api-error";
 import { Erro412Component } from "../shared/ui/erro412/erro412.component";
 
 @Injectable()
@@ -26,10 +26,10 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    return next.handle(request).pipe(
-      retry(1),
-      catchError((err: HttpErrorResponse) => {
-        this.ngxLoader.stopAll();
+   
+    return next.handle(request).pipe(      
+      //retry(1),
+      catchError((err: HttpErrorResponse) => {        
         request.url.startsWith(BASE_URL_TCM)
           ? this.hanldeErrorTCM(err)
           : this.hanldeErrorAPI(err);
@@ -39,6 +39,8 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
   }
 
   private hanldeErrorTCM(error: HttpErrorResponse) {
+    this.alertService.hide()
+    this.ngxLoader.stop();
     let msg = "";
     switch (error.status) {
       case 412:
@@ -54,20 +56,22 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
       case 500:
         const erro500: Erro500 = error["error"];
         msg = erro500.message;
-        this.alertService.showAlertDanger(msg, "ERROR");
+        this.alertService.showAlert(AlertTypes.DANGER,msg, "ERROR");
         break;
       case 0:
         msg =
           "Problema com o certificado digital! Verique se está instalado e/ou inserido no leitor!";
-        this.alertService.showAlertDanger(msg, "ERROR");
+        this.alertService.showAlert(AlertTypes.DANGER,msg, "ERROR");
         break;
       default:
         msg = error.message;
-        this.alertService.showAlertDanger(msg, "ERROR");
+        this.alertService.showAlert(AlertTypes.DANGER,msg, "ERROR");
         break;
     }
   }
   private hanldeErrorAPI(error: HttpErrorResponse) {
+    this.alertService.hide()
+    this.ngxLoader.stop();
     const apiError: APIError = error.error;
     //this.alertService.showAlertDanger(apiError.message, "ERROR");
 
@@ -75,16 +79,20 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
     switch (error.status) {
       case 400:
       case 401:
-        this.alertService.showAlertDanger(
+        this.alertService.showAlert(
+          AlertTypes.DANGER,
           "Usuário e/ou senha inválido!",
           "Erro"
         );
+      case 415:
+        this.alertService.showAlert(AlertTypes.DANGER,apiError.message, "ERROR");
+        break;
       case 500:
-        this.alertService.showAlertDanger(apiError.message, "ERROR");
+        this.alertService.showAlert(AlertTypes.DANGER,apiError.message, "ERROR");
         break;
       default:
         msg = error.message;
-        this.alertService.showAlertDanger(msg, "ERROR");
+        this.alertService.showAlert(AlertTypes.DANGER,msg, "ERROR");
         break;
     }
   }

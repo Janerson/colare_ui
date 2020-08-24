@@ -15,6 +15,7 @@
     </div>    
   </div>
   <div class="right">
-    <button class="btn btn-{{type}}" style="font-weight: 500;" (click)="onClose()">OK</button>
+    <button class="btn btn-light" style="font-weight: 500;" (click)="onClose(false)" *ngIf="isConfirm">{{cancelText}}</button>
+    <button class="btn btn-{{type}}" style="font-weight: 500;" (click)="onClose(true)">{{okText}}</button>
   </div>
 </div>

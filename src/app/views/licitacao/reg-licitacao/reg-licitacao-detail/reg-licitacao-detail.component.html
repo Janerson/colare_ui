@@ -13,7 +13,6 @@
                 <div class="col-lg-2">
                   <label class="col-form-label" for="id">Código TCM</label>
                   <div class="controls">
-                    <input type="hidden" id="uuid" class="form-control" formControlName="uuid">
                     <div class="input-prepend input-group" formGroupName="arquivo">
                       <div class="input-group-prepend">
                         <span class="input-group-text">ID</span>
@@ -24,7 +23,7 @@
                 </div>
                 <div class="col-lg-4">
                   <label class="col-form-label" for="codTipoRegulamentacao">Tipo de regulamentação</label>
-                  <div class="controls" validator error_msg="Campo Obrigatório">
+                  <div class="controls" validator>
                     <div class="input-prepend input-group">
                       <div class="input-group-prepend">
                         <span class="input-group-text">Tipo</span>
@@ -271,7 +270,7 @@
     </div>
     <!--Ações-->
     <app-acoes [form]="formulario" (onPdfHomologacao)="obterPDFHomologacao()" (onTransmitir)="transmitir()"
-    (onSincronizar)="sincronizar($event)"
-      (onHomologar)="homologar($event)" (onCancelar)="cancelar()"></app-acoes>
+      (onSincronizar)="sincronizar($event)" (onHomologar)="homologar($event)" (onRetificar)="retificar()"
+      (onCancelar)="cancelar()"></app-acoes>
   </form>
 </div>

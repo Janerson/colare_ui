@@ -1,4 +1,4 @@
-import { BaseEntity } from '../api/base-entity';
+import { BaseEntity } from '../../base-entity';
 
 /**
  * Dados do contrato

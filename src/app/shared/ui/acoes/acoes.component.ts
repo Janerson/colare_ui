@@ -10,10 +10,9 @@ import {
   ElementRef,
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { Arquivo } from "../../entity/colare/colare-retorno";
 
 @Component({
-  selector: "app-acoes",
+  selector: "app-acoes[form]",
   templateUrl: "./acoes.component.html",
   styleUrls: ["./acoes.component.css"],
 })
@@ -29,9 +28,7 @@ export class AcoesComponent implements OnInit, OnChanges {
 
   @ViewChild("file") _file: ElementRef;
 
-  hasChanged = false;
-
-  protected value: {};
+  isHomologado = false;
 
   constructor() {}
 
@@ -39,14 +36,17 @@ export class AcoesComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe((value) => {
-      this.value = value;
-      this.hasChanged = this.form.dirty;
-    });
+   this.validaAcoes()
   }
   onFileChange(file : File){
     if(file)this.onHomologar.emit(file)
     this._file.nativeElement.value = null;
   }
   
+  validaAcoes(){
+    this.form.get("arquivo.statusEnvio").valueChanges.subscribe(value => {
+      this.isHomologado = value == "HOMOLOGADO" ? true:false
+    })
+  }
+
 }

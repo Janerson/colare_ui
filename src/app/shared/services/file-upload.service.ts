@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GenericDao } from './generic/generic-dao';
 import { HttpClient } from '@angular/common/http';
-import { BaseEntity } from '../entity/api/base-entity';
+import { BaseEntity } from '../entity/base-entity';
 
 
 @Injectable({

@@ -12,6 +12,8 @@ import { SharedModule } from "../../shared/shared.module";
 import { RegLicitacaoService } from "./service/reg-licitacao.service";
 import { ContratoRecisaoComponent } from "./contrato-recisao/contrato-recisao.component";
 import { ContratoRecisaoDetailComponent } from "./contrato-recisao/contrato-recisao-detail/contrato-recisao-detail.component";
+import { LicRetificaPopupComponent } from './lic-retifica-popup/lic-retifica-popup.component';
+import { LicRetificaService } from './service/lic-retifica-homolog.service';
 
 @NgModule({
   declarations: [
@@ -20,13 +22,15 @@ import { ContratoRecisaoDetailComponent } from "./contrato-recisao/contrato-reci
     ContratoRecisaoComponent,
     ContratoRecisaoDetailComponent,
     ContratoInicialComponent,
-    ContratoInicialDetailComponent
+    ContratoInicialDetailComponent,
+    LicRetificaPopupComponent
   ],
   imports: [CommonModule, LicitacaoRoutingModule, SharedModule],
   providers: [
     RegLicitacaoService,
     ContratoInicialService,
     ContratoRecisaoService,
+    LicRetificaService
   ],
 })
 export class LicitacaoModule {}

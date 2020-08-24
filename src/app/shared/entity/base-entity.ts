@@ -1,4 +1,4 @@
-import { Arquivo } from '../colare/colare-retorno';
+import { Arquivo } from './colare/colare-retorno';
 
 /**
  * K - Tipo de Chave primária

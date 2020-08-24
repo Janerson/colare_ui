@@ -29,7 +29,7 @@
                                 </div>
                                 <select #select class="select-representacoes" (change)="onRepresentacaoChange(select.value)">
                                     <option></option>
-                                    <option *ngFor="let item of authTcm.representacoes" value="{{item.codigo}}">
+                                    <option *ngFor="let item of passporte.representacoes" value="{{item.codigo}}">
                                         {{item.representacao}}</option>
                                 </select>
                             </div>

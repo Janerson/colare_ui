@@ -1,5 +1,5 @@
 import { ContratoInicialService } from "./../service/contrato-inicial.service";
-import { ContratoInicial } from "../../../shared/entity/LIC/contrato-inicial";
+import { ContratoInicial } from "../../../shared/entity/LIC/contrato/contrato-inicial";
 import { Page } from "../../../shared/entity/api/page";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";

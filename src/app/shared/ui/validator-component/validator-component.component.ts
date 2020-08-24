@@ -5,12 +5,9 @@ import {
   ContentChild,
   AfterViewInit,
   ElementRef,
+  Renderer2,
 } from "@angular/core";
-import {
-  FormControlName,
-  FormControl,
-  ValidationErrors,
-} from "@angular/forms";
+import { FormControlName, FormControl, ValidationErrors } from "@angular/forms";
 
 @Component({
   selector: "[validator]",
@@ -22,6 +19,7 @@ export class ValidatorComponentComponent implements OnInit, AfterViewInit {
   @ContentChild(FormControlName) formControl: FormControl;
 
   constructor(private el: ElementRef) {}
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.formControl.valueChanges.subscribe(() => {
@@ -48,14 +46,22 @@ export class ValidatorComponentComponent implements OnInit, AfterViewInit {
   }
 
   private isValid() {
-    this.formControl.valid
-      ? this.el.nativeElement
-          .querySelector(".input-group")
-          .classList.remove("has-error")
-      : this.el.nativeElement
-          .querySelector(".input-group")
-          .classList.add("has-error");
+    if (this.formControl.valid) {
+      this.el.nativeElement
+        .querySelector(".form-control")
+        .classList.remove("has-error");
+      this.el.nativeElement
+        .querySelector(".form-control")
+        .classList.remove("is-invalid");       
+    } else {
+      this.el.nativeElement
+        .querySelector(".form-control")
+        .classList.add("has-error");
+      this.el.nativeElement
+        .querySelector(".form-control")
+        .classList.add("is-invalid");      
+    }
   }
 
-  ngOnInit(): void {}
+  
 }

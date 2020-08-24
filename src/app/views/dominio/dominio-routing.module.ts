@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { TipoDeDominioComponent } from "./tipo-de-dominio/tipo-de-dominio.component";
-import { TABELAS_DOMINIOS } from "../../shared/tabelas";
+import { TABELAS_DOMINIOS } from "../../shared/enum-layouts/tabelas";
 
 const routes: Routes = [
   {
@@ -19,6 +19,13 @@ const routes: Routes = [
         component: TipoDeDominioComponent,
         data: {
           title: TABELAS_DOMINIOS.TIPO_DE_ENVIO
+        }
+      },
+      {
+        path:"tipo-retificacao",
+        component:TipoDeDominioComponent,
+        data:{
+          title: TABELAS_DOMINIOS.TIPO_DE_RETIFICACAO
         }
       },
       {

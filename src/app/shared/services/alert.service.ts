@@ -14,81 +14,63 @@ export enum AlertTypes {
   INFO = "info",
   LIGHT = "light",
   DARK = "dark",
+  CONFIRM = "question",
 }
 
 @Injectable({
   providedIn: "root",
 })
 export class AlertService {
+  private static bsModalRef: BsModalRef;
+
   constructor(private bsModalService: BsModalService) {}
 
-  private showAlert(
+  showAlert(
+    type: AlertTypes,
     message: string,
-    title?: string,
-    footer?: string,
-    type?: AlertTypes
-  ) {
-    const bsModalRef: BsModalRef = this.bsModalService.show(
-      CustomAlertComponent,
-      {
-        initialState: {
-          type: type,
-          message: message,
-          title: title,
-          footer: footer,
-        },
-      }
-    );
-    //bsModalRef.content.type = type;
-    //bsModalRef.content.message = message;
-    //bsModalRef.content.title = title;
-    //bsModalRef.content.footer = footer;
-  }
-
-  private modal(options: ModalOptions) {
-    this.bsModalService.show(BaseModalComponent, options);
-  }
-
-  showAlertDanger(
-    message: string,
-    title?: string,
+    title: string,
     footer?: string
   ): BsModalService {
-    this.showAlert(message, title, footer, AlertTypes.DANGER);
+    AlertService.bsModalRef = this.bsModalService.show(CustomAlertComponent, {
+      initialState: {
+        type: type,
+        message: message,
+        title: title,
+        footer: footer,
+      },
+    });
     return this.bsModalService;
   }
 
-  showAlertSucess(
-    message: string,
-    title?: string,
-    footer?: string
-  ): BsModalService {
-    this.showAlert(message, title, footer, AlertTypes.SUCESS);
-    return this.bsModalService;
-  }
-
-  showAlertInfo(
-    message: string,
-    title?: string,
-    footer?: string
-  ): BsModalService {
-    this.showAlert(message, title, footer, AlertTypes.INFO);
-    return this.bsModalService;
-  }
-
-  showAlertWarning(
-    message: string,
-    title?: string,
-    footer?: string
-  ): BsModalService {
-    this.showAlert(message, title, footer, AlertTypes.WARNING);
-    return this.bsModalService;
+  showConfirm(message: string, title: string, footer?: string) {
+    AlertService.bsModalRef = this.bsModalService.show(CustomAlertComponent, {
+      initialState: {
+        type: AlertTypes.CONFIRM,
+        message: message,
+        title: title,
+        footer: footer,
+        isConfirm: true,
+        okText: "Ok",
+        cancelText: "Cancelar",
+      },
+    });
+    return (<CustomAlertComponent>AlertService.bsModalRef.content)
+      .confirmResult;
   }
 
   showModal(component: any, options?: ModalOptions): BsModalService {
     Object.assign(options.initialState, { component: component });
     options.animated = true;
-    this.modal(options);
+    AlertService.bsModalRef = this.bsModalService.show(
+      BaseModalComponent,
+      options
+    );
     return this.bsModalService;
+  }
+
+  hide() {
+    if (AlertService.bsModalRef) {    
+      AlertService.bsModalRef.hide();
+    }
   }
 }

@@ -1,4 +1,4 @@
-export interface AuthTcm {
+export interface Passaporte {
   nome: string;
   representacoes: Representacao[];
 }

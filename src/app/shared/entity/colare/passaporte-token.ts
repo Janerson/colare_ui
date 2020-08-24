@@ -1,6 +1,6 @@
-import { Representacao } from "./auth-tcm";
+import { Representacao } from "./passaporte";
 
-export interface ResponseTokenTCM {
+export interface PassaporteToken {
   token: Token;
   usuario: Usuario;
 }

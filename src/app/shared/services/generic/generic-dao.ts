@@ -5,7 +5,7 @@ import { take, tap } from "rxjs/operators";
 import { Page } from "../../entity/api/page";
 import { environment } from "../../../../environments/environment";
 import { Subject } from "rxjs";
-import { BaseEntity } from "../../entity/api/base-entity";
+import { BaseEntity } from "../../entity/base-entity";
 import { Arquivo, ColareRetorno } from '../../entity/colare/colare-retorno';
 
 export class GenericDao<K, T extends BaseEntity<K>> {

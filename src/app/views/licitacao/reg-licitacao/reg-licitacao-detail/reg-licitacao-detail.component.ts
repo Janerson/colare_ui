@@ -10,11 +10,14 @@ import { Subscription, EMPTY } from "rxjs";
 
 import { BaseFormComponent } from "../../../../shared/ui/base-form/base-form.component";
 import { FormService } from "../../../../shared/services/form.service";
-import { AlertService } from "../../../../shared/services/alert.service";
+import {
+  AlertService,
+  AlertTypes,
+} from "../../../../shared/services/alert.service";
 import { RegLicitacaoService } from "../../service/reg-licitacao.service";
 import { DominioService } from "../../../dominio/service/dominio.service";
 import { Dominios } from "../../../../shared/entity/colare/dominio";
-import { TABELAS_DOMINIOS } from "../../../../shared/tabelas";
+import { TABELAS_DOMINIOS } from "../../../../shared/enum-layouts/tabelas";
 import { ModalService } from "../../../../shared/services/modal.service";
 import {
   ColareRetorno,
@@ -22,7 +25,8 @@ import {
 } from "../../../../shared/entity/colare/colare-retorno";
 import { EnvioComponent } from "../../../../shared/ui/envio/envio.component";
 import { HelperService } from "../../../../shared/services/helper.service";
-import { RegLicitacao } from "../../../../shared/entity/LIC/reg-licitacao";
+import { RegLicitacao } from "../../../../shared/entity/LIC/reg_licitacao/reg-licitacao";
+import { LicRetificaPopupComponent } from "../../lic-retifica-popup/lic-retifica-popup.component";
 
 @Component({
   selector: "app-reg-licitacao-detail",
@@ -48,7 +52,7 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
     private helper: HelperService
   ) {
     super();
-    this.buildForm();
+    this.criaForm();
   }
 
   ngOnInit(): void {
@@ -63,7 +67,7 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
 
     this.dominioService
       .listaDominio(TABELAS_DOMINIOS.TIPO_DECRETO_REGULAMENTADOR, true)
-      .subscribe((data) => (this.dominios = data));      
+      .subscribe((data) => (this.dominios = data));
   }
 
   ngOnDestroy(): void {
@@ -74,7 +78,7 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
 
   buscarRegulamentacao(uuid) {
     this.service.buscarPorUUID(uuid).subscribe((r) => {
-      this.atualizaFormulario(r);      
+      this.atualizaFormulario(r);
     });
   }
 
@@ -83,7 +87,8 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
       .salvar(this.formulario.value)
       .subscribe((data: RegLicitacao) => {
         isSubimited
-          ? this.alertService.showAlertSucess(
+          ? this.alertService.showAlert(
+              AlertTypes.SUCESS,
               `Salvo com sucesso`,
               "Regulamentação"
             )
@@ -107,29 +112,37 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
     this.subscriptionModalService = this.modalService.changeEmitted$.subscribe(
       (o) => {
         this.atualizaFormulario(o);
-        this.service
-          .transmitirColare(this.formulario.value)
-          .subscribe((data: ColareRetorno) => {
-            this.atualizaFormulario(data);
-            this.save(false);
-            this.alertService.showAlertSucess(
-              "Layout transmitido com sucesso",
-              "Sucesso"
-            );
-          });
+        this.onTransmitir(false);
         this.subscriptionModalService.unsubscribe();
       }
     );
+  }
+
+  private onTransmitir(isRetificacao: boolean) {
+    this.service
+      .transmitirColare(this.formulario.value)
+      .subscribe((data: ColareRetorno) => {
+        this.atualizaFormulario(data);
+        this.save(false);
+        if (!isRetificacao) {
+          this.alertService.showAlert(
+            AlertTypes.SUCESS,
+            "Layout transmitido com sucesso",
+            "Sucesso"
+          );
+        }
+      });
   }
 
   sincronizar(e?) {
     this.service.getColare(this.formValue()).subscribe((data) => {
       this.atualizaFormColare(data);
       this.save(false);
-        this.alertService.showAlertSucess(
-          "Layout Sincronizado com sucesso!",
-          "Sucesso"
-        );
+      this.alertService.showAlert(
+        AlertTypes.SUCESS,
+        "Layout Sincronizado com sucesso!",
+        "Sucesso"
+      );
     });
   }
 
@@ -141,21 +154,64 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
     this.service
       .homologarEnvioColare(this.formulario.value, file)
       .subscribe((d) => {
-        this.sincronizar();
-        const sub = this.alertService.showAlertSucess("Envio Homologado com sucesso!","Sucesso!")
-        .onHidden.subscribe(() => {
-          sub.unsubscribe()
-          this.sincronizar()
-        })
+        //this.sincronizar();
+        const sub = this.alertService
+          .showAlert(
+            AlertTypes.SUCESS,
+            "Envio Homologado com sucesso!",
+            "Sucesso!"
+          )
+          .onHidden.subscribe(() => {
+            sub.unsubscribe();
+            this.router.navigate(["LIC/REG_LICITACAO"])
+            //this.sincronizar();
+          });
       });
+  }
+
+  retificar() {
+    const msg = `O processo de Retificação de Envio já Homologado,
+      exige uma série de passos que devem ser realizados, para tal é imprescindivel que execute
+      todas as etapas do processo de retificação, e não feche o popup até todas etapas serem concluídas. Deseja realizar a retificação agora?
+    `;
+    this.alertService.showConfirm(msg, "Atenção!").subscribe((value) => {
+      if (value) {
+        this.alertService.showModal(LicRetificaPopupComponent, {
+          ignoreBackdropClick: true,
+          class: "modal-lg",
+          initialState: {
+            title: "RETIFICAR ENVIO",
+            data: this.formValue("arquivo.id"),
+          },
+        });
+      }
+    });
+    
+    this.modalService.changeEmitted$.subscribe((value:boolean) => {
+      console.log(value)
+      if (value) {
+        this.alertService
+          .showAlert(
+            AlertTypes.SUCESS,
+            "Retificação efetuada com sucesso!",
+            "Retificação"
+          )
+          .onHide.subscribe(() => {
+            this.atualizaFormulario({
+              codTipoEnvio: 2,
+              motivoAtualizacaoCorrecao: "RETIFICAÇÃO",
+            });
+            this.onTransmitir(true);
+          });
+      }
+    });
   }
 
   cancelar() {
     this.router.navigate(["LIC/REG_LICITACAO"]);
   }
 
-  private buildForm() {
-    this.formulario.addControl("uuid", this.builder.control(null, []));
+  private criaForm() {
     this.formulario.addControl(
       "codTipoRegulamentacao",
       this.builder.control(null, [Validators.required])

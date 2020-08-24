@@ -6,7 +6,7 @@ import { BsModalRef } from "ngx-bootstrap/modal";
 import { DominioService } from "../../../views/dominio/service/dominio.service";
 import { Dominios } from "../../entity/colare/dominio";
 import { Subscription } from "rxjs";
-import { TABELAS_DOMINIOS } from "../../tabelas";
+import { TABELAS_DOMINIOS } from "../../enum-layouts/tabelas";
 import { Arquivo } from '../../entity/colare/colare-retorno';
 
 @Component({
@@ -25,7 +25,7 @@ export class EnvioComponent extends BaseFormComponent implements OnInit , OnDest
     protected dominioService: DominioService
   ) {
     super();
-    this.buildForm();
+    this.criaForm();
   }
   ngOnDestroy(): void {
     this.subscriptionDominio.unsubscribe()
@@ -37,7 +37,7 @@ export class EnvioComponent extends BaseFormComponent implements OnInit , OnDest
       .subscribe((data) => (this.dominios = data));
   }
 
-  private buildForm() {
+  private criaForm() {
     this.formulario = this.builder.group(
       {
         codTipoEnvio: this.builder.control(null, [Validators.required]),
