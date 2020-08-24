@@ -15,17 +15,15 @@ import { Subscription, EMPTY } from "rxjs";
 import { ModalService } from "../../../shared/services/modal.service";
 import { BsModalRef } from "ngx-bootstrap/modal";
 import { DominioService } from "../../dominio/service/dominio.service";
-import { TABELAS_DOMINIOS } from "../../../shared/enum-layouts/tabelas";
 import { Validators } from "@angular/forms";
-import { LicRetificaService } from "../service/lic-retifica-homolog.service";
 import {
   NgWizardService,
   NgWizardConfig,
   StepChangedArgs,
   TOOLBAR_POSITION,
 } from "ng-wizard";
-import { LicRetificaHomolog } from "../../../shared/entity/LIC/retificacao/lic-retificacao";
-import { data } from "jquery";
+import { LicRetificaService } from '../service/lic-retifica-homolog.service';
+import { TABELAS_DOMINIOS } from '../../../shared/enum-layouts/tabelas';
 
 @Component({
   selector: "app-lic-retifica-popup",
