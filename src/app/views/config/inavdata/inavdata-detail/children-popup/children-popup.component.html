@@ -1,0 +1,86 @@
+<div class="animated fadeIn">
+    <form [formGroup]="formulario" #f (submit)="onSubmit()">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-edit"></i> Sub-link
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">                
+                            <!-- row 2-->
+                            <fieldset>
+                                <legend>Link</legend>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label class="col-form-label" for="text">Nome</label>
+                                        <div class="controls">
+                                            <div class="input-prepend input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Nome</span>
+                                                </div>
+                                                <input type="text" id="name" class="form-control"
+                                                    formControlName="name" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label class="col-form-label" for="url">Url</label>
+                                        <div class="controls">
+                                            <div class="input-prepend input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-link"></i></span>
+                                                </div>
+                                                <input type="text" id="url" class="form-control"
+                                                    formControlName="url" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label class="col-form-label" for="icon">Icon</label>
+                                        <div class="controls">
+                                            <div class="input-prepend input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i [class]="formulario.get('icon').value"></i></span>
+                                                </div>
+                                                <input type="text" id="icon" class="form-control"
+                                                    formControlName="icon" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--ROW 2-->
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Ações-->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card" style="margin-bottom: 0px !important;">
+                    <div class="card-header">
+                        <i class="fa fa-certificate"></i>Ações
+                    </div>
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-brand btn-sm btn-facebook mr-1">
+                            <i class="fa fa-plus"></i>
+                            <span>Adicionar e Novo</span>
+                        </button>
+                        <button type="button" class="btn btn-brand btn-sm btn-vine mr-1" (click)="addFechar()">
+                            <i class="fa fa-plus"></i>
+                            <span>Adicionar e Fechar</span>
+                        </button>
+                        <button type="button" class="btn btn-brand btn-sm btn-tumblr mr-1" (click)="cancelar()">
+                            <i class="fa fa-undo"></i>
+                            <span>Cancelar</span>
+                        </button> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,10 @@
+<button type="button" class="btn btn-primary btn-sm" (click)="onEditar.emit(true)"
+        popover="Editar"
+        triggers="mouseenter:mouseleave"
+        *ngIf="botoes.indexOf('editar') > 0"
+        ><span class="fa fa-pencil"></span></button>
+<button type="button" class="btn btn-danger btn-sm" (click)="onApagar.emit(true)"
+        popover="Apagar"
+        triggers="mouseenter:mouseleave"
+        *ngIf="botoes.indexOf('apagar') > 0"
+        ><span class="fa fa-trash"></span></button>

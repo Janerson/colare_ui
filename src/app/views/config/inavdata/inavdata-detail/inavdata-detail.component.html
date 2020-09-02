@@ -1,0 +1,191 @@
+<div class="animated fadeIn">
+    <form [formGroup]="formulario" (submit)="onSubmit()">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-edit"></i> Link
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <fieldset>
+                                <legend>Link</legend>
+                                <!-- row 1-->
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label class="col-form-label" for="name">Nome</label>
+                                        <div class="controls">
+                                            <div class="input-prepend input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-pencil"></i></span>
+                                                </div>
+                                                <input type="text" id="name" class="form-control"
+                                                    formControlName="name" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label class="col-form-label" for="url">Url</label>
+                                        <div class="controls">
+                                            <div class="input-prepend input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-link"></i></span>
+                                                </div>
+                                                <input type="text" id="url" class="form-control"
+                                                    formControlName="url" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label class="col-form-label" for="icon">Icon</label>
+                                        <div class="controls">
+                                            <div class="input-prepend input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            [ngClass]="formValue('icon')"></i></span>
+                                                </div>
+                                                <input type="text"  id="icon" class="form-control"
+                                                    [iconPicker]="formValue('icon')"
+                                                    [ipIconPack]="['fa']"
+                                                    (iconPickerSelect)="onPickerIcon($event)"
+                                                    formControlName="icon"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label class="col-form-label" for="title">É um Titulo</label>
+                                        <div class="controls">
+                                            <label class="switch switch-label switch-pill switch-success">
+                                                <input id="title" type="checkbox" class="switch-input"
+                                                    formControlName="title" (change)="addOrRemoveChildren()" />
+                                                <span class="switch-slider" data-checked="Sim"
+                                                    data-unchecked="Não"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <!--ROW 1-->
+
+                            <!-- row 2-->
+                            <fieldset>
+                                <legend>Badge</legend>
+                                <div class="row" formGroupName="badge">
+                                    <div class="col-lg-4">
+                                        <label class="col-form-label" for="text">Texto</label>
+                                        <div class="controls">
+                                            <div class="input-prepend input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Texto</span>
+                                                </div>
+                                                <input type="text" id="text" class="form-control"
+                                                    formControlName="text" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label class="col-form-label" for="variant">Variant</label>
+                                        <div class="controls">
+                                            <div class="input-prepend input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Variant</span>
+                                                </div>
+                                                <input type="text" id="variant" class="form-control"
+                                                    formControlName="variant" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label class="col-form-label" for="icon">Class</label>
+                                        <div class="controls">
+                                            <div class="input-prepend input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">class</span>
+                                                </div>
+                                                <input type="text" id="class" class="form-control"
+                                                    formControlName="class" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--ROW 2-->
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Children -->
+        <div class="animate__animated animate__shakeX" formArrayName="children" *ngIf="!isTitle">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-table"></i>Sublinks
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <h4 class="card-title mb-0">Links</h4>
+                                    <div class="small text-muted">&nbsp;</div>
+                                </div>
+                                <div class="col-sm-7 d-none d-md-block">
+                                    <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
+                                        <button type="button" class="btn btn-warning" (click)="popupAddChildren()">
+                                            <i class="fa fa-plus"></i>&nbsp;Novo</button></div>
+                                </div>
+                            </div>
+                            <table datatable class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nome</th>
+                                        <th>Url</th>
+                                        <th>Icon</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of formValue('children',true).controls; let i = index">
+                                        <td style="width: 94px;">
+                                            <app-table-acoes
+                                            botoes="['editar','apagar']"
+                                            (onEditar)="popupAddChildren(item.value)"
+                                            (onApagar)="removerSublink(i)"
+                                            ></app-table-acoes>   
+                                        </td>
+                                        <td>{{item.get("name").value}}</td>
+                                        <td>{{item.get("url").value}}</td>
+                                        <td>{{item.get("icon").value}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Children -->
+
+        <!--Ações-->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-certificate"></i>Ações
+                    </div>
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-brand btn-sm btn-facebook mr-1">
+                            <i class="fa fa-save"></i>
+                            <span>Gravar</span>
+                        </button>
+                        <button type="button" class="btn btn-brand btn-sm btn-tumblr mr-1" (click)="voltar()">
+                            <i class="fa fa-undo"></i>
+                            <span>Voltar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

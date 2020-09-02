@@ -57,10 +57,13 @@ export class DefaultLayoutComponent extends BaseFormComponent
   filtrarMenu(str: string, array: MenuLink[]): MenuLink[] {
     let resultado: MenuLink[] = [];
     array.forEach((el) => {
+      
       let tmp = [];
       let o: MenuLink = {};
+      let title:MenuLink = {}
       let found = false;
 
+      if(el.title) title = el;
       if (el.name.toLowerCase().indexOf(str.toLowerCase()) > -1) {      
         o = el;
         found = true;
@@ -75,15 +78,13 @@ export class DefaultLayoutComponent extends BaseFormComponent
         }
       }
       if (found) {
+        if(!resultado.includes(title)){
+          resultado.push(title);
+        }
         resultado.push(o);
       }
     });
     return resultado;
-
-    // return this.navItems.filter((e) => {
-
-    //   return e.name.toLowerCase().indexOf(str.toLowerCase()) > -1;
-    // });
   }
 
   setToken(e) {

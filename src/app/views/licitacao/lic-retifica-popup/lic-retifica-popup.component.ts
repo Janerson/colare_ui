@@ -108,6 +108,13 @@ export class LicRetificaPopupComponent extends BaseFormComponent
     this.ngWizardService.next();
   }
 
+  onFileChange(file: File) {
+    if (file) {
+      this.homologar(file)    
+    }
+    this._file.nativeElement.value = null;
+  }
+
   homologar(file: File) {
     this.retificaService
       .homologarEnvioColare(this.formValue(), file)
@@ -122,19 +129,6 @@ export class LicRetificaPopupComponent extends BaseFormComponent
           });
         })
       });
-  }
-
-  onFileChange(file: File) {
-    if (file) {
-      this.homologar(file)
-      // this.retificaService
-      //   .homologarEnvioColare(this.formValue(), file)
-      //   .subscribe(() => {
-      //     this.modalService.emitChange(true);
-      //     this.cancelar();
-      //   });
-    }
-    this._file.nativeElement.value = null;
   }
 
   cancelar() {

@@ -21,23 +21,19 @@
                     </button>
                     <button type="button" class="btn btn-brand btn-sm btn-vine mr-1"
                         (click)="onSincronizar.emit($event)" popover="Sincronizar layout junto ao Colare."
-                        triggers="mouseenter:mouseleave"
-                        [disabled]="isHomologado">
+                        triggers="mouseenter:mouseleave" [disabled]="isHomologado">
                         <i class="fa fa-refresh"></i>
                         <span>Sincronizar</span>
                     </button>
                     <button type="button" class="btn btn-brand btn-sm btn-youtube mr-1"
                         (click)="onPdfHomologacao.emit($event)" popover="Baixar PDF de Homologação."
-                        triggers="mouseenter:mouseleave"
-                        [disabled]="isHomologado">
+                        triggers="mouseenter:mouseleave" [disabled]="isHomologado">
                         <i class="fa fa-file-pdf-o"></i>
                         <span>PDF Homologação</span>
                     </button>
                     <button type="button" class="btn btn-brand btn-sm btn-spotify mr-1"
                         popover="Homologar layout enviando o PDF de Homologação assinado digitalmente."
-                        triggers="mouseenter:mouseleave"
-                        (click)="file.click()"
-                        [disabled]="isHomologado">
+                        triggers="mouseenter:mouseleave" (click)="file.click()" [disabled]="isHomologado">
                         <i class="fa fa-check"></i>
                         <span>Homologar</span>
                     </button>

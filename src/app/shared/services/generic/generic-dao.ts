@@ -63,7 +63,8 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    * Lista os Layout´s
    */
   listar() {
-    return this.http.get<T[]>(`${environment.api_url(this.layout)}/ALL`);
+    return this.http.get<T[]>(`${environment.api_url(this.layout)}/ALL`)
+    .pipe(tap(() => this._refresh$.next()));
   }
   /**
    * Consulta Paginada
@@ -118,6 +119,16 @@ export class GenericDao<K, T extends BaseEntity<K>> {
       return this.atualizar(obj);
     }
     return this.gravar(obj);
+  }
+  
+  
+  excluir(uuid:string) {
+    return this.http
+      .delete(`${environment.api_url(this.layout)}/${uuid}`)
+      .pipe(
+        take(1),
+        tap(() => this._refresh$.next())
+      );
   }
 
   private atualizar(obj: T) {

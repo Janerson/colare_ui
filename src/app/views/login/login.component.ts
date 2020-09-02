@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, Validators } from "@angular/forms";
 import { AuthenticationService } from "../../auth/authentication.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs/operators";
 import { BaseFormComponent } from "../../shared/ui/base-form/base-form.component";
+import { AlertService, AlertTypes } from "../../shared/services/alert.service";
 
 @Component({
   selector: "app-dashboard",
@@ -17,7 +18,8 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
   constructor(
     private authService: AuthenticationService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService    
   ) {
     super();
     if (this.authService.token) {
@@ -39,13 +41,19 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
   }
 
   submit() {
-    const email = this.formValue('email');
+    const email = this.formValue("email");
     const password = this.formValue("password");
     this.authService
       .login(email, password)
       .pipe(first())
-      .subscribe((resp) => {
-        this.router.navigate([this.returnUrl]);
+      .subscribe(() => {
+        this.router.navigate([this.returnUrl]);     
+      }, err => {
+        this.alertService.showToastr(AlertTypes.DANGER,"Usuário e/ou senha inválido!","Erro")
       });
+  }
+
+  error() {
+    //this.alertService.showToastr(AlertTypes.DANGER,"TESTE","edsdsc")
   }
 }

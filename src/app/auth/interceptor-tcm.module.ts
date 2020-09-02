@@ -6,24 +6,25 @@ import {
   HttpHandler,
   HttpRequest,
   HttpResponse,
-  HttpErrorResponse,
 } from "@angular/common/http";
 import { NgxUiLoaderService } from "ngx-ui-loader";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { tap, finalize } from "rxjs/operators";
-import { BASE_URL_API, BASE_URL_TCM } from "../../environments/environment";
+import { tap } from "rxjs/operators";
+import { BASE_URL_TCM } from "../../environments/environment";
 import { CookieService } from "ngx-cookie-service";
 import { AlertService, AlertTypes } from "../shared/services/alert.service";
-import { ModalService } from "../shared/services/modal.service";
 import { PassaporteComponent } from "../shared/ui/passaporte/passaporte.component";
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { JwtHelperService } from "@auth0/angular-jwt";
+
+const helper = new JwtHelperService();
 
 @Injectable()
 export class HttpsRequestInterceptor implements HttpInterceptor {
+   
   constructor(
     private alertService: AlertService,
     private ngxLoader: NgxUiLoaderService,
-    private cookieService: CookieService,
+    private cookieService: CookieService    
   ) {}
   // intercept request and add token
   intercept(
@@ -40,7 +41,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
       request.url.startsWith(BASE_URL_TCM) &&
       !request.headers.get("ignore")
     ) {
-      if (!this.cookieService.get("TCM_TOKEN")) {
+      if (!this.cookieService.get("TCM_TOKEN") || helper.isTokenExpired(this.cookieService.get("TCM_TOKEN"))) {
         this.alertService.hide()
         this.ngxLoader.stop(); 
         

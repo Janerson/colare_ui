@@ -5,9 +5,9 @@ import { Router, NavigationEnd } from "@angular/router";
   // tslint:disable-next-line
   selector: "body",
   template: `<div ngxUiLoaderBlurred>
-      <router-outlet></router-outlet>
-    </div>
-    <ngx-ui-loader></ngx-ui-loader>`,
+               <router-outlet></router-outlet>
+             </div>
+            <ngx-ui-loader></ngx-ui-loader>`,
   styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit {

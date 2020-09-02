@@ -14,7 +14,7 @@ import {
   distinctUntilChanged,
   map,
 } from "rxjs/operators";
-import { ColareRetorno } from '../../entity/colare/colare-retorno';
+import { ColareRetorno } from "../../entity/colare/colare-retorno";
 
 @Component({
   selector: "app-base-form",
@@ -31,7 +31,7 @@ export class BaseFormComponent {
   }
 
   /**
-   * 
+   *
    * Método chamado quando formulario é submetido e válido
    */
   submit() {
@@ -52,8 +52,8 @@ export class BaseFormComponent {
         ? this.formulario
         : this.formulario.value
       : control
-        ? this.formulario.get(controlPath)
-        : this.formulario.get(controlPath).value;
+      ? this.formulario.get(controlPath)
+      : this.formulario.get(controlPath).value;
   }
   /**
    * @param path
@@ -73,6 +73,23 @@ export class BaseFormComponent {
         },
         (error: { message: string }) => console.log(error.message)
       );
+  }
+
+  /**
+   * Adiciona FormControls ao Formulário
+   * @param name 
+   * @param control 
+   */
+  adicionaControl(name:string,control : FormControl | FormArray | FormGroup){
+    this.formulario.addControl(name,control)
+  }
+  /**
+   * Remove FormControls do Formulário
+   * @param name 
+   * @param control 
+   */
+  removeControl(name:string){
+    this.formulario.removeControl(name)
   }
 
   /**
@@ -105,39 +122,33 @@ export class BaseFormComponent {
           layoutSigla: this.builder.control(null, []),
           prestacaoDeContasSigla: this.builder.control(null, []),
         }),
-        uuid: this.builder.control(null, [])
+        uuid: this.builder.control(null, []),
       },
       [Validators.required]
-    );    
+    );
   }
 
-  private atualizaFormulario_(obj: any, controlPath?: any) {
-    this.atualizaForm(obj, controlPath);
-    this.validarStatusEnvio()
-  }
-
-  atualizaFormulario(obj:any, path?:string){
-    if(path)this.formulario.get(path).patchValue(obj)
-    else this.formulario.patchValue(obj)
-    this.validarStatusEnvio()
-
+  atualizaFormulario(obj: Object, path?: string) {
+    if (path) this.formulario.get(path).patchValue(obj);
+    else this.formulario.patchValue(obj);
+    this.validarStatusEnvio();
   }
 
   /**
    * Atualiza o formulário com o retorno de dados do envio ao colare
    * Usar quando precisar sincronizar a base dados local, com os dados do colare
-   * @param retorno 
+   * @param retorno
    */
-  atualizaFormColare(retorno : ColareRetorno){
+  atualizaFormColare(retorno: ColareRetorno) {
     this.formValue("arquivo", true).patchValue(retorno.arquivo);
     this.formValue(undefined, true).patchValue(retorno.arquivo.jsonNode);
-    this.validarStatusEnvio();   
+    this.validarStatusEnvio();
   }
 
-/**
- * Sempre usar o metodo onSubmit no evento de submit do formulário
- * Ex: <form (submit)="onSubmit()">...</form>
- */
+  /**
+   * Sempre usar o metodo onSubmit no evento de submit do formulário
+   * Ex: <form (submit)="onSubmit()">...</form>
+   */
   onSubmit() {
     if (this.formulario.valid) {
       this.submit();
@@ -146,10 +157,9 @@ export class BaseFormComponent {
     }
   }
 
-
   verificaValidacoesForm(formGroup: FormGroup | FormArray) {
     Object.keys(formGroup.controls).forEach((campo) => {
-      const controle = formGroup.get(campo);      
+      const controle = formGroup.get(campo);
       controle.markAsDirty();
       controle.markAsTouched();
       if (controle instanceof FormGroup || controle instanceof FormArray) {
@@ -163,13 +173,16 @@ export class BaseFormComponent {
    * o formulário, será desativado para edição
    */
   validarStatusEnvio() {
-      this.formValue("arquivo.statusEnvio") === "HOMOLOGADO"? this.formulario.disable({
-        onlySelf:true,
-        emitEvent:false
-      }) : this.formulario.enable({
-       //onlySelf:true,
-       //emitEvent:false
-      });  
+    if(!this.formValue("arquivo.statusEnvio", true)) return
+    this.formValue("arquivo.statusEnvio") === "HOMOLOGADO"
+      ? this.formulario.disable({
+          onlySelf: true,
+          emitEvent: false,
+        })
+      : this.formulario.enable({
+          //onlySelf:true,
+          //emitEvent:false
+        });
   }
 
   resetar() {

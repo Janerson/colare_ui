@@ -31,6 +31,8 @@ import { ValidatorComponentComponent } from "./ui/validator-component/validator-
 import { CardComponent } from "./ui/card/card.component";
 import { CustomAlertComponent } from "./ui/custom-alert/custom-alert.component";
 import { PopoverModule } from "ngx-bootstrap/popover";
+import { IconPickerModule } from 'ngx-icon-picker';
+import { ToastrModule } from 'ngx-toastr';
 import {
   NgWizardModule,
   NgWizardConfig,
@@ -38,6 +40,7 @@ import {
   TOOLBAR_POSITION,
 } from "ng-wizard";
 import { AlertModule } from "ngx-bootstrap/alert";
+import { TableAcoesComponent } from './ui/table-acoes/table-acoes.component';
 registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
 //registerPlugin(FilePondPluginGetFile)
 
@@ -73,6 +76,7 @@ const ngWizardConfig: NgWizardConfig = {
     ValidatorComponentComponent,
     CardComponent,
     CustomAlertComponent,
+    TableAcoesComponent,
   ],
   imports: [
     CommonModule,
@@ -85,6 +89,10 @@ const ngWizardConfig: NgWizardConfig = {
     AlertModule.forRoot(),
     NgWizardModule.forRoot(ngWizardConfig),
     FilePondModule,
+    IconPickerModule,
+    ToastrModule.forRoot({
+      progressBar:true
+    })
   ],
   exports: [
     NgWizardModule,
@@ -106,6 +114,8 @@ const ngWizardConfig: NgWizardConfig = {
     StatusEnvioPipe,
     ValidatorComponentComponent,
     CardComponent,
+    IconPickerModule,
+    TableAcoesComponent
     // BsDatepickerModule
   ],
   providers: [BsLocaleService, BsModalService, AlertService],

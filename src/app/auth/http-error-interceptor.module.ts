@@ -9,17 +9,19 @@ import {
 } from "@angular/common/http";
 import { NgxUiLoaderService } from "ngx-ui-loader";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { catchError } from "rxjs/operators";
+import { catchError, retry } from "rxjs/operators";
 import { BASE_URL_TCM } from "../../environments/environment";
 import { AlertService, AlertTypes } from "../shared/services/alert.service";
 import { Erro500 } from "../shared/entity/colare/colare-erro";
 import { APIError } from "../shared/entity/api/api-error";
 import { Erro412Component } from "../shared/ui/erro412/erro412.component";
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class HttpRequestErrorInterceptor implements HttpInterceptor {
   constructor(
     private alertService: AlertService,
+    private toastService : ToastrService,
     private ngxLoader: NgxUiLoaderService
   ) {}
   intercept(
@@ -28,7 +30,6 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
    
     return next.handle(request).pipe(      
-      //retry(1),
       catchError((err: HttpErrorResponse) => {        
         request.url.startsWith(BASE_URL_TCM)
           ? this.hanldeErrorTCM(err)
@@ -77,23 +78,24 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
 
     let msg = "";
     switch (error.status) {
-      case 400:
-      case 401:
-        this.alertService.showAlert(
-          AlertTypes.DANGER,
-          "Usuário e/ou senha inválido!",
-          "Erro"
-        );
+      // case 400:
+      // case 401:        
+      //   this.alertService.showAlert(
+      //     AlertTypes.DANGER,
+      //     "Usuário e/ou senha inválido!",
+      //     "Erro"
+      //   );
+      //   break;
       case 415:
         this.alertService.showAlert(AlertTypes.DANGER,apiError.message, "ERROR");
         break;
       case 500:
         this.alertService.showAlert(AlertTypes.DANGER,apiError.message, "ERROR");
         break;
-      default:
-        msg = error.message;
-        this.alertService.showAlert(AlertTypes.DANGER,msg, "ERROR");
-        break;
+      // default:
+      //   msg = error.message;
+      //   this.alertService.showAlert(AlertTypes.DANGER,msg, "ERROR");
+      //   break;
     }
   }
 }

@@ -1,4 +1,4 @@
-import { NgxUiLoaderModule, SPINNER, NgxUiLoaderConfig, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule } from "ngx-ui-loader";
+import { NgxUiLoaderModule, SPINNER, NgxUiLoaderConfig } from "ngx-ui-loader";
 import { BrowserModule } from "@angular/platform-browser";
 import { ReactiveFormsModule } from "@angular/forms";
 import { NgModule, enableProdMode, APP_INITIALIZER } from "@angular/core";
@@ -32,7 +32,6 @@ import { DefaultLayoutComponent } from "./containers";
 import { P404Component } from "./views/error/404.component";
 import { P500Component } from "./views/error/500.component";
 import { LoginComponent } from "./views/login/login.component";
-import { RegisterComponent } from "./views/register/register.component";
 
 const APP_CONTAINERS = [DefaultLayoutComponent];
 
@@ -60,7 +59,6 @@ import { InterceptorTCM } from "./auth/interceptor-tcm.module";
 import { HttpErrorInterceptor } from "./auth/http-error-interceptor.module";
 import { appInitializer } from './auth/app.initialize';
 import { AuthenticationService } from './auth/authentication.service';
-import { ConfiguracaoModule } from './views/config/configuracao/configuracao.module';
 
 enableProdMode();
 
@@ -95,9 +93,8 @@ enableProdMode();
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
-    LoginComponent,
-    RegisterComponent,
-  ],
+    LoginComponent
+   ],
   providers: [
     {
       provide: APP_INITIALIZER,
