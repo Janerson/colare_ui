@@ -8,7 +8,7 @@ import {
   AlertService,
   AlertTypes,
 } from "../../../shared/services/alert.service";
-import { switchMap } from "rxjs/operators";
+import { switchMap, tap } from "rxjs/operators";
 import { EMPTY } from "rxjs";
 
 @Component({
@@ -49,7 +49,7 @@ export class InavdataComponent extends BaseFormComponent implements OnInit {
         "SIM",
         "NÃO"
       )
-      .pipe(switchMap((value) => (value ? this.service.excluir(uuid) : EMPTY)))
+      .pipe(switchMap((value) => value ? this.service.excluir(uuid) : EMPTY))
       .subscribe(() =>
         this.alertService.showAlert(
           AlertTypes.SUCESS,

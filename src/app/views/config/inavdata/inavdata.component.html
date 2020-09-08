@@ -31,7 +31,7 @@
               <tr *ngFor="let item of page?.content">
                 <td style="width: 94px;">
                   <app-table-acoes botoes="['editar','apagar']" (onEditar)="editar(item.uuid)"
-                    (onApagar)="excluir(item.uuid)">
+                    (onApagar)="excluir(item.uuid, $event)">
                   </app-table-acoes>
                 </td>
                 <td>{{item.name}}</td>

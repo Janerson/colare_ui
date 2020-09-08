@@ -1,10 +1,16 @@
-<button type="button" class="btn btn-primary btn-sm" (click)="onEditar.emit(true)"
-        popover="Editar"
-        triggers="mouseenter:mouseleave"
-        *ngIf="botoes.indexOf('editar') > 0"
-        ><span class="fa fa-pencil"></span></button>
-<button type="button" class="btn btn-danger btn-sm" (click)="onApagar.emit(true)"
-        popover="Apagar"
-        triggers="mouseenter:mouseleave"
-        *ngIf="botoes.indexOf('apagar') > 0"
-        ><span class="fa fa-trash"></span></button>
+<button type="button" class="btn btn-primary btn-sm" (click)="onEditar.emit(true)" popover="Editar"
+        triggers="mouseenter:mouseleave" *ngIf="botoes.indexOf('editar') > 0"><span
+                class="fa fa-pencil"></span></button>
+<button type="button" class="btn btn-danger btn-sm" (click)="onApagar.emit(true)" popover="Apagar"
+        triggers="mouseenter:mouseleave" *ngIf="botoes.indexOf('apagar') > 0"><span
+                class="fa fa-trash"></span></button>
+<!-- <button type="button" class="btn btn-danger btn-sm" popover="Apagar" *ngIf="botoes.indexOf('apagar') > 0"
+        [popover]="deleteDialog" [outsideClick]="true" [adaptivePosition]="false" placement="right"
+        popoverTitle="Deseja realmente excluir este item?"><span class="fa fa-trash"></span></button> -->
+
+<!-- <ng-template #deleteDialog>
+        <div style="text-align: center;">
+                <button type="button" class="btn btn-danger btn-sm" (click)="onApagar.emit(true)">Sim</button>
+                <button type="button" class="btn btn-success btn-sm" (click)="onApagar.emit(false)">Não</button>
+        </div>
+</ng-template> -->
