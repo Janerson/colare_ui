@@ -5,7 +5,7 @@ import {
   AfterViewInit,
   AfterContentInit,
 } from "@angular/core";
-import { Subscription, Subject } from "rxjs";
+import { Subscription, Subject, EMPTY } from "rxjs";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HelperService } from "../../../../shared/services/helper.service";
 import { MenuService } from "../../../../shared/services/menu.service";
@@ -20,6 +20,7 @@ import {
 import { ChildrenPopupComponent } from "./children-popup/children-popup.component";
 import { ModalService } from "../../../../shared/services/modal.service";
 import { Icon } from 'ngx-icon-picker';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: "app-inavdata-detail",
@@ -120,15 +121,16 @@ export class InavdataDetailComponent
         "SIM",
         "NÃO"
       )
-      .subscribe((value) => {
-        if (value) {
-          const children = this.formValue("children", true) as FormArray;
-          this.menuService.excluir(children.at(index).get("uuid").value).subscribe()
-          children.removeAt(index);
-        }
-      });
+      .pipe(switchMap((value) => (value ? this.excluirSubLink(index): EMPTY)))
+      .subscribe();
   }
 
+  excluirSubLink(index:number){
+    const children = this.formValue("children", true) as FormArray;
+    let uuid = children.at(index).get("uuid").value
+    children.removeAt(index);
+    return this.menuService.excluir(uuid)
+  }
 
   popupAddChildren(data?: Object, index?:number) {
     

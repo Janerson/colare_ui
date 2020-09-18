@@ -40,7 +40,7 @@ export class GenericDao<K, T extends BaseEntity<K>> {
   listar() {
     return this.http
       .get<T[]>(`${environment.api_url(this.layout)}/ALL`)
-      .pipe(tap(() => this._refresh$.next()));
+     // .pipe(tap(() => this._refresh$.next()));
   }
   /**
    * Consulta Paginada

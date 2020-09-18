@@ -40,9 +40,16 @@ export class DefaultLayoutComponent extends BaseFormComponent
   }
 
   ngOnInit(): void {
-    this.menuService.listar().subscribe((s) => {
-      this.navItems = s;
+    this.menuService.listar().subscribe((data) => {
+      this.navItems = data;
       this.filtered = this.navItems;
+    });
+
+    this.menuService.refresh.subscribe(() => {
+      this.menuService.listar().subscribe((data) => {
+        this.navItems =data;
+        this.filtered = this.navItems;
+      });
     });
 
     this.formFilter.get("filter").valueChanges.subscribe((str) => {
