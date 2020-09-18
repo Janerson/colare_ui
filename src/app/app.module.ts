@@ -59,6 +59,7 @@ import { InterceptorTCM } from "./auth/interceptor-tcm.module";
 import { HttpErrorInterceptor } from "./auth/http-error-interceptor.module";
 import { appInitializer } from './auth/app.initialize';
 import { AuthenticationService } from './auth/authentication.service';
+import { BsModalService, ModalModule } from "ngx-bootstrap/modal";
 
 enableProdMode();
 
@@ -80,6 +81,7 @@ enableProdMode();
     NgxJsonViewerModule,
     ReactiveFormsModule,
     SharedModule,
+    ModalModule.forRoot(),
     InterceptorApi,
     InterceptorTCM,
     HttpErrorInterceptor,
@@ -93,14 +95,15 @@ enableProdMode();
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
-    LoginComponent
-   ],
+    LoginComponent,
+  ],
   providers: [
+    BsModalService,
     {
       provide: APP_INITIALIZER,
-      useFactory:appInitializer,
-      multi:true,
-      deps:[AuthenticationService]
+      useFactory: appInitializer,
+      multi: true,
+      deps: [AuthenticationService],
     },
     {
       provide: LocationStrategy,
@@ -111,7 +114,7 @@ enableProdMode();
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
     CookieService,
-  ],
+  ],  
   bootstrap: [AppComponent],
 })
 export class AppModule {}

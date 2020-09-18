@@ -35,6 +35,11 @@ export class InavdataComponent extends BaseFormComponent implements OnInit {
     this.service.listarPaginado().subscribe((data) => {
       this.page = data;
     });
+    this.service.refresh.subscribe(() => {
+      this.service.listarPaginado().subscribe((data) => {
+        this.page = data;
+      });
+    });
   }
 
   editar(uuid: string) {
@@ -49,7 +54,7 @@ export class InavdataComponent extends BaseFormComponent implements OnInit {
         "SIM",
         "NÃO"
       )
-      .pipe(switchMap((value) => value ? this.service.excluir(uuid) : EMPTY))
+      .pipe(switchMap((value) => (value ? this.service.excluir(uuid) : EMPTY)))
       .subscribe(() =>
         this.alertService.showAlert(
           AlertTypes.SUCESS,

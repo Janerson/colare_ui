@@ -80,6 +80,7 @@ export class InavdataDetailComponent
     this.adicionaControl("name", this.builder.control(null, []));
     this.adicionaControl("url", this.builder.control(null, []));
     this.adicionaControl("icon", this.builder.control(null,[]));
+    this.adicionaControl("title", this.builder.control(false, []));
     this.adicionaControl(
       "badge",
       this.builder.group({
@@ -89,7 +90,6 @@ export class InavdataDetailComponent
         class: this.builder.control(null),
       })
     );
-    this.adicionaControl("title", this.builder.control(false, []));
     this.adicionaControl("children", this.builder.array([]));
     this.adicionaControl("variant", this.builder.control(null, []));
     this.adicionaControl("divider", this.builder.control(null, []));
@@ -123,16 +123,23 @@ export class InavdataDetailComponent
       .subscribe((value) => {
         if (value) {
           const children = this.formValue("children", true) as FormArray;
+          this.menuService.excluir(children.at(index).get("uuid").value).subscribe()
           children.removeAt(index);
         }
       });
   }
 
-  popupAddChildren(data?: Object) {
-    const subs = this.modalService.changeEmitted$.subscribe((value) => {
-      this.addChildren(value);
-      this.menuService.salvar(this.formValue()).subscribe();
+
+  popupAddChildren(data?: Object, index?:number) {
+    
+    const subs = this.modalService.changeEmitted$.subscribe((value : MenuLink) => {      
+      if(index){
+        this.getChildren(index).patchValue(value)
+      }else{
+        this.addChildren(value);
+      }
     });
+
     this.alertService
       .showModal(ChildrenPopupComponent, {
         class: "modal-lg",
@@ -141,14 +148,20 @@ export class InavdataDetailComponent
           data: data,
         },
       })
-      .onHidden.subscribe(() => {
+      .onHidden.subscribe((e) => {
         subs.unsubscribe();
         //this.submit()
+         this.menuService.salvar(this.formValue()).subscribe();
       });
   }
 
   onPickerIcon(event) {
     this.formValue("icon", true).setValue(event);
+  }
+
+  getChildren(index){
+    const children = this.formValue("children", true) as FormArray;
+    return children.at(index)
   }
 
   addOrRemoveChildren() {

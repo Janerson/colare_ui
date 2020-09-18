@@ -1,19 +1,18 @@
 import { BaseEntity } from '../../base-entity';
+import { Arquivo } from "../../colare/colare-retorno";
 
 /**
  * Informações sobre a regulamentação municipal do pregão, registro de preços e LC 123/06
  */
 export interface RegLicitacao extends BaseEntity<String> {
- 
-
   /**
    * Código do Tipo de Envio
    */
-   codTipoEnvio: number;
+  codTipoEnvio: number;
   /**
    * Tipo de regulamentação
    */
-   codTipoRegulamentacao: number;
+  codTipoRegulamentacao: number;
   /**
    * Data do Decreto Municipal
    */
@@ -39,7 +38,7 @@ export interface RegLicitacao extends BaseEntity<String> {
   /**
    * Número do Decreto Municipal Regulamentador do Pregão, Registro de Preços ou da LC 123-06
    */
-  numeroDecretoMunicipal?: string;   
+  numeroDecretoMunicipal?: string;
 }
 
 /**

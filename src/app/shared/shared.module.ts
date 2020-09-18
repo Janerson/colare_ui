@@ -84,15 +84,15 @@ const ngWizardConfig: NgWizardConfig = {
     ReactiveFormsModule,
     NgxJsonViewerModule,
     PaginationModule.forRoot(),
-    ModalModule.forRoot(),
+    //ModalModule.forRoot(),
     PopoverModule.forRoot(),
     AlertModule.forRoot(),
     NgWizardModule.forRoot(ngWizardConfig),
     FilePondModule,
     IconPickerModule,
     ToastrModule.forRoot({
-      progressBar:true
-    })
+      progressBar: true,
+    }),
   ],
   exports: [
     NgWizardModule,
@@ -115,10 +115,10 @@ const ngWizardConfig: NgWizardConfig = {
     ValidatorComponentComponent,
     CardComponent,
     IconPickerModule,
-    TableAcoesComponent
+    TableAcoesComponent,
     // BsDatepickerModule
   ],
-  providers: [BsLocaleService, BsModalService, AlertService],
+  providers: [BsLocaleService,  AlertService],
   //entryComponents: [AlertModalComponent,BaseModalComponent,PassaporteComponent],
 })
 export class SharedModule {

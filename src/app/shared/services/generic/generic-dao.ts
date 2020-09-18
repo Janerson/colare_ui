@@ -6,34 +6,9 @@ import { Page } from "../../entity/api/page";
 import { environment } from "../../../../environments/environment";
 import { Subject } from "rxjs";
 import { BaseEntity } from "../../entity/base-entity";
-import { Arquivo, ColareRetorno } from '../../entity/colare/colare-retorno';
+import { Arquivo, ColareRetorno } from "../../entity/colare/colare-retorno";
 
 export class GenericDao<K, T extends BaseEntity<K>> {
-  /**
-   * Retorna a quantidade de caracteres {n} da esquerda p/ direita
-   * @param str String
-   * @param n Qtd de caracteres
-   */
-  left = (str: any, n: any) => {
-    if (n <= 0) return "";
-    else if (n > String(str).length) return str;
-    else return String(str).substring(0, n);
-  };
-
-  /**
-   * Retorna a quantidade de caracteres {n} da direita p/ esquerda
-   * @param str String
-   * @param n Qtd de caracteres
-   */
-  right = (str: any, n: any) => {
-    if (n <= 0) return "";
-    else if (n > String(str).length) return str;
-    else {
-      var iLen = String(str).length;
-      return String(str).substring(iLen, iLen - n);
-    }
-  };
-
   private removeEmpty = (obj: T) => {
     delete obj.uuid;
     delete obj.arquivo;
@@ -63,19 +38,29 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    * Lista os Layout´s
    */
   listar() {
-    return this.http.get<T[]>(`${environment.api_url(this.layout)}/ALL`)
-    .pipe(tap(() => this._refresh$.next()));
+    return this.http
+      .get<T[]>(`${environment.api_url(this.layout)}/ALL`)
+      .pipe(tap(() => this._refresh$.next()));
   }
   /**
    * Consulta Paginada
    * @param page Número da página default 0
+   * @param searchBy pesquisar por...
+   * @param orderBy Coluna a ser ordenada default seq
+   * @param dir Direção ordenamento ASC | DESC default ASC
    */
-  paginado(page?: number) {
-    return page !== undefined
-      ? this.http.get<Page<T>>(
-          `${environment.api_url(this.layout)}/PAGED?page=${page}`
-        )
-      : this.http.get<Page<T>>(`${environment.api_url(this.layout)}/PAGED`);
+  paginado(
+    page: number = 0,
+    searchBy?: string,
+    orderBy?: string,
+    dir?: string
+  ) {
+    return this.http.get<Page<T>>(
+      `${environment.api_url(this.layout)}/PAGED?page=${page}
+      &search=${searchBy || ""}
+      &sort=${orderBy || "seq"}
+      &dir=${dir || "asc"}`
+    );
   }
 
   /**
@@ -84,10 +69,17 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    * @param tabela Nome tabela de dominio
    * @param termSearch termo para pesquisa
    */
-  dominioPaginado(page: number = 0, tabela: string, termSearch?:string ) {
-    let str = termSearch || ""
+  dominioPaginado(
+    page: number = 0,
+    tabela: string,
+    termSearch?: string,
+    orderBy?: string,
+    dir?: string
+  ) {
     return this.http.get<Page<T>>(
-      `${environment.api_url(this.layout)}/PAGED/${tabela}?page=${page}&search=${str}`
+      `${environment.api_url(
+        this.layout
+      )}/PAGED/${tabela}?page=${page}&search=${termSearch || ""}&sort=${orderBy || "codigo"}&dir=${dir || "asc"}`
     );
   }
 
@@ -120,15 +112,12 @@ export class GenericDao<K, T extends BaseEntity<K>> {
     }
     return this.gravar(obj);
   }
-  
-  
-  excluir(uuid:string) {
-    return this.http
-      .delete(`${environment.api_url(this.layout)}/${uuid}`)
-      .pipe(
-        take(1),
-        tap(() => this._refresh$.next())
-      );
+
+  excluir(uuid: string) {
+    return this.http.delete(`${environment.api_url(this.layout)}/${uuid}`).pipe(
+      take(1),
+      tap(() => this._refresh$.next())
+    );
   }
 
   private atualizar(obj: T) {

@@ -56,20 +56,24 @@ export class DefaultLayoutComponent extends BaseFormComponent
 
   filtrarMenu(str: string, array: MenuLink[]): MenuLink[] {
     let resultado: MenuLink[] = [];
+    let title:MenuLink = {}
     array.forEach((el) => {
       
       let tmp = [];
       let o: MenuLink = {};
-      let title:MenuLink = {}
+    
       let found = false;
 
-      if(el.title) title = el;
-      if (el.name.toLowerCase().indexOf(str.toLowerCase()) > -1) {      
+      if(el.title){
+        title = el;        
+      } 
+
+      if (el?.name?.toLowerCase().indexOf(str.toLowerCase()) > -1) {      
         o = el;
         found = true;
       }
 
-      if (isArray(el.children)) {
+      if (Array.isArray(el.children)) {
         o.name = el.name
         tmp = this.filtrarMenu(str, el.children);
         if (tmp.length) {
@@ -77,10 +81,9 @@ export class DefaultLayoutComponent extends BaseFormComponent
           found = true;
         }
       }
-      if (found) {
-        if(!resultado.includes(title)){
-          resultado.push(title);
-        }
+
+      if (found) {          
+          resultado.push(title);       
         resultado.push(o);
       }
     });

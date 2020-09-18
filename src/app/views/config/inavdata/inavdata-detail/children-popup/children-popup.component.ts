@@ -12,6 +12,7 @@ import { MenuLink } from '../../../../../shared/entity/api/menu-links';
 export class ChildrenPopupComponent implements OnInit {
   formulario: FormGroup;
   data : MenuLink;
+  btnTitle = "Adicionar"
 
   constructor(
     private builder: FormBuilder,
@@ -21,12 +22,16 @@ export class ChildrenPopupComponent implements OnInit {
 
   ngOnInit(): void {
     this.formulario = this.builder.group({
+      uuid: this.builder.control(null),
       name: this.builder.control(null, [Validators.required]),
       url: this.builder.control(null, [Validators.required]),
       icon: this.builder.control(null, [Validators.required]),
     });
 
-    if(this.data)this.formulario.patchValue(this.data)
+    if(this.data){
+      this.formulario.patchValue(this.data)
+      this.btnTitle = "Atualizar"
+    }
   }
 
   onSubmit() {
@@ -38,7 +43,7 @@ export class ChildrenPopupComponent implements OnInit {
     this.modalService.emitChange(this.formulario.value);
     this.cancelar()
   }
-  cancelar(){
+  cancelar(){    
     this.bsModalRef.hide()
   }
 }
