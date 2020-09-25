@@ -1,9 +1,8 @@
+import { take } from 'rxjs/operators';
 import {
   Component,
   OnInit,
   OnDestroy,
-  AfterViewInit,
-  AfterContentInit,
 } from "@angular/core";
 import { Subscription, Subject, EMPTY } from "rxjs";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -12,14 +11,13 @@ import { MenuService } from "../../../../shared/services/menu.service";
 import { BaseFormComponent } from "../../../../shared/ui/base-form/base-form.component";
 import { FormService } from "../../../../shared/services/form.service";
 import { MenuLink } from "../../../../shared/entity/api/menu-links";
-import { FormControl, FormGroup, FormArray, Validators } from "@angular/forms";
+import { FormControl, FormArray } from "@angular/forms";
 import {
   AlertService,
   AlertTypes,
 } from "../../../../shared/services/alert.service";
 import { ChildrenPopupComponent } from "./children-popup/children-popup.component";
 import { ModalService } from "../../../../shared/services/modal.service";
-import { Icon } from 'ngx-icon-picker';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -30,7 +28,7 @@ import { switchMap } from 'rxjs/operators';
 export class InavdataDetailComponent
   extends BaseFormComponent
   implements OnInit, OnDestroy {
-  private subscriptionRoute: Subscription;
+  private subscriptions : Subscription = new Subscription()
   private menuSubject: Subject<MenuLink>;
   protected isTitle = false;
   protected uuid: String;
@@ -52,18 +50,18 @@ export class InavdataDetailComponent
   ngOnInit(): void {
     this.formService.emitChange(this.formulario);
     this.criarFormulario();
-    this.menuSubject.subscribe((value) => {
+    this.subscriptions.add(this.menuSubject.subscribe((value) => {
       this.preencherFormulario(value);
-    });
+    }));
 
-    this.subscriptionRoute = this.route.paramMap.subscribe((param) => {
+     this.subscriptions.add(this.route.paramMap.subscribe((param) => {
       this.uuid = param.get("id");
-      if (this.helper.isUUID(this.uuid)) {
+      if (this.helper.isUUID(this.uuid)) { //719cf21e-7490-4abd-8b3d-840d2a644962 
         this.menuService.buscarPorUUID(this.uuid).subscribe((value) => {
           this.menuSubject.next(value);
         });
       }
-    });    
+    }));    
   }
 
   submit() {
@@ -134,7 +132,7 @@ export class InavdataDetailComponent
 
   popupAddChildren(data?: Object, index?:number) {
     
-    const subs = this.modalService.changeEmitted$.subscribe((value : MenuLink) => {      
+    this.modalService.changeEmitted$.subscribe((value : MenuLink) => {      
       if(index){
         this.getChildren(index).patchValue(value)
       }else{
@@ -142,7 +140,7 @@ export class InavdataDetailComponent
       }
     });
 
-    this.alertService
+    this.subscriptions.add(this.alertService
       .showModal(ChildrenPopupComponent, {
         class: "modal-lg",
         initialState: {
@@ -150,11 +148,10 @@ export class InavdataDetailComponent
           data: data,
         },
       })
-      .onHidden.subscribe((e) => {
-        subs.unsubscribe();
-        //this.submit()
-         this.menuService.salvar(this.formValue()).subscribe();
-      });
+      .onHidden.subscribe(
+        () => this.menuService.salvar(this.formValue()).subscribe(),
+        (err) => console.log("Ops... errr")
+      ));
   }
 
   onPickerIcon(event) {
@@ -180,8 +177,7 @@ export class InavdataDetailComponent
   }
 
   ngOnDestroy(): void {
-    this.subscriptionRoute.unsubscribe();
-    this.menuSubject.unsubscribe();
+    this.subscriptions.unsubscribe()
     this.formService.emitChange({});
   }
 }

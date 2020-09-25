@@ -21,6 +21,10 @@ export class DefaultLayoutComponent extends BaseFormComponent
   protected filtered: MenuLink[]; //= navItems;
   formFilter: FormGroup;
 
+  validType = "success"
+  pristineType = "success"
+  dirtyType = "success"
+
   constructor(
     private formService: FormService,
     private cookieService: CookieService,
@@ -59,6 +63,11 @@ export class DefaultLayoutComponent extends BaseFormComponent
     if (document.body.classList.contains('modal-open')) {
       document.body.classList.remove('modal-open');
     }
+
+  }
+
+  submit() {
+    throw new Error('Method not implemented.');
   }
 
   filtrarMenu(str: string, array: MenuLink[]): MenuLink[] {

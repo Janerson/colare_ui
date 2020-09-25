@@ -13,6 +13,7 @@ import { distinctUntilChanged, debounce, switchMap } from "rxjs/operators";
 })
 export class TipoDeDominioComponent extends BaseFormComponent
   implements OnInit {
+ 
   private subscription: Subscription;
   private serviceSubscription: Subscription;
 
@@ -27,6 +28,7 @@ export class TipoDeDominioComponent extends BaseFormComponent
     super();
   }
 
+  
   ngOnInit(): void {
     this.subscription = this.route.data.subscribe((d) => {
       this.title = d.title;
@@ -39,6 +41,10 @@ export class TipoDeDominioComponent extends BaseFormComponent
 
     this.formulario.addControl("descricao", this.builder.control(null, []));
     this.onValueChanged();
+  }
+
+  submit() {
+    throw new Error('Method not implemented.');
   }
 
   private listar() {

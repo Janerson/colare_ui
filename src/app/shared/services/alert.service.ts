@@ -56,8 +56,8 @@ export class AlertService {
         message: message,
         title: title,
         isConfirm: true,
-        okText: okTxt,
-        cancelText: canceltext,
+        okText: okTxt || "ok",
+        cancelText: canceltext || "cancelar",
       },
     });
     

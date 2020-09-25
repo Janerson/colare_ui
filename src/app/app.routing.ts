@@ -8,6 +8,7 @@ import { P404Component } from "./views/error/404.component";
 import { P500Component } from "./views/error/500.component";
 import { LoginComponent } from "./views/login/login.component";
 import { AuthGuard } from "./auth/auth-guard.guard";
+import { CanDeactivateGuard } from './auth/can-deactive.guard';
 
 export const routes: Routes = [
   {
@@ -46,7 +47,7 @@ export const routes: Routes = [
     },
     children: [
       {
-        path: "LIC",
+        path: "LIC",      
         loadChildren: () =>
           import("./views/licitacao/licitacao.module").then(
             (m) => m.LicitacaoModule

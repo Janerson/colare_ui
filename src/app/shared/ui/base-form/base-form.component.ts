@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, HostListener, OnInit } from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
@@ -6,7 +6,7 @@ import {
   FormControl,
   Validators,
 } from "@angular/forms";
-import { of, Observable, empty, interval, EMPTY } from "rxjs";
+import { of, Observable, interval, EMPTY } from "rxjs";
 import {
   tap,
   switchMap,
@@ -16,11 +16,11 @@ import {
 } from "rxjs/operators";
 import { ColareRetorno } from "../../entity/colare/colare-retorno";
 
-@Component({
-  selector: "app-base-form",
-  template: "",
-})
-export class BaseFormComponent {
+// @Component({
+//   selector: "app-base-form",
+//   template: "",
+// })
+export abstract class BaseFormComponent {
   protected builder: FormBuilder = new FormBuilder();
   protected valueChanged: boolean = false;
 
@@ -34,9 +34,19 @@ export class BaseFormComponent {
    *
    * Método chamado quando formulario é submetido e válido
    */
-  submit() {
-    alert("O método submit() precisa ser sobrescrito.");
-    throw new Error("O método submit() precisa ser sobrescrito.");
+  abstract submit();
+
+  public canDeactivate(): boolean {
+    return !this.formulario.dirty;
+  }
+
+  @HostListener("window:beforeunload", ["$event"])
+  unload($event: any) {
+    if (!this.canDeactivate()) {
+      $event.returnValue = true;
+    } else {
+      $event.returnValue = false;
+    }
   }
 
   /**
@@ -65,7 +75,7 @@ export class BaseFormComponent {
       .statusChanges.pipe(
         distinctUntilChanged(),
         debounce(() => interval(1500)),
-        switchMap((status: any) => (status === "VALID" ? observable : empty()))
+        switchMap((status: any) => (status === "VALID" ? observable : EMPTY))
       )
       .subscribe(
         (result: any) => {
@@ -77,19 +87,19 @@ export class BaseFormComponent {
 
   /**
    * Adiciona FormControls ao Formulário
-   * @param name 
-   * @param control 
+   * @param name
+   * @param control
    */
-  adicionaControl(name:string,control : FormControl | FormArray | FormGroup){
-    this.formulario.addControl(name,control)
+  adicionaControl(name: string, control: FormControl | FormArray | FormGroup) {
+    this.formulario.addControl(name, control);
   }
   /**
    * Remove FormControls do Formulário
-   * @param name 
-   * @param control 
+   * @param name
+   * @param control
    */
-  removeControl(name:string){
-    this.formulario.removeControl(name)
+  removeControl(name: string) {
+    this.formulario.removeControl(name);
   }
 
   /**
@@ -173,7 +183,7 @@ export class BaseFormComponent {
    * o formulário, será desativado para edição
    */
   validarStatusEnvio() {
-    if(!this.formValue("arquivo.statusEnvio", true)) return
+    if (!this.formValue("arquivo.statusEnvio", true)) return;
     this.formValue("arquivo.statusEnvio") === "HOMOLOGADO"
       ? this.formulario.disable({
           onlySelf: true,

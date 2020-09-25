@@ -3,6 +3,7 @@ import { BaseFormComponent } from "../../../shared/ui/base-form/base-form.compon
 import { Page } from "../../../shared/entity/api/page";
 import { RegLicitacaoService } from '../service/reg-licitacao.service';
 import { RegLicitacao } from '../../../shared/entity/LIC/reg_licitacao/reg-licitacao';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-reg-licitacao",
@@ -16,7 +17,7 @@ export class RegLicitacaoComponent extends BaseFormComponent implements OnInit {
   
   protected page: Page<RegLicitacao>;
 
-  constructor(protected service: RegLicitacaoService) {
+  constructor(protected service: RegLicitacaoService, private router: Router) {
     super();
   }
 
@@ -25,6 +26,11 @@ export class RegLicitacaoComponent extends BaseFormComponent implements OnInit {
       this.page = data;
     });
   }
+
+  editar(uuid: string) {
+    this.router.navigate(["/LIC/REG_LICITACAO/", uuid]);
+  }
+
 
   pageChanged(event: any): void {
     this.service.paginado(event.page - 1).subscribe(data => {

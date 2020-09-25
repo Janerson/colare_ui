@@ -68,9 +68,14 @@
       <tab>
         <ng-template tabHeading><i class="fa fa-code"></i>&nbsp;Developer</ng-template>
         <div class="list-group list-group-accent">
-          <div
-            class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">
-            Status Form:{{formulario.valid}}</div>
+          <div class="list-group-item list-group-item-accent-{{ formulario.valid ? 'success' : 'danger'}} bg-light text-center font-weight-bold text-muted text-uppercase small">
+            Form Valid:{{formulario.valid}}</div>
+          <div class="list-group-item list-group-item-accent-{{ formulario.dirty ? 'success' : 'danger'}} bg-light text-center font-weight-bold text-muted text-uppercase small">
+            Dirty:{{formulario.dirty}}</div>
+          <div class="list-group-item list-group-item-accent-{{ formulario.pristine ? 'success' : 'danger'}} bg-light text-center font-weight-bold text-muted text-uppercase small">
+            Pristine:{{formulario.pristine}}</div>
+        
+
           <div class="list-group-item  list-group-item-divider"></div>
           <div
             class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">

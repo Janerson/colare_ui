@@ -28,8 +28,11 @@ export class ValidatorComponentComponent implements OnInit, AfterViewInit {
   }
 
   private erros(err: ValidationErrors) {
+   
     this.isValid();
+
     if (!err) return;
+
     Object.keys(err).forEach((key) => {
       console.log(key);
       switch (key) {
@@ -43,6 +46,7 @@ export class ValidatorComponentComponent implements OnInit, AfterViewInit {
           break;
       }
     });
+    
   }
 
   private isValid() {

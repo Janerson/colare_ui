@@ -7,6 +7,7 @@ import { environment } from "../../../../environments/environment";
 import { Subject } from "rxjs";
 import { BaseEntity } from "../../entity/base-entity";
 import { Arquivo, ColareRetorno } from "../../entity/colare/colare-retorno";
+import { trim } from "jquery";
 
 export class GenericDao<K, T extends BaseEntity<K>> {
   private removeEmpty = (obj: T) => {
@@ -38,9 +39,8 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    * Lista os Layout´s
    */
   listar() {
-    return this.http
-      .get<T[]>(`${environment.api_url(this.layout)}/ALL`)
-     // .pipe(tap(() => this._refresh$.next()));
+    return this.http.get<T[]>(`${environment.api_url(this.layout)}/ALL`);
+    // .pipe(tap(() => this._refresh$.next()));
   }
   /**
    * Consulta Paginada
@@ -56,10 +56,7 @@ export class GenericDao<K, T extends BaseEntity<K>> {
     dir?: string
   ) {
     return this.http.get<Page<T>>(
-      `${environment.api_url(this.layout)}/PAGED?page=${page}
-      &search=${searchBy || ""}
-      &sort=${orderBy || "seq"}
-      &dir=${dir || "asc"}`
+      `${environment.api_url(this.layout)}/PAGED?page=${page}&search=${searchBy || ""}&sort=${orderBy || "seq"}&dir=${dir || "asc"}`
     );
   }
 
@@ -77,9 +74,7 @@ export class GenericDao<K, T extends BaseEntity<K>> {
     dir?: string
   ) {
     return this.http.get<Page<T>>(
-      `${environment.api_url(
-        this.layout
-      )}/PAGED/${tabela}?page=${page}&search=${termSearch || ""}&sort=${orderBy || "codigo"}&dir=${dir || "asc"}`
+      `${environment.api_url(this.layout)}/PAGED/${tabela}?page=${page}&search=${termSearch || ""}&sort=${orderBy || "codigo"}&dir=${dir || "asc"}`
     );
   }
 
@@ -88,9 +83,7 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    *@param tabela
    */
   listaDominio(tabela: string, status: boolean) {
-    return this.http.get<T[]>(
-      `${environment.api_url(this.layout)}/ALL/${tabela}/${status}`
-    );
+    return this.http.get<T[]>(`${environment.api_url(this.layout)}/ALL/${tabela}/${status}`);
   }
   /**
    * Busca layout pelo UUID
@@ -123,20 +116,16 @@ export class GenericDao<K, T extends BaseEntity<K>> {
   private atualizar(obj: T) {
     return this.http
       .put(`${environment.api_url(this.layout)}/${obj.uuid}`, obj)
-      .pipe(
-        take(1),
-        tap(() => this._refresh$.next())
-      );
+      .pipe(take(1),tap(() => this._refresh$.next()));
   }
   private gravar(obj: T) {
-    return this.http.post(`${environment.api_url(this.layout)}`, obj).pipe(
-      take(1),
-      tap(() => this._refresh$.next())
+    return this.http.post(`${environment.api_url(this.layout)}`, obj)
+    .pipe(take(1), tap(() => this._refresh$.next())
     );
   }
 
   /**
-   * Faz o upload o arquivo de json das tabelas de Domínio
+   * Faz o upload do arquivo de json das tabelas de Domínio
    * @param file Arquivo json da tabela de Domínio
    * @param tabela Nome da tabela de Domínio
    */
@@ -144,12 +133,8 @@ export class GenericDao<K, T extends BaseEntity<K>> {
     let formData = new FormData();
     if (file != null) {
       formData.set("file", file);
-      return this.http
-        .post(`${environment.api_url(this.layout)}/${tabela}`, formData)
-        .pipe(
-          take(1),
-          tap(() => this._refresh$.next())
-        );
+      return this.http.post(`${environment.api_url(this.layout)}/${tabela}`, formData)
+        .pipe(take(1),tap(() => this._refresh$.next()));
     }
   }
 
@@ -173,10 +158,7 @@ export class GenericDao<K, T extends BaseEntity<K>> {
 
   private postColare(t: T) {
     return this.http
-      .post(
-        `${environment.url_layout(this.layout)}/${this._mes}/${this._ano}`,
-        t
-      )
+      .post(`${environment.url_layout(this.layout)}/${this._mes}/${this._ano}`,t)
       .pipe(take(1));
   }
 
@@ -187,12 +169,7 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    */
   private putColare(t: T, id: any, mes: any, ano: any) {
     return this.http
-      .put(
-        `${environment.url_layout(this.layout)}/${mes || this._mes}/${
-          ano || this._ano
-        }/${id}`,
-        t
-      )
+      .put(`${environment.url_layout(this.layout)}/${mes || this._mes}/${ano || this._ano}/${id}`,t)
       .pipe(take(1));
   }
 
@@ -212,12 +189,8 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    * Obter o layout enviado
    * @param l Layout
    */
-  public getColare(l: T) {
-    return this.http.get<ColareRetorno>(
-      `${environment.url_layout(this.layout)}/${l.arquivo.mes}/${
-        l.arquivo.ano
-      }/${l.arquivo.id}`
-    );
+  public getColare(l: T) {    
+    return this.http.get<ColareRetorno>(`${environment.url_layout(this.layout)}/${l.arquivo.mes}/${l.arquivo.ano}/${l.arquivo.id}`);
   }
 
   public uploadColare(file: File) {
@@ -257,12 +230,7 @@ export class GenericDao<K, T extends BaseEntity<K>> {
     var formData = new FormData();
     formData.set("arquivo", arquivo);
     return this.http.put(
-      `${environment.url_homologa_envio(
-        this.layout,
-        layout.arquivo.mes,
-        layout.arquivo.ano,
-        layout.arquivo.id
-      )}`,
+      `${environment.url_homologa_envio(this.layout,layout.arquivo.mes,layout.arquivo.ano,layout.arquivo.id)}`,
       formData
     );
   }

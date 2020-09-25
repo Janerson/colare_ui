@@ -7,6 +7,7 @@ import { RegLicitacaoDetailComponent } from "./reg-licitacao/reg-licitacao-detai
 import { ContratoRecisaoComponent } from "./contrato-recisao/contrato-recisao.component";
 import { ContratoRecisaoDetailComponent } from "./contrato-recisao/contrato-recisao-detail/contrato-recisao-detail.component";
 import { CardComponent } from "../../shared/ui/card/card.component";
+import { CanDeactivateGuard } from '../../auth/can-deactive.guard';
 
 export const routes: Routes = [
   {
@@ -24,7 +25,7 @@ export const routes: Routes = [
         }
       },
       {
-        path: "REG_LICITACAO",
+        path: "REG_LICITACAO",      
         children: [
           {
             path: "",
@@ -36,6 +37,7 @@ export const routes: Routes = [
           {
             path: ":id",
             component: RegLicitacaoDetailComponent,
+            canDeactivate:[CanDeactivateGuard],
             data: {
               title: "Detalhar Regulamentação",
             },

@@ -7,10 +7,8 @@ import { ptBrLocale } from "ngx-bootstrap/locale";
 import { NgxJsonViewerModule } from "ngx-json-viewer";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { BsLocaleService } from "ngx-bootstrap/datepicker";
-import { BsModalService, ModalModule } from "ngx-bootstrap/modal";
 import { ReactiveFormsModule } from "@angular/forms";
 import { AlertModalComponent } from "./ui/alert-modal/alert-modal.component";
-import { BaseFormComponent } from "./ui/base-form/base-form.component";
 import { PaginationModule } from "ngx-bootstrap/pagination";
 import { AlertService } from "./services/alert.service";
 import { FileUploadComponent } from "./ui/file-upload/file-upload.component";
@@ -64,7 +62,7 @@ const ngWizardConfig: NgWizardConfig = {
   declarations: [
     OnlyNumberDirective,
     AlertModalComponent,
-    BaseFormComponent,
+    //BaseFormComponent,
     FileUploadComponent,
     FileUploadPondComponent,
     BaseModalComponent,
@@ -99,7 +97,7 @@ const ngWizardConfig: NgWizardConfig = {
     TypeaheadModule,
     OnlyNumberDirective,
     ReactiveFormsModule,
-    BaseFormComponent,
+    //BaseFormComponent,
     NgxJsonViewerModule,
     PaginationModule,
     AlertModalComponent,
