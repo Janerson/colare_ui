@@ -1,0 +1,2 @@
+<input class="form-control" [ngModel]="selectedItemLabel" [typeahead]="items" [typeaheadOptionField]="itemLabelKey"
+    [typeaheadMinLength]="0" [container]="'body'" (typeaheadOnSelect)="onSelect($event)">

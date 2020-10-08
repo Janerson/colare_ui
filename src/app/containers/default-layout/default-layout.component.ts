@@ -7,23 +7,23 @@ import { AuthenticationService } from "../../auth/authentication.service";
 import { MenuService } from "../../shared/services/menu.service";
 import { MenuLink } from "../../shared/entity/api/menu-links";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { isArray } from "jquery";
 
 @Component({
   selector: "app-dashboard",
   templateUrl: "./default-layout.component.html",
   styleUrls: ["./default-layout.component.css"],
 })
-export class DefaultLayoutComponent extends BaseFormComponent
+export class DefaultLayoutComponent
+  extends BaseFormComponent
   implements OnInit {
   public sidebarMinimized = false;
-  protected navItems: MenuLink[]; //= navItems;
-  protected filtered: MenuLink[]; //= navItems;
+  protected navItems: MenuLink[] = []; //= navItems;
+  protected filtered: MenuLink[] = []; //= navItems;
   formFilter: FormGroup;
 
-  validType = "success"
-  pristineType = "success"
-  dirtyType = "success"
+  validType = "success";
+  pristineType = "success";
+  dirtyType = "success";
 
   constructor(
     private formService: FormService,
@@ -51,7 +51,7 @@ export class DefaultLayoutComponent extends BaseFormComponent
 
     this.menuService.refresh.subscribe(() => {
       this.menuService.listar().subscribe((data) => {
-        this.navItems =data;
+        this.navItems = data;
         this.filtered = this.navItems;
       });
     });
@@ -60,37 +60,35 @@ export class DefaultLayoutComponent extends BaseFormComponent
       this.filtered = this.filtrarMenu(str, this.navItems);
     });
 
-    if (document.body.classList.contains('modal-open')) {
-      document.body.classList.remove('modal-open');
+    if (document.body.classList.contains("modal-open")) {
+      document.body.classList.remove("modal-open");
     }
-
   }
 
   submit() {
-    throw new Error('Method not implemented.');
+    throw new Error("Method not implemented.");
   }
 
   filtrarMenu(str: string, array: MenuLink[]): MenuLink[] {
     let resultado: MenuLink[] = [];
-    let title:MenuLink = {}
+    let title: MenuLink = {};
     array.forEach((el) => {
-      
       let tmp = [];
       let o: MenuLink = {};
-    
+
       let found = false;
 
-      if(el.title){
-        title = el;        
-      } 
+      if (el.title) {
+        title = el;
+      }
 
-      if (el?.name?.toLowerCase().indexOf(str.toLowerCase()) > -1) {      
+      if (el?.name?.toLowerCase().indexOf(str.toLowerCase()) > -1) {
         o = el;
         found = true;
       }
 
       if (Array.isArray(el.children)) {
-        o.name = el.name
+        o.name = el.name;
         tmp = this.filtrarMenu(str, el.children);
         if (tmp.length) {
           o.children = tmp;
@@ -98,17 +96,15 @@ export class DefaultLayoutComponent extends BaseFormComponent
         }
       }
 
-      if (found) {          
-          resultado.push(title);       
+      if (found) {
+        resultado.push(title);
         resultado.push(o);
       }
     });
     return resultado;
   }
 
-  setToken(e) {
-    // this.cookieService.set('TCM_TOKEN', e, 0, '/','localhost', true, "Strict");
-    //2020-07-30T20:36:50.000Z
+  setToken(e) {  
     this.cookieService.set("TCM_TOKEN", e);
   }
 

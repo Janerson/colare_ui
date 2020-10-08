@@ -1,0 +1,8 @@
+<div class="input-prepend input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+  </div>
+  <input #i type="text" class="form-control" bsDatepicker [(ngModel)]="_value"
+    [bsConfig]="{dateInputFormat:inputFormat, minMode:viewMode}" (change)="bsValueChange(i.value)"
+    (input)="bsValueChange(i.value)" (blur)="onTouched($event)" autocomplete="off"/>
+</div>

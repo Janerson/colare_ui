@@ -7,7 +7,6 @@ import { environment } from "../../../../environments/environment";
 import { Subject } from "rxjs";
 import { BaseEntity } from "../../entity/base-entity";
 import { Arquivo, ColareRetorno } from "../../entity/colare/colare-retorno";
-import { trim } from "jquery";
 
 export class GenericDao<K, T extends BaseEntity<K>> {
   private removeEmpty = (obj: T) => {
@@ -115,13 +114,12 @@ export class GenericDao<K, T extends BaseEntity<K>> {
 
   private atualizar(obj: T) {
     return this.http
-      .put(`${environment.api_url(this.layout)}/${obj.uuid}`, obj)
+      .put<T>(`${environment.api_url(this.layout)}/${obj.uuid}`, obj)
       .pipe(take(1),tap(() => this._refresh$.next()));
   }
   private gravar(obj: T) {
-    return this.http.post(`${environment.api_url(this.layout)}`, obj)
-    .pipe(take(1), tap(() => this._refresh$.next())
-    );
+    return this.http.post<T>(`${environment.api_url(this.layout)}`, obj)
+    .pipe(take(1), tap(() => this._refresh$.next()));
   }
 
   /**
@@ -158,7 +156,7 @@ export class GenericDao<K, T extends BaseEntity<K>> {
 
   private postColare(t: T) {
     return this.http
-      .post(`${environment.url_layout(this.layout)}/${this._mes}/${this._ano}`,t)
+      .post<ColareRetorno>(`${environment.url_layout(this.layout)}/${this._mes}/${this._ano}`,t)
       .pipe(take(1));
   }
 
@@ -169,7 +167,7 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    */
   private putColare(t: T, id: any, mes: any, ano: any) {
     return this.http
-      .put(`${environment.url_layout(this.layout)}/${mes || this._mes}/${ano || this._ano}/${id}`,t)
+      .put<ColareRetorno>(`${environment.url_layout(this.layout)}/${mes || this._mes}/${ano || this._ano}/${id}`,t)
       .pipe(take(1));
   }
 

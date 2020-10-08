@@ -8,6 +8,8 @@ import { ContratoRecisaoComponent } from "./contrato-recisao/contrato-recisao.co
 import { ContratoRecisaoDetailComponent } from "./contrato-recisao/contrato-recisao-detail/contrato-recisao-detail.component";
 import { CardComponent } from "../../shared/ui/card/card.component";
 import { CanDeactivateGuard } from '../../auth/can-deactive.guard';
+import { LicitacaoFaseUmComponent } from './licitacao-fase-um/licitacao-fase-um.component';
+import { LicitacaoFaseUmDetailComponent } from './licitacao-fase-um/licitacao-fase-um-detail/licitacao-fase-um-detail.component';
 
 export const routes: Routes = [
   {
@@ -99,6 +101,32 @@ export const routes: Routes = [
             component: ContratoRecisaoDetailComponent,
             data: {
               title: "Adicionar Contrato Recisão",
+            },
+          },
+        ],
+      },
+      {
+        path: "LICITACAOFASE1",
+        children: [
+          {
+            path: "",
+            component: LicitacaoFaseUmComponent,
+            data: {
+              title: "Licitação Fase - 1",
+            },
+          },
+          {
+            path: ":id",
+            component: LicitacaoFaseUmDetailComponent,
+            data: {
+              title: "Detalhar Licitação Fase - 1",
+            },
+          },
+          {
+            path: "novo",
+            component: LicitacaoFaseUmDetailComponent,
+            data: {
+              title: "Adicionar Licitação Fase - 1",
             },
           },
         ],

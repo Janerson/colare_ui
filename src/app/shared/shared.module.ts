@@ -1,13 +1,13 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { CommonModule, DatePipe } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { OnlyNumberDirective } from "./diretivas/only-number.directive";
 import { defineLocale } from "ngx-bootstrap/chronos";
 import { ptBrLocale } from "ngx-bootstrap/locale";
 import { NgxJsonViewerModule } from "ngx-json-viewer";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
-import { BsLocaleService } from "ngx-bootstrap/datepicker";
-import { ReactiveFormsModule } from "@angular/forms";
+import { BsDatepickerModule, BsLocaleService } from "ngx-bootstrap/datepicker";
+import { ReactiveFormsModule,FormsModule } from "@angular/forms";
 import { AlertModalComponent } from "./ui/alert-modal/alert-modal.component";
 import { PaginationModule } from "ngx-bootstrap/pagination";
 import { AlertService } from "./services/alert.service";
@@ -39,6 +39,11 @@ import {
 } from "ng-wizard";
 import { AlertModule } from "ngx-bootstrap/alert";
 import { TableAcoesComponent } from './ui/table-acoes/table-acoes.component';
+import {setTheme} from 'ngx-bootstrap/utils';
+import { DatepickerComponent } from './ui/date-picker/date-picker.component';
+import { CustomSelectComponent } from './ui/custom-select/custom-select.component'
+import { NgxMaskModule } from 'ngx-mask';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
 //registerPlugin(FilePondPluginGetFile)
 
@@ -57,6 +62,8 @@ const ngWizardConfig: NgWizardConfig = {
     anchorClickable: true,
   },
 };
+setTheme('bs4')
+
 
 @NgModule({
   declarations: [
@@ -75,13 +82,21 @@ const ngWizardConfig: NgWizardConfig = {
     CardComponent,
     CustomAlertComponent,
     TableAcoesComponent,
+    DatepickerComponent,
+    CustomSelectComponent,    
+   
   ],
-  imports: [
+  imports: [     
     CommonModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    NgxMaskModule.forRoot(),
+    TypeaheadModule.forRoot(),
     RouterModule,
     ReactiveFormsModule,
+    FormsModule,
     NgxJsonViewerModule,
-    PaginationModule.forRoot(),
+    PaginationModule.forRoot(),    
+    BsDatepickerModule.forRoot(),
     //ModalModule.forRoot(),
     PopoverModule.forRoot(),
     AlertModule.forRoot(),
@@ -93,13 +108,16 @@ const ngWizardConfig: NgWizardConfig = {
     }),
   ],
   exports: [
+    NgxMaskModule,
     NgWizardModule,
     TypeaheadModule,
     OnlyNumberDirective,
     ReactiveFormsModule,
+    NgMultiSelectDropDownModule,
     //BaseFormComponent,
     NgxJsonViewerModule,
     PaginationModule,
+    BsDatepickerModule,
     AlertModalComponent,
     AlertModule,
     CustomAlertComponent,
@@ -114,13 +132,16 @@ const ngWizardConfig: NgWizardConfig = {
     CardComponent,
     IconPickerModule,
     TableAcoesComponent,
+    DatepickerComponent,   
+    CustomSelectComponent,
     // BsDatepickerModule
   ],
-  providers: [BsLocaleService,  AlertService],
+  providers: [BsLocaleService,  AlertService, DatePipe],
   //entryComponents: [AlertModalComponent,BaseModalComponent,PassaporteComponent],
 })
 export class SharedModule {
-  constructor(localeService: BsLocaleService) {
+  constructor(localeService: BsLocaleService, ) {
     localeService.use("pt-br");
+  
   }
 }

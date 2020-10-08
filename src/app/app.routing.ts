@@ -15,6 +15,7 @@ export const routes: Routes = [
     path: "",
     redirectTo: "dashboard",
     pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "404",
@@ -43,7 +44,7 @@ export const routes: Routes = [
     component: DefaultLayoutComponent,
     canActivate: [AuthGuard],
     data: {
-      title: "Home",
+      title: "HOME",
     },
     children: [
       {
@@ -54,22 +55,22 @@ export const routes: Routes = [
           ),
       },
       {
-        path: "dominio",
+        path: "TABELA",
         loadChildren: () =>
-          import("./views/dominio/dominio.module").then((m) => m.DominioModule),
+          import("./views/tabelas/tabelas.module").then((m) => m.TabelaModule),
       }, 
       {
-        path: "dashboard",
+        path: "DASHBOARD",
         loadChildren: () =>
           import("./views/dashboard/dashboard.module").then(
             (m) => m.DashboardModule
           ),
       },
       {
-        path: "configuracao",
+        path: "DOMINIO",
         loadChildren: () =>
-          import("./views/config/configuracao.module").then(
-            (c) => c.ConfiguracaoModule
+          import("./views/dominio/dominio.module").then(
+            (c) => c.DominioModule
           ),
       },
     ],

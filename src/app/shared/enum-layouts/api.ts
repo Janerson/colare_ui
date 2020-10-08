@@ -1,0 +1,4 @@
+export enum API{  
+  TABELAS = "TABELA/UPLOAD",
+  DOMINIO_MENU ="DOMINIO/MENU", 
+}

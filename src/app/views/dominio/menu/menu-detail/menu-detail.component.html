@@ -4,7 +4,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-edit"></i> Link
+                        <i class="fa fa-edit"></i> Menu
                     </div>
                     <div class="card-body">
                         <div class="form-group">
@@ -14,7 +14,7 @@
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <label class="col-form-label" for="name">Nome</label>
-                                        <div class="controls">
+                                        <div class="controls" validator>
                                             <div class="input-prepend input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fa fa-pencil"></i></span>
@@ -117,12 +117,12 @@
         </div>
 
         <!-- Children -->
-        <div class="animate__animated animate__shakeX" formArrayName="children" *ngIf="!isTitle">
+        <div class="animate__animated animate__shakeX" formArrayName="children" *ngIf="!this.formValue('title')">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <i class="fa fa-table"></i>Sublinks
+                            <i class="fa fa-table"></i>Submenu
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -150,8 +150,11 @@
                                         <td style="width: 94px;">
                                             <app-table-acoes
                                             botoes="['editar','apagar']"
+                                            [layout]="layout"
+                                            [uuid]="item.get('uuid').value"
+                                            [editOnPopup]="true"
                                             (onEditar)="popupAddChildren(item.value, i)"
-                                            (onApagar)="removerSublink(i)"
+                                            (onNotify)="excluirSubLink(i)"
                                             ></app-table-acoes>   
                                         </td>
                                         <td>{{item.get("name").value}}</td>
@@ -178,6 +181,10 @@
                         <button type="submit" class="btn btn-brand btn-sm btn-facebook mr-1">
                             <i class="fa fa-save"></i>
                             <span>Gravar</span>
+                        </button>
+                        <button type="button" class="btn btn-brand btn-sm btn-youtube mr-1" [disabled]="disableDelBtn" (click)="excluir()">
+                            <i class="fa fa-trash"></i>
+                            <span>Excluir</span>
                         </button>
                         <button type="button" class="btn btn-brand btn-sm btn-tumblr mr-1" (click)="voltar()">
                             <i class="fa fa-undo"></i>

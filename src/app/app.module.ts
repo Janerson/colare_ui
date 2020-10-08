@@ -21,7 +21,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsPosition: "center-center",
   //fgsSize: 80,
   fgsType: SPINNER.squareJellyBox,
-  
 };
 
 import { AppComponent } from "./app.component";
@@ -57,9 +56,10 @@ import { CookieService } from "ngx-cookie-service";
 import { InterceptorApi } from "./auth/interceptor-api.module";
 import { InterceptorTCM } from "./auth/interceptor-tcm.module";
 import { HttpErrorInterceptor } from "./auth/http-error-interceptor.module";
-import { appInitializer } from './auth/app.initialize';
-import { AuthenticationService } from './auth/authentication.service';
+import { appInitializer, UpperCaseUrlSerializer } from "./auth/app.initialize";
+import { AuthenticationService } from "./auth/authentication.service";
 import { BsModalService, ModalModule } from "ngx-bootstrap/modal";
+import { UrlSerializer } from '@angular/router';
 
 enableProdMode();
 
@@ -100,6 +100,10 @@ enableProdMode();
   providers: [
     BsModalService,
     {
+      provide: UrlSerializer,
+      useClass: UpperCaseUrlSerializer,
+    },
+    {
       provide: APP_INITIALIZER,
       useFactory: appInitializer,
       multi: true,
@@ -114,7 +118,9 @@ enableProdMode();
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
     CookieService,
-  ],  
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+ 
+}

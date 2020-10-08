@@ -1,3 +1,4 @@
+import { Tabela } from '../../../shared/entity/colare/tabelas';
 import {
   Component,
   OnInit,
@@ -6,7 +7,6 @@ import {
   ElementRef,
 } from "@angular/core";
 import { BaseFormComponent } from "../../../shared/ui/base-form/base-form.component";
-import { Dominios } from "../../../shared/entity/colare/dominio";
 import {
   Arquivo,
   ColareRetorno,
@@ -14,7 +14,6 @@ import {
 import { Subscription, EMPTY } from "rxjs";
 import { ModalService } from "../../../shared/services/modal.service";
 import { BsModalRef } from "ngx-bootstrap/modal";
-import { DominioService } from "../../dominio/service/dominio.service";
 import { Validators } from "@angular/forms";
 import {
   NgWizardService,
@@ -24,6 +23,7 @@ import {
 } from "ng-wizard";
 import { LicRetificaService } from '../service/lic-retifica-homolog.service';
 import { TABELAS_DOMINIOS } from '../../../shared/enum-layouts/tabelas';
+import { TabelaService } from '../../tabelas/service/tabelas.service';
 
 @Component({
   selector: "app-lic-retifica-popup",
@@ -32,7 +32,7 @@ import { TABELAS_DOMINIOS } from '../../../shared/enum-layouts/tabelas';
 })
 export class LicRetificaPopupComponent extends BaseFormComponent
   implements OnInit, OnDestroy {
-  protected dominios: Dominios[];
+  protected dominios: Tabela[];
   data: number;
   private subscriptionDominio: Subscription;
 
@@ -41,7 +41,7 @@ export class LicRetificaPopupComponent extends BaseFormComponent
   constructor(
     private modalService: ModalService,
     private bsModalRef: BsModalRef,
-    protected dominioService: DominioService,
+    protected dominioService: TabelaService,
     protected retificaService: LicRetificaService,
     private ngWizardService: NgWizardService
   ) {

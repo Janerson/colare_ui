@@ -6,6 +6,7 @@ import { GenericDao } from './generic/generic-dao';
 import { environment } from "../../../environments/environment";
 import { MenuLink } from '../entity/api/menu-links';
 import { Page } from '../entity/api/page';
+import { API } from '../enum-layouts/api';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ import { Page } from '../entity/api/page';
 export class MenuService extends GenericDao<String,MenuLink> {
 
   constructor(protected http:HttpClient) { 
-    super(http,environment.dominio_menu)
+    super(http,API.DOMINIO_MENU)
   }
 
   /**
@@ -21,7 +22,7 @@ export class MenuService extends GenericDao<String,MenuLink> {
    * @param spc 
    */
   consultaSPC(spc:String) {
-    return this.http.get<MenuLink>(`${environment.api_url(environment.dominio_menu)}/SPC/${spc}`);
+    return this.http.get<MenuLink>(`${environment.api_url(API.DOMINIO_MENU)}/SPC/${spc}`);
   }
 
   /**
@@ -29,6 +30,12 @@ export class MenuService extends GenericDao<String,MenuLink> {
    * @param spc 
    */
   listarPaginado() {
-    return this.http.get<Page<MenuLink>>(`${environment.api_url(environment.dominio_menu)}/LISTAR`);
+    return this.http.get<Page<MenuLink>>(`${environment.api_url(API.DOMINIO_MENU)}/LISTAR`);
   }
+
+  listaAdd(uuid:string, link : MenuLink){
+    return this.http.put<MenuLink>(`${environment.api_url(API.DOMINIO_MENU)}/${uuid}/LISTA/ADC`,link);
+  }
+
+  
 }

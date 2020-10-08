@@ -1,28 +1,27 @@
+import { TabelaService } from '../service/tabelas.service';
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { BaseFormComponent } from "../../../shared/ui/base-form/base-form.component";
-import { Dominios } from "../../../shared/entity/colare/dominio";
 import { Page } from "../../../shared/entity/api/page";
-import { DominioService } from "../service/dominio.service";
 import { ActivatedRoute } from "@angular/router";
 import { Subscription, interval } from "rxjs";
 import { distinctUntilChanged, debounce, switchMap } from "rxjs/operators";
+import { Tabela } from '../../../shared/entity/colare/tabelas';
 
 @Component({
-  selector: "app-tipo-de-regulamentacao",
-  templateUrl: "./tipo-de-dominio.component.html",
+  templateUrl: "./tipo-de-tabela.component.html",
 })
-export class TipoDeDominioComponent extends BaseFormComponent
+export class TipoDeTabelaComponent extends BaseFormComponent
   implements OnInit {
  
   private subscription: Subscription;
   private serviceSubscription: Subscription;
 
   protected title: string;
-  protected page: Page<Dominios>;
+  protected page: Page<Tabela>;
   @ViewChild("file") _file: ElementRef;
 
   constructor(
-    protected service: DominioService,
+    protected service: TabelaService,
     private route: ActivatedRoute
   ) {
     super();

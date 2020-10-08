@@ -1,11 +1,11 @@
+import { Tabela } from '../../../../shared/entity/colare/tabelas';
 import {
   Component,
   OnInit,
   OnDestroy,
-  ComponentFactoryResolver,
 } from "@angular/core";
 import { Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { Subscription, EMPTY } from "rxjs";
 
 import { BaseFormComponent } from "../../../../shared/ui/base-form/base-form.component";
@@ -15,36 +15,35 @@ import {
   AlertTypes,
 } from "../../../../shared/services/alert.service";
 import { RegLicitacaoService } from "../../service/reg-licitacao.service";
-import { DominioService } from "../../../dominio/service/dominio.service";
-import { Dominios } from "../../../../shared/entity/colare/dominio";
 import { TABELAS_DOMINIOS } from "../../../../shared/enum-layouts/tabelas";
 import { ModalService } from "../../../../shared/services/modal.service";
 import {
   ColareRetorno,
-  Arquivo,
 } from "../../../../shared/entity/colare/colare-retorno";
-import { EnvioComponent } from "../../../../shared/ui/envio/envio.component";
 import { HelperService } from "../../../../shared/services/helper.service";
 import { RegLicitacao } from "../../../../shared/entity/LIC/reg_licitacao/reg-licitacao";
 import { LicRetificaPopupComponent } from "../../lic-retifica-popup/lic-retifica-popup.component";
+import { LIC } from "../../../../shared/enum-layouts/lic";
+import { TabelaService } from '../../../tabelas/service/tabelas.service';
 
 @Component({
   selector: "app-reg-licitacao-detail",
   templateUrl: "./reg-licitacao-detail.component.html",
   // viewProviders: [ { provide: ControlContainer, useExisting: NgForm }]
 })
-export class RegLicitacaoDetailComponent extends BaseFormComponent
+export class RegLicitacaoDetailComponent
+  extends BaseFormComponent
   implements OnInit, OnDestroy {
-  protected dominios: Dominios[];
+  protected dominios: Tabela[];
   private subscriptionRoute: Subscription;
   private subscriptionModalService: Subscription;
   protected hasDetalhamentoLc123: boolean = false;
   protected uuid: String;
+  protected layout = LIC.REG_LICITACAO;
 
   constructor(
-    private router: Router,
     private service: RegLicitacaoService,
-    private dominioService: DominioService,
+    private tabelaService: TabelaService,
     private route: ActivatedRoute,
     private formService: FormService,
     private alertService: AlertService,
@@ -65,7 +64,7 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
 
     this.formService.emitChange(this.formulario);
 
-    this.dominioService
+    this.tabelaService
       .listaDominio(TABELAS_DOMINIOS.TIPO_DECRETO_REGULAMENTADOR, true)
       .subscribe((data) => (this.dominios = data));
   }
@@ -101,17 +100,11 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
     this.save(true);
   }
 
-  transmitir() {
-    this.alertService.showModal(EnvioComponent, {
-      initialState: {
-        title: "Envio Regulamentação dos procedimentos licitatórios",
-        data: this.formValue("arquivo"),
-      },
-    });
-
+  transmitir() {  
     this.subscriptionModalService = this.modalService.changeEmitted$.subscribe(
       (o) => {
         this.atualizaFormulario(o);
+        this.save(false)
         this.onTransmitir(false);
         this.subscriptionModalService.unsubscribe();
       }
@@ -134,60 +127,26 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
       });
   }
 
-  sincronizar(e?) {
+  sincronizar() {
     this.service.getColare(this.formValue()).subscribe((data) => {
       this.atualizaFormColare(data);
       this.save(false);
       this.alertService.showAlert(
-        AlertTypes.SUCESS,
-        "Layout Sincronizado com sucesso!",
-        "Sucesso"
-      );
+        AlertTypes.SUCESS,"Layout Sincronizado com sucesso!","Sucesso");
     });
-  }
-
-  obterPDFHomologacao() {
-    this.service.obterPdfHomologacaoColare(this.formValue("arquivo.recibo"));
-  }
-
-  homologar(file: File) {
-    this.service
-      .homologarEnvioColare(this.formulario.value, file)
-      .subscribe((d) => {
-        //this.sincronizar();
-        const sub = this.alertService
-          .showAlert(
-            AlertTypes.SUCESS,
-            "Envio Homologado com sucesso!",
-            "Sucesso!"
-          )
-          .onHidden.subscribe(() => {
-            sub.unsubscribe();
-            this.sincronizar();
-            this.router.navigate(["LIC/REG_LICITACAO"])
-          });
-      });
   }
 
   retificar() {
-    const msg = `O processo de Retificação de Envio já Homologado,
-      exige uma série de passos que devem ser realizados, para tal é imprescindivel que execute
-      todas as etapas do processo de retificação, e não feche o popup até todas etapas serem concluídas. Deseja realizar a retificação agora?
-    `;
-    this.alertService.showConfirm(msg, "Atenção!").subscribe((value) => {
-      if (value) {
-        this.alertService.showModal(LicRetificaPopupComponent, {
-          ignoreBackdropClick: true,
-          class: "modal-lg",
-          initialState: {
-            title: "RETIFICAR ENVIO",
-            data: this.formValue("arquivo.id"),
-          },
-        });
-      }
+    this.alertService.showModal(LicRetificaPopupComponent, {
+      ignoreBackdropClick: true,
+      class: "modal-lg",
+      initialState: {
+        title: "RETIFICAR ENVIO",
+        data: this.formValue("arquivo.id"),
+      },
     });
-    
-    this.modalService.changeEmitted$.subscribe((value:boolean) => {
+
+    this.modalService.changeEmitted$.subscribe((value: boolean) => {
       if (value) {
         this.alertService
           .showAlert(
@@ -196,19 +155,18 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
             "Retificação"
           )
           .onHide.subscribe(() => {
-            this.atualizaFormulario({
-              statusEnvio: "NAO_HOMOLOGADO",
-              arquivoHomologacao: null,
-            },"arquivo");
-            this.save(false)
+            this.atualizaFormulario(
+              {
+                statusEnvio: "NAO_HOMOLOGADO",
+                arquivoHomologacao: null,
+              },
+              "arquivo"
+            );
+            this.save(false);
             //this.onTransmitir(true);
           });
       }
     });
-  }
-
-  cancelar() {
-    this.router.navigate(["LIC/REG_LICITACAO"]);
   }
 
   private criaForm() {
@@ -276,6 +234,6 @@ export class RegLicitacaoDetailComponent extends BaseFormComponent
       ]),
       artigoPercObjetoContratacaoMEEPP: this.builder.control(null),
       percentualObjetoContratacaoMEEPP: this.builder.control(null),
-    });
+    },[Validators.required]);
   }
 }

@@ -9,7 +9,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "module": "esnext",
-    "target": "es5",
+    "target": "esnext",
     "typeRoots": [
       "node_modules/@types"
     ],

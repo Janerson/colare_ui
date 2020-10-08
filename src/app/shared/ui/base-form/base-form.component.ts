@@ -1,14 +1,11 @@
-import { Component, HostListener, OnInit } from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
   FormArray,
   FormControl,
-  Validators,
-} from "@angular/forms";
+  Validators} from "@angular/forms";
 import { of, Observable, interval, EMPTY } from "rxjs";
 import {
-  tap,
   switchMap,
   debounce,
   distinctUntilChanged,
@@ -40,14 +37,14 @@ export abstract class BaseFormComponent {
     return !this.formulario.dirty;
   }
 
-  @HostListener("window:beforeunload", ["$event"])
-  unload($event: any) {
-    if (!this.canDeactivate()) {
-      $event.returnValue = true;
-    } else {
-      $event.returnValue = false;
-    }
-  }
+//@HostListener("window:beforeunload", ["$event"])
+//unload($event: any) {
+//  if (!this.canDeactivate()) {
+//    $event.returnValue = true;
+//  } else {
+//    $event.returnValue = false;
+//  }
+//}
 
   /**
    * Retorna o valor do formControl ou o proprio formControl
@@ -56,13 +53,13 @@ export abstract class BaseFormComponent {
    * @param control Opcional (TRUE | FALSE - default) Quando true, retorna o FormControl, indicado
    * no parametro {{controlPath}}
    */
-  formValue(controlPath?: any, control?: boolean): any {
+  formValue(controlPath?: any, control?: boolean){
     return controlPath === undefined
       ? control
         ? this.formulario
         : this.formulario.value
       : control
-      ? this.formulario.get(controlPath)
+      ? this.formulario.get(controlPath) 
       : this.formulario.get(controlPath).value;
   }
   /**
@@ -169,7 +166,7 @@ export abstract class BaseFormComponent {
 
   verificaValidacoesForm(formGroup: FormGroup | FormArray) {
     Object.keys(formGroup.controls).forEach((campo) => {
-      const controle = formGroup.get(campo);
+      const controle = formGroup.get(campo);     
       controle.markAsDirty();
       controle.markAsTouched();
       if (controle instanceof FormGroup || controle instanceof FormArray) {

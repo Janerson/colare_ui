@@ -19,8 +19,8 @@ export const environment = {
   /**
    * Endpoint para upload dos arquivos de JSON referentes a tabelas de Domínio
    */
-  dominio: "DOMINIO/UPLOAD",
-  dominio_menu:"DOMINIO/MENU_LINK", 
+  //dominio: "DOMINIO/UPLOAD",
+  //dominio_menu:"DOMINIO/MENU_LINK", 
   /**
    * 
    * @param layout

@@ -1,11 +1,11 @@
 import { BaseEntity } from '../base-entity';
 
-export class Dominio extends BaseEntity<Number>  {
+export class TipoTabela extends BaseEntity<Number>  {
   nomeTipoDominio: string;
-  dominios: Dominios[];
+  dominios: Tabela[];
 }
 
-export class Dominios extends BaseEntity<String>  {
+export class Tabela extends BaseEntity<String>  {
   codigo: string;
   descricao: string;
   vigencia: string;

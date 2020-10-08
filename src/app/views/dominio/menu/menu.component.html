@@ -17,7 +17,7 @@
                   <i class="fa fa-plus"></i>&nbsp;Novo</button></div>
             </div>
           </div>
-          <table  class="table table-striped">
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th>#</th>
@@ -30,8 +30,8 @@
             <tbody>
               <tr *ngFor="let item of page?.content">
                 <td style="width: 94px;">
-                  <app-table-acoes botoes="['editar','apagar']" (onEditar)="editar(item.uuid)"
-                    (onApagar)="excluir(item.uuid, $event)">
+                  <app-table-acoes botoes="['editar','apagar']" [layout]="layout" [uuid]="item.uuid" [editOnPopup]="false"
+                    (onNotify)="onNotify()">
                   </app-table-acoes>
                 </td>
                 <td>{{item.name}}</td>

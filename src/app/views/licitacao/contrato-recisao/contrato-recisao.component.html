@@ -30,15 +30,17 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of page?.content">
-                  <td><a [routerLink]="['./',item.seqID]" routerLinkActive="router-link-active">
+                  <td><a [routerLink]="['./',item.uuid]" routerLinkActive="router-link-active">
                       <i class="fa fa-edit"></i></a>
                   </td>
-                  <td>{{item.id}}</td>
+                  <td>{{item.arquivo?.id}}</td>
                   <td>{{item.data | date:'dd/MM/yyyy'}}</td>
                   <td>{{item.saldoFinalExecutadoContrato}}</td>
                   <td>{{item.codMotivoRescisao }}</td>
                   <td>
-                    <span class="badge badge-{{item.id?'success':'warning'}}">{{item.id?"Transmitido":"Pendente"}}</span>
+                    <span class="badge badge-{{item.arquivo?.statusEnvio |statusEnvio}}">
+                      {{item.arquivo?.statusEnvio ? item.arquivo?.statusEnvio : 'ENVIO_PENDENTE'}}
+                    </span>
                   </td>
                 </tr>
               </tbody>

@@ -13,7 +13,14 @@
                         <i class="fa fa-save"></i>
                         <span>Gravar</span>
                     </button>
-                    <button type="button" class="btn btn-brand btn-sm btn-vine mr-1" (click)="onTransmitir.emit($event)"
+                    <button type="button" class="btn btn-brand btn-sm btn-youtube mr-1"
+                        popover="Deletar registro." triggers="mouseenter:mouseleave"
+                        [disabled]="form.get('uuid').value ==null"
+                        (click)="excluir()">
+                        <i class="fa fa-trash"></i>
+                        <span>Excluir</span>
+                    </button>
+                    <button type="button" class="btn btn-brand btn-sm btn-vine mr-1" (click)="transmitir()"
                         popover="Transmitir layout para o Colare" triggers="mouseenter:mouseleave"
                         [disabled]="isHomologado">
                         <i class="fa fa-send"></i>
@@ -26,7 +33,7 @@
                         <span>Sincronizar</span>
                     </button>
                     <button type="button" class="btn btn-brand btn-sm btn-youtube mr-1"
-                        (click)="onPdfHomologacao.emit($event)" popover="Baixar PDF de Homologação."
+                        (click)="obterPDFHomologacao()" popover="Baixar PDF de Homologação."
                         triggers="mouseenter:mouseleave" [disabled]="isHomologado">
                         <i class="fa fa-file-pdf-o"></i>
                         <span>PDF Homologação</span>
@@ -38,13 +45,13 @@
                         <span>Homologar</span>
                     </button>
                     <button type="button" class="btn btn-brand btn-sm btn-reddit mr-1"
-                        (click)="onRetificar.emit($event)" popover="Retificar layout já homologado."
+                        (click)="retificar()" popover="Retificar layout já homologado."
                         triggers="mouseenter:mouseleave" [disabled]="!isHomologado">
                         <i class="fa fa-edit"></i>
                         <span>Retificar</span>
                     </button>
                     <button type="button" class="btn btn-brand btn-sm btn-tumblr mr-1"
-                        (click)="onCancelar.emit($event)">
+                        (click)="cancelar()">
                         <i class="fa fa-undo"></i>
                         <span>Voltar</span>
                     </button>
@@ -52,5 +59,5 @@
             </div>
         </div>
     </div>
-    <input #file type="file" style="display: none;" accept=".pdf" (change)="onFileChange($event.target.files[0])">
+    <input #file type="file" style="display: none;" accept=".pdf" (change)="homologar($event.target.files[0])">
 </div>

@@ -1,0 +1,195 @@
+<div class="animated fadeIn">
+    <form [formGroup]="formulario" (submit)="onSubmit()">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-edit"></i>Licitação Fase - 1
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label class="col-form-label" for="id">ID</label>
+                                    <div class="controls">
+                                        <div class="input-prepend input-group" formGroupName="arquivo">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">ID</span>
+                                            </div>
+                                            <input type="text" id="id" class="form-control" formControlName="id"
+                                                readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="controls" validator>
+                                        <label class="col-form-label control-label" for="exercicioLicitacao">Exercício
+                                            do edital da
+                                            licitação</label>
+                                        <div class="input-prepend input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                            <input type="text" id="exercicioLicitacao" class="form-control"
+                                                formControlName="exercicioLicitacao" [OnlyNumber]="true"
+                                                placeholder="Ex: 2020" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="controls" validator>
+                                        <label class="col-form-label control-label" for="numeroLicitacao">Número
+                                            licitação</label>
+                                        <div class="input-prepend input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">N°</span>
+                                            </div>
+                                            <input type="number" id="numeroLicitacao" class="form-control"
+                                                formControlName="numeroLicitacao" placeholder="Ex: 1" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="controls" validator>
+                                        <label class="col-form-label control-label"
+                                            for="dataPrevistaAberturaSessao">Data Prevista
+                                            Abertura Sessão</label>
+                                        <div class="input-prepend input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                            <input type="date" id="dataPrevistaAberturaSessao"
+                                                name="dataPrevistaAberturaSessao" class="form-control"
+                                                formControlName="dataPrevistaAberturaSessao" autocomplete="off" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="controls" validator>
+                                        <label class="col-form-label control-label" for="objeto">Objeto</label>
+                                        <div class="input-prepend input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                            <textarea type="" id="objeto" name="objeto" class="form-control"
+                                                formControlName="objeto" autocomplete="off">
+                                                </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label class="col-form-label" for="codModalidadeLicitacao">Modalidade da
+                                        Licitação</label>
+                                    <div class="controls" validator>
+                                        <div class="input-prepend input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Tipo</span>
+                                            </div>                                          
+                                            <c-select formControlName="codModalidadeLicitacao"
+                                                [items]="modalidadeLicitacao" itemLabelKey="descricao"></c-select> 
+
+                                            <!-- <input id="codModalidadeLicitacao" [typeahead]="modalidadeLicitacao"
+                                                class="form-control"
+                                                [typeaheadMinLength]="0"
+                                                [typeaheadOptionsInScrollableView] ="5"
+                                                typeaheadOptionField="descricao"
+                                                (typeaheadOnSelect)="onCodModalidade($event.item)"
+                                                formControlName="codModalidadeLicitacao"/>  -->
+                                            <!-- <select class="form-control" id="codModalidadeLicitacao"
+                                                formControlName="codModalidadeLicitacao">
+                                                <option></option>
+                                                <option *ngFor="let item of modalidadeLicitacao"
+                                                    [ngValue]="item.codigo">
+                                                    {{item.descricao}}</option>
+                                            </select> -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label class="col-form-label" for="criterioDesempateMEEPP">Licitação com preferência
+                                        para ME e EPP (Art. 44, Lei Complementar 123/2006)</label>
+                                    <div class="controls">
+                                        <label class="switch switch-label switch-pill switch-success">
+                                            <input id="criterioDesempateMEEPP" type="checkbox" class="switch-input"
+                                                formControlName="criterioDesempateMEEPP" />
+                                            <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="col-form-label" for="destinacaoExclusivaMEEPP">Destinação exclusiva a
+                                        ME e EPP (Art. 48, I, Lei Complementar 123/2006)</label>
+                                    <div class="controls">
+                                        <label class="switch switch-label switch-pill switch-success">
+                                            <input id="destinacaoExclusivaMEEPP" type="checkbox" class="switch-input"
+                                                formControlName="destinacaoExclusivaMEEPP" />
+                                            <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label class="col-form-label" for="subcontratacaoMEEPP">Exigência de subcontratação
+                                        de ME e EPP (Art. 48, II, Lei Complementar 123/2006)</label>
+                                    <div class="controls">
+                                        <label class="switch switch-label switch-pill switch-success">
+                                            <input id="subcontratacaoMEEPP" type="checkbox" class="switch-input"
+                                                formControlName="subcontratacaoMEEPP" />
+                                            <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="col-form-label" for="limitePercObjetoContratacaoMEEPP">Estabeleceu
+                                        limite percentual do objeto para a contratação de ME e EPP? (Art. 48, III, Lei
+                                        Complementar 123/2006)</label>
+                                    <div class="controls">
+                                        <label class="switch switch-label switch-pill switch-success">
+                                            <input id="limitePercObjetoContratacaoMEEPP" type="checkbox"
+                                                class="switch-input"
+                                                formControlName="limitePercObjetoContratacaoMEEPP" />
+                                            <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label class="col-form-label" for="processoPorLote">Processo realizado por
+                                        lote</label>
+                                    <div class="controls">
+                                        <label class="switch switch-label switch-pill switch-success">
+                                            <input id="processoPorLote" type="checkbox" class="switch-input"
+                                                formControlName="processoPorLote" />
+                                            <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="col-form-label" for="servicoContinuo">Trata-se de prestação de serviço
+                                        a ser executado de forma contínua.</label>
+                                    <div class="controls">
+                                        <label class="switch switch-label switch-pill switch-success">
+                                            <input id="servicoContinuo" type="checkbox" class="switch-input"
+                                                formControlName="servicoContinuo" />
+                                            <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-acoes [form]="formulario" [layout]="layout"></app-acoes>
+    </form>
+</div>

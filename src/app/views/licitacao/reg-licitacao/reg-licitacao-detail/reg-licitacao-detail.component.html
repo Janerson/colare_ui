@@ -11,7 +11,7 @@
               <!-- row -->
               <div class="row">
                 <div class="col-lg-2">
-                  <label class="col-form-label" for="id">Código TCM</label>
+                  <label class="col-form-label" for="id">ID</label>
                   <div class="controls">
                     <div class="input-prepend input-group" formGroupName="arquivo">
                       <div class="input-group-prepend">
@@ -28,7 +28,6 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text">Tipo</span>
                       </div>
-                      <!-- [ngClass]="aplicaCssErro('codTipoRegulamentacao')"  -->
                       <select class="form-control" id="codTipoRegulamentacao" formControlName="codTipoRegulamentacao"
                         (change)="addOrRemoveDetalhamentoLc123()">
                         <option></option>
@@ -61,22 +60,25 @@
                         <span class="input-group-text">N°</span>
                       </div>
                       <input type="text" id="numeroDecretoMunicipal" name="numeroDecretoMunicipal" class="form-control"
-                        formControlName="numeroDecretoMunicipal">
+                        formControlName="numeroDecretoMunicipal" />
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-3">
                   <label class="col-form-label" for="dataDecretoMunicipal">Data Decreto Municipal</label>
-                  <div class="controls">
-                    <input type="date" id="dataDecretoMunicipal" name="dataDecretoMunicipal" class="form-control"
-                      formControlName="dataDecretoMunicipal">
+                  <div class="controls" validator>
+                    <div class="input-prepend input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                      </div>
+                      <input type="date" class="form-control" formControlName="dataDecretoMunicipal" autocomplete="off"/>
+                    </div>
                   </div>
                 </div>
                 <div class="col-lg-3">
-                  <label class="col-form-label" for="prependedInput">Data Publicação</label>
+                  <label class="col-form-label" for="dataPublicacao">Data Publicação</label>
                   <div class="controls">
-                    <input type="date" id="dataPublicacao" name="dataPublicacao" class="form-control"
-                      formControlName="dataPublicacao">
+                    <input type="date" class="form-control" formControlName="dataPublicacao" autocomplete="off"/>
                   </div>
                 </div>
               </div>
@@ -269,8 +271,7 @@
       <!--/.col-->
     </div>
     <!--Ações-->
-    <app-acoes [form]="formulario" (onPdfHomologacao)="obterPDFHomologacao()" (onTransmitir)="transmitir()"
-      (onSincronizar)="sincronizar($event)" (onHomologar)="homologar($event)" (onRetificar)="retificar()"
-      (onCancelar)="cancelar()"></app-acoes>
+    <app-acoes [form]="formulario" [layout]="layout" (onTransmitir)="transmitir()" (onSincronizar)="sincronizar($event)"
+      (onRetificar)="retificar()"></app-acoes>
   </form>
 </div>
