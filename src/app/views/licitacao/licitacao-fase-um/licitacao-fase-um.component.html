@@ -22,8 +22,9 @@
                 <tr>
                   <th>#</th>
                   <th>Id</th>
+                  <th>N° Processo</th>
                   <th>N° Licitação</th>
-                  <th>Obejeto</th>
+                  <th>Objeto</th>
                   <th>Data Publicação</th>
                   <th>Status Envio</th>
                 </tr>
@@ -35,6 +36,7 @@
                     </app-table-acoes>
                   </td>
                   <td>{{item.arquivo?.id}}</td>
+                  <td>{{item.numeroProcessoAdministrativo}}</td>
                   <td>{{item.numeroLicitacao}}</td>
                   <td>{{item.objeto}}</td>
                   <td>{{item.dataPrevistaAberturaSessao | date:'dd/MM/yyyy'}}</td>

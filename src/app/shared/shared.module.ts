@@ -44,6 +44,9 @@ import { DatepickerComponent } from './ui/date-picker/date-picker.component';
 import { CustomSelectComponent } from './ui/custom-select/custom-select.component'
 import { NgxMaskModule } from 'ngx-mask';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CustomCardComponent } from './ui/custom-card/custom-card.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
 //registerPlugin(FilePondPluginGetFile)
 
@@ -83,7 +86,8 @@ setTheme('bs4')
     CustomAlertComponent,
     TableAcoesComponent,
     DatepickerComponent,
-    CustomSelectComponent,    
+    CustomSelectComponent,
+    CustomCardComponent,  
    
   ],
   imports: [     
@@ -103,6 +107,8 @@ setTheme('bs4')
     NgWizardModule.forRoot(ngWizardConfig),
     FilePondModule,
     IconPickerModule,
+    NgSelectModule,
+    TabsModule.forRoot(),
     ToastrModule.forRoot({
       progressBar: true,
     }),
@@ -134,6 +140,9 @@ setTheme('bs4')
     TableAcoesComponent,
     DatepickerComponent,   
     CustomSelectComponent,
+    CustomCardComponent,
+    TabsModule,
+    NgSelectModule  
     // BsDatepickerModule
   ],
   providers: [BsLocaleService,  AlertService, DatePipe],

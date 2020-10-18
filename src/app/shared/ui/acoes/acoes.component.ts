@@ -78,7 +78,7 @@ export class AcoesComponent implements OnInit, OnChanges {
 
   validaAcoes() {
     this.form.get("arquivo.statusEnvio").valueChanges.subscribe((value) => {
-      this.isHomologado = value == "HOMOLOGADO" ? true : false;
+      this.isHomologado = value == "HOMOLOGADO" && value != null ? true : false;
     });
   }
 

@@ -10,15 +10,13 @@ import { API } from '../../../shared/enum-layouts/api';
   styleUrls: ["./menu.component.css"],
 })
 export class MenuComponent extends BaseFormComponent implements OnInit {
-  submit() {
-    throw new Error("Method not implemented.");
-  }
+
   protected layout = API.DOMINIO_MENU;
 
   protected page: Page<MenuLink>;
 
   constructor(
-    private service: MenuService  ) {
+    private service: MenuService) {
     super();
   }
 
@@ -32,8 +30,8 @@ export class MenuComponent extends BaseFormComponent implements OnInit {
       });
     });
   }
-  
-  onNotify(){
+
+  onNotify() {
     this.service.refresh.next()
   }
 
@@ -41,5 +39,11 @@ export class MenuComponent extends BaseFormComponent implements OnInit {
     this.service.paginado(event.page - 1).subscribe((data) => {
       this.page = data;
     });
+  }
+  onFormInvalid() {
+    throw new Error('Method not implemented.');
+  }
+  submit() {
+    throw new Error("Method not implemented.");
   }
 }

@@ -69,6 +69,10 @@ export class DefaultLayoutComponent
     throw new Error("Method not implemented.");
   }
 
+  onFormInvalid(){
+    throw new Error("Method not implemented.");
+  }
+
   filtrarMenu(str: string, array: MenuLink[]): MenuLink[] {
     let resultado: MenuLink[] = [];
     let title: MenuLink = {};

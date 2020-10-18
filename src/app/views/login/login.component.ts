@@ -11,6 +11,7 @@ import { AlertService, AlertTypes } from "../../shared/services/alert.service";
   templateUrl: "login.component.html",
 })
 export class LoginComponent extends BaseFormComponent implements OnInit {
+
   loginForm: FormGroup;
   submitted = false;
   returnUrl: string;
@@ -51,6 +52,10 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
       }, err => {
         this.alertService.showToastr(AlertTypes.DANGER,"Usuário e/ou senha inválido!","Erro")
       });
+  }
+
+  onFormInvalid() {
+    this.alertService.showToastr(AlertTypes.DANGER,"ERROR","Verifique os erros e tente novamente.")
   }
 
   error() {

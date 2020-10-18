@@ -22,6 +22,10 @@ export class LicitacaoFaseUmComponent
   submit() {
     throw new Error("Method not implemented.");
   }
+  onFormInvalid() {
+    throw new Error("Method not implemented.");
+  }
+
 
   protected page: Page<LicitacaoFaseUm>;
 
@@ -30,7 +34,7 @@ export class LicitacaoFaseUmComponent
     private route: ActivatedRoute,
     private router: Router
   ) {
-    super();   
+    super();
   }
 
   ngOnInit(): void {

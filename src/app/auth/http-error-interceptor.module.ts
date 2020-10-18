@@ -70,6 +70,7 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
         break;
     }
   }
+
   private hanldeErrorAPI(error: HttpErrorResponse) {
     this.alertService.hide()
     this.ngxLoader.stop();
@@ -78,19 +79,27 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
 
     let msg = "";
     switch (error.status) {
-      // case 400:
-      // case 401:        
-      //   this.alertService.showAlert(
-      //     AlertTypes.DANGER,
-      //     "Usuário e/ou senha inválido!",
-      //     "Erro"
-      //   );
-      //   break;
-      case 415:
-        this.alertService.showAlert(AlertTypes.DANGER,apiError.message, "ERROR");
+       case 400:  
+       case 401:        
+         this.alertService.showToastr(
+           AlertTypes.DANGER,           
+           "ERROR",
+           "Usuário e/ou senha inválido!"
+         );
+         break;
+      case 412:        
+        apiError.errors.forEach((e,i) =>{
+          this.alertService.showToastr(AlertTypes.DANGER,"ERROR",e, {
+            timeOut:(5000 + (i*1000)),
+            tapToDismiss:true
+          });
+        })
         break;
-      case 500:
-        this.alertService.showAlert(AlertTypes.DANGER,apiError.message, "ERROR");
+      case 415:
+        this.alertService.showToastr(AlertTypes.DANGER,"ERROR",apiError.message);
+        break;
+      case 500:        
+        this.alertService.showToastr(AlertTypes.DANGER,"ERROR",apiError.message);
         break;
       // default:
       //   msg = error.message;

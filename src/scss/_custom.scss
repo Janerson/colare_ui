@@ -1,48 +1,43 @@
-@import '~ng-wizard/themes/ng_wizard.min.css';
+@import "~ng-wizard/themes/ng_wizard.min.css";
 /* Optional */
 /* If a theme other than default is used, the css file for that theme is required. */
-@import '~ng-wizard/themes/ng_wizard_theme_arrows.min.css';
-@import '~ng-wizard/themes/ng_wizard_theme_circles.min.css';
-@import '~ng-wizard/themes/ng_wizard_theme_dots.min.css';
+@import "~ng-wizard/themes/ng_wizard_theme_arrows.min.css";
+@import "~ng-wizard/themes/ng_wizard_theme_circles.min.css";
+@import "~ng-wizard/themes/ng_wizard_theme_dots.min.css";
 
-// .ng-invalid.touched:not(form) {
-//   border-color: red;
-//   border-width: 1px;
-// }
-// body{
-//   background-color: #f2f4f8;
-// }
+// Style for NG-Select
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
- .modal{
- //  display:flex;
-   top:5%;
-   //border: 0px;
- }
+.modal {
+  //  display:flex;
+  top: 5%;
+  //border: 0px;
+}
 
- .modal-content {
- //  position: relative;
- //  display: -webkit-box;
- //  display: flex;
- //  -webkit-box-orient: vertical;
- //  -webkit-box-direction: normal;
+.modal-content {
+  //  position: relative;
+  //  display: -webkit-box;
+  //  display: flex;
+  //  -webkit-box-orient: vertical;
+  //  -webkit-box-direction: normal;
   // flex-direction: column;
   // width: 100%;
   // pointer-events: auto;
   // background-clip: padding-box;
-   border: none;
-   border-radius: 0.5rem;
-   //outline: 0;
- }
-
+  border: none;
+  border-radius: 0.5rem;
+  //outline: 0;
+}
 
 .btn {
   margin-right: 5px;
 }
-.has-error {
-  border-style: solid;
-  border-width: thin;
-  border-color: red;
-}
+
+//.has-error {
+//  border-style: solid;
+//  border-width: thin;
+//  border-color: red;
+//}
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -56,20 +51,65 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+// Validações
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
+  background-position: right 0.1rem center;
+  padding-right: 0.75rem;
+}
 
-fieldset{
+.was-validated .form-control:valid,
+.form-control.is-valid {
+  background-position: right 0.1rem center;
+  padding-right: 1.2rem;
+}
+
+//.form-control.ng-dirty.ng-invalid {
+//  border-color: #f86c6b;
+//  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23f86c6b' viewBox='-2 -2 7 7'%3e%3cpath stroke='%23f86c6b' d='M0 0l3 3m0-3L0 3'/%3e%3ccircle r='.5'/%3e%3ccircle cx='3' r='.5'/%3e%3ccircle cy='3' r='.5'/%3e%3ccircle cx='3' cy='3' r='.5'/%3e%3c/svg%3E");
+//  padding-right: calc(1.5em + 0.75rem);
+//  background-repeat: no-repeat;
+//  background-position: center right calc(0.375em + 0.1875rem);
+//  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+//}
+//
+//.form-control.ng-dirty.ng-invalid:focus {
+//  border-color: #f86c6b;
+//  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset,
+//    0 0 8px rgb(239, 104, 104);
+//}
+
+// Fieldset
+fieldset {
   border: 1px groove #fbfbfb5c !important;
   padding: 0 1.4em 1.4em 1.4em !important;
   margin: 0 0 1.5em 0 !important;
   -webkit-box-shadow: 0px 0px 0px 0px #fbfbfb5c;
-  box-shadow: 0px 0px 0px 0px #fbfbfb5c
+  box-shadow: 0px 0px 0px 0px #fbfbfb5c;
 }
 
-legend{
-  font-size: .9em !important;
+legend {
+  font-size: 0.9em !important;
   font-weight: bold !important;
   text-align: left !important;
   width: auto;
   padding: 0 5px;
   border-bottom: none;
+}
+
+// Tabs
+.tab-content {
+  margin-top: -1px;
+  background: #fff;
+  border: 0px;
+  border-top: 1px solid #c8ced3;
+}
+
+.nav-tabs .nav-link.active {
+  color: #1088ff;
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+  border-color: #1088ff #6001fa00 #6001fa00 #6001fa00;
 }

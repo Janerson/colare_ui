@@ -12,6 +12,7 @@ import { Tabela } from '../../../shared/entity/colare/tabelas';
 })
 export class TipoDeTabelaComponent extends BaseFormComponent
   implements OnInit {
+
  
   private subscription: Subscription;
   private serviceSubscription: Subscription;
@@ -43,6 +44,10 @@ export class TipoDeTabelaComponent extends BaseFormComponent
   }
 
   submit() {
+    throw new Error('Method not implemented.');
+  }
+
+  onFormInvalid() {
     throw new Error('Method not implemented.');
   }
 

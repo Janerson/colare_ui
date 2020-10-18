@@ -13,11 +13,15 @@ import { LIC } from '../../../shared/enum-layouts/lic';
 export class RegLicitacaoComponent extends BaseFormComponent implements OnInit {
 
   protected layout = LIC.REG_LICITACAO
-  
+
   submit() {
     throw new Error("Method not implemented.");
   }
-  
+  onFormInvalid() {
+    throw new Error("Method not implemented.");
+  }
+
+
   protected page: Page<RegLicitacao>;
 
   constructor(protected service: RegLicitacaoService, private router: Router) {
@@ -32,7 +36,7 @@ export class RegLicitacaoComponent extends BaseFormComponent implements OnInit {
     this.router.navigate(["/LIC/REG_LICITACAO/", uuid]);
   }
 
-  excluir(uuid){
+  excluir(uuid) {
     this.service.excluir(uuid)
   }
 
@@ -41,13 +45,13 @@ export class RegLicitacaoComponent extends BaseFormComponent implements OnInit {
       this.page = data;
     });
   }
-  private listar(){
+  private listar() {
     this.service.paginado().subscribe(data => {
       this.page = data;
     });
   }
 
-  onNotify(){
+  onNotify() {
     this.listar()
   }
 }

@@ -3,14 +3,11 @@ import {
   FormBuilder,
   FormArray,
   FormControl,
-  Validators} from "@angular/forms";
+  Validators,
+  AbstractControl,
+} from "@angular/forms";
 import { of, Observable, interval, EMPTY } from "rxjs";
-import {
-  switchMap,
-  debounce,
-  distinctUntilChanged,
-  map,
-} from "rxjs/operators";
+import { switchMap, debounce, distinctUntilChanged, map } from "rxjs/operators";
 import { ColareRetorno } from "../../entity/colare/colare-retorno";
 
 // @Component({
@@ -32,19 +29,23 @@ export abstract class BaseFormComponent {
    * Método chamado quando formulario é submetido e válido
    */
   abstract submit();
+  /**
+   * Método chamado quando o formulário está inválido.
+   */
+  abstract onFormInvalid();
 
   public canDeactivate(): boolean {
     return !this.formulario.dirty;
   }
 
-//@HostListener("window:beforeunload", ["$event"])
-//unload($event: any) {
-//  if (!this.canDeactivate()) {
-//    $event.returnValue = true;
-//  } else {
-//    $event.returnValue = false;
-//  }
-//}
+  //@HostListener("window:beforeunload", ["$event"])
+  //unload($event: any) {
+  //  if (!this.canDeactivate()) {
+  //    $event.returnValue = true;
+  //  } else {
+  //    $event.returnValue = false;
+  //  }
+  //}
 
   /**
    * Retorna o valor do formControl ou o proprio formControl
@@ -53,14 +54,21 @@ export abstract class BaseFormComponent {
    * @param control Opcional (TRUE | FALSE - default) Quando true, retorna o FormControl, indicado
    * no parametro {{controlPath}}
    */
-  formValue(controlPath?: any, control?: boolean){
+  formValue(controlPath?: any, control?: boolean) {
     return controlPath === undefined
       ? control
         ? this.formulario
         : this.formulario.value
       : control
-      ? this.formulario.get(controlPath) 
-      : this.formulario.get(controlPath).value;
+        ? this.formulario.get(controlPath)
+        : this.formulario.get(controlPath).value;
+  }
+
+  /**
+   * Devolve o FormControl
+   */
+  getControl(path: string): AbstractControl {
+    return this.formulario.get(path);
   }
   /**
    * @param path
@@ -115,24 +123,21 @@ export abstract class BaseFormComponent {
    *  Cria o Formulario Base
    */
   private buildForm() {
-    this.formulario = this.builder.group(
-      {
-        arquivo: this.builder.group({
-          uuid: this.builder.control(null),
-          id: this.builder.control(null, []),
-          ano: this.builder.control(null, []),
-          mes: this.builder.control(null, []),
-          idRepresentacao: this.builder.control(null, []),
-          recibo: this.builder.control(null, []),
-          statusEnvio: this.builder.control(null, []),
-          arquivoHomologacao: this.builder.control(null, []),
-          layoutSigla: this.builder.control(null, []),
-          prestacaoDeContasSigla: this.builder.control(null, []),
-        }),
-        uuid: this.builder.control(null, []),
-      },
-      [Validators.required]
-    );
+    this.formulario = this.builder.group({
+      arquivo: this.builder.group({
+        uuid: this.builder.control(null),
+        id: this.builder.control(null, []),
+        ano: this.builder.control(null, []),
+        mes: this.builder.control(null, []),
+        idRepresentacao: this.builder.control(null, []),
+        recibo: this.builder.control(null, []),
+        statusEnvio: this.builder.control(null, []),
+        arquivoHomologacao: this.builder.control(null, []),
+        layoutSigla: this.builder.control(null, []),
+        prestacaoDeContasSigla: this.builder.control(null, []),
+      }),
+      uuid: this.builder.control(null),
+    }, [Validators.required]);
   }
 
   atualizaFormulario(obj: Object, path?: string) {
@@ -161,14 +166,17 @@ export abstract class BaseFormComponent {
       this.submit();
     } else {
       this.verificaValidacoesForm(this.formulario);
+      this.onFormInvalid()
     }
   }
 
   verificaValidacoesForm(formGroup: FormGroup | FormArray) {
     Object.keys(formGroup.controls).forEach((campo) => {
-      const controle = formGroup.get(campo);     
+      const controle = formGroup.get(campo);
       controle.markAsDirty();
       controle.markAsTouched();
+      const value = controle.value;
+      controle.setValue(value)
       if (controle instanceof FormGroup || controle instanceof FormArray) {
         this.verificaValidacoesForm(controle);
       }
@@ -183,13 +191,13 @@ export abstract class BaseFormComponent {
     if (!this.formValue("arquivo.statusEnvio", true)) return;
     this.formValue("arquivo.statusEnvio") === "HOMOLOGADO"
       ? this.formulario.disable({
-          onlySelf: true,
-          emitEvent: false,
-        })
+        onlySelf: true,
+        emitEvent: false,
+      })
       : this.formulario.enable({
-          //onlySelf:true,
-          //emitEvent:false
-        });
+        //onlySelf:true,
+        //emitEvent:false
+      });
   }
 
   resetar() {
@@ -197,6 +205,7 @@ export abstract class BaseFormComponent {
   }
 
   verificaValidTouched(campo: string) {
+    console.log("verificaValidTouched()", campo);
     return (
       !this.formulario.get(campo).valid &&
       (this.formulario.get(campo).touched || this.formulario.get(campo).dirty)
@@ -204,17 +213,11 @@ export abstract class BaseFormComponent {
   }
 
   verificaRequired(campo: string) {
+    console.log("verificaRequired()", campo);
     return (
       this.formulario.get(campo).hasError("required") &&
       (this.formulario.get(campo).touched || this.formulario.get(campo).dirty)
     );
-  }
-
-  verificaEmailInvalido() {
-    const campoEmail = this.formulario.get("email");
-    if (campoEmail.errors) {
-      return campoEmail.errors["email"] && campoEmail.touched;
-    }
   }
 
   aplicaCssErro(campo: string) {

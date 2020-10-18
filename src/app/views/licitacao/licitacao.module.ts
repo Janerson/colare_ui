@@ -16,6 +16,7 @@ import { LicRetificaPopupComponent } from './lic-retifica-popup/lic-retifica-pop
 import { LicRetificaService } from './service/lic-retifica-homolog.service';
 import { LicitacaoFaseUmComponent } from './licitacao-fase-um/licitacao-fase-um.component';
 import { LicitacaoFaseUmDetailComponent } from './licitacao-fase-um/licitacao-fase-um-detail/licitacao-fase-um-detail.component';
+import { LoteComponent } from './lote/lote.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LicitacaoFaseUmDetailComponent } from './licitacao-fase-um/licitacao-fa
     ContratoInicialDetailComponent,
     LicRetificaPopupComponent,
     LicitacaoFaseUmComponent,
-    LicitacaoFaseUmDetailComponent
+    LicitacaoFaseUmDetailComponent,
+    LoteComponent
   ],
   imports: [CommonModule, LicitacaoRoutingModule, SharedModule],
   providers: [

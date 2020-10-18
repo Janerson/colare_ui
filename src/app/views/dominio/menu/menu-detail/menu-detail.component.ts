@@ -29,7 +29,6 @@ export class MenuDetailComponent
   protected disableDelBtn = true;
   icon = new FormControl();
 
-
   protected layout = API.DOMINIO_MENU;
 
   constructor(
@@ -58,10 +57,10 @@ export class MenuDetailComponent
   }
 
   private getMenu() {
-    this.formulario.reset
+    this.formulario.reset;
     this.menuService.buscarPorUUID(this.uuid).subscribe((value) => {
-      this.children.clear()
-      this.atualizaFormulario(value)
+      this.children.clear();
+      this.atualizaFormulario(value);
       if (value.children) value.children.forEach((m) => this.addChildren(m));
       this.disableDelBtn = false;
     });
@@ -77,6 +76,11 @@ export class MenuDetailComponent
         });
     });
   }
+
+  onFormInvalid(){
+    this.alertService.showToastr(AlertTypes.DANGER,"ERROR","Verifique os erros e tente novamente.")
+   }
+
 
   excluir() {
     this.alertService
@@ -126,15 +130,14 @@ export class MenuDetailComponent
     this.adicionaControl("class", this.builder.control(null, []));
   }
 
-
-  addChildren(m: MenuLink) {   
+  addChildren(m: MenuLink) {
     const fg = this.builder.group({
       uuid: this.builder.control(m.uuid),
       icon: this.builder.control(m.icon),
       name: this.builder.control(m.name),
       url: this.builder.control(m.url),
     });
-    this.children.push(fg)
+    this.children.push(fg);
   }
 
   excluirSubLink(index: number) {
@@ -142,8 +145,8 @@ export class MenuDetailComponent
     this.menuService.refresh.next();
   }
 
-  get children(){
-    return this.formValue('children' , true) as FormArray
+  get children() {
+    return this.formValue("children", true) as FormArray;
   }
 
   popupAddChildren(data?: Object, index?: number) {
@@ -160,16 +163,7 @@ export class MenuDetailComponent
       );
       return;
     }
-
-    // let subs = this.modalService.changeEmitted$.subscribe((value: MenuLink) => {
-    //   hasValueEmitted = true;
-    //   if (index) {
-    //     this.menuService.salvar(value).subscribe();
-    //   } else {
-    //     this.menuService.listaAdd(this.formValue("uuid"), value).subscribe();
-    //   }
-    // });
-
+    
     this.alertService
       .showModal(MenuPopupComponent, {
         class: "modal-lg",
@@ -179,18 +173,14 @@ export class MenuDetailComponent
         },
       })
       .onHidden.subscribe(() => {
-        //if (hasValueEmitted) {
-          this.getMenu();
-          this.menuService.refresh.next();
-         // subs.unsubscribe();
-      //  }
+        this.getMenu();
+        this.menuService.refresh.next();
       });
   }
 
   onPickerIcon(event) {
     this.formValue("icon", true).setValue(event);
   }
-
 
   addOrRemoveChildren() {
     this.isTitle = this.formValue("title");

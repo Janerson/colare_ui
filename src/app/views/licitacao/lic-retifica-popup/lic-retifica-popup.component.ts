@@ -101,6 +101,11 @@ export class LicRetificaPopupComponent extends BaseFormComponent
       });
   }
 
+  onFormInvalid(){
+    throw new Error("Method not implemented.");
+   }
+
+
   obterPdf() {
     this.retificaService.obterPdfHomologacaoColare(
       this.formValue("arquivo.recibo")

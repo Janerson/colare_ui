@@ -41,6 +41,8 @@ export class RegLicitacaoDetailComponent
   protected uuid: String;
   protected layout = LIC.REG_LICITACAO;
 
+ 
+
   constructor(
     private service: RegLicitacaoService,
     private tabelaService: TabelaService,
@@ -99,6 +101,11 @@ export class RegLicitacaoDetailComponent
   submit() {
     this.save(true);
   }
+
+  onFormInvalid(){
+   this.alertService.showToastr(AlertTypes.DANGER,"ERROR","Verifique os erros e tente novamente.")
+   }
+
 
   transmitir() {  
     this.subscriptionModalService = this.modalService.changeEmitted$.subscribe(

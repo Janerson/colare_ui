@@ -9,11 +9,11 @@ import { BaseEntity } from "../../entity/base-entity";
 import { Arquivo, ColareRetorno } from "../../entity/colare/colare-retorno";
 
 export class GenericDao<K, T extends BaseEntity<K>> {
-  private removeEmpty = (obj: T) => {
-    delete obj.uuid;
+  private removeEmpty = (obj: T , isAPI:boolean) => {
+    if(!isAPI) delete obj.uuid;
     delete obj.arquivo;
     Object.keys(obj).forEach((key) => {
-      if (obj[key] && typeof obj[key] === "object") this.removeEmpty(obj[key]);
+      if (obj[key] && typeof obj[key] === "object") this.removeEmpty(obj[key], isAPI);
       else if (obj[key] == null) delete obj[key];
     });
   };
@@ -99,6 +99,7 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    * @param obj Entidade a ser persistida
    */
   salvar(obj: T) {
+    this.removeEmpty(obj, true)
     if (obj.uuid) {
       return this.atualizar(obj);
     }
@@ -146,10 +147,10 @@ export class GenericDao<K, T extends BaseEntity<K>> {
     const mes = t.arquivo?.mes;
     const ano = t.arquivo?.ano;
     if (t.arquivo?.id) {
-      this.removeEmpty(t);
+      this.removeEmpty(t,false);
       return this.putColare(t, id, mes, ano);
     } else {
-      this.removeEmpty(t);
+      this.removeEmpty(t,false);
       return this.postColare(t);
     }
   }

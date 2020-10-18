@@ -76,23 +76,23 @@ export class AlertService {
     return this.bsModalService;
   }
 
-  showToastr(type:AlertTypes, title:string, message:string){
+  showToastr(type:AlertTypes, title:string, message:string, opt?: Partial<IndividualConfig>){
 
     switch (type) {
       case AlertTypes.SUCESS:
-        this.toastr.success(message,title)
+        this.toastr.success(message,title,opt)
         break;
       case AlertTypes.DANGER:
-        this.toastr.error(message,title)
+        this.toastr.error(message,title,opt)
         break;
       case AlertTypes.INFO:
-        this.toastr.info(message,title)
+        this.toastr.info(message,title,opt)
         break;    
       case AlertTypes.WARNING:
-        this.toastr.warning(message,title)
+        this.toastr.warning(message,title,opt)
         break;    
       default:
-        this.toastr.show(message,title)
+        this.toastr.show(message,title,opt)
         break;
     }
   }

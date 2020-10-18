@@ -51,6 +51,10 @@ export class EnvioComponent extends BaseFormComponent implements OnInit , OnDest
      this.bsModalRef.hide();
    }
 
+   onFormInvalid(){
+    throw new Error("Method not implemented.");
+   }
+
 
   cancelar() {
     this.bsModalRef.hide();
