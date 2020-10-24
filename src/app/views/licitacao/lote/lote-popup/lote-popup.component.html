@@ -1,0 +1,52 @@
+<div>
+    <form [formGroup]="formulario" (submit)="onSubmit(true)">
+        <div class="row">
+            <div class="col-lg-12">
+                <c-card cardTitle="Lote Fase - 1">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="col-form-label" for="numeroLote">Número do Lote</label>
+                            <div class="controls" validator>
+                                <div class="input-prepend input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">N°</span>
+                                    </div>
+                                    <input type="number" id="numeroLote" class="form-control"
+                                        formControlName="numeroLote" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="col-form-label" for="numeroLote">Descrição do Lote</label>
+                            <div class="controls" validator>
+                                <div class="input-prepend input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-pencil"></i></span>
+                                    </div>
+                                    <textarea id="descricaoLote" class="form-control"
+                                        formControlName="descricaoLote"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </c-card>
+                <c-card faIcon="fa fa-certificate" cardTitle="Ações" style="margin-bottom: 0px;">
+                    <button type="submit" class="btn btn-brand btn-sm btn-facebook mr-1" [disabled]="btnTitle !== 'Adicionar'">
+                        <i class="fa fa-plus"></i>
+                        <span>{{btnTitle}} e Novo</span>
+                    </button>
+                    <button type="button" class="btn btn-brand btn-sm btn-vine mr-1" (click)="onSubmit(false)">
+                        <i class="fa fa-plus"></i>
+                        <span>{{btnTitle}} e Fechar</span>
+                    </button>
+                    <button type="button" class="btn btn-brand btn-sm btn-tumblr mr-1" (click)="cancelar()">
+                        <i class="fa fa-undo"></i>
+                        <span>Cancelar</span>
+                    </button> 
+                </c-card>
+            </div>
+        </div>
+    </form>
+</div>

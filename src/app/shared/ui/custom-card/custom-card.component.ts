@@ -9,6 +9,7 @@ export class CustomCardComponent implements OnInit {
 
   @Input() faIcon = "fa fa-edit"
   @Input() cardTitle = ""
+  @Input() style =""
 
   constructor() { }
 

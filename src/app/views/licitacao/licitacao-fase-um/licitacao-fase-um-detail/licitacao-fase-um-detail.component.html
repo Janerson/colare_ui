@@ -26,9 +26,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                     </div>
-                                    <input type="text" id="exercicioLicitacao" class="form-control"
+                                    <input type="number" id="exercicioLicitacao" class="form-control"
                                         formControlName="exercicioLicitacao" [OnlyNumber]="true" placeholder="Ex: 2020"
-                                        autocomplete="off">
+                                        autocomplete="off" />
                                 </div>
                             </div>
                         </div>
@@ -348,6 +348,6 @@
                 </c-card>
             </div>
         </div>
-        <app-acoes [form]="formulario" [layout]="layout"></app-acoes>
+        <c-layout-acoes [form]="formulario" [layout]="layout"></c-layout-acoes>
     </form>
 </div>

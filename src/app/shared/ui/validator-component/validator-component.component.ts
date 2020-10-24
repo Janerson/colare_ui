@@ -22,7 +22,7 @@ export class ValidatorComponentComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.formControl.valueChanges.subscribe((value) => {
-      console.log(this.formControl["name"], "Touched: " + this.formControl.touched, "Pristine: " + this.formControl.pristine,"Dirty: "+this.formControl.dirty);
+      //console.log(this.formControl["name"], "Touched: " + this.formControl.touched, "Pristine: " + this.formControl.pristine,"Dirty: "+this.formControl.dirty);
       this.erros(this.formControl.errors);
       this.isValid();
     });
@@ -43,7 +43,7 @@ export class ValidatorComponentComponent implements OnInit, AfterViewInit {
     if (!err) return;
 
     Object.keys(err).forEach((key) => {
-      console.log(this.formControl["name"], key, err[key]);
+      //console.log(this.formControl["name"], key, err[key]);
       switch (key) {
         case "email":
           this.error_msg = "E-mail inválido!";

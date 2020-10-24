@@ -50,8 +50,9 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
       .subscribe(() => {
         this.router.navigate([this.returnUrl]);     
       }, err => {
-        this.alertService.showToastr(AlertTypes.DANGER,"Usuário e/ou senha inválido!","Erro")
-      });
+        this.alertService.showToastr(AlertTypes.DANGER,"ERROR","Usuário/senha inválido.")
+      }
+      );
   }
 
   onFormInvalid() {

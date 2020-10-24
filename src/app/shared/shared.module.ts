@@ -23,7 +23,6 @@ import { Erro412Component } from "./ui/erro412/erro412.component";
 import { BaseModalComponent } from "./ui/base-modal/base-modal.component";
 import { PassaporteComponent } from "./ui/passaporte/passaporte.component";
 import { EnvioComponent } from "./ui/envio/envio.component";
-import { AcoesComponent } from "./ui/acoes/acoes.component";
 import { StatusEnvioPipe } from "./pipes/status-envio.pipe";
 import { ValidatorComponentComponent } from "./ui/validator-component/validator-component.component";
 import { CardComponent } from "./ui/card/card.component";
@@ -38,7 +37,7 @@ import {
   TOOLBAR_POSITION,
 } from "ng-wizard";
 import { AlertModule } from "ngx-bootstrap/alert";
-import { TableAcoesComponent } from './ui/table-acoes/table-acoes.component';
+
 import {setTheme} from 'ngx-bootstrap/utils';
 import { DatepickerComponent } from './ui/date-picker/date-picker.component';
 import { CustomSelectComponent } from './ui/custom-select/custom-select.component'
@@ -47,6 +46,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CustomCardComponent } from './ui/custom-card/custom-card.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { CustomFieldComponent } from './ui/custom-field/custom-field.component';
+import { ColareLayoutTableComponet } from './ui/colare-table-acoes/colare-table-acoes.component';
+import { ColareLayoutAcoesComponent } from './ui/colare-acoes/colare-acoes.component';
+import { TableAcoesComponent } from './ui/table-acoes/table-acoes.component';
 registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
 //registerPlugin(FilePondPluginGetFile)
 
@@ -79,15 +82,17 @@ setTheme('bs4')
     PassaporteComponent,
     EnvioComponent,
     Erro412Component,
-    AcoesComponent,
+    ColareLayoutAcoesComponent,
     StatusEnvioPipe,
     ValidatorComponentComponent,
     CardComponent,
     CustomAlertComponent,
-    TableAcoesComponent,
+    ColareLayoutTableComponet,
     DatepickerComponent,
     CustomSelectComponent,
-    CustomCardComponent,  
+    CustomCardComponent,
+    CustomFieldComponent,
+    TableAcoesComponent,  
    
   ],
   imports: [     
@@ -131,18 +136,20 @@ setTheme('bs4')
     FileUploadPondComponent,
     BaseModalComponent,
     Erro412Component,
-    AcoesComponent,
+    ColareLayoutAcoesComponent,
     PopoverModule,
     StatusEnvioPipe,
     ValidatorComponentComponent,
     CardComponent,
     IconPickerModule,
-    TableAcoesComponent,
+    ColareLayoutTableComponet,
     DatepickerComponent,   
     CustomSelectComponent,
     CustomCardComponent,
+    CustomFieldComponent,
     TabsModule,
-    NgSelectModule  
+    NgSelectModule,
+    TableAcoesComponent  
     // BsDatepickerModule
   ],
   providers: [BsLocaleService,  AlertService, DatePipe],

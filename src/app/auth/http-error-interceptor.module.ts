@@ -87,6 +87,13 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
            "Usuário e/ou senha inválido!"
          );
          break;
+       case 405:        
+         this.alertService.showToastr(
+           AlertTypes.DANGER,           
+           "ERROR",
+           apiError.errors[0]
+         );
+         break;
       case 412:        
         apiError.errors.forEach((e,i) =>{
           this.alertService.showToastr(AlertTypes.DANGER,"ERROR",e, {

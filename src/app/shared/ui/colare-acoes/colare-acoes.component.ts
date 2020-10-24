@@ -1,4 +1,4 @@
-import { AlertService, AlertTypes } from './../../services/alert.service';
+import { AlertService, AlertTypes } from '../../services/alert.service';
 import { HttpClient } from "@angular/common/http";
 import {
   Component,
@@ -19,11 +19,11 @@ import { switchMap } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 
 @Component({
-  selector: "app-acoes[form][layout]",
-  templateUrl: "./acoes.component.html",
-  styleUrls: ["./acoes.component.css"],
+  selector: "c-layout-acoes[form][layout]",
+  templateUrl: "./colare-acoes.component.html",
+  styleUrls: ["./colare-acoes.component.css"],
 })
-export class AcoesComponent implements OnInit, OnChanges {
+export class ColareLayoutAcoesComponent implements OnInit, OnChanges {
   @Input() form: FormGroup;
   @Input() layout: string;
 

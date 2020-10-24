@@ -1,4 +1,4 @@
-import { BaseEntity } from "../../base-entity";
+import { BaseEntity} from "../../base-entity";
 
 /**
  * Envio inicial dos dados da licitação - Abertura da licitação
@@ -63,6 +63,7 @@ export interface LicitacaoFaseUm extends BaseEntity<String> {
    * Lei Complementar 123/2006)
    */
   limitePercObjetoContratacaoMEEPP?: boolean;
+
   lote?: Lote[];
   /**
    * Descreve o motivo da Atualização ou Correção
@@ -173,7 +174,7 @@ export interface EditalEAnexos extends BaseEntity<String> {
 /**
  * – Cadastro de Lotes do Processo Licitatório
  */
-export interface Lote extends BaseEntity<String> {
+export class Lote extends BaseEntity<String> {
   /**
    * Descrição do Lote
    */
@@ -183,6 +184,8 @@ export interface Lote extends BaseEntity<String> {
    * Número do Lote
    */
   numeroLote?: number;
+
+  faseUm?:string;
 }
 
 /**

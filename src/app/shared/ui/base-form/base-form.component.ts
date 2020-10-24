@@ -17,6 +17,7 @@ import { ColareRetorno } from "../../entity/colare/colare-retorno";
 export abstract class BaseFormComponent {
   protected builder: FormBuilder = new FormBuilder();
   protected valueChanged: boolean = false;
+  private _fields = []
 
   formulario: FormGroup;
 
@@ -28,15 +29,29 @@ export abstract class BaseFormComponent {
    *
    * Método chamado quando formulario é submetido e válido
    */
-  abstract submit();
+  abstract submit(value?:any);
   /**
    * Método chamado quando o formulário está inválido.
    */
-  abstract onFormInvalid();
+  abstract onFormInvalid(fields?: Array<any>);
 
   public canDeactivate(): boolean {
     return !this.formulario.dirty;
   }
+
+    /**
+   * Sempre usar o metodo onSubmit no evento de submit do formulário
+   * Ex: <form (submit)="onSubmit()">...</form>
+   */
+  onSubmit(value?:any) {
+    if (this.formulario.valid) {
+      this.submit(value);
+    } else {
+      this.verificaValidacoesForm(this.formulario);
+      this.onFormInvalid(this._fields)
+    }
+  }
+
 
   //@HostListener("window:beforeunload", ["$event"])
   //unload($event: any) {
@@ -157,30 +172,21 @@ export abstract class BaseFormComponent {
     this.validarStatusEnvio();
   }
 
-  /**
-   * Sempre usar o metodo onSubmit no evento de submit do formulário
-   * Ex: <form (submit)="onSubmit()">...</form>
-   */
-  onSubmit() {
-    if (this.formulario.valid) {
-      this.submit();
-    } else {
-      this.verificaValidacoesForm(this.formulario);
-      this.onFormInvalid()
-    }
-  }
 
   verificaValidacoesForm(formGroup: FormGroup | FormArray) {
+
     Object.keys(formGroup.controls).forEach((campo) => {
       const controle = formGroup.get(campo);
       controle.markAsDirty();
       controle.markAsTouched();
       const value = controle.value;
       controle.setValue(value)
+      if (controle.invalid) this._fields.push({ field: campo, erro: controle.errors })
       if (controle instanceof FormGroup || controle instanceof FormArray) {
         this.verificaValidacoesForm(controle);
       }
     });
+
   }
 
   /**

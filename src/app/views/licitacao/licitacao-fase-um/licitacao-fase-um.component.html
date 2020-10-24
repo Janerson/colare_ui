@@ -32,8 +32,8 @@
               <tbody>
                 <tr *ngFor="let item of page?.content">
                   <td>
-                    <app-table-acoes botoes="['editar']" [layout]="layout" [uuid]="item.uuid" [editOnPopup]="false">
-                    </app-table-acoes>
+                    <c-layout-table-acoes botoes="['editar']" [layout]="layout" [uuid]="item.uuid" [editOnPopup]="false">
+                    </c-layout-table-acoes>
                   </td>
                   <td>{{item.arquivo?.id}}</td>
                   <td>{{item.numeroProcessoAdministrativo}}</td>

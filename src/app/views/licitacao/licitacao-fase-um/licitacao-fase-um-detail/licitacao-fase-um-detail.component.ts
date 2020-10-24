@@ -1,6 +1,7 @@
+import { LicitacaoFaseUm } from './../../../../shared/entity/LIC/licitacao_faseum/licitacao-fase-um';
 import { HelperService } from "./../../../../shared/services/helper.service";
 import { Subscription } from "rxjs";
-import { FormControl, Validators } from "@angular/forms";
+import { FormArray, Validators } from "@angular/forms";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { LIC } from "../../../../shared/enum-layouts/lic";
 import { FormService } from "../../../../shared/services/form.service";
@@ -9,7 +10,6 @@ import { TabelaService } from "../../../tabelas/service/tabelas.service";
 import { Tabela } from "../../../../shared/entity/colare/tabelas";
 import { TABELAS_DOMINIOS } from "../../../../shared/enum-layouts/tabelas";
 import { IDropdownSettings } from "ng-multiselect-dropdown";
-import { truncate } from "fs";
 import { LicitacaoFaseUmService } from "../../service/licitacao-fase-um.service";
 import {
   AlertService,
@@ -94,7 +94,6 @@ export class LicitacaoFaseUmDetailComponent
   }
 
   save(isSubimited: boolean) {
-    console.log(this.formulario.value);
     this.service.salvar(this.formValue()).subscribe((data) => {
       isSubimited
         ? this.alertService.showToastr(
@@ -109,8 +108,8 @@ export class LicitacaoFaseUmDetailComponent
 
   buscarLicitacao(uuid) {
     this.service.buscarPorUUID(uuid).subscribe((data) => {
-      console.log(data);
       this.atualizaFormulario(data);
+      this.addLote(data)
     });
   }
 
@@ -118,8 +117,8 @@ export class LicitacaoFaseUmDetailComponent
     this.save(true);
   }
 
-  onFormInvalid(){
-    this.alertService.showToastr(AlertTypes.DANGER,"ERROR","Verifique os erros e tente novamente.")
+  onFormInvalid(fields:Array<any>){
+      this.alertService.showToastr(AlertTypes.DANGER,"ERROR",`Formulário com erros, verifique e tente novamente.`) 
    }
 
 
@@ -158,9 +157,22 @@ export class LicitacaoFaseUmDetailComponent
     this.adicionaControl("servicoContinuo", this.builder.control(false));
     this.adicionaControl("numeroDeConvidados", this.builder.control(null));
     this.adicionaControl("descricaoPremioOuRemuneracaoConcurso", this.builder.control(null));
+    this.adicionaControl("lote",this.builder.array([]))
   }
 
-  onCodNaturezaObjeto(e) {
+  addLote(Lic:LicitacaoFaseUm){
+    (this.getControl('lote') as FormArray).clear()
+
+    Lic.lote?.forEach(lote => {
+      (this.getControl('lote') as FormArray).push(  this.builder.group({
+        uuid: this.builder.control(lote.uuid),
+        numeroLote: this.builder.control(lote.numeroLote),
+        descricaoLote: this.builder.control(lote.descricaoLote),
+      }))
+    })
+  }
+
+  onCodNaturezaObjeto() {
     let cod = this.formValue("codNaturezaObjeto");
     if (cod == 1000 || cod == 2000) {
       this.getControl("codRegimeExecucao").enable();
@@ -237,5 +249,6 @@ export class LicitacaoFaseUmDetailComponent
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.formService.emitChange({})
   }
 }

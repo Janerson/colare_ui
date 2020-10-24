@@ -6,14 +6,15 @@ import { Page } from "../../entity/api/page";
 import { environment } from "../../../../environments/environment";
 import { Subject } from "rxjs";
 import { BaseEntity } from "../../entity/base-entity";
-import { Arquivo, ColareRetorno } from "../../entity/colare/colare-retorno";
+import { ColareRetorno } from "../../entity/colare/colare-retorno";
 
 export class GenericDao<K, T extends BaseEntity<K>> {
-  private removeEmpty = (obj: T , isAPI:boolean) => {
-    if(!isAPI) delete obj.uuid;
+  private removeEmpty = (obj: T, isAPI: boolean) => {
+    if (!isAPI) delete obj.uuid;
     delete obj.arquivo;
     Object.keys(obj).forEach((key) => {
-      if (obj[key] && typeof obj[key] === "object") this.removeEmpty(obj[key], isAPI);
+      if (obj[key] && typeof obj[key] === "object")
+        this.removeEmpty(obj[key], isAPI);
       else if (obj[key] == null) delete obj[key];
     });
   };
@@ -55,7 +56,9 @@ export class GenericDao<K, T extends BaseEntity<K>> {
     dir?: string
   ) {
     return this.http.get<Page<T>>(
-      `${environment.api_url(this.layout)}/PAGED?page=${page}&search=${searchBy || ""}&sort=${orderBy || "seq"}&dir=${dir || "asc"}`
+      `${environment.api_url(this.layout)}/PAGED?page=${page}&search=${
+        searchBy || ""
+      }&sort=${orderBy || "seq"}&dir=${dir || "asc"}`
     );
   }
 
@@ -73,7 +76,11 @@ export class GenericDao<K, T extends BaseEntity<K>> {
     dir?: string
   ) {
     return this.http.get<Page<T>>(
-      `${environment.api_url(this.layout)}/PAGED/${tabela}?page=${page}&search=${termSearch || ""}&sort=${orderBy || "codigo"}&dir=${dir || "asc"}`
+      `${environment.api_url(
+        this.layout
+      )}/PAGED/${tabela}?page=${page}&search=${termSearch || ""}&sort=${
+        orderBy || "codigo"
+      }&dir=${dir || "asc"}`
     );
   }
 
@@ -82,7 +89,9 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    *@param tabela
    */
   listaDominio(tabela: string, status: boolean) {
-    return this.http.get<T[]>(`${environment.api_url(this.layout)}/ALL/${tabela}/${status}`);
+    return this.http.get<T[]>(
+      `${environment.api_url(this.layout)}/ALL/${tabela}/${status}`
+    );
   }
   /**
    * Busca layout pelo UUID
@@ -98,8 +107,8 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    * Salva ou atualiza a entidade
    * @param obj Entidade a ser persistida
    */
-  salvar(obj: T) {
-    this.removeEmpty(obj, true)
+  salvar(obj: T) { 
+    this.removeEmpty(obj, true);
     if (obj.uuid) {
       return this.atualizar(obj);
     }
@@ -116,11 +125,16 @@ export class GenericDao<K, T extends BaseEntity<K>> {
   private atualizar(obj: T) {
     return this.http
       .put<T>(`${environment.api_url(this.layout)}/${obj.uuid}`, obj)
-      .pipe(take(1),tap(() => this._refresh$.next()));
+      .pipe(
+        take(1),
+        tap(() => this._refresh$.next())
+      );
   }
   private gravar(obj: T) {
-    return this.http.post<T>(`${environment.api_url(this.layout)}`, obj)
-    .pipe(take(1), tap(() => this._refresh$.next()));
+    return this.http.post<T>(`${environment.api_url(this.layout)}`, obj).pipe(
+      take(1),
+      tap(() => this._refresh$.next())
+    );
   }
 
   /**
@@ -132,9 +146,71 @@ export class GenericDao<K, T extends BaseEntity<K>> {
     let formData = new FormData();
     if (file != null) {
       formData.set("file", file);
-      return this.http.post(`${environment.api_url(this.layout)}/${tabela}`, formData)
-        .pipe(take(1),tap(() => this._refresh$.next()));
+      return this.http
+        .post(`${environment.api_url(this.layout)}/${tabela}`, formData)
+        .pipe(
+          take(1),
+          tap(() => this._refresh$.next())
+        );
     }
+  }
+
+  /**
+   *
+   * @param tabela - tabela de persistencia
+   * @param uuid   - ID do Layot PAI
+   * @param obj    - Objeto a ser persistido
+   */
+  adicionarNaTabela(tabela: string, uuid: string, obj: {}) {
+    return this.http
+      .post(`${environment.api_url(this.layout)}/${uuid}/${tabela}/ADD`, obj)
+      .pipe(
+        take(1),
+        tap(() => this.refresh.next())
+      );
+  }
+
+  /**
+   *
+   * @param tabela - tabela de persistencia
+   * @param uuid   - ID do Layot PAI
+   * @param uuidDel- ID objeto a ser deletado
+   */
+  deletarDaTabela(tabela: string, uuid: string, uuidDel: string) {
+    return this.http
+      .delete(
+        `${environment.api_url(this.layout)}/${uuid}/${tabela}/DEL/${uuidDel}`
+      )
+      .pipe(
+        take(1),
+        tap(() => this.refresh.next())
+      );
+  }
+
+  /**
+   * Consulta Paginada
+   * @param tabela tabela
+   * @param uuid id layout
+   * @param page Número da página default 0
+   * @param searchBy pesquisar por...
+   * @param orderBy Coluna a ser ordenada default seq
+   * @param dir Direção ordenamento ASC | DESC default ASC
+   */
+  listarDadosTabela(
+    tabela: string,
+    uuid: string,
+    page: number = 0,
+    searchBy?: string,
+    orderBy?: string,
+    dir?: string
+  ) {
+    return this.http.get<Page<any>>(
+      `${environment.api_url(
+        this.layout
+      )}/${uuid}/${tabela}/LIST?page=${page}&search=${searchBy || ""}&sort=${
+        orderBy || "seq"
+      }&dir=${dir || "asc"}`
+    );
   }
 
   //==========================ENDPOINT´S TCM=========================
@@ -147,17 +223,20 @@ export class GenericDao<K, T extends BaseEntity<K>> {
     const mes = t.arquivo?.mes;
     const ano = t.arquivo?.ano;
     if (t.arquivo?.id) {
-      this.removeEmpty(t,false);
+      this.removeEmpty(t, false);
       return this.putColare(t, id, mes, ano);
     } else {
-      this.removeEmpty(t,false);
+      this.removeEmpty(t, false);
       return this.postColare(t);
     }
   }
 
   private postColare(t: T) {
     return this.http
-      .post<ColareRetorno>(`${environment.url_layout(this.layout)}/${this._mes}/${this._ano}`,t)
+      .post<ColareRetorno>(
+        `${environment.url_layout(this.layout)}/${this._mes}/${this._ano}`,
+        t
+      )
       .pipe(take(1));
   }
 
@@ -168,7 +247,12 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    */
   private putColare(t: T, id: any, mes: any, ano: any) {
     return this.http
-      .put<ColareRetorno>(`${environment.url_layout(this.layout)}/${mes || this._mes}/${ano || this._ano}/${id}`,t)
+      .put<ColareRetorno>(
+        `${environment.url_layout(this.layout)}/${mes || this._mes}/${
+          ano || this._ano
+        }/${id}`,
+        t
+      )
       .pipe(take(1));
   }
 
@@ -188,8 +272,12 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    * Obter o layout enviado
    * @param l Layout
    */
-  public getColare(l: T) {    
-    return this.http.get<ColareRetorno>(`${environment.url_layout(this.layout)}/${l.arquivo.mes}/${l.arquivo.ano}/${l.arquivo.id}`);
+  public getColare(l: T) {
+    return this.http.get<ColareRetorno>(
+      `${environment.url_layout(this.layout)}/${l.arquivo.mes}/${
+        l.arquivo.ano
+      }/${l.arquivo.id}`
+    );
   }
 
   public uploadColare(file: File) {
@@ -229,7 +317,12 @@ export class GenericDao<K, T extends BaseEntity<K>> {
     var formData = new FormData();
     formData.set("arquivo", arquivo);
     return this.http.put(
-      `${environment.url_homologa_envio(this.layout,layout.arquivo.mes,layout.arquivo.ano,layout.arquivo.id)}`,
+      `${environment.url_homologa_envio(
+        this.layout,
+        layout.arquivo.mes,
+        layout.arquivo.ano,
+        layout.arquivo.id
+      )}`,
       formData
     );
   }

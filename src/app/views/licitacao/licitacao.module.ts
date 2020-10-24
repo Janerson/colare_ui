@@ -4,6 +4,7 @@ import { ContratoInicialService } from "./service/contrato-inicial.service";
 import { ContratoRecisaoService } from "./service/contrato-recisao.service";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { FormsModule } from '@angular/forms';
 
 import { LicitacaoRoutingModule } from "./licitacao-routing.module";
 import { RegLicitacaoComponent } from "./reg-licitacao/reg-licitacao.component";
@@ -17,6 +18,8 @@ import { LicRetificaService } from './service/lic-retifica-homolog.service';
 import { LicitacaoFaseUmComponent } from './licitacao-fase-um/licitacao-fase-um.component';
 import { LicitacaoFaseUmDetailComponent } from './licitacao-fase-um/licitacao-fase-um-detail/licitacao-fase-um-detail.component';
 import { LoteComponent } from './lote/lote.component';
+import { LotePopupComponent } from './lote/lote-popup/lote-popup.component';
+import { ItensLoteComponent } from './lote/itens-lote/itens-lote.component';
 
 @NgModule({
   declarations: [
@@ -29,9 +32,11 @@ import { LoteComponent } from './lote/lote.component';
     LicRetificaPopupComponent,
     LicitacaoFaseUmComponent,
     LicitacaoFaseUmDetailComponent,
-    LoteComponent
+    LoteComponent,
+    LotePopupComponent,
+    ItensLoteComponent
   ],
-  imports: [CommonModule, LicitacaoRoutingModule, SharedModule],
+  imports: [CommonModule, LicitacaoRoutingModule, SharedModule,FormsModule],
   providers: [
     RegLicitacaoService,
     ContratoInicialService,

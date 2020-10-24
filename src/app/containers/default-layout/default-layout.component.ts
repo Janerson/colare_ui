@@ -75,10 +75,10 @@ export class DefaultLayoutComponent
 
   filtrarMenu(str: string, array: MenuLink[]): MenuLink[] {
     let resultado: MenuLink[] = [];
-    let title: MenuLink = {};
+    let title: MenuLink  = {};
     array.forEach((el) => {
       let tmp = [];
-      let o: MenuLink = {};
+      let o: MenuLink  = {}
 
       let found = false;
 
@@ -122,6 +122,7 @@ export class DefaultLayoutComponent
     this.formulario = form;
   }
   logout() {
+    console.log("logout()")
     this.authService.logout();
   }
 }

@@ -1,0 +1,10 @@
+<div class="controls" >
+    <label class="col-form-label control-label" [attr.for]="id">{{label}}</label>
+    <div class="input-prepend input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i [ngClass]="classIcon"></i></span>
+        </div>
+        <input [type]="type" [id]="id" class="form-control" [(ngModel)]="value" [placeholder]="placeholder"
+            autocomplete="off" />
+    </div>
+</div>

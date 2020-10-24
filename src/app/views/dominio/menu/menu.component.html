@@ -30,9 +30,9 @@
             <tbody>
               <tr *ngFor="let item of page?.content">
                 <td style="width: 94px;">
-                  <app-table-acoes botoes="['editar','apagar']" [layout]="layout" [uuid]="item.uuid" [editOnPopup]="false"
+                  <c-layout-table-acoes botoes="['editar','apagar']" [layout]="layout" [uuid]="item.uuid" [editOnPopup]="false"
                     (onNotify)="onNotify()">
-                  </app-table-acoes>
+                  </c-layout-table-acoes>
                 </td>
                 <td>{{item.name}}</td>
                 <td>{{item.url}}</td>

@@ -1,13 +1,10 @@
-import { Router } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
-import { GenericService } from "./../../services/colare-generic.service";
 import { AlertService, AlertTypes } from "./../../services/alert.service";
-import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { switchMap } from "rxjs/operators";
 import { EMPTY } from "rxjs";
 
 @Component({
-  selector: "app-table-acoes[botoes][layout][uuid][editOnPopup]",
+  selector: "table-acoes[botoes]",
   templateUrl: "./table-acoes.component.html",
   styleUrls: ["./table-acoes.component.css"],
 })
@@ -17,45 +14,19 @@ export class TableAcoesComponent implements OnInit {
    * valores disponiveis ['editar','apagar']
    **/
   @Input() botoes: string[];
+
   /**
-   * Path do Layout Ex: LIC/LICITACAOFASEUM
+   *Evento disparado, no click do botão apagar
    */
-  @Input() layout: string;
+  @Output() onApagar = new EventEmitter<boolean>();
   /**
-   * UUID DO LAYOUT
-   */
-  @Input() uuid: string;
-  /**
-   * Tipo de Ediçao, quando true, será emitido
-   * o evento onEditar, assim fica a cargo do Desenvolvedor criar a lógica de exclusão
-   */
-  @Input() editOnPopup: boolean;
-  /**
-   *Evento disparado quando feita a exclusão de
-   *algum item
-   */
-  @Output() onNotify = new EventEmitter<boolean>();
-  /**
-   * Evento disparado caso o input editOnPopup=true
+   * vento disparado, no click do botão editar
    */
   @Output() onEditar = new EventEmitter<boolean>();
 
-  private service: GenericService;
+  constructor(private alertService: AlertService) {}
 
-  constructor(
-    private alertService: AlertService,
-    private http: HttpClient,
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {
-    this.service = new GenericService(this.http, this.layout);
-  }
-
-  editar() {
-    if (this.editOnPopup) this.onEditar.emit(true);
-    else this.router.navigate([`${this.layout}/`, this.uuid]);
-  }
+  ngOnInit(): void {}
 
   excluir() {
     this.alertService
@@ -65,17 +36,6 @@ export class TableAcoesComponent implements OnInit {
         "SIM",
         "NÃO"
       )
-      .pipe(
-        switchMap((value) => (value ? this.service.excluir(this.uuid) : EMPTY))
-      )
-      .subscribe(() =>
-        this.alertService
-          .showAlert(
-            AlertTypes.SUCESS,
-            "Registro excluído com sucesso!",
-            "Sucesso"
-          )
-          .onHidden.subscribe(() => this.onNotify.emit(true))
-      );
+      .subscribe((value) => (value ? this.onApagar.emit(true) : EMPTY));
   }
 }
