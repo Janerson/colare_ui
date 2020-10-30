@@ -122,7 +122,6 @@ export class DefaultLayoutComponent
     this.formulario = form;
   }
   logout() {
-    console.log("logout()")
     this.authService.logout();
   }
 }

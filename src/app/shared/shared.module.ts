@@ -1,3 +1,4 @@
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgModule } from "@angular/core";
 import { CommonModule, DatePipe } from "@angular/common";
 import { RouterModule } from "@angular/router";
@@ -13,11 +14,8 @@ import { PaginationModule } from "ngx-bootstrap/pagination";
 import { AlertService } from "./services/alert.service";
 import { FileUploadComponent } from "./ui/file-upload/file-upload.component";
 // import filepond module
-import { FilePondModule, registerPlugin } from "ngx-filepond";
-import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 
 // import and register filepond file type validation plugin
-import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import { FileUploadPondComponent } from "./ui/file-upload-pond/file-upload-pond.component";
 import { Erro412Component } from "./ui/erro412/erro412.component";
 import { BaseModalComponent } from "./ui/base-modal/base-modal.component";
@@ -29,7 +27,6 @@ import { CardComponent } from "./ui/card/card.component";
 import { CustomAlertComponent } from "./ui/custom-alert/custom-alert.component";
 import { PopoverModule } from "ngx-bootstrap/popover";
 import { IconPickerModule } from 'ngx-icon-picker';
-import { ToastrModule } from 'ngx-toastr';
 import {
   NgWizardModule,
   NgWizardConfig,
@@ -41,17 +38,15 @@ import { AlertModule } from "ngx-bootstrap/alert";
 import {setTheme} from 'ngx-bootstrap/utils';
 import { DatepickerComponent } from './ui/date-picker/date-picker.component';
 import { CustomSelectComponent } from './ui/custom-select/custom-select.component'
-import { NgxMaskModule } from 'ngx-mask';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+//import { NgxMaskModule } from 'ngx-mask';
 import { CustomCardComponent } from './ui/custom-card/custom-card.component';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CustomFieldComponent } from './ui/custom-field/custom-field.component';
 import { ColareLayoutTableComponet } from './ui/colare-table-acoes/colare-table-acoes.component';
 import { ColareLayoutAcoesComponent } from './ui/colare-acoes/colare-acoes.component';
 import { TableAcoesComponent } from './ui/table-acoes/table-acoes.component';
-registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
-//registerPlugin(FilePondPluginGetFile)
+import { ToastrModule } from 'ngx-toastr';
+import { ModalBackdropComponent } from 'ngx-bootstrap/modal';
 
 defineLocale("pt-br", ptBrLocale);
 
@@ -93,12 +88,10 @@ setTheme('bs4')
     CustomCardComponent,
     CustomFieldComponent,
     TableAcoesComponent,  
-   
   ],
   imports: [     
     CommonModule,
-    NgMultiSelectDropDownModule.forRoot(),
-    NgxMaskModule.forRoot(),
+   // NgxMaskModule.forRoot(),
     TypeaheadModule.forRoot(),
     RouterModule,
     ReactiveFormsModule,
@@ -106,25 +99,21 @@ setTheme('bs4')
     NgxJsonViewerModule,
     PaginationModule.forRoot(),    
     BsDatepickerModule.forRoot(),
-    //ModalModule.forRoot(),
     PopoverModule.forRoot(),
     AlertModule.forRoot(),
     NgWizardModule.forRoot(ngWizardConfig),
-    FilePondModule,
     IconPickerModule,
-    NgSelectModule,
-    TabsModule.forRoot(),
+    TabsModule.forRoot() ,
     ToastrModule.forRoot({
       progressBar: true,
-    }),
+    })
   ],
   exports: [
-    NgxMaskModule,
+  //  NgxMaskModule,
     NgWizardModule,
     TypeaheadModule,
     OnlyNumberDirective,
     ReactiveFormsModule,
-    NgMultiSelectDropDownModule,
     //BaseFormComponent,
     NgxJsonViewerModule,
     PaginationModule,
@@ -148,8 +137,7 @@ setTheme('bs4')
     CustomCardComponent,
     CustomFieldComponent,
     TabsModule,
-    NgSelectModule,
-    TableAcoesComponent  
+    TableAcoesComponent,    
     // BsDatepickerModule
   ],
   providers: [BsLocaleService,  AlertService, DatePipe],

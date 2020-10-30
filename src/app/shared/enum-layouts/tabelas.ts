@@ -7,4 +7,6 @@ export enum TABELAS_DOMINIOS {
   NATUREZA_PROCEDIMENTO = "Natureza do Procedimento",
   TIPO_LICITACAO = "Tipo de Licitacao e Criterio de Julgamento",
   REGIME_EXECUCAO = "Regime de Execucao",
+  UNIDADES_DE_MEDIDA = "Unidades de Medida",
+  ORIGEM_VLR_REFERENCIA = "Origem do Valor de Referencia",
 }

@@ -148,14 +148,14 @@
                                 <tbody>
                                     <tr *ngFor="let item of formValue('children',true).controls; let i = index">
                                         <td style="width: 94px;">
-                                            <app-table-acoes
+                                            <c-layout-table-acoes
                                             botoes="['editar','apagar']"
                                             [layout]="layout"
                                             [uuid]="item.get('uuid').value"
                                             [editOnPopup]="true"
                                             (onEditar)="popupAddChildren(item.value, i)"
                                             (onNotify)="excluirSubLink(i)"
-                                            ></app-table-acoes>   
+                                            ></c-layout-table-acoes>   
                                         </td>
                                         <td>{{item.get("name").value}}</td>
                                         <td>{{item.get("url").value}}</td>

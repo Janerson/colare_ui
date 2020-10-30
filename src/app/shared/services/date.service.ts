@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { format, isMatch } from "date-fns";
 import * as moment from "moment";
 
 @Injectable({
@@ -12,16 +11,16 @@ export class DateService {
     this.moment.locale("pt-BR");
   }
 
-  format(date: any, fmt: string): string | any {
-    //moment.locale("pt-BR");
-    //console.log(date);
-    //return moment(date).format(fmt);
-    return format(date, fmt);
-  }
+  // format(date: any, fmt: string): string | any {
+  //   //moment.locale("pt-BR");
+  //   //console.log(date);
+  //   //return moment(date).format(fmt);
+  //   return format(date, fmt);
+  // }
 
-  isValidDate(date, fmt): boolean {
-    console.log(isMatch(date, fmt))
-    // return moment(date, fmt, true).isValid();
-    return isMatch(date, fmt);
-  }
+  // isValidDate(date, fmt): boolean {
+  //   console.log(isMatch(date, fmt))
+  //   // return moment(date, fmt, true).isValid();
+  //   return isMatch(date, fmt);
+  // }
 }

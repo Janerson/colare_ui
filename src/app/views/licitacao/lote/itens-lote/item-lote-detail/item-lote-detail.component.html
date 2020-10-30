@@ -1,0 +1,163 @@
+<div bsModalbackdrop>
+    <form [formGroup]="formulario" (submit)="onSubmit(true)">
+        <div class="row">
+            <div class="col-lg-12">
+                <c-card cardTitle="Cadastro de Itens">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label class="col-form-label" for="numeroItem">Número de ordem do item no edital</label>
+                            <div class="controls" validator>
+                                <div class="input-prepend input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">N°</span>
+                                    </div>
+                                    <input type="number" id="numeroItem" class="form-control"
+                                        formControlName="numeroItem" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="col-form-label" for="descricao">Descrição do item conforme edital</label>
+                            <div class="controls" validator>
+                                <div class="input-prepend input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-pencil"></i></span>
+                                    </div>
+                                    <input type="text" id="descricao" class="form-control"
+                                        formControlName="descricao" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="col-form-label" for="quantidade">Quantidade</label>
+                            <div class="controls" validator>
+                                <div class="input-prepend input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-pencil"></i></span>
+                                    </div>
+                                    <input type="number" id="quantidade" class="form-control"
+                                        formControlName="quantidade" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label class="col-form-label" for="codigoUnicoMercadoriaOuServico">Código de
+                                Mercadoria ou Serviço dos itens</label>
+                            <div class="controls" validator>
+                                <div class="input-prepend input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-pencil"></i></span>
+                                    </div>
+                                    <input type="number" id="codigoUnicoMercadoriaOuServico" class="form-control"
+                                        formControlName="codigoUnicoMercadoriaOuServico" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="controls" validator>
+                                <label class="col-form-label" for="codUnidadeMedida">Código da unidade medida</label>
+                                <div class="input-prepend input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Tipo</span>
+                                    </div>
+                                    <select class="form-control" id="codUnidadeMedida"
+                                        formControlName="codUnidadeMedida">
+                                        <option></option>
+                                        <option *ngFor="let item of unidadesDeMedidas" [ngValue]="item.codigo">
+                                            {{item.descricao}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="controls" validator>
+                                <label class="col-form-label" for="valorDeReferencia">Valor de referência</label>
+                                <div class="input-prepend input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">R$</span>
+                                    </div>
+                                    <input type="number" id="valorDeReferencia" class="form-control"
+                                        formControlName="valorDeReferencia" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label class="col-form-label" for="precoMaximo">Preço Máximo</label>
+                            <div class="controls">
+                                <label class="switch switch-label switch-pill switch-success">
+                                    <input id="precoMaximo" type="checkbox" class="switch-input"
+                                        formControlName="precoMaximo" />
+                                    <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="controls" validator>
+                                <label class="col-form-label" for="codOrigemValorReferencia">Código da origem do valor
+                                    de referência</label>
+                                <div class="input-prepend input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Tipo</span>
+                                    </div>
+                                    <select class="form-control" id="codOrigemValorReferencia"
+                                        formControlName="codOrigemValorReferencia">
+                                        <option></option>
+                                        <option *ngFor="let item of origemValorReferencia" [ngValue]="item.codigo">
+                                            {{item.descricao}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="controls" validator>
+                                <label class="col-form-label" for="quantidadeDesdobraUnidade">Quantidade desdobrada
+                                    (quantas unidades contém a caixa / fardo / pacote)</label>
+                                <div class="input-prepend input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Tipo</span>
+                                    </div>
+                                    <input type="number" id="quantidadeDesdobraUnidade" class="form-control"
+                                        formControlName="quantidadeDesdobraUnidade" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="col-form-label" for="descricaoOrigemValorReferencia">Descrever onde foi obtido
+                                o valor de referência.</label>
+                            <div class="controls" validator>
+                                <div class="input-prepend input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-pencil"></i></span>
+                                    </div>
+                                    <textarea id="descricaoOrigemValorReferencia" class="form-control"
+                                        formControlName="descricaoOrigemValorReferencia"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </c-card>
+                <c-card faIcon="fa fa-certificate" cardTitle="Ações" style="margin-bottom: 0px;">
+                    <button type="submit" class="btn btn-brand btn-sm btn-facebook mr-1"
+                        [disabled]="btnTitle !== 'Adicionar'">
+                        <i class="fa fa-plus"></i>
+                        <span>{{btnTitle}} e Novo</span>
+                    </button>
+                    <button type="button" class="btn btn-brand btn-sm btn-vine mr-1" (click)="onSubmit(false)">
+                        <i class="fa fa-plus"></i>
+                        <span>{{btnTitle}} e Fechar</span>
+                    </button>
+                    <button type="button" class="btn btn-brand btn-sm btn-tumblr mr-1" (click)="cancelar()">
+                        <i class="fa fa-undo"></i>
+                        <span>Cancelar</span>
+                    </button>
+                </c-card>
+            </div>
+        </div>
+    </form>
+</div>

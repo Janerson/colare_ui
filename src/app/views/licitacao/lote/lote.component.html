@@ -53,7 +53,8 @@
                                     <td>{{item.numeroLote}}</td>
                                     <td>{{item.descricaoLote}}</td>
                                     <td> <button type="button" class="btn btn-brand btn-sm btn-facebook mr-1"
-                                            popover="Adicionar/Consultar items." triggers="mouseenter:mouseleave">
+                                            popover="Adicionar/Consultar items." triggers="mouseenter:mouseleave"
+                                            (click)="adicionarItem(item)">
                                             <i class="fa fa-shopping-bag"></i>
                                             <span>Itens</span>
                                         </button></td>

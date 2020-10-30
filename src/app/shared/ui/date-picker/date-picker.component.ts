@@ -1,7 +1,7 @@
 import { DateService } from "./../../services/date.service";
 import { Component, forwardRef, Injector, Input, OnInit } from "@angular/core";
 import { ControlValueAccessor, FormControl, NgControl, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { parseISO } from 'date-fns';
+//import { parseISO } from 'date-fns';
 
 @Component({
   selector: "c-datepicker",
@@ -51,13 +51,13 @@ export class DatepickerComponent implements ControlValueAccessor, OnInit{
   }
 
   public writeValue(value: any) {
-    if(this.service.isValidDate(this.transformDate(value, this.outputFormat),this.outputFormat)){
-      this._value = this.transformDate(value, this.inputFormat);
-      this.onChange(this.transformDate(value, this.outputFormat))
-    }else{
-      this.onChange(value)
-    }
-    //console.log(value, this._value)
+    // if(this.service.isValidDate(this.transformDate(value, this.outputFormat),this.outputFormat)){
+    //   this._value = this.transformDate(value, this.inputFormat);
+    //   this.onChange(this.transformDate(value, this.outputFormat))
+    // }else{
+    //   this.onChange(value)
+    // }
+    // //console.log(value, this._value)
    
   }
 
@@ -71,7 +71,7 @@ export class DatepickerComponent implements ControlValueAccessor, OnInit{
 
   public setDisabledState(isDisabled: boolean) {}
 
-  private transformDate(value: any, format) {
-      return this.service.format(value, format);
-  }
+  // private transformDate(value: any, format) {
+  //     return this.service.format(value, format);
+  // }
 }

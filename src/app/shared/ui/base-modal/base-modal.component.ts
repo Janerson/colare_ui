@@ -6,7 +6,7 @@ import {
   ComponentFactoryResolver,
   AfterViewInit,
 } from "@angular/core";
-import { BsModalRef } from "ngx-bootstrap/modal";
+import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 
 @Component({
   selector: "base-modal",
@@ -21,33 +21,36 @@ export class BaseModalComponent implements OnInit, AfterViewInit {
   title = "Enviar dados Colare";
   component: any;
   data:any
+  private idModal:number
 
   @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
 
   constructor(
-    public bsModalRef: BsModalRef,
+    private bsModalService: BsModalService,
+    //public bsModalRef: BsModalRef,
     private componentFactoryResolver: ComponentFactoryResolver
   ) {}
 
   ngOnInit(): void {
-    
+    this.idModal = this.bsModalService.config.id
   }
-
+  
   ngAfterViewInit() {
-    this.loadComponent();
+    this.loadComponent();    
   }
 
   loadComponent() {
      const factory = this.componentFactoryResolver.resolveComponentFactory(this.component);
      const ref = this.container.createComponent(factory);
      ref.instance['data'] = this.data
-     ref.changeDetectorRef.detectChanges();
+     ref.changeDetectorRef.detectChanges();     
   }
 
   onClose() {
-    this.bsModalRef.hide();
-    if (document.body.classList.contains('modal-open')) {
-      document.body.classList.remove('modal-open');
-    }
+    //this.bsModalRef.hide();
+    this.bsModalService.hide(this.idModal)
+    // if (document.body.classList.contains('modal-open')) {
+    //   document.body.classList.remove('modal-open');
+    // }
   }
 }

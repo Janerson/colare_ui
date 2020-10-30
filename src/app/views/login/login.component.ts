@@ -1,3 +1,4 @@
+import { ToastrService } from "ngx-toastr";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators } from "@angular/forms";
 import { AuthenticationService } from "../../auth/authentication.service";
@@ -11,7 +12,6 @@ import { AlertService, AlertTypes } from "../../shared/services/alert.service";
   templateUrl: "login.component.html",
 })
 export class LoginComponent extends BaseFormComponent implements OnInit {
-
   loginForm: FormGroup;
   submitted = false;
   returnUrl: string;
@@ -20,11 +20,12 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
     private authService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router,
-    private alertService: AlertService    
+    private alertService: AlertService,
+    private toast: ToastrService
   ) {
     super();
     if (this.authService.token) {
-      this.router.navigate(["/dashboard"]);
+      this.router.navigate(["/DASHBOARD"]);
     }
   }
 
@@ -38,7 +39,7 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
       this.builder.control(null, [Validators.required])
     );
     this.returnUrl =
-      this.route.snapshot.queryParams["returnUrl"] || "/dashboard";
+      this.route.snapshot.queryParams["returnUrl"] || "/DASHBOARD";
   }
 
   submit() {
@@ -47,19 +48,29 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
     this.authService
       .login(email, password)
       .pipe(first())
-      .subscribe(() => {
-        this.router.navigate([this.returnUrl]);     
-      }, err => {
-        this.alertService.showToastr(AlertTypes.DANGER,"ERROR","Usuário/senha inválido.")
-      }
+      .subscribe(
+        (next) => {
+          this.router.navigate([this.returnUrl]);
+         }
+         ,
+         (err) =>
+           this.alertService.showToastr(
+             AlertTypes.DANGER,
+             "ERROR",
+             "Usuário/senha inválido."
+           )
       );
   }
 
   onFormInvalid() {
-    this.alertService.showToastr(AlertTypes.DANGER,"ERROR","Verifique os erros e tente novamente.")
+    this.alertService.showToastr(
+      AlertTypes.DANGER,
+      "ERROR",
+      "Verifique os erros e tente novamente."
+    );
   }
 
   error() {
-    //this.alertService.showToastr(AlertTypes.DANGER,"TESTE","edsdsc")
+    this.alertService.showToastr(AlertTypes.DANGER, "TESTE", "edsdsc");
   }
 }

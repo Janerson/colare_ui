@@ -45,7 +45,7 @@ export const routes: Routes = [
             },
           },
           {
-            path: "novo",
+            path: "NOVO",
             component: RegLicitacaoDetailComponent,
             data: {
               title: "Adicionar Regulamentação",
@@ -71,7 +71,7 @@ export const routes: Routes = [
             },
           },
           {
-            path: "novo",
+            path: "NOVO",
             component: ContratoInicialDetailComponent,
             data: {
               title: "Adicionar Contrato Inicial",
@@ -97,7 +97,7 @@ export const routes: Routes = [
             },
           },
           {
-            path: "novo",
+            path: "NOVO",
             component: ContratoRecisaoDetailComponent,
             data: {
               title: "Adicionar Contrato Recisão",
@@ -123,7 +123,7 @@ export const routes: Routes = [
             },
           },
           {
-            path: "novo",
+            path: "NOVO",
             component: LicitacaoFaseUmDetailComponent,
             data: {
               title: "Adicionar Licitação Fase - 1",

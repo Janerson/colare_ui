@@ -62,11 +62,11 @@ export class AuthenticationService {
   }
 
   logout() {
-    this.http.delete(environment.api_oauth_logout,{withCredentials:true}).subscribe(() => {
+    this.http.delete(environment.api_oauth_logout,{withCredentials:true}).subscribe((a) => {  
       this.stopRefreshTokenTimer();
       this.cookieService.delete("API_TOKEN");
       this.cookieService.delete("TCM_TOKEN");
-      this._router.navigate(["/login"]);
+      this._router.navigate(["/LOGIN"]);
       this._user = null
     });
   }
@@ -99,7 +99,6 @@ export class AuthenticationService {
     const timeout = expires.getTime() - Date.now() - 60 * 1000;
     this.refreshTokenTimeout = setTimeout(
       () => {
-        console.log("Solicitando novo access_token...")
         this.refreshToken().subscribe()
       },
       timeout

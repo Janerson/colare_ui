@@ -13,7 +13,7 @@ import { CanDeactivateGuard } from './auth/can-deactive.guard';
 export const routes: Routes = [
   {
     path: "",
-    redirectTo: "dashboard",
+    redirectTo: "DASHBOARD",
     pathMatch: "full",
     canActivate: [AuthGuard]
   },
@@ -33,7 +33,7 @@ export const routes: Routes = [
     },
   },
   {
-    path: "login",
+    path: "LOGIN",
     component: LoginComponent,
     data: {
       title: "Login Page",

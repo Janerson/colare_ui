@@ -1,9 +1,8 @@
-import { Injectable, ChangeDetectorRef } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { BsModalRef, BsModalService, ModalOptions } from "ngx-bootstrap/modal";
-import { AlertModalComponent } from "../ui/alert-modal/alert-modal.component";
 import { BaseModalComponent } from "../ui/base-modal/base-modal.component";
 import { CustomAlertComponent } from "../ui/custom-alert/custom-alert.component";
-import { ToastrService, IndividualConfig } from 'ngx-toastr';
+import { ToastrService, IndividualConfig } from "ngx-toastr";
 
 export enum AlertTypes {
   PRIMARY = "primary",
@@ -17,13 +16,14 @@ export enum AlertTypes {
   CONFIRM = "question",
 }
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable()
 export class AlertService {
   private static bsModalRef: BsModalRef;
 
-  constructor(private bsModalService: BsModalService, private toastr : ToastrService) {}
+  constructor(
+    private bsModalService: BsModalService,
+    private toastr: ToastrService,
+  ) {}
 
   showAlert(
     type: AlertTypes,
@@ -32,7 +32,7 @@ export class AlertService {
     footer?: string
   ): BsModalService {
     AlertService.bsModalRef = this.bsModalService.show(CustomAlertComponent, {
-      backdrop:true,
+      backdrop: true,
       initialState: {
         type: type,
         message: message,
@@ -50,7 +50,7 @@ export class AlertService {
     canceltext?: string
   ) {
     AlertService.bsModalRef = this.bsModalService.show(CustomAlertComponent, {
-      backdrop:true,
+      backdrop: true,
       initialState: {
         type: AlertTypes.CONFIRM,
         message: message,
@@ -60,15 +60,16 @@ export class AlertService {
         cancelText: canceltext || "cancelar",
       },
     });
-    
+
     return (<CustomAlertComponent>AlertService.bsModalRef.content)
       .confirmResult;
   }
 
   showModal(component: any, options?: ModalOptions): BsModalService {
     Object.assign(options.initialState, { component: component });
+    options.id = Math.floor((Math.random()) * 100)
     options.animated = true;
-    options.backdrop = true
+    options.backdrop = true;
     AlertService.bsModalRef = this.bsModalService.show(
       BaseModalComponent,
       options
@@ -76,25 +77,31 @@ export class AlertService {
     return this.bsModalService;
   }
 
-  showToastr(type:AlertTypes, title:string, message:string, opt?: Partial<IndividualConfig>){
-
-    switch (type) {
-      case AlertTypes.SUCESS:
-        this.toastr.success(message,title,opt)
-        break;
-      case AlertTypes.DANGER:
-        this.toastr.error(message,title,opt)
-        break;
-      case AlertTypes.INFO:
-        this.toastr.info(message,title,opt)
-        break;    
-      case AlertTypes.WARNING:
-        this.toastr.warning(message,title,opt)
-        break;    
-      default:
-        this.toastr.show(message,title,opt)
-        break;
-    }
+  showToastr(
+    type: AlertTypes,
+    title: string,
+    message: string,
+    opt?: Partial<IndividualConfig>
+  ) {
+    this.toastr.clear()
+     switch (type) {
+       case AlertTypes.SUCESS:
+         this.toastr.success(message, title, opt);
+         break;
+       case AlertTypes.DANGER:
+         this.toastr.error(message, title, opt);
+         break;
+       case AlertTypes.INFO:
+         this.toastr.info(message, title, opt);
+         break;
+       case AlertTypes.WARNING:
+         this.toastr.warning(message, title, opt);
+         break;
+       default:
+         this.toastr.show(message, title, opt);
+         break;
+     }
+    
   }
 
   hide() {

@@ -3,7 +3,7 @@ import { BaseEntity} from "../../base-entity";
 /**
  * Envio inicial dos dados da licitação - Abertura da licitação
  */
-export interface LicitacaoFaseUm extends BaseEntity<String> {
+export class LicitacaoFaseUm extends BaseEntity<String> {
   /**
    * Modalidade da Licitação
    */
@@ -64,7 +64,7 @@ export interface LicitacaoFaseUm extends BaseEntity<String> {
    */
   limitePercObjetoContratacaoMEEPP?: boolean;
 
-  lote?: Lote[];
+  lote?: LoteFaseUm[];
   /**
    * Descreve o motivo da Atualização ou Correção
    */
@@ -174,24 +174,22 @@ export interface EditalEAnexos extends BaseEntity<String> {
 /**
  * – Cadastro de Lotes do Processo Licitatório
  */
-export class Lote extends BaseEntity<String> {
+export interface LoteFaseUm extends BaseEntity<String> {
   /**
    * Descrição do Lote
    */
   descricaoLote?: string;
-  item?: Item[];
+  item?: ItemLoteFaseUm[];
   /**
    * Número do Lote
    */
   numeroLote?: number;
-
-  faseUm?:string;
 }
 
 /**
  * Cadastro de Itens do Processo Licitatório
  */
-export interface Item extends BaseEntity<String> {
+export interface ItemLoteFaseUm extends BaseEntity<String> {
   /**
    * Código de Mercadoria ou Serviço dos itens
    */

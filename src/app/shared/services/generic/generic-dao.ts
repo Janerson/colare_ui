@@ -107,7 +107,7 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    * Salva ou atualiza a entidade
    * @param obj Entidade a ser persistida
    */
-  salvar(obj: T) { 
+  salvar(obj: T) {
     this.removeEmpty(obj, true);
     if (obj.uuid) {
       return this.atualizar(obj);
@@ -158,7 +158,7 @@ export class GenericDao<K, T extends BaseEntity<K>> {
   /**
    *
    * @param tabela - tabela de persistencia
-   * @param uuid   - ID do Layot PAI
+   * @param uuid   - ID do Layout PAI
    * @param obj    - Objeto a ser persistido
    */
   adicionarNaTabela(tabela: string, uuid: string, obj: {}) {
@@ -210,6 +210,87 @@ export class GenericDao<K, T extends BaseEntity<K>> {
       )}/${uuid}/${tabela}/LIST?page=${page}&search=${searchBy || ""}&sort=${
         orderBy || "seq"
       }&dir=${dir || "asc"}`
+    );
+  }
+
+  /**
+   *
+   * @param uuidL ID - LAYOUT
+   * @param tabela TABELA
+   * @param idTabela ID_TABELA
+   * @param subTabela SUB_TABELA
+   * @param obj OBJETO A SER PERSISTIDO
+   */
+  adicionarNaSubTabela(
+    uuidL: string,
+    tabela: string,
+    idTabela: String,
+    subTabela: string,
+    obj: {}
+  ) {
+    return this.http
+      .post(
+        `${environment.api_url(
+          this.layout
+        )}/${uuidL}/${tabela}/${idTabela}/${subTabela}/ADD`,
+        obj
+      )
+      .pipe(
+        take(1),
+        tap(() => this.refresh.next())
+      );
+  }
+
+  /**
+   *
+   * @param uuidL ID - LAYOUT
+   * @param tabela TABELA
+   * @param idTabela ID_TABELA
+   * @param subTabela SUB_TABELA
+   * @param obj OBJETO A SER PERSISTIDO
+   */
+  deletarDaSubTabela(
+    uuidL: string,
+    tabela: string,
+    idTabela: string,
+    subTabela: string,
+    idDEl: string
+  ) {
+    return this.http
+      .delete(
+        `${environment.api_url(
+          this.layout
+        )}/${uuidL}/${tabela}/${idTabela}/${subTabela}/DEL/${idDEl}`
+      )
+      .pipe(
+        take(1),
+        tap(() => this.refresh.next())
+      );
+  }
+
+  /**
+   * Consulta Paginada
+   * @param uuid id layout
+   * @param tabela tabela
+   * @param tabelaId tabela id
+   * @param subTabela subTabela
+   * @param page Número da página default 0
+   * @param searchBy pesquisar por...
+   * @param orderBy Coluna a ser ordenada default seq
+   * @param dir Direção ordenamento ASC | DESC default ASC
+   */
+  listarDadosSubTabela(
+    uuid: string,
+    tabela: string,
+    tabelaId: String,
+    subTabela: string,
+    page: number = 0,
+    searchBy?: string,
+    orderBy?: string,
+    dir?: string
+  ) {
+    return this.http.get<Page<any>>(
+      `${environment.api_url(this.layout)}/${uuid}/${tabela}/${tabelaId}/${subTabela}/LIST?page=${page}&search=${searchBy || ""}&sort=${orderBy || "seq"}&dir=${dir || "asc"}`
     );
   }
 

@@ -20,6 +20,7 @@ import { LicitacaoFaseUmDetailComponent } from './licitacao-fase-um/licitacao-fa
 import { LoteComponent } from './lote/lote.component';
 import { LotePopupComponent } from './lote/lote-popup/lote-popup.component';
 import { ItensLoteComponent } from './lote/itens-lote/itens-lote.component';
+import { ItemLoteDetailComponent } from './lote/itens-lote/item-lote-detail/item-lote-detail.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ItensLoteComponent } from './lote/itens-lote/itens-lote.component';
     LicitacaoFaseUmDetailComponent,
     LoteComponent,
     LotePopupComponent,
-    ItensLoteComponent
+    ItensLoteComponent,
+    ItemLoteDetailComponent
   ],
   imports: [CommonModule, LicitacaoRoutingModule, SharedModule,FormsModule],
   providers: [

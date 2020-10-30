@@ -9,7 +9,6 @@ import { BaseFormComponent } from "../../../../shared/ui/base-form/base-form.com
 import { TabelaService } from "../../../tabelas/service/tabelas.service";
 import { Tabela } from "../../../../shared/entity/colare/tabelas";
 import { TABELAS_DOMINIOS } from "../../../../shared/enum-layouts/tabelas";
-import { IDropdownSettings } from "ng-multiselect-dropdown";
 import { LicitacaoFaseUmService } from "../../service/licitacao-fase-um.service";
 import {
   AlertService,
@@ -27,15 +26,7 @@ export class LicitacaoFaseUmDetailComponent
   implements OnInit, OnDestroy {
   protected layout = LIC.LICITACAOFASE1;
   protected subscription: Subscription;
-  protected dropdownSettings: IDropdownSettings = {
-    singleSelection: true,
-    idField: "codigo",
-    textField: "descricao",
-    selectAllText: "Select All",
-    unSelectAllText: "UnSelect All",
-    itemsShowLimit: 3,
-    allowSearchFilter: true,
-  };
+ 
 
   protected tbTitle = "Lote";
   protected tbTitle2 = "Recurso Orcamentario";
@@ -142,7 +133,6 @@ export class LicitacaoFaseUmDetailComponent
     this.adicionaControl("subcontratacaoMEEPP", this.builder.control(false));
     this.adicionaControl("limitePercObjetoContratacaoMEEPP", this.builder.control(false));
     this.adicionaControl("codModalidadeLicitacao", this.builder.control(null, Validators.required));
-
     this.adicionaControl("codNaturezaProcedimento", this.builder.control(null, Validators.required));
     this.adicionaControl("codTipoLicitacaoCriterioJulgamento", this.builder.control(null, Validators.required));
     this.adicionaControl("codRegimeExecucao", this.builder.control({ disabled: true }));

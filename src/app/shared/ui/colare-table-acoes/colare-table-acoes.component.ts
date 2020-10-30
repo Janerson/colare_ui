@@ -68,14 +68,13 @@ export class ColareLayoutTableComponet implements OnInit {
       .pipe(
         switchMap((value) => (value ? this.service.excluir(this.uuid) : EMPTY))
       )
-      .subscribe(() =>
-        this.alertService
-          .showAlert(
-            AlertTypes.SUCESS,
-            "Registro excluído com sucesso!",
-            "Sucesso"
-          )
-          .onHidden.subscribe(() => this.onNotify.emit(true))
-      );
+      .subscribe(() => {
+        this.onNotify.emit(true);
+        this.alertService.showToastr(
+          AlertTypes.SUCESS,
+          "Registro excluído com sucesso!",
+          "Sucesso"
+        );
+      });
   }
 }

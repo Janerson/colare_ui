@@ -1,10 +1,15 @@
 import { NgxUiLoaderModule, SPINNER, NgxUiLoaderConfig } from "ngx-ui-loader";
 import { BrowserModule } from "@angular/platform-browser";
 import { ReactiveFormsModule } from "@angular/forms";
-import { NgModule, enableProdMode, APP_INITIALIZER } from "@angular/core";
+import { NgModule, enableProdMode, APP_INITIALIZER, ErrorHandler, Inject, Injectable, InjectionToken } from "@angular/core";
 import { LocationStrategy, HashLocationStrategy } from "@angular/common";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from "@angular/common/http";
+import { LOCALE_ID } from '@angular/core';
+import localePt from '@angular/common/locales/pt';
+import {registerLocaleData} from '@angular/common';
+
+registerLocaleData(localePt, 'pt');
 
 import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 import { PERFECT_SCROLLBAR_CONFIG } from "ngx-perfect-scrollbar";
@@ -56,12 +61,32 @@ import { CookieService } from "ngx-cookie-service";
 import { InterceptorApi } from "./auth/interceptor-api.module";
 import { InterceptorTCM } from "./auth/interceptor-tcm.module";
 import { HttpErrorInterceptor } from "./auth/http-error-interceptor.module";
-import { appInitializer, UpperCaseUrlSerializer } from "./auth/app.initialize";
+import { appInitializer } from "./auth/app.initialize";
 import { AuthenticationService } from "./auth/authentication.service";
-import { BsModalService, ModalModule } from "ngx-bootstrap/modal";
-import { UrlSerializer } from '@angular/router';
+import { BsModalService, ModalBackdropComponent, ModalModule } from "ngx-bootstrap/modal";
+import * as Rollbar from 'rollbar';
 
 enableProdMode();
+// const rollbarConfig = {
+//   accessToken: '28bfc91ad6ef47e28a628d53c70dec01',
+//   captureUncaught: true,
+//   captureUnhandledRejections: true,
+// };
+
+// @Injectable()
+// export class RollbarErrorHandler implements ErrorHandler {
+//   constructor(@Inject(RollbarService) private rollbar: Rollbar) {}
+
+//   handleError(err:any) : void {
+//     this.rollbar.error(err.originalError || err);
+//   }
+// }
+
+// export function rollbarFactory() {
+//     return new Rollbar(rollbarConfig);
+// }
+
+// export const RollbarService = new InjectionToken<Rollbar>('rollbar');
 
 @NgModule({
   imports: [
@@ -87,6 +112,7 @@ enableProdMode();
     HttpErrorInterceptor,
     PerfectScrollbarModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+
     //NgxUiLoaderRouterModule.forRoot({showForeground:false}),
     //NgxUiLoaderHttpModule.forRoot()
   ],
@@ -96,13 +122,10 @@ enableProdMode();
     P404Component,
     P500Component,
     LoginComponent,
-  ],
+  ],  
   providers: [
+    {provide: LOCALE_ID, useValue: 'pt'},
     BsModalService,
-    {
-      provide: UrlSerializer,
-      useClass: UpperCaseUrlSerializer,
-    },
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializer,
@@ -118,9 +141,9 @@ enableProdMode();
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
     CookieService,
+    // { provide: ErrorHandler, useClass: RollbarErrorHandler },
+    // { provide: RollbarService, useFactory: rollbarFactory },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
- 
-}
+export class AppModule {}

@@ -1,20 +1,21 @@
-@import "~ng-wizard/themes/ng_wizard.min.css";
-/* Optional */
-/* If a theme other than default is used, the css file for that theme is required. */
-@import "~ng-wizard/themes/ng_wizard_theme_arrows.min.css";
-@import "~ng-wizard/themes/ng_wizard_theme_circles.min.css";
-@import "~ng-wizard/themes/ng_wizard_theme_dots.min.css";
 
-// Style for NG-Select
-@import "~@ng-select/ng-select/themes/default.theme.css";
 
 .modal {
   //  display:flex;
-  top: 5%;
+  top: 0%;
   //border: 0px;
 }
 
+modal-container:nth-of-type(2) {
+  background: rgba(0, 0, 0, 0.5);
+}
+
 .modal-content {
+  border-top: 5px solid #1b8eb7;
+  border-bottom: 1.5px solid #1b8eb7;
+  border-left: none;
+  border-right: none;
+
   //  position: relative;
   //  display: -webkit-box;
   //  display: flex;
@@ -24,8 +25,8 @@
   // width: 100%;
   // pointer-events: auto;
   // background-clip: padding-box;
-  border: none;
-  border-radius: 0.5rem;
+  //border: none;
+  //border-radius: 0.5rem;
   //outline: 0;
 }
 
@@ -112,4 +113,14 @@ legend {
 .nav-tabs .nav-link:hover,
 .nav-tabs .nav-link:focus {
   border-top: 1.5px solid #1088ff;
+}
+
+// #toast-container > div {
+//   opacity:1;
+// }
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
 }

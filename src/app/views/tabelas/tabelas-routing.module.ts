@@ -70,6 +70,20 @@ const routes: Routes = [
           title: TABELAS_DOMINIOS.REGIME_EXECUCAO,
         },
       },
+      {
+        path: "UNIDADES-DE-MEDIDA",
+        component: TipoDeTabelaComponent,
+        data: {
+          title: TABELAS_DOMINIOS.UNIDADES_DE_MEDIDA,
+        },
+      },
+      {
+        path: "ORIGEM-VALOR-REFERENCIA",
+        component: TipoDeTabelaComponent,
+        data: {
+          title: TABELAS_DOMINIOS.ORIGEM_VLR_REFERENCIA,
+        },
+      },
     ],
   },
 ];

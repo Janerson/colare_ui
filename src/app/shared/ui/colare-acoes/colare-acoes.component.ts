@@ -1,4 +1,4 @@
-import { AlertService, AlertTypes } from '../../services/alert.service';
+import { AlertService, AlertTypes } from "../../services/alert.service";
 import { HttpClient } from "@angular/common/http";
 import {
   Component,
@@ -14,9 +14,9 @@ import {
 import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { GenericService } from "../../services/colare-generic.service";
-import { EnvioComponent } from '../envio/envio.component';
-import { switchMap } from 'rxjs/operators';
-import { EMPTY } from 'rxjs';
+import { EnvioComponent } from "../envio/envio.component";
+import { switchMap } from "rxjs/operators";
+import { EMPTY } from "rxjs";
 
 @Component({
   selector: "c-layout-acoes[form][layout]",
@@ -27,15 +27,15 @@ export class ColareLayoutAcoesComponent implements OnInit, OnChanges {
   @Input() form: FormGroup;
   @Input() layout: string;
 
-  @Output() onTransmitir  = new EventEmitter<boolean>();
-  @Output() onSincronizar = new EventEmitter<boolean>(); 
-  @Output() onRetificar   = new EventEmitter<boolean>();
+  @Output() onTransmitir = new EventEmitter<boolean>();
+  @Output() onSincronizar = new EventEmitter<boolean>();
+  @Output() onRetificar = new EventEmitter<boolean>();
 
   //protected btnGravarText = "Gravar"
- 
+
   private msg = `O processo de Retificação de Envio já Homologado,
-  exige uma série de passos que devem ser realizados, para tal é imprescindivel que execute
-  todas as etapas do processo de retificação, e não feche o popup até todas etapas serem concluídas.
+  exige uma série de passos que devem ser realizados, para tal é imprescindível que execute
+  todas as etapas do processo de retificação, e não feche o popup até que todas etapas sejam concluídas.
   Deseja realizar a retificação agora?`;
 
   private service: GenericService;
@@ -44,14 +44,18 @@ export class ColareLayoutAcoesComponent implements OnInit, OnChanges {
 
   isHomologado = false;
 
-  constructor(private http: HttpClient, private router: Router, private alertService : AlertService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private alertService: AlertService
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {}
 
   ngOnInit(): void {
     this.validaAcoes();
     this.service = new GenericService(this.http, this.layout);
-    // this.form.get('uuid').statusChanges.subscribe(value => {      
+    // this.form.get('uuid').statusChanges.subscribe(value => {
     //   console.log(value)
     // })
   }
@@ -59,19 +63,15 @@ export class ColareLayoutAcoesComponent implements OnInit, OnChanges {
   homologar(file: File) {
     if (file) {
       this.service
-      .homologarEnvioColare(this.form.value, file)
-      .subscribe((d) => {
-        const sub = this.alertService
-          .showAlert(
+        .homologarEnvioColare(this.form.value, file)
+        .subscribe((d) => {
+          this.alertService.showToastr(
             AlertTypes.SUCESS,
             "Envio Homologado com sucesso!",
             "Sucesso!"
-          )
-          .onHidden.subscribe(() => {
-            sub.unsubscribe();
-            this.onSincronizar.emit(true)           
-          });
-      });
+          );
+          this.onSincronizar.emit(true);
+        });
     }
     this._file.nativeElement.value = null;
   }
@@ -82,13 +82,15 @@ export class ColareLayoutAcoesComponent implements OnInit, OnChanges {
     });
   }
 
-  transmitir(){
-    this.alertService.showModal(EnvioComponent, {
-      initialState: {
-        title: "Enviar Layout",
-        data: this.form.get("arquivo").value,
-      },
-    }).onHidden.subscribe(() => this.onTransmitir.emit(true));
+  transmitir() {
+    this.alertService
+      .showModal(EnvioComponent, {
+        initialState: {
+          title: "Enviar Layout",
+          data: this.form.get("arquivo").value,
+        },
+      })
+      .onHidden.subscribe(() => this.onTransmitir.emit(true));
   }
 
   excluir() {
@@ -100,17 +102,18 @@ export class ColareLayoutAcoesComponent implements OnInit, OnChanges {
         "NÃO"
       )
       .pipe(
-        switchMap((value) => (value ? this.service.excluir(this.form.get("uuid").value) : EMPTY))
+        switchMap((value) =>
+          value ? this.service.excluir(this.form.get("uuid").value) : EMPTY
+        )
       )
-      .subscribe(() =>
-        this.alertService
-          .showAlert(
-            AlertTypes.SUCESS,
-            "Registro excluído com sucesso!",
-            "Sucesso"
-          )
-          .onHidden.subscribe(this.cancelar())
-      );
+      .subscribe(() => {
+        this.cancelar();
+        this.alertService.showToastr(
+          AlertTypes.SUCESS,
+          "Registro excluído com sucesso!",
+          "Sucesso"
+        );
+      });
   }
 
   obterPDFHomologacao() {
@@ -119,10 +122,10 @@ export class ColareLayoutAcoesComponent implements OnInit, OnChanges {
     );
   }
 
-  retificar(){
+  retificar() {
     this.alertService.showConfirm(this.msg, "Atenção!").subscribe((value) => {
       if (value) {
-        this.onRetificar.emit(value)
+        this.onRetificar.emit(value);
       }
     });
   }

@@ -16,21 +16,27 @@ import { FormControlName, FormControl, ValidationErrors } from "@angular/forms";
 export class ValidatorComponentComponent implements OnInit, AfterViewInit {
   @ContentChild(FormControlName) formControl: FormControl;
 
-  constructor(private el: ElementRef, private render: Renderer2) { }
+  constructor(private el: ElementRef, private render: Renderer2) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.formControl.valueChanges.subscribe((value) => {
-      //console.log(this.formControl["name"], "Touched: " + this.formControl.touched, "Pristine: " + this.formControl.pristine,"Dirty: "+this.formControl.dirty);
+      // console.log(value,
+      //   this.formControl["name"],
+      //   "Touched: " + this.formControl.touched,
+      //   "Pristine: " + this.formControl.pristine,
+      //   "Dirty: " + this.formControl.dirty
+      // );
       this.erros(this.formControl.errors);
+      
       this.isValid();
     });
 
     this.render.listen(
       this.el.nativeElement.querySelector(".form-control"),
       "blur",
-      () => {       
+      () => {
         this.erros(this.formControl.errors);
       }
     );
@@ -64,6 +70,12 @@ export class ValidatorComponentComponent implements OnInit, AfterViewInit {
         case "maxlength":
           this.error_msg = `Limite de ${err[key].requiredLength} caracteres`;
           break;
+        case "min":
+          this.error_msg = `Valor mínimo: ${err[key].min}`;
+          break
+        case "max":
+          this.error_msg = `Valor máximo: ${err[key].max}`;
+          break;
         default:
           break;
       }
@@ -71,7 +83,7 @@ export class ValidatorComponentComponent implements OnInit, AfterViewInit {
   }
 
   private isValid() {
-    if (this.formControl.valid && this.formControl.touched) {
+    if (this.formControl.valid && (this.formControl.touched|| this.formControl.dirty)) {
       this.el.nativeElement
         .querySelector(".form-control")
         .classList.remove("has-error");
@@ -87,7 +99,10 @@ export class ValidatorComponentComponent implements OnInit, AfterViewInit {
           .querySelector(".form-control")
           .classList.remove("is-valid");
       }
-    } else if ((this.formControl.dirty||this.formControl.touched) && this.formControl.invalid) {
+    } else if (
+      (this.formControl.dirty || this.formControl.touched) &&
+      this.formControl.invalid
+    ) {
       this.el.nativeElement
         .querySelector(".form-control")
         .classList.add("has-error");

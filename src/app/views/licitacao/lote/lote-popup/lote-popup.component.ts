@@ -1,5 +1,5 @@
+import { LoteFaseUm } from './../../../../shared/entity/LIC/licitacao_faseum/licitacao-fase-um';
 import { LicitacaoFaseUmService } from "./../../service/licitacao-fase-um.service";
-import { data } from "jquery";
 import {
   AlertService,
   AlertTypes,
@@ -8,8 +8,7 @@ import { BsModalRef } from "ngx-bootstrap/modal";
 import { Validators } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
 import { BaseFormComponent } from "../../../../shared/ui/base-form/base-form.component";
-import { Lote } from "../../../../shared/entity/LIC/licitacao_faseum/licitacao-fase-um";
-import { da } from 'date-fns/locale';
+//import { da } from 'date-fns/locale';
 
 @Component({
   selector: "app-lote-popup",
@@ -21,7 +20,7 @@ export class LotePopupComponent extends BaseFormComponent implements OnInit {
 
   data: {
     uuid: string;
-    lote: Lote;
+    lote: LoteFaseUm;
   };
 
   constructor(
@@ -55,10 +54,9 @@ export class LotePopupComponent extends BaseFormComponent implements OnInit {
   private save(saveAndNew: boolean) {
     let opr = this.btnTitle === "Atualizar" ? "atualizado" : "incluído";
     this.removeControl("arquivo");
-    console.log(this.formValue());
     this.service
       .adicionarNaTabela('LOTE',this.data.uuid, this.formValue())
-      .subscribe((data : Lote) =>
+      .subscribe((data : LoteFaseUm) =>
         this.alertService.showToastr(
           AlertTypes.SUCESS,
           "SUCESSO",
