@@ -1,0 +1,57 @@
+<div>
+    <form [formGroup]="formulario" (submit)="onSubmit(true)">
+        <div class="row">
+            <div class="col-lg-12">
+                <c-card cardTitle="Naureza Objeto Detalhada">
+                    <div class="row">                      
+                        <div class="col-lg-12">
+                            <label class="col-form-label" for="codNaturezaObjetoDetalhada">Natureza detalhada</label>
+                            <div class="controls" validator>
+                                <div class="input-prepend input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Tipo</span>
+                                    </div>
+                                    <select class="form-control" id="codNaturezaObjetoDetalhada"
+                                        formControlName="codNaturezaObjetoDetalhada">
+                                        <option></option>
+                                        <option *ngFor="let item of naturezaObjeto$ | async" [ngValue]="item.codigo">
+                                            {{item.codigo}}-{{item.descricao}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="col-form-label" for="descricaoNaturezaObjetoOutros">Descrição</label>
+                            <div class="controls" validator>
+                                <div class="input-prepend input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-pencil"></i></span>
+                                    </div>
+                                    <textarea id="descricaoNaturezaObjetoOutros" class="form-control"
+                                        formControlName="descricaoNaturezaObjetoOutros"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                   
+                </c-card>
+                <c-card faIcon="fa fa-certificate" cardTitle="Ações" style="margin-bottom: 0px;">
+                    <button type="submit" class="btn btn-brand btn-sm btn-facebook mr-1"
+                        [disabled]="btnTitle !== 'Adicionar'">
+                        <i class="fa fa-plus"></i>
+                        <span>{{btnTitle}} e Novo</span>
+                    </button>
+                    <button type="button" class="btn btn-brand btn-sm btn-vine mr-1" (click)="onSubmit(false)">
+                        <i class="fa fa-plus"></i>
+                        <span>{{btnTitle}} e Fechar</span>
+                    </button>
+                    <button type="button" class="btn btn-brand btn-sm btn-tumblr mr-1" (click)="cancelar()">
+                        <i class="fa fa-undo"></i>
+                        <span>Cancelar</span>
+                    </button>
+                </c-card>
+            </div>
+        </div>
+    </form>
+</div>

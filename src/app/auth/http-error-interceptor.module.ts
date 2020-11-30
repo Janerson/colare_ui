@@ -50,6 +50,13 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
     this.ngxLoader.stop();
     let msg = "";
     switch (error.status) {
+      case 0:
+        this.alertService.showToastr(
+          AlertTypes.DANGER,
+          "ERROR",
+          "Impossivel fazer a conexão com o webservice do TCM!"
+        );
+         break
       case 412:
         this.alertService.showModal(Erro412Component, {
           class: "modal-lg",
@@ -85,10 +92,16 @@ export class HttpRequestErrorInterceptor implements HttpInterceptor {
 
     let msg = "";
     switch (error.status) {
+      case 0:
+        this.alertService.showToastr(
+          AlertTypes.DANGER,
+          "ERROR",
+          "Impossivel fazer a conexão com o webservice da API!"
+        );
+         break
       case 400:
       case 401:
         if (this.auth.token) {
-          console.log("Error capturado..", error.message);
           this.alertService.showToastr(
             AlertTypes.DANGER,
             "ERROR",

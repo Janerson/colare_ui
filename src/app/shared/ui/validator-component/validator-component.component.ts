@@ -29,7 +29,7 @@ export class ValidatorComponentComponent implements OnInit, AfterViewInit {
       //   "Dirty: " + this.formControl.dirty
       // );
       this.erros(this.formControl.errors);
-      
+
       this.isValid();
     });
 
@@ -49,7 +49,6 @@ export class ValidatorComponentComponent implements OnInit, AfterViewInit {
     if (!err) return;
 
     Object.keys(err).forEach((key) => {
-      //console.log(this.formControl["name"], key, err[key]);
       switch (key) {
         case "email":
           this.error_msg = "E-mail inválido!";
@@ -72,7 +71,7 @@ export class ValidatorComponentComponent implements OnInit, AfterViewInit {
           break;
         case "min":
           this.error_msg = `Valor mínimo: ${err[key].min}`;
-          break
+          break;
         case "max":
           this.error_msg = `Valor máximo: ${err[key].max}`;
           break;
@@ -83,7 +82,15 @@ export class ValidatorComponentComponent implements OnInit, AfterViewInit {
   }
 
   private isValid() {
-    if (this.formControl.valid && (this.formControl.touched|| this.formControl.dirty)) {
+    console.log(
+      this.formControl.valid,
+      this.formControl["name"],
+      this.formControl.pristine
+    );
+    if (
+      this.formControl.valid &&
+      (this.formControl.touched || this.formControl.dirty)
+    ) {
       this.el.nativeElement
         .querySelector(".form-control")
         .classList.remove("has-error");
@@ -112,6 +119,16 @@ export class ValidatorComponentComponent implements OnInit, AfterViewInit {
       this.el.nativeElement
         .querySelector(".form-control")
         .classList.remove("is-valid");
+    } else {
+      this.el.nativeElement
+        .querySelector(".form-control")
+        .classList.remove("is-valid");
+      this.el.nativeElement
+        .querySelector(".form-control")
+        .classList.remove("has-error");
+      this.el.nativeElement
+        .querySelector(".form-control")
+        .classList.remove("is-invalid");
     }
   }
 }

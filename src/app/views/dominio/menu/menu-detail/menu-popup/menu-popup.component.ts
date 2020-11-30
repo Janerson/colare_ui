@@ -1,4 +1,8 @@
-import { data } from "jquery";
+import {
+  AlertService,
+  AlertTypes,
+} from "./../../../../../shared/services/alert.service";
+
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { ModalService } from "../../../../../shared/services/modal.service";
@@ -20,7 +24,7 @@ export class MenuPopupComponent implements OnInit {
 
   constructor(
     private builder: FormBuilder,
-    private modalService: ModalService,
+    private alerttService: AlertService,
     private bsModalRef: BsModalRef,
     private service: MenuService
   ) {}
@@ -31,6 +35,7 @@ export class MenuPopupComponent implements OnInit {
       name: this.builder.control(null, [Validators.required]),
       url: this.builder.control(null, [Validators.required]),
       icon: this.builder.control(null),
+      nomeTabelaColare: this.builder.control(null),
     });
 
     if (this.data?.menu) {
@@ -59,9 +64,25 @@ export class MenuPopupComponent implements OnInit {
 
   private salvar() {
     if (this.data.menu) {
-      this.service.salvar(this.formulario.value).subscribe();
+      this.service
+        .salvar(this.formulario.value)
+        .subscribe(() =>
+          this.alerttService.showToastr(
+            AlertTypes.SUCESS,
+            "Sucesso",
+            "Link Atualizado com sucesso."
+          )
+        );
     } else {
-      this.service.listaAdd(this.data.uuid, this.formulario.value).subscribe();
+      this.service
+        .listaAdd(this.data.uuid, this.formulario.value)
+        .subscribe(() =>
+          this.alerttService.showToastr(
+            AlertTypes.SUCESS,
+            "Sucesso",
+            "Link incluído com sucesso."
+          )
+        );
     }
   }
 }

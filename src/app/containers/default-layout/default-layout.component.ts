@@ -44,16 +44,12 @@ export class DefaultLayoutComponent
   }
 
   ngOnInit(): void {
-    this.menuService.listar().subscribe((data) => {
-      this.navItems = data;
-      this.filtered = this.navItems;
+    this.menuService.listaPorStatus(true).subscribe((data) => {
+      this.lista();
     });
 
     this.menuService.refresh.subscribe(() => {
-      this.menuService.listar().subscribe((data) => {
-        this.navItems = data;
-        this.filtered = this.navItems;
-      });
+      this.lista();
     });
 
     this.formFilter.get("filter").valueChanges.subscribe((str) => {
@@ -65,20 +61,27 @@ export class DefaultLayoutComponent
     }
   }
 
+  private lista() {
+    this.menuService.listaPorStatus(true).subscribe((data) => {
+      this.navItems = data;
+      this.filtered = this.navItems;
+    });
+  }
+
   submit() {
     throw new Error("Method not implemented.");
   }
 
-  onFormInvalid(){
+  onFormInvalid() {
     throw new Error("Method not implemented.");
   }
 
   filtrarMenu(str: string, array: MenuLink[]): MenuLink[] {
     let resultado: MenuLink[] = [];
-    let title: MenuLink  = {};
+    let title: MenuLink = {};
     array.forEach((el) => {
       let tmp = [];
-      let o: MenuLink  = {}
+      let o: MenuLink = {};
 
       let found = false;
 
@@ -86,7 +89,10 @@ export class DefaultLayoutComponent
         title = el;
       }
 
-      if (el?.name?.toLowerCase().indexOf(str.toLowerCase()) > -1) {
+      if (
+        el?.name?.toLowerCase().indexOf(str.toLowerCase()) > -1 &&
+        !el.title
+      ) {
         o = el;
         found = true;
       }
@@ -108,7 +114,7 @@ export class DefaultLayoutComponent
     return resultado;
   }
 
-  setToken(e) {  
+  setToken(e) {
     this.cookieService.set("TCM_TOKEN", e);
   }
 

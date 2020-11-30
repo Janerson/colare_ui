@@ -44,11 +44,9 @@
                                                     <span class="input-group-text"><i
                                                             [ngClass]="formValue('icon')"></i></span>
                                                 </div>
-                                                <input type="text"  id="icon" class="form-control"
-                                                    [iconPicker]="formValue('icon')"
-                                                    [ipIconPack]="['fa']"
-                                                    (iconPickerSelect)="onPickerIcon($event)"
-                                                    formControlName="icon"/>
+                                                <input type="text" id="icon" class="form-control"
+                                                    [iconPicker]="formValue('icon')" [ipIconPack]="['fa']"
+                                                    (iconPickerSelect)="onPickerIcon($event)" formControlName="icon" />
                                             </div>
                                         </div>
                                     </div>
@@ -58,6 +56,19 @@
                                             <label class="switch switch-label switch-pill switch-success">
                                                 <input id="title" type="checkbox" class="switch-input"
                                                     formControlName="title" (change)="addOrRemoveChildren()" />
+                                                <span class="switch-slider" data-checked="Sim"
+                                                    data-unchecked="Não"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label class="col-form-label" for="show">Exibir na Sidebar?</label>
+                                        <div class="controls">
+                                            <label class="switch switch-label switch-pill switch-success">
+                                                <input id="show" type="checkbox" class="switch-input"
+                                                    formControlName="show" (change)="addOrRemoveChildren()" />
                                                 <span class="switch-slider" data-checked="Sim"
                                                     data-unchecked="Não"></span>
                                             </label>
@@ -148,14 +159,10 @@
                                 <tbody>
                                     <tr *ngFor="let item of formValue('children',true).controls; let i = index">
                                         <td style="width: 94px;">
-                                            <c-layout-table-acoes
-                                            botoes="['editar','apagar']"
-                                            [layout]="layout"
-                                            [uuid]="item.get('uuid').value"
-                                            [editOnPopup]="true"
-                                            (onEditar)="popupAddChildren(item.value, i)"
-                                            (onNotify)="excluirSubLink(i)"
-                                            ></c-layout-table-acoes>   
+                                            <c-layout-table-acoes botoes="['editar','apagar']" [layout]="layout"
+                                                [uuid]="item.get('uuid').value" [editOnPopup]="true"
+                                                (onEditar)="popupAddChildren(item.value, i)"
+                                                (onNotify)="excluirSubLink(i)"></c-layout-table-acoes>
                                         </td>
                                         <td>{{item.get("name").value}}</td>
                                         <td>{{item.get("url").value}}</td>
@@ -182,7 +189,8 @@
                             <i class="fa fa-save"></i>
                             <span>Gravar</span>
                         </button>
-                        <button type="button" class="btn btn-brand btn-sm btn-youtube mr-1" [disabled]="disableDelBtn" (click)="excluir()">
+                        <button type="button" class="btn btn-brand btn-sm btn-youtube mr-1" [disabled]="disableDelBtn"
+                            (click)="excluir()">
                             <i class="fa fa-trash"></i>
                             <span>Excluir</span>
                         </button>

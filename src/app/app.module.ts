@@ -1,7 +1,7 @@
 import { NgxUiLoaderModule, SPINNER, NgxUiLoaderConfig } from "ngx-ui-loader";
 import { BrowserModule } from "@angular/platform-browser";
 import { ReactiveFormsModule } from "@angular/forms";
-import { NgModule, enableProdMode, APP_INITIALIZER, ErrorHandler, Inject, Injectable, InjectionToken } from "@angular/core";
+import { NgModule, enableProdMode, APP_INITIALIZER } from "@angular/core";
 import { LocationStrategy, HashLocationStrategy } from "@angular/common";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from "@angular/common/http";
@@ -63,8 +63,7 @@ import { InterceptorTCM } from "./auth/interceptor-tcm.module";
 import { HttpErrorInterceptor } from "./auth/http-error-interceptor.module";
 import { appInitializer } from "./auth/app.initialize";
 import { AuthenticationService } from "./auth/authentication.service";
-import { BsModalService, ModalBackdropComponent, ModalModule } from "ngx-bootstrap/modal";
-import * as Rollbar from 'rollbar';
+import { BsModalService, ModalModule } from "ngx-bootstrap/modal";
 
 enableProdMode();
 // const rollbarConfig = {
@@ -112,7 +111,6 @@ enableProdMode();
     HttpErrorInterceptor,
     PerfectScrollbarModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
-
     //NgxUiLoaderRouterModule.forRoot({showForeground:false}),
     //NgxUiLoaderHttpModule.forRoot()
   ],

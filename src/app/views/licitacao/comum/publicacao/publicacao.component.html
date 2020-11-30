@@ -1,14 +1,14 @@
 <div class="animate__animated animate__fadeIn">
     <div class="row">
         <div class="col-lg-12">
-            <div class="card" style="margin-bottom: 0px;">
+            <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-table"></i>Cadastro de Itens do Processo Licitatório
+                    <i class="fa fa-table"></i>Informações de todas as publicações do Edital ou Convite
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h4 class="card-title mb-0">Itens</h4>
+                            <h4 class="card-title mb-0">Publicação</h4>
                             <div class="small text-muted">&nbsp;</div>
                         </div>
                     </div>
@@ -27,8 +27,8 @@
 
                         <div class="col-sm-7">
                             <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
-                                <label class="btn btn-primary" (click)="addItem()">
-                                    Novo Item
+                                <label class="btn btn-primary" (click)="novoPublicacao()">
+                                    Nova Publicação
                                     <i class="fa fa-plus"></i>
                                 </label>
                             </div>
@@ -39,33 +39,20 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">N°</th>
+                                    <th scope="col">Data Publicação</th>
+                                    <th scope="col">Veículo de publicação</th>
                                     <th scope="col">Descrição</th>
-                                    <th scope="col">Qtd.</th>
-                                    <th scope="col">Unidade Medida</th>
-                                    <th scope="col">Preço Máximo</th>
-                                    <th scope="col">Valore de Referência</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let item of page?.content" scope="row">
-                                    <td style="width: 94px;">
-                                        <table-acoes botoes="['apagar','editar']"
-                                        (onEditar)="addItem(item)"
-                                        ></table-acoes>
-                                    </td>
-                                    <td>{{item.numeroItem}}</td>
-                                    <td>{{item.descricao}}</td>
-                                    <td>{{item.quantidade}}</td>
-                                    <td>{{item.codUnidadeMedida}}</td>
-                                    <td>
-                                        <label class="switch switch-label switch-pill switch-success">
-                                            <input id="criterioDesempateMEEPP" type="checkbox" class="switch-input"
-                                                [checked]="item.precoMaximo" onclick="return false;"git />
-                                            <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
-                                        </label>
-                                    </td>
-                                    <td>{{item.valorDeReferencia |currency:'BRL':'symbol'}}</td>
+                                    <td style="width: 94px;"><table-acoes botoes="['apagar','editar']"
+                                        (onEditar)="novoPublicacao(item)"
+                                        (onApagar)="excluir(item.uuid)"
+                                        ></table-acoes></td>
+                                    <td>{{item.dataPublicacao | date :'dd/MM/yyyy'}}</td>
+                                    <td>{{consultaVeiculoPublicacao(item.codVeiculoPublicacao)?.descricao }}</td>
+                                    <td>{{item?.descricao}}</td>                                  
                                 </tr>
                             </tbody>
                         </table>

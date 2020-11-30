@@ -250,11 +250,11 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    * @param obj OBJETO A SER PERSISTIDO
    */
   deletarDaSubTabela(
-    uuidL: string,
-    tabela: string,
-    idTabela: string,
-    subTabela: string,
-    idDEl: string
+    uuidL: any,
+    tabela: any,
+    idTabela: any,
+    subTabela: any,
+    idDEl: any
   ) {
     return this.http
       .delete(

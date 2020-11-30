@@ -12,8 +12,10 @@ export class MenuLink extends BaseEntity<String> implements INavData {
   icon?: string;
   badge?: INavBadge;
   title?: boolean;
+  show?: boolean;
   children?: MenuLink[];
   variant?: string;
   divider?: boolean;
   class?: string;
+  nomeTabelaColare?:string
 }

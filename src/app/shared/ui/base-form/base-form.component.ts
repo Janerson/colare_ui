@@ -139,6 +139,7 @@ export abstract class BaseFormComponent {
    */
   private buildForm() {
     this.formulario = this.builder.group({
+      uuid: this.builder.control(null),
       arquivo: this.builder.group({
         uuid: this.builder.control(null),
         id: this.builder.control(null, []),
@@ -150,8 +151,7 @@ export abstract class BaseFormComponent {
         arquivoHomologacao: this.builder.control(null, []),
         layoutSigla: this.builder.control(null, []),
         prestacaoDeContasSigla: this.builder.control(null, []),
-      }),
-      uuid: this.builder.control(null),
+      })      
     }, [Validators.required]);
   }
 

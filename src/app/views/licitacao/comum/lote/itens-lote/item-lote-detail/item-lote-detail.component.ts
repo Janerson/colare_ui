@@ -1,16 +1,16 @@
-import { TabelaService } from "./../../../../tabelas/service/tabelas.service";
+import { TabelaService } from "./../../../../../tabelas/service/tabelas.service";
 import { Component, OnInit } from "@angular/core";
 import { Validators } from "@angular/forms";
 import { BsModalRef } from "ngx-bootstrap/modal";
-import { ItemLoteFaseUm, LoteFaseUm } from "../../../../../shared/entity/LIC/licitacao_faseum/licitacao-fase-um";
+import { ItemLoteFaseUm } from "../../../../../../shared/entity/LIC/licitacao_faseum/licitacao-fase-um";
 import {
   AlertService,
   AlertTypes,
-} from "../../../../../shared/services/alert.service";
-import { BaseFormComponent } from "../../../../../shared/ui/base-form/base-form.component";
-import { LicitacaoFaseUmService } from "../../../service/licitacao-fase-um.service";
-import { Tabela } from "../../../../../shared/entity/colare/tabelas";
-import { TABELAS_DOMINIOS } from "../../../../../shared/enum-layouts/tabelas";
+} from "../../../../../../shared/services/alert.service";
+import { BaseFormComponent } from "../../../../../../shared/ui/base-form/base-form.component";
+import { LicitacaoFaseUmService } from "../../../../service/licitacao-fase-um.service";
+import { Tabela } from "../../../../../../shared/entity/colare/tabelas";
+import { TABELAS_DOMINIOS } from "../../../../../../shared/enum-layouts/tabelas";
 
 @Component({
   selector: "app-item-lote-detail",
@@ -23,7 +23,7 @@ export class ItemLoteDetailComponent
   btnTitle = "Adicionar";
 
   data: {
-    uuid: string;
+    idLayout: string;
     loteId: any;
     item : ItemLoteFaseUm
   };
@@ -50,6 +50,7 @@ export class ItemLoteDetailComponent
     }
     this.initValidacoesForm()
     this.initTabelas();
+
     console.log(this.data)
   }
 
@@ -141,13 +142,12 @@ export class ItemLoteDetailComponent
     let opr = this.btnTitle === "Atualizar" ? "atualizado" : "incluído";
     this.removeControl("arquivo");
     this.service
-      .adicionarNaSubTabela(this.data.uuid,"LOTE", this.data.loteId,"ITEM",this.formValue())
-      .subscribe(data => {
-        console.log(data)
+      .adicionarNaSubTabela(this.data.idLayout,"LOTE", this.data.loteId,"ITEM",this.formValue())
+      .subscribe((data : ItemLoteFaseUm)  => {
         this.alertService.showToastr(
           AlertTypes.SUCESS,
           "SUCESSO",
-          `Item incluído com sucesso.`
+          `Item ${data.descricao} ${opr} com sucesso.`
         )
       })
         

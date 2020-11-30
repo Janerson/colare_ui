@@ -68,6 +68,7 @@
     "simple-line-icons": "^2.4.1",
     "ts-helpers": "^1.1.2",
     "tslib": "^1.10.0",
+    "uninstall": "0.0.0",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.10.2"
   },

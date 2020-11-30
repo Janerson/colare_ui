@@ -45,7 +45,7 @@ export class LicitacaoFaseUm extends BaseEntity<String> {
    * Destinação exclusiva a ME e EPP (Art. 48, I, Lei Complementar 123/2006)
    */
   destinacaoExclusivaMEEPP?: boolean;
-  editalEAnexos?: EditalEAnexos[];
+  editalEAnexos?: EditalEAnexosFaseUm[];
   /**
    * Exercício do edital da licitação
    */
@@ -69,7 +69,7 @@ export class LicitacaoFaseUm extends BaseEntity<String> {
    * Descreve o motivo da Atualização ou Correção
    */
   motivoAtualizacaoCorrecao?: string;
-  naturezaDoObjetoDetalhada?: NaturezaDoObjetoDetalhada[];
+  naturezaDoObjetoDetalhada?: NaturezaDoObjetoDetalhadaFaseUm[];
   /**
    * Número de convidados.
    */
@@ -91,8 +91,17 @@ export class LicitacaoFaseUm extends BaseEntity<String> {
    * Processo realizado por lote
    */
   processoPorLote?: boolean;
-  publicacao?: Publicacao[];
+  /**
+   * Publicaçoes
+   */
+  publicacao?: PublicacaoFaseUm[];
+  /**
+   * Recurso
+   */
   recursoOrcamentario?: RecursoOrcamentario[];
+  /**
+   * 
+   */
   responsaveis?: Responsaveis[];
   /**
    * Trata-se de prestação de serviço a ser executado de forma contínua.
@@ -156,7 +165,7 @@ export interface Membro extends BaseEntity<String> {
 /**
  * Informar os anexos e/ou o edital em partes separadas (ex. parte 2 de 3)
  */
-export interface EditalEAnexos extends BaseEntity<String> {
+export interface EditalEAnexosFaseUm extends BaseEntity<String> {
   /**
    * Código do tipo de documento enviado - Edital e Anexos, conforme tabela
    */
@@ -235,7 +244,7 @@ export interface ItemLoteFaseUm extends BaseEntity<String> {
 /**
  * Detalhar a natureza do objeto
  */
-export interface NaturezaDoObjetoDetalhada extends BaseEntity<String> {
+export interface NaturezaDoObjetoDetalhadaFaseUm extends BaseEntity<String> {
   /**
    * Detalhamento da natureza do objeto
    */
@@ -275,7 +284,7 @@ export interface Parecer extends BaseEntity<String> {
 /**
  * Informação de todas as publicações do Edital ou Convite
  */
-export interface Publicacao extends BaseEntity<String> {
+export interface PublicacaoFaseUm extends BaseEntity<String> {
   /**
    * Código do veículo da Publicação
    */

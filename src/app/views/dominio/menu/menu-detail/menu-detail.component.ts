@@ -69,18 +69,23 @@ export class MenuDetailComponent
   submit() {
     this.menuService.salvar(this.formValue()).subscribe((data) => {
       this.uuid = data.uuid;
-      this.alertService
-        .showAlert(AlertTypes.SUCESS, "Dados gravados com sucesso!", "Sucesso")
-        .onHidden.subscribe(() => {
-          this.getMenu();
-        });
+      this.alertService.showToastr(
+        AlertTypes.SUCESS,
+        "Sucesso",
+        "Dados gravados com sucesso!"
+      );
+      //this.atualizaFormulario(value);
+      this.getMenu();
     });
   }
 
-  onFormInvalid(){
-    this.alertService.showToastr(AlertTypes.DANGER,"ERROR","Verifique os erros e tente novamente.")
-   }
-
+  onFormInvalid() {
+    this.alertService.showToastr(
+      AlertTypes.DANGER,
+      "ERROR",
+      "Verifique os erros e tente novamente."
+    );
+  }
 
   excluir() {
     this.alertService
@@ -95,15 +100,14 @@ export class MenuDetailComponent
           value ? this.menuService.excluir(this.formValue("uuid")) : EMPTY
         )
       )
-      .subscribe(() =>
-        this.alertService
-          .showAlert(
-            AlertTypes.SUCESS,
-            "Registro excluído com sucesso!",
-            "Sucesso"
-          )
-          .onHidden.subscribe(() => this.voltar())
-      );
+      .subscribe(() => {
+        this.alertService.showToastr(
+          AlertTypes.SUCESS,
+          "Sucesso",
+          "Registro excluído com sucesso!"
+        );
+        this.voltar();
+      });
   }
 
   criarFormulario() {
@@ -115,6 +119,7 @@ export class MenuDetailComponent
     this.adicionaControl("url", this.builder.control(null, []));
     this.adicionaControl("icon", this.builder.control(null, []));
     this.adicionaControl("title", this.builder.control(false, []));
+    this.adicionaControl("show", this.builder.control(true, []));
     this.adicionaControl(
       "badge",
       this.builder.group({
@@ -136,6 +141,7 @@ export class MenuDetailComponent
       icon: this.builder.control(m.icon),
       name: this.builder.control(m.name),
       url: this.builder.control(m.url),
+      nomeTabelaColare: this.builder.control(m.nomeTabelaColare),
     });
     this.children.push(fg);
   }
@@ -163,7 +169,7 @@ export class MenuDetailComponent
       );
       return;
     }
-    
+
     this.alertService
       .showModal(MenuPopupComponent, {
         class: "modal-lg",

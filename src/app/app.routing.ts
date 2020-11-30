@@ -73,6 +73,13 @@ export const routes: Routes = [
             (c) => c.DominioModule
           ),
       },
+      {
+        path: "CONFIG",
+        loadChildren: () =>
+          import("./views/config/config.module").then(
+            (m) => m.ConfigModule
+          ),
+      },
     ],
   },
   { path: "**", component: P404Component },

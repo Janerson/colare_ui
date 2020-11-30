@@ -48,7 +48,7 @@ export class PassaporteComponent implements OnInit, OnDestroy {
     midnight.setHours(23, 59, 59);
     this.cookieService.set("TCM_TOKEN", token, midnight);
     this.closeModal();
-    this.alertService.showAlert(AlertTypes.SUCESS,"Usário logado com sucesso!","Passaporte")    
+    this.alertService.showToastr(AlertTypes.SUCESS,"Passaporte","Usário logado com sucesso!")    
   }
   closeModal() {
     this.bsMoldaRef.hide();

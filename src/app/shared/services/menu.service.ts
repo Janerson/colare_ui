@@ -36,6 +36,10 @@ export class MenuService extends GenericDao<String,MenuLink> {
   listaAdd(uuid:string, link : MenuLink){
     return this.http.put<MenuLink>(`${environment.api_url(API.DOMINIO_MENU)}/${uuid}/LISTA/ADC`,link);
   }
+  listaPorStatus(status:boolean){
+    console.log(status)
+    return this.http.get<MenuLink[]>(`${environment.api_url(API.DOMINIO_MENU)}/LISTAR/STATUS?show=${status}`);
+  }
 
   
 }

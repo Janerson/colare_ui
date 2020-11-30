@@ -5,11 +5,11 @@ import { Routes, RouterModule } from "@angular/router";
 
 export const routes: Routes = [
   {
-    path: "",
+    path: "",   
     data: {
       title: "Domínio",
     },
-    children: [
+    children: [     
       {
         path: "MENU",
         children: [
@@ -35,6 +35,10 @@ export const routes: Routes = [
             },
           },
         ],
+      },
+      {
+        path:"",
+        redirectTo:"/CONFIG"
       },
     ],
   },

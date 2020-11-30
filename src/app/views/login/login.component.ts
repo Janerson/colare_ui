@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { ToastrService } from "ngx-toastr";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators } from "@angular/forms";
@@ -21,7 +22,7 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService,
-    private toast: ToastrService
+    private http: HttpClient
   ) {
     super();
     if (this.authService.token) {
@@ -70,7 +71,5 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
     );
   }
 
-  error() {
-    this.alertService.showToastr(AlertTypes.DANGER, "TESTE", "edsdsc");
-  }
+ 
 }

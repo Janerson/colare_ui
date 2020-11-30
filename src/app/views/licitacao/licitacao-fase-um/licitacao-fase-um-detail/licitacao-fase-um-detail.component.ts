@@ -148,6 +148,9 @@ export class LicitacaoFaseUmDetailComponent
     this.adicionaControl("numeroDeConvidados", this.builder.control(null));
     this.adicionaControl("descricaoPremioOuRemuneracaoConcurso", this.builder.control(null));
     this.adicionaControl("lote",this.builder.array([]))
+    this.adicionaControl("publicacao",this.builder.array([]))
+    this.adicionaControl("editalEAnexos",this.builder.array([]))
+    this.adicionaControl("naturezaDoObjetoDetalhada",this.builder.array([]))
   }
 
   addLote(Lic:LicitacaoFaseUm){

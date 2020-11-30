@@ -1,0 +1,63 @@
+<div>
+    <form [formGroup]="formulario" (submit)="onSubmit(true)">
+        <div class="row">
+            <div class="col-lg-12">
+                <c-card cardTitle="Edital e Anexos Fase - 1">
+                    <div class="row">                      
+                        <div class="col-lg-12">
+                            <label class="col-form-label" for="codTipoEditalAnexos">Tipo de Documento</label>
+                            <div class="controls" validator>
+                                <div class="input-prepend input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">N°</span>
+                                    </div>
+                                    <select class="form-control" id="codTipoEditalAnexos"
+                                        formControlName="codTipoEditalAnexos">
+                                        <option></option>
+                                        <option *ngFor="let item of tipoEditalEAnexos$ |async" [ngValue]="item.codigo">
+                                            {{item.descricao}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="col-form-label" for="descricao">Descrição</label>
+                            <div class="controls" validator>
+                                <div class="input-prepend input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-pencil"></i></span>
+                                    </div>
+                                    <textarea id="descricao" class="form-control"
+                                        formControlName="descricao"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <app-file-upload [formGroup]="formulario" title="Edital e Anexos(PDF)" extensions=".pdf">
+                            </app-file-upload>
+                        </div>
+                    </div>
+                </c-card>
+                <c-card faIcon="fa fa-certificate" cardTitle="Ações" style="margin-bottom: 0px;">
+                    <button type="submit" class="btn btn-brand btn-sm btn-facebook mr-1"
+                        [disabled]="btnTitle !== 'Adicionar'">
+                        <i class="fa fa-plus"></i>
+                        <span>{{btnTitle}} e Novo</span>
+                    </button>
+                    <button type="button" class="btn btn-brand btn-sm btn-vine mr-1" (click)="onSubmit(false)">
+                        <i class="fa fa-plus"></i>
+                        <span>{{btnTitle}} e Fechar</span>
+                    </button>
+                    <button type="button" class="btn btn-brand btn-sm btn-tumblr mr-1" (click)="cancelar()">
+                        <i class="fa fa-undo"></i>
+                        <span>Cancelar</span>
+                    </button>
+                </c-card>
+            </div>
+        </div>
+    </form>
+</div>

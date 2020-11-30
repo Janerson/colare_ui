@@ -1,13 +1,13 @@
-import { LoteFaseUm } from './../../../../shared/entity/LIC/licitacao_faseum/licitacao-fase-um';
-import { LicitacaoFaseUmService } from "./../../service/licitacao-fase-um.service";
+import { LoteFaseUm } from './../../../../../shared/entity/LIC/licitacao_faseum/licitacao-fase-um';
+import { LicitacaoFaseUmService } from "./../../../service/licitacao-fase-um.service";
 import {
   AlertService,
   AlertTypes,
-} from "./../../../../shared/services/alert.service";
+} from "./../../../../../shared/services/alert.service";
 import { BsModalRef } from "ngx-bootstrap/modal";
 import { Validators } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
-import { BaseFormComponent } from "../../../../shared/ui/base-form/base-form.component";
+import { BaseFormComponent } from "../../../../../shared/ui/base-form/base-form.component";
 //import { da } from 'date-fns/locale';
 
 @Component({

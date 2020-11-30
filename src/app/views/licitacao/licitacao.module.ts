@@ -17,10 +17,17 @@ import { LicRetificaPopupComponent } from './lic-retifica-popup/lic-retifica-pop
 import { LicRetificaService } from './service/lic-retifica-homolog.service';
 import { LicitacaoFaseUmComponent } from './licitacao-fase-um/licitacao-fase-um.component';
 import { LicitacaoFaseUmDetailComponent } from './licitacao-fase-um/licitacao-fase-um-detail/licitacao-fase-um-detail.component';
-import { LoteComponent } from './lote/lote.component';
-import { LotePopupComponent } from './lote/lote-popup/lote-popup.component';
-import { ItensLoteComponent } from './lote/itens-lote/itens-lote.component';
-import { ItemLoteDetailComponent } from './lote/itens-lote/item-lote-detail/item-lote-detail.component';
+import { EditalEAnexosPopupComponent } from './comum/edital-e-anexos/edital-e-anexos-popup/edital-e-anexos-popup.component';
+import { EditalEAnexosComponent } from './comum/edital-e-anexos/edital-e-anexos.component';
+import { ItemLoteDetailComponent } from './comum/lote/itens-lote/item-lote-detail/item-lote-detail.component';
+import { ItensLoteComponent } from './comum/lote/itens-lote/itens-lote.component';
+import { LotePopupComponent } from './comum/lote/lote-popup/lote-popup.component';
+import { LoteComponent } from './comum/lote/lote.component';
+import { NaturezaDetalhadaPopupComponent } from './comum/natureza-detalhada/natureza-detalhada-popup/natureza-detalhada-popup.component';
+import { NaturezaDetalhadaComponent } from './comum/natureza-detalhada/natureza-detalhada.component';
+import { PublicacaoPopupComponent } from './comum/publicacao/publicacao-popup/publicacao-popup.component';
+import { PublicacaoComponent } from './comum/publicacao/publicacao.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +43,13 @@ import { ItemLoteDetailComponent } from './lote/itens-lote/item-lote-detail/item
     LoteComponent,
     LotePopupComponent,
     ItensLoteComponent,
-    ItemLoteDetailComponent
+    ItemLoteDetailComponent,
+    PublicacaoComponent,
+    EditalEAnexosComponent,
+    NaturezaDetalhadaComponent,
+    PublicacaoPopupComponent,
+    EditalEAnexosPopupComponent,
+    NaturezaDetalhadaPopupComponent
   ],
   imports: [CommonModule, LicitacaoRoutingModule, SharedModule,FormsModule],
   providers: [
@@ -44,6 +57,7 @@ import { ItemLoteDetailComponent } from './lote/itens-lote/item-lote-detail/item
     ContratoInicialService,
     ContratoRecisaoService,
     LicRetificaService
+    
   ],
 })
 export class LicitacaoModule {}

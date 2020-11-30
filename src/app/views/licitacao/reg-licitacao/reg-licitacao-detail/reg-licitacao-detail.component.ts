@@ -88,10 +88,10 @@ export class RegLicitacaoDetailComponent
       .salvar(this.formulario.value)
       .subscribe((data: RegLicitacao) => {
         isSubimited
-          ? this.alertService.showAlert(
+          ? this.alertService.showToastr(
               AlertTypes.SUCESS,
-              `Salvo com sucesso`,
-              "Regulamentação"
+              "Regulamentação",
+              `Salvo com sucesso`
             )
           : EMPTY;
         this.buscarRegulamentacao(data.uuid);

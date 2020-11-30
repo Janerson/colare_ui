@@ -1,5 +1,3 @@
-
-
 .modal {
   //  display:flex;
   top: 0%;
@@ -11,11 +9,6 @@ modal-container:nth-of-type(2) {
 }
 
 .modal-content {
-  border-top: 5px solid #1b8eb7;
-  border-bottom: 1.5px solid #1b8eb7;
-  border-left: none;
-  border-right: none;
-
   //  position: relative;
   //  display: -webkit-box;
   //  display: flex;
@@ -25,8 +18,8 @@ modal-container:nth-of-type(2) {
   // width: 100%;
   // pointer-events: auto;
   // background-clip: padding-box;
-  //border: none;
-  //border-radius: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
   //outline: 0;
 }
 
@@ -122,5 +115,16 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
-  text-overflow: '';
+  text-overflow: "";
+}
+
+// SIDEBAR
+// .sidebar .nav-title {
+//   background-color: black;
+// }
+.sidebar .nav-dropdown.open {
+  background-color: black;
+}
+.sidebar .nav-link.active{
+  background-color: #002744;
 }

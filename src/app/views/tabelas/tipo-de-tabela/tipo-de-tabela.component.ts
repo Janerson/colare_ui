@@ -32,12 +32,12 @@ export class TipoDeTabelaComponent extends BaseFormComponent
   ngOnInit(): void {
     this.subscription = this.route.data.subscribe((d) => {
       this.title = d.title;
+      this.listar()
     });
 
     this.serviceSubscription = this.service.refresh.subscribe(() => {
       this.listar();
     });
-    this.listar();
 
     this.formulario.addControl("descricao", this.builder.control(null, []));
     this.onValueChanged();

@@ -1,4 +1,4 @@
-<div class="animate__animated animate__fadeInDown">
+<div class="animate__animated animate__fadeIn">
     <form [formGroup]="formulario" (submit)="onSubmit()">
         <div class="row">
             <div class="col-lg-12">
@@ -124,6 +124,7 @@
                                         <option *ngFor="let item of modalidadeLicitacao" [ngValue]="item.codigo">
                                             {{item.descricao}}</option>
                                     </select>
+                                 
                                 </div>
                             </div>
                         </div>
@@ -336,13 +337,14 @@
                         <tab heading="Recurso Orcamentário" (selectTab)="onSelectTab($event, 2)">Long Labeled Justified
                             content
                         </tab>
-                        <tab heading="Publicação" (selectTab)="onSelectTab($event,2)">Long Labeled Justified content
+                        <tab heading="Publicação" (selectTab)="onSelectTab($event,2)">
+                            <c-publicacao [form]="formulario"></c-publicacao>
                         </tab>
-                        <tab heading="Edital e Anexos" (selectTab)="onSelectTab($event,2)">Long Labeled Justified
-                            content
+                        <tab heading="Edital e Anexos" (selectTab)="onSelectTab($event,2)">
+                            <c-edital-e-anexos [form]="formulario"></c-edital-e-anexos>
                         </tab>
-                        <tab heading="Natureza detalhada" (selectTab)="onSelectTab($event,2)">Long Labeled Justified
-                            content
+                        <tab heading="Natureza detalhada" (selectTab)="onSelectTab($event,2)">
+                            <c-natureza-detalhada [form]="formulario"></c-natureza-detalhada>
                         </tab>
                     </tabset>
                 </c-card>

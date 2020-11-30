@@ -1,4 +1,4 @@
-import { ModalModule } from 'ngx-bootstrap/modal';
+import { HighlightPipe } from './pipes/highlight.pipe';
 import { NgModule } from "@angular/core";
 import { CommonModule, DatePipe } from "@angular/common";
 import { RouterModule } from "@angular/router";
@@ -8,7 +8,7 @@ import { ptBrLocale } from "ngx-bootstrap/locale";
 import { NgxJsonViewerModule } from "ngx-json-viewer";
 import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { BsDatepickerModule, BsLocaleService } from "ngx-bootstrap/datepicker";
-import { ReactiveFormsModule,FormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { AlertModalComponent } from "./ui/alert-modal/alert-modal.component";
 import { PaginationModule } from "ngx-bootstrap/pagination";
 import { AlertService } from "./services/alert.service";
@@ -26,7 +26,7 @@ import { ValidatorComponentComponent } from "./ui/validator-component/validator-
 import { CardComponent } from "./ui/card/card.component";
 import { CustomAlertComponent } from "./ui/custom-alert/custom-alert.component";
 import { PopoverModule } from "ngx-bootstrap/popover";
-import { IconPickerModule } from 'ngx-icon-picker';
+import { IconPickerModule } from "ngx-icon-picker";
 import {
   NgWizardModule,
   NgWizardConfig,
@@ -35,18 +35,17 @@ import {
 } from "ng-wizard";
 import { AlertModule } from "ngx-bootstrap/alert";
 
-import {setTheme} from 'ngx-bootstrap/utils';
-import { DatepickerComponent } from './ui/date-picker/date-picker.component';
-import { CustomSelectComponent } from './ui/custom-select/custom-select.component'
+import { setTheme } from "ngx-bootstrap/utils";
+import { DatepickerComponent } from "./ui/date-picker/date-picker.component";
+import { CustomSelectComponent } from "./ui/custom-select/custom-select.component";
 //import { NgxMaskModule } from 'ngx-mask';
-import { CustomCardComponent } from './ui/custom-card/custom-card.component';
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { CustomFieldComponent } from './ui/custom-field/custom-field.component';
-import { ColareLayoutTableComponet } from './ui/colare-table-acoes/colare-table-acoes.component';
-import { ColareLayoutAcoesComponent } from './ui/colare-acoes/colare-acoes.component';
-import { TableAcoesComponent } from './ui/table-acoes/table-acoes.component';
-import { ToastrModule } from 'ngx-toastr';
-import { ModalBackdropComponent } from 'ngx-bootstrap/modal';
+import { CustomCardComponent } from "./ui/custom-card/custom-card.component";
+import { TabsModule } from "ngx-bootstrap/tabs";
+import { CustomFieldComponent } from "./ui/custom-field/custom-field.component";
+import { ColareLayoutTableComponet } from "./ui/colare-table-acoes/colare-table-acoes.component";
+import { ColareLayoutAcoesComponent } from "./ui/colare-acoes/colare-acoes.component";
+import { TableAcoesComponent } from "./ui/table-acoes/table-acoes.component";
+import { ToastrModule } from "ngx-toastr";
 
 defineLocale("pt-br", ptBrLocale);
 
@@ -63,8 +62,7 @@ const ngWizardConfig: NgWizardConfig = {
     anchorClickable: true,
   },
 };
-setTheme('bs4')
-
+setTheme("bs4");
 
 @NgModule({
   declarations: [
@@ -79,6 +77,7 @@ setTheme('bs4')
     Erro412Component,
     ColareLayoutAcoesComponent,
     StatusEnvioPipe,
+    HighlightPipe,
     ValidatorComponentComponent,
     CardComponent,
     CustomAlertComponent,
@@ -87,29 +86,29 @@ setTheme('bs4')
     CustomSelectComponent,
     CustomCardComponent,
     CustomFieldComponent,
-    TableAcoesComponent,  
+    TableAcoesComponent,
   ],
-  imports: [     
+  imports: [
     CommonModule,
-   // NgxMaskModule.forRoot(),
+    // NgxMaskModule.forRoot(),
     TypeaheadModule.forRoot(),
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
     NgxJsonViewerModule,
-    PaginationModule.forRoot(),    
+    PaginationModule.forRoot(),
     BsDatepickerModule.forRoot(),
     PopoverModule.forRoot(),
     AlertModule.forRoot(),
     NgWizardModule.forRoot(ngWizardConfig),
     IconPickerModule,
-    TabsModule.forRoot() ,
+    TabsModule.forRoot(),
     ToastrModule.forRoot({
       progressBar: true,
-    })
+    }),
   ],
   exports: [
-  //  NgxMaskModule,
+    //  NgxMaskModule,
     NgWizardModule,
     TypeaheadModule,
     OnlyNumberDirective,
@@ -128,24 +127,24 @@ setTheme('bs4')
     ColareLayoutAcoesComponent,
     PopoverModule,
     StatusEnvioPipe,
+    HighlightPipe,
     ValidatorComponentComponent,
     CardComponent,
     IconPickerModule,
     ColareLayoutTableComponet,
-    DatepickerComponent,   
+    DatepickerComponent,
     CustomSelectComponent,
     CustomCardComponent,
     CustomFieldComponent,
     TabsModule,
-    TableAcoesComponent,    
+    TableAcoesComponent,
     // BsDatepickerModule
   ],
-  providers: [BsLocaleService,  AlertService, DatePipe],
+  providers: [BsLocaleService, AlertService, DatePipe],
   //entryComponents: [AlertModalComponent,BaseModalComponent,PassaporteComponent],
 })
 export class SharedModule {
-  constructor(localeService: BsLocaleService, ) {
+  constructor(localeService: BsLocaleService) {
     localeService.use("pt-br");
-  
   }
 }
