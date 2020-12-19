@@ -76,10 +76,10 @@ export class DefaultLayoutComponent
     throw new Error("Method not implemented.");
   }
 
-  filtrarMenu(str: string, array: MenuLink[]): MenuLink[] {
+  filtrarMenu(str: string, menus: MenuLink[]): MenuLink[] {
     let resultado: MenuLink[] = [];
     let title: MenuLink = {};
-    array.forEach((el) => {
+    menus.forEach((el) => {
       let tmp = [];
       let o: MenuLink = {};
 
@@ -111,6 +111,7 @@ export class DefaultLayoutComponent
         resultado.push(o);
       }
     });
+    console.log(resultado)
     return resultado;
   }
 
