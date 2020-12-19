@@ -1,5 +1,4 @@
 import { HttpClient } from '@angular/common/http';
-import { ToastrService } from "ngx-toastr";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators } from "@angular/forms";
 import { AuthenticationService } from "../../auth/authentication.service";
@@ -21,9 +20,7 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
     private authService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router,
-    private alertService: AlertService,
-    private http: HttpClient
-  ) {
+    private alertService: AlertService  ) {
     super();
     if (this.authService.token) {
       this.router.navigate(["/DASHBOARD"]);
@@ -50,11 +47,11 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
       .login(email, password)
       .pipe(first())
       .subscribe(
-        (next) => {
+        () => {
           this.router.navigate([this.returnUrl]);
          }
          ,
-         (err) =>
+         () =>
            this.alertService.showToastr(
              AlertTypes.DANGER,
              "ERROR",
