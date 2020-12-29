@@ -111,7 +111,7 @@ export class DefaultLayoutComponent
         resultado.push(o);
       }
     });
-    console.log(resultado)
+    //console.log(resultado)
     return resultado;
   }
 

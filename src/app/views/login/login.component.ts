@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators } from "@angular/forms";
 import { AuthenticationService } from "../../auth/authentication.service";
@@ -20,7 +19,8 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
     private authService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router,
-    private alertService: AlertService  ) {
+    private alertService: AlertService
+  ) {
     super();
     if (this.authService.token) {
       this.router.navigate(["/DASHBOARD"]);
@@ -47,16 +47,13 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
       .login(email, password)
       .pipe(first())
       .subscribe(
-        () => {
-          this.router.navigate([this.returnUrl]);
-         }
-         ,
-         () =>
-           this.alertService.showToastr(
-             AlertTypes.DANGER,
-             "ERROR",
-             "Usuário/senha inválido."
-           )
+        (success) => this.router.navigate([this.returnUrl]),
+        (error) =>
+          this.alertService.showToastr(
+            AlertTypes.DANGER,
+            "ERROR",
+            "Usuário/senha inválido."
+          )
       );
   }
 
@@ -67,6 +64,4 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
       "Verifique os erros e tente novamente."
     );
   }
-
- 
 }
