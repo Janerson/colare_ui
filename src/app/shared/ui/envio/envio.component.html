@@ -7,7 +7,7 @@
             <label for="exampleFormControlSelect1">Tipo de Envio</label>
             <select [ngClass]="aplicaCssErro('codTipoEnvio')" class="form-control" id="codTipoEnvio"
                 formControlName="codTipoEnvio">
-                <option *ngFor="let item of dominios" [ngValue]="item.codigo"
+                <option *ngFor="let item of tabelas" [ngValue]="item.codigo"
                     [hidden]="item.codigo == '1' && data.id > 0 || item.codigo != '1' && data.id == 0 ">{{item.descricao}}
                 </option>
             </select>

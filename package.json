@@ -67,7 +67,7 @@
     "rxjs": "^6.5.3",
     "simple-line-icons": "^2.4.1",
     "ts-helpers": "^1.1.2",
-    "tslib": "^1.10.0",
+    "tslib": "^2.1.0",
     "uninstall": "0.0.0",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.10.2"

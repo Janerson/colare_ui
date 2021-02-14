@@ -4,9 +4,11 @@
   //border: 0px;
 }
 
-modal-container:nth-of-type(2) {
+modal-container:nth-of-type(-n+2) {
   background: rgba(0, 0, 0, 0.5);
 }
+
+
 
 .modal-content {
   //  position: relative;

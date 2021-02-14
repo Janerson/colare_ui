@@ -45,7 +45,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
         this.alertService.hide()
         this.ngxLoader.stop(); 
         
-         this.alertService.showToastr(AlertTypes.INFO,"Faça o Login com seu certificado digital e tente novamente!","Atenção")
+         this.alertService.showToastr(AlertTypes.WARNING,"Faça o Login com seu certificado digital e tente novamente!","Atenção")
        // .onHidden.subscribe(() => {
           this.showLogin()
        // //  sub.unsubscribe()
