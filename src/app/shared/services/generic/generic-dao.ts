@@ -162,12 +162,24 @@ export class GenericDao<K, T extends BaseEntity<K>> {
    * @param obj    - Objeto a ser persistido
    */
   adicionarNaTabela(tabela: string, uuid: string, obj: {}) {
-    return this.http
+    if (obj["uuid"]) {
+      return this.http
+        .put(
+          `${environment.api_url(this.layout)}/${uuid}/${tabela}/UPD`,
+          obj
+        )
+        .pipe(
+          take(1),
+          tap(() => this.refresh.next())
+        );
+    }else{
+      return this.http
       .post(`${environment.api_url(this.layout)}/${uuid}/${tabela}/ADD`, obj)
       .pipe(
         take(1),
         tap(() => this.refresh.next())
       );
+    }
   }
 
   /**
@@ -290,7 +302,11 @@ export class GenericDao<K, T extends BaseEntity<K>> {
     dir?: string
   ) {
     return this.http.get<Page<any>>(
-      `${environment.api_url(this.layout)}/${uuid}/${tabela}/${tabelaId}/${subTabela}/LIST?page=${page}&search=${searchBy || ""}&sort=${orderBy || "seq"}&dir=${dir || "asc"}`
+      `${environment.api_url(
+        this.layout
+      )}/${uuid}/${tabela}/${tabelaId}/${subTabela}/LIST?page=${page}&search=${
+        searchBy || ""
+      }&sort=${orderBy || "seq"}&dir=${dir || "asc"}`
     );
   }
 

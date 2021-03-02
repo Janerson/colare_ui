@@ -21,15 +21,8 @@ export class ValidatorComponentComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    this.formControl.valueChanges.subscribe((value) => {
-      // console.log(value,
-      //   this.formControl["name"],
-      //   "Touched: " + this.formControl.touched,
-      //   "Pristine: " + this.formControl.pristine,
-      //   "Dirty: " + this.formControl.dirty
-      // );
+    this.formControl.valueChanges.subscribe((value) => {  
       this.erros(this.formControl.errors);
-
       this.isValid();
     });
 
@@ -82,11 +75,11 @@ export class ValidatorComponentComponent implements OnInit, AfterViewInit {
   }
 
   private isValid() {
-    console.log(
-      this.formControl.valid,
-      this.formControl["name"],
-      this.formControl.pristine
-    );
+    // console.log(
+    //   this.formControl.valid,
+    //   this.formControl["name"],
+    //   this.formControl.pristine
+    // );
     if (
       this.formControl.valid &&
       (this.formControl.touched || this.formControl.dirty)

@@ -86,14 +86,13 @@ export class RegLicitacaoDetailComponent
   save(isSubimited: boolean) {
     this.service
       .salvar(this.formulario.value)
-      .subscribe((data: RegLicitacao) => {
-        isSubimited
-          ? this.alertService.showToastr(
+      .subscribe((data: RegLicitacao) => {        
+         this.alertService.showToastr(
               AlertTypes.SUCESS,
               "Regulamentação",
               `Salvo com sucesso`
             )
-          : EMPTY;
+         
         this.buscarRegulamentacao(data.uuid);
       });
   }
@@ -102,7 +101,8 @@ export class RegLicitacaoDetailComponent
     this.save(true);
   }
 
-  onFormInvalid(){
+  onFormInvalid(fields){
+    console.log(fields)
    this.alertService.showToastr(AlertTypes.DANGER,"ERROR","Verifique os erros e tente novamente.")
    }
 

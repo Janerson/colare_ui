@@ -44,6 +44,7 @@ export abstract class BaseFormComponent {
    * Ex: <form (submit)="onSubmit()">...</form>
    */
   onSubmit(value?:any) {
+    this._fields = [];
     if (this.formulario.valid) {
       this.submit(value);
     } else {
