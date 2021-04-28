@@ -1,6 +1,6 @@
 import { Injectable, Injector } from "@angular/core";
 import { Router } from "@angular/router";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
@@ -10,7 +10,6 @@ import { CookieService } from "ngx-cookie-service";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
-
   private options = {
     headers: {
       Authorization: environment.client_token,
@@ -34,9 +33,7 @@ export class AuthenticationService {
     private cookieService: CookieService,
     private _injector: Injector,
     private http: HttpClient
-  ) {
- 
-  }
+  ) {}
 
   public get token(): string {
     return this.cookieService.get("API_TOKEN");
@@ -62,13 +59,15 @@ export class AuthenticationService {
   }
 
   logout() {
-    this.http.delete(environment.api_oauth_logout,{withCredentials:true}).subscribe((a) => {  
-      this.stopRefreshTokenTimer();
-      this.cookieService.delete("API_TOKEN");
-      this.cookieService.delete("TCM_TOKEN");
-      this._router.navigate(["/LOGIN"]);
-      this._user = null
-    });
+    this.http
+      .delete(environment.api_oauth_logout, { withCredentials: true })
+      .subscribe((a) => {
+        this.stopRefreshTokenTimer();
+        this.cookieService.delete("API_TOKEN");
+        this.cookieService.delete("TCM_TOKEN");
+        this._router.navigate(["/LOGIN"]);
+        this._user = null;
+      });
   }
 
   refreshToken() {
@@ -81,6 +80,28 @@ export class AuthenticationService {
           this.startRefreshTokenTimer();
           return refreshToken;
         })
+      );
+  }
+
+  get accessToken(): Observable<any> {
+    const httpHeaders = new HttpHeaders().append(
+      "Content-Type",
+      "application/x-www-form-urlencoded"
+    );
+
+    const body = new HttpParams()
+      .set("grant_type", "password")
+      .set("scope", "openid")
+      .set("resource", "https://analysis.windows.net/powerbi/api")
+      .set("client_id", "3558745c-4011-4bd7-8b5e-148e75bc1f85")
+      .set("username", "paulo.hmsilva@bi.go.gov.br")
+      .set("password", "@biPGE&2021");
+
+    return this.http
+      .post<any>(
+        "https://login.windows.net/common/oauth2/token",
+        body,
+        this._options(httpHeaders)
       );
   }
 
@@ -97,15 +118,27 @@ export class AuthenticationService {
     // set a timeout to refresh the token a minute before it expires
     const expires = new Date(this._user.exp * 1000);
     const timeout = expires.getTime() - Date.now() - 60 * 1000;
-    this.refreshTokenTimeout = setTimeout(
-      () => {
-        this.refreshToken().subscribe()
-      },
-      timeout
-    );
+    this.refreshTokenTimeout = setTimeout(() => {
+      this.refreshToken().subscribe();
+    }, timeout);
   }
 
   private stopRefreshTokenTimer() {
     clearTimeout(this.refreshTokenTimeout);
+  }
+
+  private _options(headers?: HttpHeaders, params?: HttpParams): {} {
+    return {
+      headers: headers ? headers : this.buildHeaders(),
+      params: params ? params : this.buildParams(),
+    };
+  }
+
+  private buildHeaders(): HttpHeaders {
+    return new HttpHeaders();
+  }
+
+  private buildParams(): HttpParams {
+    return new HttpParams();
   }
 }
