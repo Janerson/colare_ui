@@ -102,7 +102,7 @@ export class AuthenticationService {
         "https://login.windows.net/common/oauth2/token",
         body,
         this._options(httpHeaders)
-      );
+      ).pipe();
   }
 
   // helper methods

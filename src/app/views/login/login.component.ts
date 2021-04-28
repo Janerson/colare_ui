@@ -41,20 +41,22 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
   }
 
   submit() {
-    const email = this.formValue("email");
-    const password = this.formValue("password");
-    this.authService
-      .login(email, password)
-      .pipe(first())
-      .subscribe(
-        (success) => this.router.navigate([this.returnUrl]),
-        (error) =>
-          this.alertService.showToastr(
-            AlertTypes.DANGER,
-            "ERROR",
-            "Usuário/senha inválido."
-          )
-      );
+    // const email = this.formValue("email");
+    // const password = this.formValue("password");
+    // this.authService
+    //   .login(email, password)
+    //   .pipe(first())
+    //   .subscribe(
+    //     (success) => this.router.navigate([this.returnUrl]),
+    //     (error) =>
+    //       this.alertService.showToastr(
+    //         AlertTypes.DANGER,
+    //         "ERROR",
+    //         "Usuário/senha inválido."
+    //       )
+    //   );
+
+    this.authService.accessToken.subscribe(t => console.log(t))
   }
 
   onFormInvalid() {
